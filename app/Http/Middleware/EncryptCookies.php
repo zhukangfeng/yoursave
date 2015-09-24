@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Middleware;
 
+// Services
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 
 class EncryptCookies extends BaseEncrypter
