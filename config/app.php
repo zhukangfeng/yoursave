@@ -144,6 +144,16 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * 3rd party Service Providers...
+         */
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+
+        /**
+         * Excel and CSV operation
+         */
+        Maatwebsite\Excel\ExcelServiceProvider::class
     ],
 
     /*
@@ -192,6 +202,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        /**
+         * Excel and CSV
+         */
+        'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
