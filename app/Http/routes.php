@@ -11,7 +11,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Config::get('const_value.search_query_type.and', '111');
 });
 
 Route::get('/home', 'UserController@home');

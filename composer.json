@@ -9,7 +9,9 @@
         "laravel/framework": "5.1.*",
         "barryvdh/laravel-debugbar": "^2.0",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "league/flysystem-aws-s3-v3": "^1.0"
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "maatwebsite/excel": "~2.0.0",
+        "mpdf/mpdf": "~5.7.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
