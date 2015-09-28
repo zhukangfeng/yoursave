@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,3 +13,5 @@
 Route::get('/', function () {
     return Config::get('const_value.search_query_type.and', '111');
 });
+
+Route::get('/home', 'UserController@home');

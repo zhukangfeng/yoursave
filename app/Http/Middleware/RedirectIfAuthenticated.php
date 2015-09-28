@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Middleware;
 
+// Services
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 

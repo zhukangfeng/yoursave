@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Middleware;
 
+// Services
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
 class VerifyCsrfToken extends BaseVerifier
