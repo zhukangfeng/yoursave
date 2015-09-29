@@ -1,4 +1,4 @@
-﻿# ************************************************************
+# ************************************************************
 # Sequel Pro SQL dump
 # Version 4135
 #
@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.42)
 # Database: yoursave
-# Generation Time: 2015-09-27 09:29:48 +0000
+# Generation Time: 2015-09-29 03:53:21 +0000
 # ************************************************************
 
 
@@ -78,11 +78,11 @@ CREATE TABLE `chat_group_user_relations` (
   KEY `user_id` (`user_id`),
   KEY `invited_by` (`invited_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `chat_group_user_relations_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `chat_group_user_relations_ibfk_1` FOREIGN KEY (`chat_group_id`) REFERENCES `chat_groups` (`id`),
   CONSTRAINT `chat_group_user_relations_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
   CONSTRAINT `chat_group_user_relations_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `chat_group_user_relations_ibfk_4` FOREIGN KEY (`invited_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `chat_group_user_relations_ibfk_4` FOREIGN KEY (`invited_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `chat_group_user_relations_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='讨论组（群组）分析信息表';
 
 
@@ -139,8 +139,8 @@ CREATE TABLE `consumes` (
   KEY `user relation` (`user_id`),
   KEY `good relation` (`good_id`),
   KEY `shop relation` (`shop_id`),
-  CONSTRAINT `consumes shop relation` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
   CONSTRAINT `consumes good relation` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`),
+  CONSTRAINT `consumes shop relation` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
   CONSTRAINT `consumes user relation` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户的消费信息';
 
@@ -199,12 +199,12 @@ CREATE TABLE `files` (
 
 
 
-# Dump of table good_collects
+# Dump of table good_collections
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `good_collects`;
+DROP TABLE IF EXISTS `good_collections`;
 
-CREATE TABLE `good_collects` (
+CREATE TABLE `good_collections` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `shop_id` int(8) unsigned DEFAULT NULL,
   `good_id` int(12) unsigned DEFAULT NULL,
@@ -219,10 +219,10 @@ CREATE TABLE `good_collects` (
   KEY `good_id` (`good_id`),
   KEY `created_by` (`created_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `good_collects_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `good_collects_ibfk_1` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
-  CONSTRAINT `good_collects_ibfk_2` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`),
-  CONSTRAINT `good_collects_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `good_collections_ibfk_1` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
+  CONSTRAINT `good_collections_ibfk_2` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`),
+  CONSTRAINT `good_collections_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `good_collections_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品收藏表';
 
 
@@ -250,11 +250,11 @@ CREATE TABLE `good_kinds` (
   KEY `good kinds created user relation` (`created_by`),
   KEY `good kinds updated user relation` (`updated_by`),
   KEY `good kinds deleted user relation` (`deleted_by`),
-  CONSTRAINT `good kinds deleted user relation` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `good kinds created user relation` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `good kinds deleted user relation` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `good kinds parent good kind relation` FOREIGN KEY (`parent_id`) REFERENCES `good_kinds` (`id`),
   CONSTRAINT `good kinds updated user relation` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='商品分类信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品分类信息表';
 
 
 
@@ -265,7 +265,7 @@ DROP TABLE IF EXISTS `good_ranks`;
 
 CREATE TABLE `good_ranks` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `rank_good_id` int(12) unsigned DEFAULT NULL,
+  `good_id` int(12) unsigned DEFAULT NULL,
   `rank` float unsigned DEFAULT NULL,
   `rank_info` mediumtext,
   `created_by` int(11) unsigned DEFAULT NULL,
@@ -275,14 +275,14 @@ CREATE TABLE `good_ranks` (
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `rank_good_id` (`rank_good_id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `good_ranks_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `good_ranks_ibfk_1` FOREIGN KEY (`rank_good_id`) REFERENCES `goods` (`id`),
+  KEY `good_id` (`good_id`),
   CONSTRAINT `good_ranks_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `good_ranks_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `good_ranks_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `good_ranks_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `good_ranks_ibfk_5` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品评价信息表';
 
 
@@ -295,9 +295,9 @@ DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `good_kind_id` int(11) unsigned DEFAULT NULL,
-  `goods_name` char(80) NOT NULL,
+  `good_name` char(80) NOT NULL DEFAULT '',
   `produce_company_id` int(8) unsigned DEFAULT NULL COMMENT 'goods'' produce company',
-  `goods_info` mediumtext NOT NULL,
+  `good_info` mediumtext NOT NULL,
   `currency` int(3) unsigned NOT NULL DEFAULT '0' COMMENT '币种',
   `expirate_time` datetime NOT NULL,
   `created_by` int(11) unsigned DEFAULT NULL,
@@ -359,10 +359,10 @@ CREATE TABLE `message_remind_user_relations` (
   KEY `remind_user_id` (`remind_user_id`),
   KEY `created_by` (`created_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `message_remind_user_relations_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `message_remind_user_relations_ibfk_1` FOREIGN KEY (`message_id`) REFERENCES `messages` (`id`),
   CONSTRAINT `message_remind_user_relations_ibfk_2` FOREIGN KEY (`remind_user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `message_remind_user_relations_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `message_remind_user_relations_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `message_remind_user_relations_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='聊天记录中提醒的用户信息表';
 
 
@@ -390,11 +390,11 @@ CREATE TABLE `messages` (
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `messages_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`chat_group_id`) REFERENCES `chat_groups` (`id`),
   CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `messages` (`id`),
   CONSTRAINT `messages_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `messages_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `messages_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `messages_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户聊天信息表';
 
 
@@ -408,15 +408,15 @@ CREATE TABLE `preference_collections` (
   `id` bigint(16) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(12) unsigned NOT NULL,
   `preference_id` bigint(16) unsigned NOT NULL,
-  `collect_info` mediumtext NOT NULL,
+  `collection_info` mediumtext NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `preference_id` (`preference_id`),
-  CONSTRAINT `preference_collections_ibfk_2` FOREIGN KEY (`preference_id`) REFERENCES `preferences` (`id`),
-  CONSTRAINT `preference_collections_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `preference_collections_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `preference_collections_ibfk_2` FOREIGN KEY (`preference_id`) REFERENCES `preferences` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='促销信息收集表';
 
 
@@ -440,9 +440,9 @@ CREATE TABLE `preference_comments` (
   KEY `user_id` (`user_id`),
   KEY `preference_id` (`preference_id`),
   KEY `parent_id` (`parent_id`),
-  CONSTRAINT `preference_comments_ibfk_4` FOREIGN KEY (`parent_id`) REFERENCES `preference_comments` (`id`),
   CONSTRAINT `preference_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `preference_comments_ibfk_3` FOREIGN KEY (`preference_id`) REFERENCES `preferences` (`id`)
+  CONSTRAINT `preference_comments_ibfk_3` FOREIGN KEY (`preference_id`) REFERENCES `preferences` (`id`),
+  CONSTRAINT `preference_comments_ibfk_4` FOREIGN KEY (`parent_id`) REFERENCES `preference_comments` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='促销信息评论表';
 
 
@@ -477,11 +477,11 @@ CREATE TABLE `preferences` (
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `preferences_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `preferences_ibfk_1` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`),
   CONSTRAINT `preferences_ibfk_2` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
   CONSTRAINT `preferences_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `preferences_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `preferences_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `preferences_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品促销信息';
 
 
@@ -509,11 +509,11 @@ CREATE TABLE `produce_company_users` (
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `produce_company_users_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `produce_company_users_ibfk_1` FOREIGN KEY (`produce_company_id`) REFERENCES `produce_companys` (`id`),
   CONSTRAINT `produce_company_users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `produce_company_users_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `produce_company_users_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `produce_company_users_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `produce_company_users_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品生产厂家用户信息';
 
 
@@ -527,7 +527,7 @@ CREATE TABLE `produce_companys` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `address` varchar(255) DEFAULT NULL,
-  `phone` char(80) DEFAULT NULL,
+  `phone_num` char(80) DEFAULT NULL,
   `post_addr` char(10) DEFAULT NULL,
   `response_email` varchar(255) DEFAULT NULL,
   `response_user_id` int(11) unsigned DEFAULT NULL,
@@ -544,23 +544,23 @@ CREATE TABLE `produce_companys` (
   KEY `updated_by` (`updated_by`),
   KEY `response_user_id` (`response_user_id`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `produce_companys_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `produce_companys_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
   CONSTRAINT `produce_companys_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `produce_companys_ibfk_3` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `produce_companys_ibfk_3` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `produce_companys_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品生产厂家信息表';
 
 
 
-# Dump of table shop_collects
+# Dump of table shop_collections
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `shop_collects`;
+DROP TABLE IF EXISTS `shop_collections`;
 
-CREATE TABLE `shop_collects` (
+CREATE TABLE `shop_collections` (
   `id` int(12) unsigned NOT NULL,
   `shop_id` int(8) unsigned NOT NULL,
-  `collect_info` mediumtext NOT NULL,
+  `collection_info` mediumtext NOT NULL,
   `created_by` int(11) unsigned DEFAULT NULL,
   `updated_by` int(11) unsigned DEFAULT NULL,
   `deleted_by` int(11) unsigned DEFAULT NULL,
@@ -572,10 +572,10 @@ CREATE TABLE `shop_collects` (
   KEY `updated_by` (`updated_by`),
   KEY `shop_id` (`shop_id`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `shop_collects_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `shop_collects_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `shop_collects_ibfk_3` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
-  CONSTRAINT `shop_collects_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `shop_collections_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `shop_collections_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `shop_collections_ibfk_3` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
+  CONSTRAINT `shop_collections_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品商店收集表';
 
 
@@ -603,11 +603,11 @@ CREATE TABLE `shop_comments` (
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `shop_comments_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `shop_comments_ibfk_1` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
   CONSTRAINT `shop_comments_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `shop_comments` (`id`),
   CONSTRAINT `shop_comments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `shop_comments_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `shop_comments_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `shop_comments_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商店的用户评论信息';
 
 
@@ -633,10 +633,10 @@ CREATE TABLE `shop_ranks` (
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `shop_ranks_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `shop_ranks_ibfk_1` FOREIGN KEY (`rank_shop_id`) REFERENCES `shops` (`id`),
   CONSTRAINT `shop_ranks_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `shop_ranks_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `shop_ranks_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `shop_ranks_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商店评价表';
 
 
@@ -650,8 +650,9 @@ CREATE TABLE `shop_users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `shop_id` int(8) unsigned DEFAULT NULL,
   `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '1: admin; 2:manager; 3:common; 4:guest',
-  `mail` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `position` varchar(255) DEFAULT NULL,
   `status` tinyint(1) unsigned DEFAULT NULL COMMENT '0:not active; 1:active;; 2: requesting',
   `created_by` int(11) unsigned DEFAULT NULL,
   `updated_by` int(11) unsigned DEFAULT NULL,
@@ -686,7 +687,7 @@ CREATE TABLE `shops` (
   `shop_info` mediumtext,
   `popularity` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'user enjoy''s number',
   `user_keep_num` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'user keep''s number',
-  `is_autherate` tinyint(1) unsigned DEFAULT '0' COMMENT '0:not autherate; 1:offical',
+  `status` tinyint(1) unsigned DEFAULT '0' COMMENT '0:not autherate; 1:offical',
   `response_user_id` int(11) unsigned DEFAULT NULL,
   `created_by` int(11) unsigned DEFAULT NULL,
   `updated_by` int(11) unsigned DEFAULT NULL,
@@ -699,11 +700,11 @@ CREATE TABLE `shops` (
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `shops_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `shops_ibfk_1` FOREIGN KEY (`response_user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `shops_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
   CONSTRAINT `shops_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
-  CONSTRAINT `shops_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `shops_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `shops_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品售卖商店表';
 
 
@@ -719,8 +720,10 @@ CREATE TABLE `user_ranks` (
   `rank` float unsigned NOT NULL DEFAULT '0' COMMENT 'rank''s mark',
   `rank_info` mediumtext COMMENT '用户评价信息',
   `created_by` int(11) unsigned DEFAULT NULL COMMENT 'ranking user',
+  `updated_by` int(11) unsigned DEFAULT NULL,
   `deleted_by` int(11) unsigned DEFAULT NULL COMMENT 'deleting user',
   `created_at` datetime DEFAULT NULL COMMENT 'ranking time',
+  `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL COMMENT 'deleting time',
   PRIMARY KEY (`id`),
   KEY `ranked_user_id` (`ranked_user_id`),
@@ -733,21 +736,22 @@ CREATE TABLE `user_ranks` (
 
 
 
-# Dump of table user_realtion_groups
+# Dump of table user_relation_groups
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `user_realtion_groups`;
+DROP TABLE IF EXISTS `user_relation_groups`;
 
-CREATE TABLE `user_realtion_groups` (
+CREATE TABLE `user_relation_groups` (
   `id` bigint(13) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned DEFAULT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
+  `group_info` mediumtext,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `user_realtion_groups_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `user_relation_groups_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户的好友分组数据表';
 
 
@@ -771,7 +775,7 @@ CREATE TABLE `user_relations` (
   KEY `user_relation_group_id` (`user_relation_group_id`),
   CONSTRAINT `user_relations_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`),
   CONSTRAINT `user_relations_ibfk_2` FOREIGN KEY (`friend_user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `user_relations_ibfk_3` FOREIGN KEY (`user_relation_group_id`) REFERENCES `user_realtion_groups` (`id`)
+  CONSTRAINT `user_relations_ibfk_3` FOREIGN KEY (`user_relation_group_id`) REFERENCES `user_relation_groups` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='好友关系情况';
 
 
@@ -797,10 +801,10 @@ CREATE TABLE `user_share_comments` (
   KEY `parent_id` (`parent_id`),
   KEY `created_by` (`created_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `user_share_comments_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `user_share_comments_ibfk_1` FOREIGN KEY (`user_share_id`) REFERENCES `user_shares` (`id`),
   CONSTRAINT `user_share_comments_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `user_share_comments` (`id`),
-  CONSTRAINT `user_share_comments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `user_share_comments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `user_share_comments_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户分享信息评论表';
 
 
@@ -825,9 +829,9 @@ CREATE TABLE `user_shares` (
   KEY `preference_id` (`preference_id`),
   KEY `created_by` (`created_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `user_shares_ibfk_3` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `user_shares_ibfk_1` FOREIGN KEY (`preference_id`) REFERENCES `preferences` (`id`),
-  CONSTRAINT `user_shares_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `user_shares_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `user_shares_ibfk_3` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户分享表（店铺，打折信息等）';
 
 
@@ -843,7 +847,7 @@ CREATE TABLE `users` (
   `f_name` char(40) DEFAULT NULL COMMENT 'family name',
   `l_name` char(40) DEFAULT NULL COMMENT 'last name',
   `login_mail` char(255) DEFAULT '' COMMENT 'user regist mail，set it null when deleted',
-  `mail` char(255) DEFAULT '' COMMENT 'user regist mail',
+  `email` char(255) DEFAULT '' COMMENT 'user regist mail',
   `password` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'user password',
   `post_code` char(10) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -854,19 +858,15 @@ CREATE TABLE `users` (
   `currency` tinyint(3) unsigned DEFAULT '0' COMMENT '用户选择币种（0:unset;1:RMB; 2DOLLAR; 3:JPN; 4;HK;...)',
   `language` char(4) DEFAULT 'en',
   `user_type` int(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:buyer; 1:saler',
-  `rank` float unsigned NOT NULL DEFAULT '0' COMMENT 'user''s rate(0-100),用户分数',
-  `rank_num` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'rank''s number',
   `shop_user_id` int(11) unsigned DEFAULT NULL COMMENT 'null:personal; int:: shop''s client.',
   `produce_company_user_id` int(11) unsigned DEFAULT NULL,
-  `is_autheriticate` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:not autheriticate, 1 common autheriticate,; 2:offical autheriticate;',
-  `login_fail_times` tinyint(1) unsigned DEFAULT '0' COMMENT 'fail login times',
-  `last_login_fail_at` datetime DEFAULT NULL COMMENT 'login fail''s time',
-  `last_login_ip` char(100) DEFAULT NULL,
-  `last_login_time` datetime NOT NULL,
-  `is_receive_mass` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '0:not receive; 1:receive',
+  `autheriticate_type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:not autheriticate, 1 common autheriticate,; 2:offical autheriticate;',
+  `receive_collection_message_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否接受推送消息(0：不接受；1:接受所有；2:接受收藏的和好友收藏的和官方推送；3：接受好友和自己收藏的；4：接受自己收藏的',
   `approve_times` int(5) unsigned NOT NULL DEFAULT '0',
   `remember_token` varchar(255) DEFAULT NULL,
   `remember_token_time` datetime DEFAULT NULL COMMENT '随机密码有效时间',
+  `active_token` varchar(255) DEFAULT NULL COMMENT '激活码',
+  `active_token_time` datetime DEFAULT NULL COMMENT '激活码到期时间',
   `status` tinyint(1) unsigned DEFAULT '1' COMMENT '0: requsting; 1:active; 2:stop;',
   `public_type` tinyint(1) unsigned NOT NULL DEFAULT '2' COMMENT '0:任何人不公开；1:好友公开；2:注册用户公开;9:任意公开',
   `created_ip` char(100) NOT NULL,
@@ -876,29 +876,30 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `u_name` (`u_name`),
   UNIQUE KEY `login_mail` (`login_mail`),
+  UNIQUE KEY `active_token` (`active_token`),
   KEY `shop_user_id` (`shop_user_id`),
   KEY `produce_company_user_id` (`produce_company_user_id`),
-  CONSTRAINT `users_ibfk_2` FOREIGN KEY (`produce_company_user_id`) REFERENCES `produce_company_users` (`id`),
-  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`shop_user_id`) REFERENCES `shop_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8 COMMENT='用户信息表。\n普通用户：shop_user_id:null，produce_company_user_id:null\n商店用户：shop_user_id:shop_users表的id，produce_company_user_id:null\n产品生产公司用户：shop_user_id:null，produce_company_user_id:produce_company_users表的id';
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`shop_user_id`) REFERENCES `shop_users` (`id`),
+  CONSTRAINT `users_ibfk_2` FOREIGN KEY (`produce_company_user_id`) REFERENCES `produce_company_users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表。\n普通用户：shop_user_id:null，produce_company_user_id:null\n商店用户：shop_user_id:shop_users表的id，produce_company_user_id:null\n产品生产公司用户：shop_user_id:null，produce_company_user_id:produce_company_users表的id';
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
-INSERT INTO `users` (`id`, `u_name`, `f_name`, `l_name`, `login_mail`, `mail`, `password`, `post_code`, `address`, `home_phone`, `mobile_phone`, `birthday`, `sex`, `currency`, `language`, `user_type`, `rank`, `rank_num`, `shop_user_id`, `produce_company_user_id`, `is_autheriticate`, `login_fail_times`, `last_login_fail_at`, `last_login_ip`, `last_login_time`, `is_receive_mass`, `approve_times`, `remember_token`, `remember_token_time`, `status`, `public_type`, `created_ip`, `created_at`, `updated_at`, `deleted_at`)
+INSERT INTO `users` (`id`, `u_name`, `f_name`, `l_name`, `login_mail`, `email`, `password`, `post_code`, `address`, `home_phone`, `mobile_phone`, `birthday`, `sex`, `currency`, `language`, `user_type`, `shop_user_id`, `produce_company_user_id`, `autheriticate_type`, `receive_collection_message_type`, `approve_times`, `remember_token`, `remember_token_time`, `active_token`, `active_token_time`, `status`, `public_type`, `created_ip`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-	(1,'test_u','test_f','test_l',NULL,'test@test.com',X'74657374','111-1111','test_address','1234567890','0987654321','1992-09-18',0,0,'en',1,60,0,NULL,NULL,1,NULL,NULL,'127.0.0.1','2015-01-30 16:47:33',123,9,'69f536c88a3ce8350b785901d73c370b0d155e5c','2015-02-11 17:47:33',1,2,'127:0:0:1',NULL,NULL,NULL),
-	(2,'test_u1','test_f1','test_l1',NULL,'test1@test.com',X'7465737431','111-1111','test_address','1234567890','0987654321','1992-09-18',0,0,'en',1,60,0,NULL,NULL,1,NULL,NULL,'127.0.0.1','2015-01-22 11:49:17',123,9,'5ac2c72e464c5bef37889b6f1811ae29a653c6ae',NULL,1,2,'127:0:0:1',NULL,NULL,NULL),
-	(72,'root_u','root_f','root_l',NULL,'zhukangfen@gmail.com',X'','root_p','root_adress','root_h_p','root_m_p','1992-03-06',0,1,'en',0,0,0,NULL,NULL,0,NULL,NULL,'127.0.0.1','2015-01-26 00:34:08',1,0,'705068cb4a174e045a72ec95386679360603c522',NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
-	(111,'zhu_u1','zhu_f1','zhu-l1',NULL,'shu@c-m.co.jp',X'736875','123-45671','川崎市川崎区11','08088365933','08088365934','1992-03-22',0,1,'en',0,99,0,NULL,NULL,1,NULL,NULL,'127.0.0.1','2015-03-22 22:32:29',1,0,'edb220b7bf4347a3b47d4774a47261b3ceb3d89d','2015-03-23 01:58:47',1,2,'127.0.0.1',NULL,NULL,NULL),
-	(112,'1','','',NULL,'shu1@c-m.co.jp',X'31','','','','','0000-00-00',0,8,'en',0,0,0,NULL,NULL,0,NULL,NULL,'127.0.0.1','2015-01-27 18:05:20',1,0,'27d6ce1ec3415ab9a7a942a31c4e73d768d822f3',NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
-	(114,'朱康峰','shu','kouhou',NULL,'shu@shu.com',X'736875','','','','','0000-00-00',0,1,'en',0,0,0,NULL,NULL,0,NULL,NULL,'127.0.0.1','2015-01-27 18:44:41',1,0,'936eb91fc9097b58d63c4d890917c416a480a3f7',NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
-	(115,'我是11111111-test_u111111111','test_f1','test_l1',NULL,'1',X'31','111-1111','test_address','1234567890','0987654321','1992-09-18',0,1,'en',1,60,0,NULL,NULL,1,NULL,NULL,'127.0.0.1','2015-03-26 13:55:41',1,9,'90bc2825a75b21fe4c3771159f955e8ef53b5c13','2015-03-26 15:55:41',1,2,'127:0:0:1',NULL,NULL,NULL),
-	(116,'2','','',NULL,'2@2.com',X'32','','','','','0000-00-00',0,1,'en',0,0,0,NULL,NULL,0,NULL,NULL,'127.0.0.1','2015-01-30 17:14:39',1,0,NULL,'2015-01-30 18:14:39',1,2,'127.0.0.1',NULL,NULL,NULL),
-	(117,'3','','',NULL,'3@3.com',X'33','','','','','0000-00-00',0,1,'en',0,0,0,NULL,NULL,0,NULL,NULL,'127.0.0.1','2015-01-30 18:01:21',1,0,NULL,NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
-	(118,'0','','',NULL,'0@0.com',X'31','','','','','0000-00-00',0,3,'en',0,0,0,NULL,NULL,0,NULL,NULL,'127.0.0.1','2015-02-09 15:45:27',1,0,'a5b0dcaab22c858c4be1fb89bc866c5c72c6e292','2015-02-09 17:47:55',1,2,'127.0.0.1',NULL,NULL,NULL),
-	(119,'a','','',NULL,'a@aa.com',X'61','','','','','0000-00-00',0,1,'en',0,0,0,NULL,NULL,0,NULL,NULL,'127.0.0.1','2015-02-09 14:39:08',1,0,'5dea81c33d557e299585dde40a673336370e30a4','2015-02-09 17:44:23',1,2,'127.0.0.1',NULL,NULL,NULL),
-	(120,'11','11-f','11-l',NULL,'11@11.com',X'3131','111-1111','1111','1111111','1111111','1111-11-11',0,3,'en',1,0,0,NULL,NULL,0,NULL,NULL,'127.0.0.1','2015-02-12 17:02:48',1,0,NULL,'2015-02-12 19:06:17',1,2,'127.0.0.1',NULL,NULL,NULL);
+	(1,'test_u','test_f','test_l',NULL,'test@test.com',X'74657374','111-1111','test_address','1234567890','0987654321','1992-09-18',0,0,'en',1,NULL,NULL,1,123,9,'69f536c88a3ce8350b785901d73c370b0d155e5c','2015-02-11 17:47:33',NULL,NULL,1,2,'127:0:0:1',NULL,NULL,NULL),
+	(2,'test_u1','test_f1','test_l1',NULL,'test1@test.com',X'7465737431','111-1111','test_address','1234567890','0987654321','1992-09-18',0,0,'en',1,NULL,NULL,1,123,9,'5ac2c72e464c5bef37889b6f1811ae29a653c6ae',NULL,NULL,NULL,1,2,'127:0:0:1',NULL,NULL,NULL),
+	(72,'root_u','root_f','root_l',NULL,'zhukangfen@gmail.com',X'','root_p','root_adress','root_h_p','root_m_p','1992-03-06',0,1,'en',0,NULL,NULL,0,1,0,'705068cb4a174e045a72ec95386679360603c522',NULL,NULL,NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
+	(111,'zhu_u1','zhu_f1','zhu-l1',NULL,'shu@c-m.co.jp',X'736875','123-45671','川崎市川崎区11','08088365933','08088365934','1992-03-22',0,1,'en',0,NULL,NULL,1,1,0,'edb220b7bf4347a3b47d4774a47261b3ceb3d89d','2015-03-23 01:58:47',NULL,NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
+	(112,'1','','',NULL,'shu1@c-m.co.jp',X'31','','','','','0000-00-00',0,8,'en',0,NULL,NULL,0,1,0,'27d6ce1ec3415ab9a7a942a31c4e73d768d822f3',NULL,NULL,NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
+	(114,'朱康峰','shu','kouhou',NULL,'shu@shu.com',X'736875','','','','','0000-00-00',0,1,'en',0,NULL,NULL,0,1,0,'936eb91fc9097b58d63c4d890917c416a480a3f7',NULL,NULL,NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
+	(115,'我是11111111-test_u111111111','test_f1','test_l1',NULL,'1',X'31','111-1111','test_address','1234567890','0987654321','1992-09-18',0,1,'en',1,NULL,NULL,1,1,9,'90bc2825a75b21fe4c3771159f955e8ef53b5c13','2015-03-26 15:55:41',NULL,NULL,1,2,'127:0:0:1',NULL,NULL,NULL),
+	(116,'2','','',NULL,'2@2.com',X'32','','','','','0000-00-00',0,1,'en',0,NULL,NULL,0,1,0,NULL,'2015-01-30 18:14:39',NULL,NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
+	(117,'3','','',NULL,'3@3.com',X'33','','','','','0000-00-00',0,1,'en',0,NULL,NULL,0,1,0,NULL,NULL,NULL,NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
+	(118,'0','','',NULL,'0@0.com',X'31','','','','','0000-00-00',0,3,'en',0,NULL,NULL,0,1,0,'a5b0dcaab22c858c4be1fb89bc866c5c72c6e292','2015-02-09 17:47:55',NULL,NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
+	(119,'a','','',NULL,'a@aa.com',X'61','','','','','0000-00-00',0,1,'en',0,NULL,NULL,0,1,0,'5dea81c33d557e299585dde40a673336370e30a4','2015-02-09 17:44:23',NULL,NULL,1,2,'127.0.0.1',NULL,NULL,NULL),
+	(120,'11','11-f','11-l',NULL,'11@11.com',X'3131','111-1111','1111','1111111','1111111','1111-11-11',0,3,'en',1,NULL,NULL,0,1,0,NULL,'2015-02-12 19:06:17',NULL,NULL,1,2,'127.0.0.1',NULL,NULL,NULL);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
