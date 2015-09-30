@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.42)
 # Database: yoursave
-# Generation Time: 2015-09-29 03:53:21 +0000
+# Generation Time: 2015-09-30 11:10:30 +0000
 # ************************************************************
 
 
@@ -227,6 +227,34 @@ CREATE TABLE `good_collections` (
 
 
 
+# Dump of table good_comments
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `good_comments`;
+
+CREATE TABLE `good_comments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `good_id` int(12) unsigned DEFAULT NULL,
+  `parent_id` bigint(20) unsigned DEFAULT NULL,
+  `comment_info` mediumtext,
+  `created_by` int(11) unsigned DEFAULT NULL,
+  `deleted_by` int(11) unsigned DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `deleted_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `good_id` (`good_id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `created_by` (`created_by`),
+  KEY `deleted_by` (`deleted_by`),
+  CONSTRAINT `good_comments_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `good_comments_ibfk_1` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`),
+  CONSTRAINT `good_comments_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `good_comments` (`id`),
+  CONSTRAINT `good_comments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table good_kinds
 # ------------------------------------------------------------
 
@@ -297,8 +325,10 @@ CREATE TABLE `goods` (
   `good_kind_id` int(11) unsigned DEFAULT NULL,
   `good_name` char(80) NOT NULL DEFAULT '',
   `produce_company_id` int(8) unsigned DEFAULT NULL COMMENT 'goods'' produce company',
+  `produce_company_name` varchar(255) DEFAULT NULL COMMENT 'produce_company_id=null的时候有效',
   `good_info` mediumtext NOT NULL,
-  `currency` int(3) unsigned NOT NULL DEFAULT '0' COMMENT '币种',
+  `price` float unsigned DEFAULT NULL,
+  `currency` int(3) unsigned DEFAULT NULL COMMENT '币种',
   `expirate_time` datetime NOT NULL,
   `created_by` int(11) unsigned DEFAULT NULL,
   `updated_by` int(11) unsigned DEFAULT NULL,
@@ -456,6 +486,7 @@ CREATE TABLE `preferences` (
   `id` bigint(16) unsigned NOT NULL AUTO_INCREMENT,
   `good_id` int(12) unsigned DEFAULT NULL,
   `shop_id` int(8) unsigned DEFAULT NULL,
+  `shop_name` varchar(255) DEFAULT NULL COMMENT 'shop_id=null的时候有效',
   `original_price` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '原价',
   `discount_price` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '现价',
   `infor_url` varchar(255) DEFAULT NULL COMMENT '外部信息网址',
@@ -609,6 +640,69 @@ CREATE TABLE `shop_comments` (
   CONSTRAINT `shop_comments_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
   CONSTRAINT `shop_comments_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商店的用户评论信息';
+
+
+
+# Dump of table shop_good_comments
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `shop_good_comments`;
+
+CREATE TABLE `shop_good_comments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `shop_good_id` bigint(16) unsigned DEFAULT NULL,
+  `parent_id` bigint(20) unsigned DEFAULT NULL,
+  `comment_info` mediumtext,
+  `created_by` int(11) unsigned DEFAULT NULL,
+  `deleted_by` int(11) unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `shop_good_id` (`shop_good_id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `created_by` (`created_by`),
+  KEY `deleted_by` (`deleted_by`),
+  CONSTRAINT `shop_good_comments_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `shop_good_comments_ibfk_1` FOREIGN KEY (`shop_good_id`) REFERENCES `shop_good_comments` (`id`),
+  CONSTRAINT `shop_good_comments_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `shop_good_comments` (`id`),
+  CONSTRAINT `shop_good_comments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table shop_goods
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `shop_goods`;
+
+CREATE TABLE `shop_goods` (
+  `id` bigint(18) unsigned NOT NULL AUTO_INCREMENT,
+  `shop_id` int(8) unsigned DEFAULT NULL,
+  `good_id` int(12) unsigned DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `currency` int(3) unsigned DEFAULT NULL,
+  `good_info` mediumtext,
+  `is_public` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `status` tinyint(1) unsigned DEFAULT '0' COMMENT '0:关闭；1:有效：2:等待确认',
+  `created_by` int(11) unsigned DEFAULT NULL,
+  `updated_by` int(11) unsigned DEFAULT NULL,
+  `deleted_by` int(11) unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `shop_id` (`shop_id`),
+  KEY `good_id` (`good_id`),
+  KEY `created_by` (`created_by`),
+  KEY `updated_by` (`updated_by`),
+  KEY `deleted_by` (`deleted_by`),
+  CONSTRAINT `shop_goods_ibfk_1` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
+  CONSTRAINT `shop_goods_ibfk_2` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`),
+  CONSTRAINT `shop_goods_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `shop_goods_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `shop_goods_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
