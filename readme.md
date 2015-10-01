@@ -33,6 +33,7 @@ composer install
 // 成功后去掉之前添加的注释
 ```
 5. laravel 加密key生成
+
 ```sh
 php artisan key:generate
 ```
@@ -70,6 +71,7 @@ php artisan db:seed
 2. git 提交规范
  1. 开发时应在自己分支上进行开发，在进行开发之前，将主分支(development)合并到自己分支（为了保证为最新代码，减少冲突）
  2. 开发完成后，进行代码规范检查
+
 ```sh
 phpcs --standard=psr2 --colors testfile
 // 如果可以的话进行psr4测试
@@ -78,9 +80,12 @@ phpcs --standard=psr2 --colors testfile
 
  3. phpunit测试
  在完成功能代码后，需对自己所写代码撰写测试代码，进行测试。要求有详细的测试记录
+
 ```sh
-phpunit    // 对所有测试文件进行测试
-phpunit filename   // 对单个文件进行测试
+phpunit
+// 对所有测试文件进行测试
+phpunit filename
+// 对单个文件进行测试
 ```
 
  4. git提交
