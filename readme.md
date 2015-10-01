@@ -49,7 +49,7 @@ php artisan db:seed
 
 ＃ 开发规则
 1. 代码规范
-要求符合psr-2规范(http://www.php-fig.org/psr/psr-2/)，尽量满足psr-4规范(http://www.php-fig.org/psr/psr-4/)
+要求符合[psr-2规范](http://www.php-fig.org/psr/psr-2/)，尽量满足[psr-4规范](http://www.php-fig.org/psr/psr-4/)
 
 2. 命名规范
  1. 类名: PascalCase
@@ -80,7 +80,7 @@ php artisan db:seed
  ```sh
  phpunit    // 对所有测试文件进行测试
  phpunit filename   // 对单个文件进行测试
- ｀｀｀
+ ```
  4. git提交
  在完成阶段性工作或者全部工作后，并且测试和代码规范都正确后可以提交到代码库的自己分支中，提交git管理库有利于错误时回滚，所以在完成一定代码量后即可提交。
  在提交后可以从远程代码库fetch，如果主分支(development)有了更新，及时pull到本地，并且合并到自己的分支，这样可以减少代码冲突
