@@ -93,8 +93,7 @@ phpcs --standard=psr2 --colors testfile
 
 
 ＃ laravel 多语言对应
-1. 所以涉及到多语言问题(界面显示，邮件信息等)都在/resources/lang文件夹下定义
-然后利用laravel函数
+所以涉及到多语言问题(界面显示，邮件信息等)都在/resources/lang文件夹下定义然后利用laravel函数
 ```php
 trans('views.page_name.category_name.info_name');  // 界面控键名文件
 trans('messages.page_name.category_name.info_name');  // 界面信息提示文件
