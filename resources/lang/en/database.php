@@ -175,26 +175,103 @@ return [
         DB_TABLE_NAME                       => 'shop collections',
         DB_SHOP_COLLECTIONS_COLLECTION_INFO => 'collection information'
     ],
-    // 商店的用户评论信息表
+    // 商店的用户评论信息
     DB_SHOP_COMMENTS => [
         DB_TABLE_NAME                   => 'shop comments',
         DB_SHOP_COMMENTS_COMMENT_INFO   => 'comment information',
         DB_SHOP_COMMENTS_IS_PUBLIC      => 'public'
     ],
-    // 商店商品评论信息表
+    // 商店商品评论信息
     DB_SHOP_GOOD_COMMENTS => [
         DB_TABLE_NAME                       => 'good comments',
         DB_SHOP_GOOD_COMMENTS_COMMENT_INFO  => 'comment information'
     ],
-    // 商店商品信息表
+    // 商店商品信息
     DB_SHOP_GOODS => [
-        DB_TABLE_NAME               => 'shop\' goods',
+        DB_TABLE_NAME               => 'shop\'s goods',
         DB_SHOP_GOODS_COST          => 'cost',
         DB_SHOP_GOODS_PRICE         => 'price',
         DB_SHOP_GOODS_CURRENCY      => 'currency',
         DB_SHOP_GOODS_GOOD_INFO     => 'good information',
         DB_SHOP_GOODS_IS_PUBLIC     => 'public',
         DB_SHOP_GOODS_STATUS        => 'status'
+    ],
+    // 商店评价
+    DB_SHOP_RANKS => [
+        DB_TABLE_NAME           => 'shop\' ranks',
+        DB_SHIP_RANKS_RANK      => 'rank',
+        DB_SHIP_RANKS_RANK_INFO => 'rank information'
+    ],
+    // 商品售卖商店职员信息表
+    DB_SHOP_USERS => [
+        DB_TABLE_NAME           => 'staffs',
+        DB_SHOP_USERS_TYPE  => 'staff type',
+        DB_SHOP_USERS_EMAIL => 'staff\' email',
+        DB_SHOP_USERS_NAME  => 'staff\s name',
+        DB_SHOP_USERS_POSITION  => 'staff\'s positon',
+        DB_SHOP_USERS_STATUS    => 'account\' status'
+    ],
+    // 商品售卖商店信息表
+    DB_SHOPS => [
+        DB_TABLE_NAME       => 'shops',
+        DB_SHOPS_NAME       => 'shop\'s name',
+        DB_SHOPS_ADDRESS    => 'shop\' address',
+        DB_SHOPS_PHONE_NUM  => 'contact phone number',
+        DB_SHOPS_WEB_ADDR   => 'shop website',
+        DB_SHOPS_SHOP_INFO  => 'shop information',
+        DB_SHOPS_STATUS     => 'shop status',
+    ],
+    // 对用户评价，评分表
+    DB_USER_RANKS => [
+        DB_TABLE_NAME           => 'user\'s ranks',
+        DB_USER_RANKS_RANK      => 'rank',
+        DB_USER_RANKS_RANK_INFO => 'rank information'
+    ],
+    // 用户的好友分组数据表
+    DB_USER_RELATION_GROUPS => [
+        DB_USER_RELATION_GROUPS_NAME        => 'group name',
+        DB_USER_RELATION_GROUPS_GROUP_INFO  => 'group information'
+    ],
+    // 好友关系情况
+    DB_USER_RELATIONS => [
+        DB_TABLE_NAME               => 'friend relations',
+        DB_USER_RELATIONS_STATUS    => 'friend relation'
+    ],
+    // 用户分享信息评论信息表
+    DB_USER_SHARE_COMMENTS => [
+        DB_TABLE_NAME                       => 'share comments',
+        DB_USER_SHARE_COMMENTS_COMMENT_INFO => 'comment information',
+        DB_USER_SHARE_COMMENTS_IS_PUBLIC    => 'public'
+    ],
+    // 用户分享信息表（店铺，打折信息等）
+    DB_USER_SHARES => [
+        DB_TABLE_NAME               => 'user shares',
+        DB_USER_SHARES_SHARE_NAME   => 'share name',
+        DB_USER_SHARES_SHARE_URL    => 'url',
+        DB_USER_SHARES_SHARE_INFO   => 'share information',
+        DB_USER_SHARES_TYPE         => 'share type',
+        DB_USER_SHARES_PUBLIC_TYPE  => 'public'
+    ],
+    // 用户信息表。
+    DB_USERS => [
+        DB_USERS_U_NAME                             => 'nick name',
+        DB_USERS_F_NAME                             => 'first name',
+        DB_USERS_L_NAME                             => 'last name',
+        DB_USERS_LOGIN_MAIL                         => 'login email address',
+        DB_USERS_EMAIL                              => 'contact email address',
+        DB_USERS_PASSWORD                           => 'password',
+        DB_USERS_POST_CODE                          => 'post code',
+        DB_USERS_ADDRESS                            => 'address',
+        DB_USERS_HOME_PHONE                         => 'home phone number',
+        DB_USERS_MOBILE_PHONE                       => 'mobile phone number',
+        DB_USERS_BIRTHDAY                           => 'birthday',
+        DB_USERS_SEX                                => 'sex',
+        DB_USERS_CURRENCY                           => 'currency',
+        DB_USERS_LANGUAGE                           => 'language',
+        DB_USERS_AUTHERITICATE_TYPE                 => 'authenticate type',
+        DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE    => 'receive massage type',
+        DB_USERS_STATUS                             => 'account status',
+        DB_USERS_PUBLIC_TYPE                        => 'public type',
+        DB_USERS_CREATED_IP                         => 'created ip adddress',
     ]
-
 ];
