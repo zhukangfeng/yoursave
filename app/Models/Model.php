@@ -51,7 +51,7 @@ class Model extends Model
         
 
         $searchData =  preg_split('/[\s|\x{3000}]+/u', $searchString);
-        $query->where(function ($query) use ($searchName, $searchData)) {
+        $query->where(function ($query) use ($searchName, $searchData) {
             if ($searchType === Config::get('const_value.search_query_type.and', 0)) {
                 // 多条件并且符合
                 foreach ($searchData as $splitString) {
@@ -80,7 +80,8 @@ class Model extends Model
                     }
                 }
             }
-        }
+        });
+        
         return $query;
     }
 }

@@ -18,6 +18,7 @@ define('DB_COMMON_DELETED_BY',   'deleted_by');
 define('DB_COMMON_CREATED_AT',   'created_at');
 define('DB_COMMON_UPDATED_AT',   'updated_at');
 define('DB_COMMON_DELETED_AT',   'deleted_at');
+define('DB_COMMON_PUBLIC_TYPE',  'public_type');
 
 // 讨论组（群组）分析信息表
 define('DB_CHAT_GROUP_USER_RELATIONS',               'chat_group_user_relations');

@@ -14,7 +14,8 @@ return [
         DB_COMMON_DELETED_BY    => 'deleted user',
         DB_COMMON_CREATED_AT    => 'created time',
         DB_COMMON_UPDATED_AT    => 'last updated time',
-        DB_COMMON_DELETED_AT    => 'deleted time'
+        DB_COMMON_DELETED_AT    => 'deleted time',
+        DB_COMMON_IS_PUBLIC     => 'public type'
     ],
     // 群组成员信息
     DB_CHAT_GROUP_USER_RELATIONS => [
@@ -112,8 +113,7 @@ return [
     // 促销信息评论
     DB_PREFERENCE_COMMENTS => [
         DB_TABLE_NAME                       => 'preference comments',
-        DB_PREFERENCE_COMMENTS_COMMENT_INFO => 'comment information',
-        DB_PREFERENCE_COMMENTS_IS_PUBLIC    => 'public'
+        DB_PREFERENCE_COMMENTS_COMMENT_INFO => 'comment information'
     ],
     // 商品促销信息
     DB_PREFERENCES  => [
@@ -124,8 +124,7 @@ return [
         DB_PREFERENCES_INFOR_URL        => 'information url',
         DB_PREFERENCES_PREFERENCE_INFO  => 'preference information',
         DB_PREFERENCES_BEGIN_TIME       => 'begin time',
-        DB_PREFERENCES_END_TIME         => 'end time',
-        DB_PREFERENCES_IS_PUBLIC        => 'public'
+        DB_PREFERENCES_END_TIME         => 'end time'
     ],
     // 促销信息评分信息
     DB_PREFERENCES_RANKS => [
@@ -150,7 +149,6 @@ return [
         DB_PRODUCE_COMPANY_GOODS_COST       => 'cost',
         DB_PRODUCE_COMPANY_GOODS_CURRENCY   => 'currency',
         DB_PRODUCE_COMPANY_GOODS_GOOD_INFO  => 'good information',
-        DB_PRODUCE_COMPANY_GOODS_IS_PUBLIC  => 'public',
         DB_PRODUCE_COMPANY_GOODS_STATUS     => 'status'
     ],
     // 商品生产厂家用户信息
@@ -178,8 +176,7 @@ return [
     // 商店的用户评论信息
     DB_SHOP_COMMENTS => [
         DB_TABLE_NAME                   => 'shop comments',
-        DB_SHOP_COMMENTS_COMMENT_INFO   => 'comment information',
-        DB_SHOP_COMMENTS_IS_PUBLIC      => 'public'
+        DB_SHOP_COMMENTS_COMMENT_INFO   => 'comment information'
     ],
     // 商店商品评论信息
     DB_SHOP_GOOD_COMMENTS => [
@@ -193,7 +190,6 @@ return [
         DB_SHOP_GOODS_PRICE         => 'price',
         DB_SHOP_GOODS_CURRENCY      => 'currency',
         DB_SHOP_GOODS_GOOD_INFO     => 'good information',
-        DB_SHOP_GOODS_IS_PUBLIC     => 'public',
         DB_SHOP_GOODS_STATUS        => 'status'
     ],
     // 商店评价
@@ -240,8 +236,7 @@ return [
     // 用户分享信息评论信息表
     DB_USER_SHARE_COMMENTS => [
         DB_TABLE_NAME                       => 'share comments',
-        DB_USER_SHARE_COMMENTS_COMMENT_INFO => 'comment information',
-        DB_USER_SHARE_COMMENTS_IS_PUBLIC    => 'public'
+        DB_USER_SHARE_COMMENTS_COMMENT_INFO => 'comment information'
     ],
     // 用户分享信息表（店铺，打折信息等）
     DB_USER_SHARES => [
@@ -249,8 +244,7 @@ return [
         DB_USER_SHARES_SHARE_NAME   => 'share name',
         DB_USER_SHARES_SHARE_URL    => 'url',
         DB_USER_SHARES_SHARE_INFO   => 'share information',
-        DB_USER_SHARES_TYPE         => 'share type',
-        DB_USER_SHARES_PUBLIC_TYPE  => 'public'
+        DB_USER_SHARES_TYPE         => 'share type'
     ],
     // 用户信息表。
     DB_USERS => [
