@@ -10,8 +10,7 @@
 |
 */
 
-Route::get('/', function () {
-    return Config::get('const_value.search_query_type.and', '111');
-});
+Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@login');
 
 Route::get('/home', 'UserController@home');

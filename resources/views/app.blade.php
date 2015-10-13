@@ -19,26 +19,48 @@
 <script type="text/javascript" src="{{ asset('/shared/scripts/functions.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('/shared/scripts/controller.js') }}" defer></script>
 
-<title>AdFlow:{{ $title }}</title>
+<title>{{ trans('pages.common.app_name')}}:{{ $title or '' }}</title>
 @yield('assets')
 
 </head>
-<body id="{{ $id }}" class="{{ $class }}" mode="{{ $mode or ''}}" console="{{ $console or ''}}">
+<body id="{{ $id or '' }}" class="{{ $class or '' }}" mode="{{ $mode or '' }}" console="{{ $console or '' }}" name="{{ $name or '' }}">
 
 @yield('header')
 
 <div class="contents-body">
     @if(Auth::check())
-    @include('contents-console')
+    @include('console')
     @endif
     @yield('console')
     <div class="contents-area">
+        <div class="flash-massage">
+            @if (Session::has('success_messages'))
+                <div class="success-messages">
+                    @foreach (Session::get('success_messages') as $message)
+                        {{ $message }}<br />
+                    @endforeach
+                </div>
+            @endif
+            @if (Session::has('waring_messages'))
+                <div class="waring-messages">
+                    @foreach (Session::get('waring_messages') as $message)
+                        {{ $message }}<br />
+                    @endforeach
+                </div>
+            @endif
+            @if (Session::has('error_messages'))
+                <div class="error-messages">
+                    @foreach (Session::get('error_messages') as $message)
+                        {{ $message }}<br />
+                    @endforeach
+                </div>
+            @endif
+        </div>
         @yield('content')
-        @include('contents-footer')
+        @include('footer')
     </div><!-- /.contents-area -->
 </div><!-- /.contents-body -->
 
 <div class="to-page-top"></div>
-
 </body>
 </html>
