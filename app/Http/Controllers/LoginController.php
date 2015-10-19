@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 // Services
 use Auth;
+use Session;
+
+// Utils
+use App\Utils\AuthUtil;
+
 class LoginController extends Controller
 {
     /**
@@ -19,6 +24,7 @@ class LoginController extends Controller
      */
     public function index()
     {
+
         return view('login.index');
     }
 
@@ -30,10 +36,42 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        $name = $request->input('name');
-        $user = User::find($name);
-        var_dump($user);
-        var_dump($request->input());
+        $account    = $request->input('account');
+        $password   = $request->input('password');
+        $remember   = $request->input('remember');
+        if (strpos($account, '@') !== false) {
+            // 存在@，说明时邮箱地址
+            $user = User::where('login_mail', $account)->first();
+        } else {
+            // 不存在@，说明是用户名登录
+            $user = User::where('u_name', $account)->first();
+        }
+        if (is_null($user)) {
+            // 用户不存在
+            return back()->withInput()->withErrors(['account_error' => trans('error_messages.login.no_account')]);
+        }
+
+        if ($user->status !== DB_USERS_STATUS_EFFECITVE) {
+            // 用户账户非不可用
+            if ($user->status === DB_USERS_STATUS_REQUESTING) {
+                // 未激活状态
+                return back()->withInput()->withErrors(['account_requesting_error' => trans('error_messages.login.account_requesting_error')]);
+            } else {
+                return back()->withInput()->withErrors(['account_invalid_error' => trans('error_messages.login.account_invalid_error')]);
+            }
+        }
+
+
+        if (!AuthUtil::checkPassword($password, $user->password)) {
+            // 密码错误
+            return back()->withInput()->withErrors(['password_error' => trans('error_messages.login.password_error')]);
+        } 
+        Auth::login($user, (bool)$remember);
+        Session::put('User', $user);
+
+        if (!is_null())
+
+        return redirect('/');
     }
 
     /**

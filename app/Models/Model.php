@@ -23,7 +23,7 @@ class Model extends ParentModel
         $model = new static();
         $model->updateTimestamps();
         foreach ($createData as &$data) {
-            foreach ($model->getDates() as $key) {
+            foreach (['created_at', 'updated_at'] as $key) {
                 if (!array_key_exists($key, $data)) {
                     $data += [ $key => $model->serializeDate($model->asDateTime($model->{$key}))];
                 }

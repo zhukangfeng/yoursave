@@ -1,12 +1,16 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
+// Controllers;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+
+// Models
+use App\Models\User;
+
+// Services;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Validator;
 
 class AuthController extends Controller
 {
