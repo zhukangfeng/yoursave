@@ -16,7 +16,8 @@ return [
             'delete'    => '删除',
             'back'      => '返回',
             'download'  => '下载',
-            'create'    => '创建'
+            'create'    => '创建',
+            'logout'    => '注销',
         ],
     ],
 
@@ -41,7 +42,25 @@ return [
     // 用户相关界面显示内容
     'user'  => [
         // 登录界面
+        'title' => '个人资料管理',
+        'friends_title' => '好友管理',
+        ''
     ],
-    'shop'  => [
-    ]
+    // 商店
+    'myshop'  => [
+        'title' => '商店管理',
+        'edit_title'    => '商店信息修改',
+        'certificate_title' => '商店认证',
+        'goods_title'       => '销售商品一览',
+        'users_title'       => '职员管理'
+    ],
+    // 生产厂家
+    'mycompany' => [
+        'title' => '企业管理',
+        'edit_title'    => '企业信息修改',
+        'certificate_title' => '企业认证',
+        'goods_title'   => '生产商品一览',
+        'users_title'   => '职员管理',
+        ''
+    ],
 ];

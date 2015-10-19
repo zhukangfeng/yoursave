@@ -2,6 +2,10 @@
 namespace App\Http\Controllers;
 
 // Models
+use App\Models\Shop;
+use App\Models\ShopUser;
+use App\Models\ProduceCompany;
+use App\Models\ProduceCompanyUser;
 use App\Models\User;
 
 // Requests
@@ -15,7 +19,7 @@ use Session;
 // Utils
 use App\Utils\AuthUtil;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
     /**
      * 返回登录界面
@@ -69,64 +73,32 @@ class LoginController extends Controller
         Auth::login($user, (bool)$remember);
         Session::put('User', $user);
 
-        if (!is_null())
+        if (!is_null($user->shop_user_id)) {
+            // 商店用户
+            $shopUser = ShopUser::find($user->shop_user_id);
+            Session::put('ShopUser', $shopUser);
+            Session::put('Shop', Shop::find($shopUser->shop_id));
+        }
 
+        if (!is_null($user->produce_company_user_id)) {
+            // 生产厂家用户
+            $produceCompanyUser = ProduceCompanyUser::find($user->produce_company_user_id);
+            Session::put('ProduceCompanyUser', $produceCompanyUser);
+            Session::put('ProduceCompany', ProduceCompany::find($produceCompanyUser->produce_company_id));
+        }
         return redirect('/');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 注销登录
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function logout()
     {
-        //
-    }
+        Auth::logout();
+        Session::flush();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect('/login');
     }
 }

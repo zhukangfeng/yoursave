@@ -27,41 +27,48 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/') }}">Home</a></li>
-                        @if (!is_null(Session::get('Account')))
-                        @if (Session::get('Corporate')->contract_type == 0)
-                        <li><a href="{{ url('/order') }}">案件オーダー</a></li>
-                        <li><a href="{{ url('/material') }}">素材管理</a></li>
-                        <li>
-                            <a href="{{ url('/config') }}"　class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">各種設定</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/config/clients') }}">広告主管理</a></li>
-                                <li><a href="{{ url('/config/tag') }}">タグ管理</a></li>
-                                <li><a href="{{ url('/config/media') }}">メディアマスタ設定</a></li>
-                                <li><a href="{{ url('/config/menus') }}">広告メニューマスタ設定</a></li>
-                            </ul>
-                        </li>
-                        @endif
-                        <li><a href="{{ url('/items/ordered') }}">案件一覧</a></li>
+                        @if (Auth::check())
+                            <li><a href="{{ url('/') }}">Home</a></li>
+                            @if (Session::get('ProduceCompany'))
+                                <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.mycompany.title') }}</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ url('/mycompany') }}">{{ trans('pages.mycompany.title') }}</a></li>
+                                        @if (Session::get('ProduceCompanyUser')->type !== DB_PRODUCE_COMPANY_USERS_TYPE_GUEST)
+                                            <li><a href="{{ url('/mycompany/goods') }}">{{ trans('pages.mycompany.goods_title') }}</a></li>
+                                            <li><a href="{{ url('/mycompany/users') }}">{{ trans('pages.mycompany.users_title') }}</a></li>
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endif
+                            @if (Session::get('Shop'))
+                                <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.myshop.title') }}</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ url('/myshop') }}">{{ trans('pages.myshop.title') }}</a></li>
+                                        @if (Session::get('Shop')->type !== DB_PRODUCE_COMPANY_USERS_TYPE_GUEST)
+                                            <li><a href="{{ url('/myshop/goods') }}">{{ trans('pages.myshop.goods_title') }}</a></li>
+                                            <li><a href="{{ url('/myshop/users') }}">{{ trans('pages.myshop.users_title') }}</a></li>
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endif
                         @endif
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                            <li><a href="{{ url('/login') }}">Login</a></li>
+                            <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->lastname.Auth::user()->firstname }} <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/user') }}">ユーザ情報</a></li>
-                                <li><a href="{{ url('/accounts') }}">アカウント</a></li>
-                                @if (!is_null(Session::get('Account')))
-                                <li><a href="{{ url('/corp_info/corp') }}">企業情報管理</a></li>
-                                @endif
-                                <li><a href="{{ url('/logout') }}">Logout</a></li>
-                            </ul>
-                        </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Session::get('User')->u_name }} <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/user') }}">{{ trans('pages.user.title') }}</a></li>
+                                    <li><a href="{{ url('/user/friends') }}">{{ trans('pages.user.friends_title') }}</a></li>
+                                    <li><a href="{{ url('/logout') }}">{{ trans('pages.common.buttons.logout') }}</a></li>
+                                </ul>
+                            </li>
                         @endif
                     </ul>
                 </div>

@@ -10,9 +10,17 @@
 |
 */
 
-Route::get('/login', 'LoginController@index');
-Route::post('/login', 'LoginController@login');
+Route::get('/login', 'AuthController@index');
+Route::post('/login', 'AuthController@login');
+
+Route::get('/logout', 'AuthController@logout');
 
 Route::get('/', 'DashboardController@index');
 
 Route::get('/home', 'UserController@home');
+
+// 商店管理
+Route::resource('/myshop', 'ShopController');
+
+// 生产厂家管理
+Route::resource('/mycompany', 'ProduceCompanyController');
