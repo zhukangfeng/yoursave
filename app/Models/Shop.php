@@ -17,10 +17,9 @@ class Shop extends Model
         'phone_num',
         'web_addr',
         'shop_info',
-        'popularity',
-        'user_keep_num',
-        'status',
         'response_user_id',
+        'status',
+        'public_type',
         'created_by',
         'updated_by',
         'deleted_by'

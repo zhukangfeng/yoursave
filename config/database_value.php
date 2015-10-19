@@ -215,6 +215,11 @@ define('DB_PRODUCE_COMPANY_USERS_USER_ID',              'user_id');             
 define('DB_PRODUCE_COMPANY_USERS_STATUS',               'status');              // 账户状态：0:无效；1:有效；2:邀请中
 define('DB_PRODUCE_COMPANY_USERS_TYPE',                 'type');                // 账户类型：1: 管理者; 2:经理; 3:普通用户; 4:阅览用户
 
+define('DB_PRODUCE_COMPANY_USERS_STATUS_INVALID', 0);
+define('DB_PRODUCE_COMPANY_USERS_STATUS_EFFECTIVE', 1);
+define('DB_PRODUCE_COMPANY_USERS_STATUS_REQUESTING', 2);
+
+
 define('DB_PRODUCE_COMPANY_USERS_TYPE_ADMIN',   1);
 define('DB_PRODUCE_COMPANY_USERS_TYPE_MANAGER', 2);
 define('DB_PRODUCE_COMPANY_USERS_TYPE_COMMON',  3);
