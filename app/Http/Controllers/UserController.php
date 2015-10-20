@@ -60,7 +60,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 显示个人资料
      *
      * @param  int  $id
      * @return Response
