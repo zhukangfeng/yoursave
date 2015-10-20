@@ -2,7 +2,7 @@
 namespace App\Models;
 
 // Model
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as ParentModel;
 
 /**
  * 数据库模型
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @todo 所有模型公用函数
  */
-class Model extends Model
+class Model extends ParentModel
 {
     /**
      * 多数据同时插入，并且加入updated_at,created_at等数据
@@ -23,7 +23,7 @@ class Model extends Model
         $model = new static();
         $model->updateTimestamps();
         foreach ($createData as &$data) {
-            foreach ($model->getDates() as $key) {
+            foreach (['created_at', 'updated_at'] as $key) {
                 if (!array_key_exists($key, $data)) {
                     $data += [ $key => $model->serializeDate($model->asDateTime($model->{$key}))];
                 }
@@ -42,7 +42,7 @@ class Model extends Model
      * @param string int $searchType 搜索方式（0：并且；1:或者）
      * @return \Illuminate\Database\Eloquent\Builder $query
      */
-    public static function scopeSearchQuery($query, $searchName, $searchString, $searchType = Config::get('const_value.search_query_type.and', 0))
+    public static function scopeSearchQuery($query, $searchName, $searchString, $searchType = null)
     {
         $searchString = trim($searchString);
         //エスケープ

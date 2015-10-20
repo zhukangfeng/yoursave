@@ -119,6 +119,6 @@ return [
     |
     */
 
-    'pretend' => false,
+    'pretend' => env('MAIL_IS_PRETEND', false),
 
 ];

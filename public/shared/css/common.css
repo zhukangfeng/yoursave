@@ -1,0 +1,4 @@
+@charset "utf-8";
+div.errors p.error-message {
+    color: #F10D05;
+}

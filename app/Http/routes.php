@@ -10,8 +10,20 @@
 |
 */
 
-Route::get('/', function () {
-    return Config::get('const_value.search_query_type.and', '111');
-});
+Route::get('/login', 'AuthController@index');
+Route::post('/login', 'AuthController@login');
+
+Route::get('/register', 'UserController@create');
+Route::put('/register', 'UserController@store');
+
+Route::get('/logout', 'AuthController@logout');
+
+Route::get('/', 'DashboardController@index');
 
 Route::get('/home', 'UserController@home');
+
+// 商店管理
+Route::resource('/myshop', 'ShopController');
+
+// 生产厂家管理
+Route::resource('/mycompany', 'ProduceCompanyController');

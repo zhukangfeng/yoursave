@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ trans('messages.common.lang') }}">
+<html lang="{{ App::getLocale() }}">
 <head>
 
 <meta charset="utf-8">
@@ -7,38 +7,110 @@
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <link rel="shortcut icon" href="{{ asset('/shared/images/favicon.ico') }}">
-<link rel="stylesheet" href="{{ asset('/shared/css/sanitize.css') }}" media="screen,print">
-<link rel="stylesheet" href="{{ asset('/shared/css/style.css') }}" media="screen,print">
-<link rel="stylesheet" href="{{ asset('/shared/css/language.css') }}" media="screen,print">
-<link rel="stylesheet" href="{{ asset('/shared/css/jquery.datetimepicker.css') }}" media="screen,print">
-<script type="text/javascript" src="{{ asset('/shared/scripts/lib/jquery.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/shared/scripts/lib/jquery-ui.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/shared/scripts/lib/jquery.datetimepicker.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('/shared/scripts/lib/keymaster.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('/shared/scripts/config.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('/shared/scripts/functions.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('/shared/scripts/controller.js') }}" defer></script>
-
-<title>AdFlow:{{ $title }}</title>
+@include ('common_assets')
+<title>{{ trans('pages.common.app_name')}}:{{ $title or '' }}</title>
 @yield('assets')
 
 </head>
-<body id="{{ $id }}" class="{{ $class }}" mode="{{ $mode or ''}}" console="{{ $console or ''}}">
+<body id="{{ $id or '' }}" class="{{ $class or '' }}" mode="{{ $mode or '' }}" console="{{ $console or '' }}" name="{{ $name or '' }}">
+    <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Yoursave</a>
+                </div>
 
-@yield('header')
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        @if (Auth::check())
+                            <li><a href="{{ url('/') }}">Home</a></li>
+                            @if (Session::get('ProduceCompany'))
+                                <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.mycompany.title') }}</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ url('/mycompany') }}">{{ trans('pages.mycompany.title') }}</a></li>
+                                        @if (Session::get('ProduceCompanyUser')->type !== DB_PRODUCE_COMPANY_USERS_TYPE_GUEST)
+                                            <li><a href="{{ url('/mycompany/goods') }}">{{ trans('pages.mycompany.goods_title') }}</a></li>
+                                            <li><a href="{{ url('/mycompany/users') }}">{{ trans('pages.mycompany.users_title') }}</a></li>
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endif
+                            @if (Session::get('Shop'))
+                                <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.myshop.title') }}</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ url('/myshop') }}">{{ trans('pages.myshop.title') }}</a></li>
+                                        @if (Session::get('Shop')->type !== DB_PRODUCE_COMPANY_USERS_TYPE_GUEST)
+                                            <li><a href="{{ url('/myshop/goods') }}">{{ trans('pages.myshop.goods_title') }}</a></li>
+                                            <li><a href="{{ url('/myshop/users') }}">{{ trans('pages.myshop.users_title') }}</a></li>
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endif
+                        @endif
+                    </ul>
 
-<div class="contents-body">
-    @if(Auth::check())
-    @include('contents-console')
-    @endif
-    @yield('console')
-    <div class="contents-area">
-        @yield('content')
-        @include('contents-footer')
-    </div><!-- /.contents-area -->
-</div><!-- /.contents-body -->
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (Auth::guest())
+                            <li><a href="{{ url('/login') }}">Login</a></li>
+                            <li><a href="{{ url('/register') }}">Register</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Session::get('User')->u_name }} <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/user') }}">{{ trans('pages.user.title') }}</a></li>
+                                    <li><a href="{{ url('/user/friends') }}">{{ trans('pages.user.friends_title') }}</a></li>
+                                    <li><a href="{{ url('/logout') }}">{{ trans('pages.common.buttons.logout') }}</a></li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-<div class="to-page-top"></div>
+    @yield('header')
 
+    <div class="contents-body">
+        @if(Auth::check())
+        @include('console')
+        @endif
+        @yield('console')
+        <div class="contents-area">
+            <div class="flash-massage">
+                @if (Session::has('success_messages'))
+                    <div class="success-messages">
+                        @foreach (Session::get('success_messages') as $message)
+                            {{ $message }}<br />
+                        @endforeach
+                    </div>
+                @endif
+                @if (Session::has('waring_messages'))
+                    <div class="waring-messages">
+                        @foreach (Session::get('waring_messages') as $message)
+                            {{ $message }}<br />
+                        @endforeach
+                    </div>
+                @endif
+                @if (Session::has('error_messages'))
+                    <div class="error-messages">
+                        @foreach (Session::get('error_messages') as $message)
+                            {{ $message }}<br />
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+            @yield('content')
+            @include('footer')
+        </div><!-- /.contents-area -->
+    </div><!-- /.contents-body -->
+
+    <div class="to-page-top"></div>
 </body>
 </html>

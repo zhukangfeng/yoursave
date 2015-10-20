@@ -7,25 +7,25 @@
  */
 return [
     // 数据库常用信息
-    DB_COMMON   => [
-        DB_COMMON_ID            => 'id',
-        DB_COMMON_CREATED_BY    => 'created user',
-        DB_COMMON_UPDATED_BY    => 'updated user',
-        DB_COMMON_DELETED_BY    => 'deleted user',
-        DB_COMMON_CREATED_AT    => 'created time',
-        DB_COMMON_UPDATED_AT    => 'last updated time',
-        DB_COMMON_DELETED_AT    => 'deleted time',
-        DB_COMMON_PUBLIC_TYPE   => 'public type',
+    'common'   => [
+        'id'            => 'id',
+        'created_by'    => '创建者',
+        'updated_by'    => '更新者',
+        'deleted_by'    => '删除者',
+        'created_at'    => '创建时间',
+        'updated_at'    => '最后更新时间',
+        'deleted_at'    => '删除时间',
+        'public_type'   => '公开类型',
         'column_value'    => [
-            DB_COMMON_PUBLIC_TYPE_NO                    => 'not public',
-            DB_COMMON_PUBLIC_TYPE_YES_FOR_ALL           => 'public',
-            DB_COMMON_PUBLIC_TYPE_YES_FOR_REGISTERED    => 'public for all registered users',
-            DB_COMMON_PUBLIC_TYPE_YES_FOR_FRIEND        => 'public for all friends'
+            DB_COMMON_PUBLIC_TYPE_NO                    => '不公开',
+            DB_COMMON_PUBLIC_TYPE_YES_FOR_ALL           => '公开',
+            DB_COMMON_PUBLIC_TYPE_YES_FOR_REGISTERED    => '注册用户公开',
+            DB_COMMON_PUBLIC_TYPE_YES_FOR_FRIEND        => '对好友公开'
         ]
     ],
     // 群组成员信息
     DB_CHAT_GROUP_USER_RELATIONS => [
-        'tabel_name'                       => 'chat group',
+        'table_name'                       => 'chat group',
         DB_CHAT_GROUP_USER_RELATIONS_TYPE   => 'group type',
         DB_CHAT_GROUP_USER_RELATIONS_INVITED_BY => 'invited user',
         'column_value'    => [
@@ -48,7 +48,7 @@ return [
     ],
     // 用户的消费信息
     DB_CONSUMES => [
-        'tabel_name'               => 'consumes',
+        'table_name'               => 'consumes',
         DB_CONSUMES_CONSUME_NAME    => 'consume name',
         DB_CONSUMES_CONSUME_COST    => 'consume cost',
         DB_CONSUMES_CURRENCY        => 'consume currency',
@@ -58,25 +58,25 @@ return [
     ],
     // 上传文件信息
     DB_FILES => [
-        'tabel_name'       => 'files',
+        'table_name'       => 'files',
         DB_FILES_TYPE       => 'file type',
         DB_FILES_REAL_NAME  => 'file name',
         DB_FILES_SIZE       => 'file size'
     ],
     // 商品收藏
     DB_GOOD_COLLECTIONS => [
-        'tabel_name'                       => 'good collections',
+        'table_name'                       => 'good collections',
         DB_GOOD_COLLECTIONS_COLLECTION_TIME => 'collection time',
         DB_GOOD_COLLECTIONS_COLLECTION_INFO => 'collection information'
     ],
     // 商品评论
     DB_GOOD_COMMENTS => [
-        'tabel_name'                   => 'good comments',
+        'table_name'                   => 'good comments',
         DB_GOOD_COMMENTS_COMMENT_INFO   => 'comment content'
     ],
     // 商品分类信息
     DB_GOOD_KINDS => [
-        'tabel_name'           => 'good kinds',
+        'table_name'           => 'good kinds',
         DB_GOOD_KINDS_NAME      => 'kind name',
         DB_GOOD_KINDS_KIND_INFO => 'kind information',
         DB_GOOD_KINDS_STATUS    => 'good kind status',
@@ -90,20 +90,20 @@ return [
     ],
     // 商品评价信息
     DB_GOOD_RANKS => [
-        'tabel_name'           => 'good ranks',
+        'table_name'           => 'good ranks',
         DB_GOOD_RANKS_RANK      => 'rank',
         DB_GOOD_RANKS_RANK_INFO => 'rank information'
     ],
     // 商品信息
     DB_GOODS => [
-        'tabel_name'       => 'goods',
+        'table_name'       => 'goods',
         DB_GOODS_GOOD_NAME  => 'good name',
         DB_GOODS_GOOD_INFO  => 'good information',
         DB_GOODS_STATUS     => 'good status'
     ],
     // 用户登录记录
     DB_LOG_LOGINS => [
-        'tabel_name'               => 'login log',
+        'table_name'               => 'login log',
         DB_LOG_LOGIN_LOG_IP         => 'login ip',
         DB_LOG_LOGIN_LOG_HTTP_INFO  => 'login http information',
         DB_LOG_LOGIN_STATUS         => 'login status',
@@ -115,27 +115,27 @@ return [
     ],
     // 聊天记录中提醒的用户信息
     DB_MESSAGE_REMIND_USER_RELATIONS => [
-        'tabel_name'   => 'Remind users'
+        'table_name'   => 'Remind users'
     ],
     // 用户聊天信息
     DB_MESSAGES => [
-        'tabel_name'       => 'messages',
+        'table_name'       => 'messages',
         DB_MESSAGES_SEND_TO => 'send to',
         DB_MESSAGES_CONTENT => 'content'
     ],
     //促销信息收集
     DB_PREFERENCE_COLLECTIONS => [
-        'tabel_name'                               => 'preference collections',
+        'table_name'                               => 'preference collections',
         DB_PREFERENCE_COLLECTIONS_COLLECTION_INFO   => 'collection information'
     ],
     // 促销信息评论
     DB_PREFERENCE_COMMENTS => [
-        'tabel_name'                       => 'preference comments',
+        'table_name'                       => 'preference comments',
         DB_PREFERENCE_COMMENTS_COMMENT_INFO => 'comment information'
     ],
     // 商品促销信息
     DB_PREFERENCES  => [
-        'tabel_name'                   => 'preference information',
+        'table_name'                   => 'preference information',
         DB_PREFERENCES_SHOP_NAME        => 'shop name',
         DB_PREFERENCES_ORIGINAL_PRICE   => 'original price',
         DB_PREFERENCES_DISCOUNT_PRICE   => 'discount price',
@@ -146,13 +146,13 @@ return [
     ],
     // 促销信息评分信息
     DB_PREFERENCES_RANKS => [
-        'tabel_name'                   => 'preference ranks',
+        'table_name'                   => 'preference ranks',
         DB_PREFERENCES_RANKS_RANK       => 'rank',
         DB_PREFERENCES_RANKS_RANK_INFO  => 'rank information'
     ],
     // 商品生产厂家产品卖出信息
     DB_PRODUCE_COMPANY_GOOD_SELLS => [
-        'tabel_name'                               => 'sold goods',
+        'table_name'                               => 'sold goods',
         DB_PRODUCE_COMPANY_GOOD_SELLS_SHOP_NAME     => 'shop name',
         DB_PRODUCE_COMPANY_GOOD_SELLS_COST          => 'cost',
         DB_PRODUCE_COMPANY_GOOD_SELLS_PRICE         => 'price',
@@ -170,7 +170,7 @@ return [
     ],
     // 生产厂家产品信息
     DB_PRODUCE_COMPANY_GOODS => [
-        'tabel_name'                       => 'company\' goods',
+        'table_name'                       => 'company\' goods',
         DB_PRODUCE_COMPANY_GOODS_PRICE      => 'price',
         DB_PRODUCE_COMPANY_GOODS_COST       => 'cost',
         DB_PRODUCE_COMPANY_GOODS_CURRENCY   => 'currency',
@@ -184,7 +184,7 @@ return [
     ],
     // 商品生产厂家用户信息
     DB_PRODUCE_COMPANY_USERS => [
-        'tabel_name'                   => 'company users',
+        'table_name'                   => 'company users',
         DB_PRODUCE_COMPANY_USERS_STATUS => 'status',
         DB_PRODUCE_COMPANY_USERS_TYPE   => 'user type',
         'column_value' => [
@@ -196,7 +196,7 @@ return [
     ],
     // 商品生产厂家信息
     DB_PRODUCE_COMPANYS => [
-        'tabel_name'                           => 'produce companys',
+        'table_name'                           => 'produce companys',
         DB_PRODUCE_COMPANYS_NAME                => 'name',
         DB_PRODUCE_COMPANYS_ADDRESS             => 'address',
         DB_PRODUCE_COMPANYS_PHONE_NUM           => 'phone number',
@@ -212,22 +212,22 @@ return [
     ],
     // 商品商店收集
     DB_SHOP_COLLECTIONS => [
-        'tabel_name'                       => 'shop collections',
+        'table_name'                       => 'shop collections',
         DB_SHOP_COLLECTIONS_COLLECTION_INFO => 'collection information'
     ],
     // 商店的用户评论信息
     DB_SHOP_COMMENTS => [
-        'tabel_name'                   => 'shop comments',
+        'table_name'                   => 'shop comments',
         DB_SHOP_COMMENTS_COMMENT_INFO   => 'comment information'
     ],
     // 商店商品评论信息
     DB_SHOP_GOOD_COMMENTS => [
-        'tabel_name'                       => 'good comments',
+        'table_name'                       => 'good comments',
         DB_SHOP_GOOD_COMMENTS_COMMENT_INFO  => 'comment information'
     ],
     // 商店商品信息
     DB_SHOP_GOODS => [
-        'tabel_name'               => 'shop\'s goods',
+        'table_name'               => 'shop\'s goods',
         DB_SHOP_GOODS_COST          => 'cost',
         DB_SHOP_GOODS_PRICE         => 'price',
         DB_SHOP_GOODS_CURRENCY      => 'currency',
@@ -241,13 +241,13 @@ return [
     ],
     // 商店评价
     DB_SHOP_RANKS => [
-        'tabel_name'           => 'shop\' ranks',
+        'table_name'           => 'shop\' ranks',
         DB_SHIP_RANKS_RANK      => 'rank',
         DB_SHIP_RANKS_RANK_INFO => 'rank information'
     ],
     // 商品售卖商店职员信息表
     DB_SHOP_USERS => [
-        'tabel_name'           => 'staffs',
+        'table_name'           => 'staffs',
         DB_SHOP_USERS_TYPE      => 'staff type',
         'column_value' => [
             DB_SHOP_USERS_EMAIL     => 'staff\' email',
@@ -261,7 +261,7 @@ return [
     ],
     // 商品售卖商店信息表
     DB_SHOPS => [
-        'tabel_name'       => 'shops',
+        'table_name'       => 'shops',
         DB_SHOPS_NAME       => 'shop\'s name',
         DB_SHOPS_ADDRESS    => 'shop\' address',
         DB_SHOPS_PHONE_NUM  => 'contact phone number',
@@ -276,7 +276,7 @@ return [
     ],
     // 对用户评价，评分表
     DB_USER_RANKS => [
-        'tabel_name'           => 'user\'s ranks',
+        'table_name'           => 'user\'s ranks',
         DB_USER_RANKS_RANK      => 'rank',
         DB_USER_RANKS_RANK_INFO => 'rank information'
     ],
@@ -287,7 +287,7 @@ return [
     ],
     // 好友关系情况
     DB_USER_RELATIONS => [
-        'tabel_name'               => 'friend relations',
+        'table_name'               => 'friend relations',
         DB_USER_RELATIONS_STATUS    => 'friend relation',
         'column_value' => [
             DB_USER_RELATIONS_STATUS_INVALID    => 'invalid',
@@ -297,12 +297,12 @@ return [
     ],
     // 用户分享信息评论信息表
     DB_USER_SHARE_COMMENTS => [
-        'tabel_name'                       => 'share comments',
+        'table_name'                       => 'share comments',
         DB_USER_SHARE_COMMENTS_COMMENT_INFO => 'comment information'
     ],
     // 用户分享信息表（店铺，打折信息等）
     DB_USER_SHARES => [
-        'tabel_name'               => 'user shares',
+        'table_name'               => 'user shares',
         DB_USER_SHARES_SHARE_NAME   => 'share name',
         DB_USER_SHARES_SHARE_URL    => 'url',
         DB_USER_SHARES_SHARE_INFO   => 'share information',
@@ -319,31 +319,33 @@ return [
     ],
     // 用户信息表。
     'users' => [
-        'u_name'        => 'nick name',
-        'f_name'        => 'first name',
-        'l_name'        => 'last name',
-        'login_mail'    => 'login email address',
-        'email'         => 'contact email address',
-        'password'      => 'password',
-        'post_code'     => 'post code',
-        'address'       => 'address',
-        'home_phone'    => 'home phone number',
-        'mobile_phone'  => 'mobile phone number',
-        'birthday'      => 'birthday',
-        'sex'           => 'sex',
-        'currency'      => 'currency',
-        'language'      => 'language',
-        'autheriticate_type'                 => 'authenticate type',
-        'receive_collection_message_type'    => 'receive massage type',
-        'status'                             => 'account status',
-        'created_ip'                         => 'created ip adddress',
+        'u_name'        => '用户昵称',
+        'f_name'        => '名',
+        'l_name'        => '姓',
+        'login_mail'    => '登录邮箱地址',
+        'email'         => '联系邮箱地址',
+        'password'      => '密码',
+        'post_code'     => '邮编',
+        'address'       => '地址',
+        'home_phone'    => '家庭电话',
+        'mobile_phone'  => '移动电话',
+        'birthday'      => '生日',
+        'sex'           => '性别',
+        'currency'      => '使用货币',
+        'language'      => '使用系统语言',
+        'autheriticate_type'                => '用户认证等级',
+        'receive_collection_message_type'   => '接受推送消息类型',
+        'status'        => '账户状态',
+        'created_ip'    => '注册IP地址',
         'column_value' => [
-            DB_USERS_STATUS_INVALID     => 'invalid',
-            DB_USERS_STATUS_EFFECITVE   => 'effective',
-            DB_USERS_STATUS_REQUESTING  => 'requesting mail checking',
-            DB_USERS_AUTHERITICATE_TYPE_UNAUTHENTICATED => 'unauthenticated',
-            DB_USERS_AUTHERITICATE_TYPE_OFFICIAL_AUTH   => 'official authenticated',
-            DB_USERS_AUTHERITICATE_TYPE_COMMON_AUTH     => 'common authenticated',
+            DB_USERS_SEX_MAN    => '男性',
+            DB_USERS_SEX_WOMAN  => '女性',
+            DB_USERS_STATUS_INVALID     => '无效',
+            DB_USERS_STATUS_EFFECITVE   => '有效',
+            DB_USERS_STATUS_REQUESTING  => '等待邮件认证',
+            DB_USERS_AUTHERITICATE_TYPE_UNAUTHENTICATED => '未认证',
+            DB_USERS_AUTHERITICATE_TYPE_OFFICIAL_AUTH   => '官方认证',
+            DB_USERS_AUTHERITICATE_TYPE_COMMON_AUTH     => '普通认证',
             DB_USERS_LANGUAGE_EN    => 'English',
             DB_USERS_LANGUAGE_ZH_CN => '日本語',
             DB_USERS_LANGUAGE_JA    => '简体中文'

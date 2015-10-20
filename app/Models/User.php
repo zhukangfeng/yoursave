@@ -11,12 +11,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
     use Authenticatable;
     use CanResetPassword;
-    use SoftDeletion;
+    use SoftDeletes;
 
     protected $dates = [
         'deleted_at',
-        'birthday',
-        'remember_token_tim',
+        'remember_token_time',
         'active_token_time'
     ];
 
@@ -31,6 +30,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'l_name',
         'login_mail',
         'email',
+        'password',
         'post_code',
         'address',
         'home_phone',
@@ -39,7 +39,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'sex',
         'currency',
         'language',
-        'user_type',
         'shop_user_id',
         'produce_company_user_id',
         'autheriticate_type',
