@@ -13,6 +13,9 @@
 Route::get('/login', 'AuthController@index');
 Route::post('/login', 'AuthController@login');
 
+Route::get('/register', 'UserController@create');
+Route::put('/register', 'UserController@store');
+
 Route::get('/logout', 'AuthController@logout');
 
 Route::get('/', 'DashboardController@index');

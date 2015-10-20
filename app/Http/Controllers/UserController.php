@@ -1,12 +1,20 @@
 <?php
 namespace App\Http\Controllers;
 
+// Models
+use App\Models\User;
+
 // Requests
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Http\Requests\Register\UserCreateRequest;
 
 // Services
+use Carbon\Carbon;
 use DB;
+use Illuminate\Http\Request;
+
+// Utils
+use App\Utils\AuthUtil;
 
 /**
  * UserController
@@ -39,24 +47,34 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 注册用户界面.
      *
      * @return Response
      */
     public function create()
     {
-        //
+
+        return view('register.index');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 注册用户信息存入数据库.
      *
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
-        //
+        $user = User::create([
+            'u_name'    => $request->input('username'),
+            'f_name'    => $request->input('firstname'),
+            'l_name'    => $request->input('lastname'),
+            'login_mail'    => $request->input('login_mail_addr'),
+            'active_token'  => AuthUtil::createToken('login_mail_addr'),
+            'active_token_time' => Carbon::now()->addHours(REGISTER_CHECK_URL_EFFECTIVE_HOUR),
+            'status'    => DB_USERS_STATUS_REQUESTING,
+            'created_ip'    => $request->getClientIp()
+        ]);
     }
 
     /**
