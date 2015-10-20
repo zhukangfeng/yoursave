@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ App::getLocale() }}">
 <head>
-
-<meta charset="utf-8">
-<meta name="robots" content="noindex,nofollow">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<link rel="shortcut icon" href="{{ asset('/shared/images/favicon.ico') }}">
-@include ('common_assets')
-<title>{{ trans('pages.common.app_name')}}:{{ $title or '' }}</title>
-@yield('assets')
-
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <link rel="shortcut icon" href="{{ asset('/shared/images/favicon.ico') }}">
+    @include ('common_assets')
+    <title>{{ trans('pages.common.app_name')}}:{{ $title or '' }}</title>
+    @yield('assets')
 </head>
 <body id="{{ $id or '' }}" class="{{ $class or '' }}" mode="{{ $mode or '' }}" console="{{ $console or '' }}" name="{{ $name or '' }}">
     <nav class="navbar navbar-default">
@@ -85,23 +83,23 @@
         <div class="contents-area">
             <div class="flash-massage">
                 @if (Session::has('success_messages'))
-                    <div class="success-messages">
+                    <div class="success-messages alert alert-success" role="alert">
                         @foreach (Session::get('success_messages') as $message)
-                            {{ $message }}<br />
+                            <label>{{ $message }}</label><br />
                         @endforeach
                     </div>
                 @endif
                 @if (Session::has('waring_messages'))
-                    <div class="waring-messages">
+                    <div class="waring-messages alert alert-info" role="alert">
                         @foreach (Session::get('waring_messages') as $message)
-                            {{ $message }}<br />
+                            <label>{{ $message }}</label><br />
                         @endforeach
                     </div>
                 @endif
                 @if (Session::has('error_messages'))
-                    <div class="error-messages">
+                    <div class="error-messages alert alert-danger" role="alert">
                         @foreach (Session::get('error_messages') as $message)
-                            {{ $message }}<br />
+                            <label>{{ $message }}</label><br />
                         @endforeach
                     </div>
                 @endif

@@ -12,9 +12,11 @@ use App\Http\Requests\Register\UserCreateRequest;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use Session;
 
 // Utils
 use App\Utils\AuthUtil;
+use App\Utils\MailUtil;
 
 /**
  * UserController
@@ -65,6 +67,8 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
+        DB::beginTransaction();
+
         $user = User::create([
             'u_name'    => $request->input('username'),
             'f_name'    => $request->input('firstname'),
@@ -75,6 +79,29 @@ class UserController extends Controller
             'status'    => DB_USERS_STATUS_REQUESTING,
             'created_ip'    => $request->getClientIp()
         ]);
+
+        try {
+            $activeToken = $user->active_token;
+            MailUtil::sendMail([
+                'view'  => 'register.register_check_mail',
+                'viewData'  => compact('user', 'activeToken'),
+                'fromMailAddr'  => null,
+                'fromName'  => null,
+                'toMailAddr'    => $user->login_mail,
+                'toName'    => $user->l_name,
+                'subject'   => trans('mails.register.subject')
+            ]);
+        } catch (Exception $e) {
+            DB::rollback();
+            Session::flash('error_messages', [trans('error_messages.register.mail_sent_fail')]);
+
+            return back()->withInput();
+        }
+
+        DB::commit();
+        Session::flash('success_messages', [trans('success_messages.register.user_register_success')]);
+
+        return redirect('/');
     }
 
     /**
@@ -83,7 +110,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show()
     {
         //
     }

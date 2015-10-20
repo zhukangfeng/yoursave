@@ -45,6 +45,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'receive_collection_message_type',
         'approve_times',
         'remember_token_time',
+        'active_token',
         'active_token_time',
         'status',
         'public_type',
