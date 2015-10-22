@@ -2,7 +2,7 @@
 namespace App\Services;
 
 // OSS
-use JohnLui\AliyunOSS\AliyunOSS as ParentAliyunOSS;
+use Zhu\AliyunOSS\AliyunOSS as ParentAliyunOSS;
 use Aliyun\OSS\OSSClient;
 use Config;
 
@@ -10,6 +10,9 @@ class AliyunOSS
 {
 
     protected $ossClient;
+
+    private $AccessKeyId;
+    private $AccessKeySecret;
 
     public function __construct($isInternal = false)
     {
@@ -46,7 +49,11 @@ class AliyunOSS
     public static function multipartUpload($ossKey, $filePath)
     {
         $oss = new AliyunOSS();
-
+        $ossClient = new factory([
+            OSSOptions::ENDPOINT => $serverName,
+            'AccessKeyId' => $AccessKeyId,
+            'AccessKeySecret' => $AccessKeySecret
+        ]);
         return $oss->ossClient->initiateMultipartUpload([
             'Bucket'    => $oss->bucket,
             'Key'       => $ossKey,
@@ -77,32 +84,34 @@ class AliyunOSS
     /**
      * 拷贝一个在OSS上已经存在的Object为另外一个Object。
      *
-     * @param array $options 可以包含以下Key:
-     * <li>SourceBucket(string, 必选) - 复制的源Bucket</li>
-     * <li>SourceKey(string, 必选) - 复制的的源Object的Key</li>
-     * <li>DestBucket(string, 必选) - 复制的目的Bucket</li>
-     * <li>DestKey(string, 必选) - 复制的目的Object的Key</li>
-     * <li>ContentDisposition(string, 可选) - Content-Disposition请求头，表示MIME用户代理如何显示附加的文件。</li>
-     * <li>CacheControl(string, 可选) - Cache-Control请求头，表示用户指定的HTTP请求/回复链的缓存行为。</li>
-     * <li>ContentEncoding(string, 可选) - Content-Encoding请求头，表示Object内容的编码方式。</li>
-     * <li>ContentType(string, 可选) - Content-Type请求头，表示Object内容的类型，为标准的MIME类型。</li>
-     * <li>Expires(\DateTime, 可选) - Expires请求头，表示Object的过期时间</li>
-     * <li>UserMetadata(array, 可选) - 用户自定义元数据，如 array('key1' => 'value1', 'key2' => 'value2') </li>
-     * <p>如果用户在请求中指定了任意一项Object的元数据（ContentDisposition，CacheControl，ContentEncoding，ContentType，Expires， UserMetadata）
-     * 则使用新的元数据，否则直接使用源Object的源数据。
-     * </p>
-     *
+     * @param string $sourceBuckt 复制的源Bucket
+     * @param string $sourceKey - 复制的的源Object的Key
+     * @param string $destBucket - 复制的目的Bucket
+     * @param string $destKey - 复制的目的Object的Key
      * @return Models\CopyObjectResult
      */
-    public static function copyObject(array $options) {
+    public static function copyObject($sourceBuckt, $sourceKey, $destBucket, $destKey) {
         $oss = new AliyunOSS();
 
-        return $oss->ossClient->copyObject($options);
+        return $oss->ossClient->copyObject($sourceBuckt, $sourceKey, $destBucket, $destKey);
     }
 
     /**
-     * 移动OSS上依旧存在的Object
+     * 移动OSS上已经存在的Object
      *
+     * @param string $sourceBuckt 复制的源Bucket
+     * @param string $sourceKey - 复制的的源Object的Key
+     * @param string $destBucket - 复制的目的Bucket
+     * @param string $destKey - 复制的目的Object的Key
+     * @return Models\CopyObjectResult
+     */
+    public function moveObject($sourceBuckt, $sourceKey, $destBucket, $destKey)
+    {
+        $oss = new AliyunOSS();
+
+        return $oss->ossClient->moveObject($sourceBuckt, $sourceKey, $destBucket, $destKey);
+    }
+
 
     /**
      * 删除一个Object
@@ -113,10 +122,10 @@ class AliyunOSS
      *
      * @return void
      */
-    public function deleteObject(array $options) {
+    public function deleteObject($bucketName, $key) {
         $oss = new AliyunOSS();
 
-        return $oss->ossClient->deleteObject(__FUNCTION__, $options);
+        return $oss->ossClient->deleteObject($bucketName, $key);
     }
 
     public static function createBucket($bucketName)

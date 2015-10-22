@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee0427413fe68a2330836fc6d72ee54f",
-    "content-hash": "1dff1cb244e239e267f36f78276f1b59",
+    "hash": "6bff7a6ce0993635ddb3b4c55ab0a3f4",
+    "content-hash": "a18ad22418d3cf0047877f4789532cef",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -725,48 +725,6 @@
                 "tokenizer"
             ],
             "time": "2015-03-11 20:06:43"
-        },
-        {
-            "name": "johnlui/aliyun-oss",
-            "version": "v1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/johnlui/AliyunOSS.git",
-                "reference": "9c7c2a48b0f8dafc87646d212807a4ab44821d74"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/johnlui/AliyunOSS/zipball/9c7c2a48b0f8dafc87646d212807a4ab44821d74",
-                "reference": "9c7c2a48b0f8dafc87646d212807a4ab44821d74",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "JohnLui\\AliyunOSS\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "John Lui",
-                    "email": "wenhanlv@gmail.com"
-                }
-            ],
-            "description": "阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项目，包括 Laravel、Symfony、TinyLara 等等。",
-            "homepage": "https://github.com/johnlui/AliyunOSS",
-            "keywords": [
-                "AliyunOSS",
-                "aliyun",
-                "oss"
-            ],
-            "time": "2015-08-07 15:22:53"
         },
         {
             "name": "laravel/framework",
@@ -2665,6 +2623,52 @@
                 "environment"
             ],
             "time": "2015-05-30 15:59:26"
+        },
+        {
+            "name": "zhu/aliyun-oss",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zhukangfeng/AliyunOSS.git",
+                "reference": "2b7d6db79f0fa7c76037bb50574e0c2b0a73381e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zhukangfeng/AliyunOSS/zipball/2b7d6db79f0fa7c76037bb50574e0c2b0a73381e",
+                "reference": "2b7d6db79f0fa7c76037bb50574e0c2b0a73381e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zhu\\AliyunOSS\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John Lui",
+                    "email": "wenhanlv@gmail.com"
+                },
+                {
+                    "name": "Kangfeng Zhu",
+                    "email": "zhukangfeng@gmail.com"
+                }
+            ],
+            "description": "阿里云 OSS 官方 SDK 的 Composer 封装，支持任何 PHP 项目，包括 Laravel、Symfony、TinyLara 等等。",
+            "homepage": "https://github.com/zhukangfeng/AliyunOSS",
+            "keywords": [
+                "AliyunOSS",
+                "aliyun",
+                "oss"
+            ],
+            "time": "2015-10-22 08:38:14"
         }
     ],
     "packages-dev": [

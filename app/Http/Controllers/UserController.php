@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Session;
-use App\Services\OSS;
+use App\Services\AliyunOSS;
 
 // Utils
 use App\Utils\AuthUtil;
@@ -50,12 +50,16 @@ class UserController extends Controller
         //     'test/bootstrap-datetimepicker-master_' . Carbon::now() . '.zip',
         //     public_path() . '/bootstrap-datetimepicker-master.zip'
         // );
-        var_dump(FileIO::upload('/Users/shu/Downloads/china1.pdf', 'upload/china1.pdf'));
-        return FileIO::getUrl('upload/china1.pdf', 1);
+        // var_dump(FileIO::upload('/Users/shu/Downloads/china1.pdf', 'upload/china1.pdf'));
+        // return FileIO::getUrl('upload/china1.pdf', 1);
         // return DB::table('users')
         //     ->select('id')
         //     ->first()
         //     ->id;
+        $aliyunOSS = new AliyunOSS();
+        // var_dump($aliyunOSS->upload('robots.txt', public_path() . '/robots.txt'));
+        // var_dump($aliyunOSS->deleteObject('yoursave', 'abcd.xbd'));
+        var_dump($aliyunOSS->moveObject(null, 'tmp/tobots.txt', null, 'tmp/robots.txt'));
     }
 
     /**

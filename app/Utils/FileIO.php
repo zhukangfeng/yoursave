@@ -19,21 +19,45 @@ class FileIO
      * @param $savePathName 要保存的路径和文件名
      * @return mutil
      */
-    public static function upload($orignalPathName = null, $savePathName = null)
+    public static function upload($originalPathName = null, $savePathName = null)
     {
-        if ($orignalPathName == '' || $savePathName == '') {
+        if ($originalPathName == '' || $savePathName == '') {
             return null;
         }
 
         switch (Storage::getDefaultDriver()) {
             case 'local':
-                return Storage::put($savePathName, file_get_contents($orignalPathName));
+                return Storage::put($savePathName, file_get_contents($originalPathName));
                 break;
             case 'aliyunOSS':
-                return self::uploadToAliyunOSS($orignalPathName, $savePathName);
+                return self::uploadToAliyunOSS($originalPathName, $savePathName);
                 break;
             case 's3':
-                return self::uploadToS3($orignalPathName, $savePathName);
+                return self::uploadToS3($originalPathName, $savePathName);
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
+
+    /**
+     * 将文件转存
+     *
+     * @param string $originalPathName
+     * @param string $destPathName
+     */
+    public static function moveFile($originalPathName, $destPathName)
+    {
+        switch (Storage::getDefaultDriver()) {
+            case 'local':
+                return Storage::move($originalPathName, $destPathName);
+                break;
+            case 'aliyunOSS':
+                return self::moveFileInAliyunOSS($originalPathName, $savePathName);
+                break;
+            case 's3':
+                return self::moveFileInS3($originalPathName, $savePathName);
                 break;
             default:
                 # code...
@@ -75,9 +99,21 @@ class FileIO
      * @param $savePathName 要保存的路径和文件名
      * @return mutil
      */
-    protected static function uploadToAliyunOSS($orignalPathName, $savePathName)
+    protected static function uploadToAliyunOSS($originalPathName, $savePathName)
     {
-        return AliyunOSS::multipartUpload($savePathName, $orignalPathName);
+        return AliyunOSS::multipartUpload($savePathName, $originalPathName);
+    }
+
+    /**
+     * 将存放在阿里云中的文件转移
+     *
+     * @param
+     * @param string $originalPathName
+     * @param string $destPathName
+     */
+    protected static function moveFileInAliyunOSS($originalPathName, $destPathName)
+    {
+        return AliyunOSS::moveObject(null, $originalPathName, null, $destPathName);
     }
 
     /**
@@ -99,11 +135,21 @@ class FileIO
      * @param $savePathName 要保存的路径和文件名
      * @return mutil
      */
-    protected static function uploadToS3($orignalPathName, $savePathName)
+    protected static function uploadToS3($originalPathName, $savePathName)
     {
-        return Storage::put($savePathName, file_get_contents($orignalPathName));
+        return Storage::put($savePathName, file_get_contents($originalPathName));
     }
 
+    /**
+     * 移动S3种文件
+     *
+     * @param string $originalPathName
+     * @param string $destPathName
+     */
+     protected static function moveFileInS3($originalPathName, $destPathName)
+     {
+        return Storage::move($originalPathName, $destPathName);
+     }
     /**
      * 获取amazon s3下载url
      *
