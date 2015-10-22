@@ -1,9 +1,5 @@
 @charset "utf-8";
-div.errors p.error-message {
-    color: #F10D05;
-}
 div.contents-body .contents-area .panel-body
 .form-data .required > label.control-label:after {
-    margin-left: 1em;
-    color: red;
+    content: '必须';
 }

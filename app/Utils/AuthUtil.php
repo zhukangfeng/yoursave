@@ -46,5 +46,4 @@ class AuthUtil
     {
         return sha1($string . Carbon::now());
     }
-
 }

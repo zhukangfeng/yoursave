@@ -13,10 +13,11 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Session;
+use App\Services\OSS;
 
 // Utils
 use App\Utils\AuthUtil;
-use App\Utils\MailUtil;
+use App\Utils\FileIO;
 
 /**
  * UserController
@@ -32,7 +33,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = Session::get('User');
+        var_dump($user);
     }
 
     /**
@@ -42,10 +44,18 @@ class UserController extends Controller
      */
     public function home()
     {
-        return DB::table('users')
-            ->select('id')
-            ->first()
-            ->id;
+// var_dump(public_path());exit;
+        // 上传一个文件
+        // $result = OSS::upload(
+        //     'test/bootstrap-datetimepicker-master_' . Carbon::now() . '.zip',
+        //     public_path() . '/bootstrap-datetimepicker-master.zip'
+        // );
+        var_dump(FileIO::upload('/Users/shu/Downloads/china1.pdf', 'upload/china1.pdf'));
+        return FileIO::getUrl('upload/china1.pdf', 1);
+        // return DB::table('users')
+        //     ->select('id')
+        //     ->first()
+        //     ->id;
     }
 
     /**
@@ -102,6 +112,38 @@ class UserController extends Controller
         Session::flash('success_messages', [trans('success_messages.register.user_register_success')]);
 
         return redirect('/');
+    }
+
+    /**
+     * 个人账户激活
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function check(Request $request)
+    {
+        $token = $request->input('token');
+
+        if ($token == '') {
+            // 不存在token
+            return redirect('/');
+        }
+
+        $user = User::where('active_token', $token)
+            ->first();
+
+        if (is_null($user)) {
+            // token无效
+            Session::flash('error_messages', [trans('error_messages.register.token_error')]);
+            return redirect('/register');
+        }
+
+        if ($user->active_token_time < Carbon::now()) {
+            // token失效
+            Session::flash('error_messages', [trans('error_messages.register.over_token_active_time')]);
+            return redirect('/register/resendmail');
+        }
+
     }
 
     /**

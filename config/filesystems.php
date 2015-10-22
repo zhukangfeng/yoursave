@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => env('FILESYSTEMS_DEFAULT', "local"),
 
     /*
     |--------------------------------------------------------------------------

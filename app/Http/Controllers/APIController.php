@@ -1,28 +1,26 @@
 <?php
 namespace App\Http\Controllers;
 
-// Controllers
 use App\Http\Controllers\Controller;
 
 // Requests
 use App\Http\Requests;
+use App\Http\Requests\API\APIFileDownloadRequest;
 
 // Services
 use Illuminate\Http\Request;
-use Session;
+use Storage;
 
-class ProduceCompanyController extends Controller
+class APIController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 下载文件
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function fileDownload(APIFileDownloadRequest $request)
     {
-        $produceCompany = Session::get('ProduceCompany');
-
-        var_dump($produceCompany);
+        var_dump($request->input('path'));
     }
 
     /**

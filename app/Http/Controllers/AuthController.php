@@ -59,9 +59,15 @@ class AuthController extends Controller
             // 用户账户非不可用
             if ($user->status === DB_USERS_STATUS_REQUESTING) {
                 // 未激活状态
-                return back()->withInput()->withErrors(['account_requesting_error' => trans('error_messages.login.account_requesting_error')]);
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'account_requesting_error' => trans('error_messages.login.account_requesting_error')
+                    ]);
             } else {
-                return back()->withInput()->withErrors(['account_invalid_error' => trans('error_messages.login.account_invalid_error')]);
+                return back()
+                    ->withInput()
+                    ->withErrors(['account_invalid_error' => trans('error_messages.login.account_invalid_error')]);
             }
         }
 
@@ -69,7 +75,7 @@ class AuthController extends Controller
         if (!AuthUtil::checkPassword($password, $user->password)) {
             // 密码错误
             return back()->withInput()->withErrors(['password_error' => trans('error_messages.login.password_error')]);
-        } 
+        }
         Auth::login($user, (bool)$remember);
         Session::put('User', $user);
 

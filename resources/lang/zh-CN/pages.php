@@ -59,8 +59,10 @@ return [
     // 用户注册
     'register'  => [
         'title' => '注册',
+        'active_title'  => '账号激活',
         'labels'    => [
             'index_panel_header'    => '新用户注册',
+            'active_panel_header'   => '账号信息修改',
         ]
     ],
     // 用户相关界面显示内容

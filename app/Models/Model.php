@@ -34,7 +34,7 @@ class Model extends ParentModel
     }
 
     /**
-     * 数据库多字段搜索 
+     * 数据库多字段搜索
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $searchName 要搜索的数据库字段
@@ -82,6 +82,21 @@ class Model extends ParentModel
             }
         });
         
+        return $query;
+    }
+
+    /**
+     * 除去意见删除的数据
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder $query
+     */
+    public function scopeUndeleted($query, $tableName = null)
+    {
+        if (!is_null($tableName)) {
+            $query->whereNull($tableName . '.deleted_at');
+        }
+
         return $query;
     }
 }

@@ -64,7 +64,9 @@ class MailUtil extends Mail
             if (isset($mailData['attachFile'])) {
                 if (is_array($mailData['attachFile'])) {
                     foreach ($mailData['attachFile'] as $key => $attachFile) {
-                        if (isset($mailData['attachFileOptions'][$key]) && is_array($mailData['attachFileOptions'][$key])) {
+                        if (isset($mailData['attachFileOptions'][$key])
+                            && is_array($mailData['attachFileOptions'][$key])
+                        ) {
                             $message->attach($attachFile, $mailData['attachFileOptions'][$key]);
                         } else {
                             $message->attach($attachFile);

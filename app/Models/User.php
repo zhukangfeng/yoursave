@@ -49,7 +49,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'active_token_time',
         'status',
         'public_type',
-        'created_id'
+        'created_ip'
     ];
 
     /**
@@ -70,4 +70,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $table = 'users';
 
+    public static function de()
+    {
+        var_dump(with(new static)->getTable());
+    }
 }

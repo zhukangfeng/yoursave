@@ -1,4 +1,4 @@
-@extends ('app', ['title' => trans('pages.register.title'), 'id' => 'register', 'class' => 'register', 'console' => '', 'mode' => '', 'name' => ''])
+@extends ('app', ['title' => trans('pages.register.active_title'), 'id' => 'user_active', 'class' => 'register active', 'console' => '', 'mode' => '', 'name' => ''])
 
 @section ('content')
 <div class="container-fluid">
@@ -9,9 +9,8 @@
                 <div class="panel-body">
                     <div class="form-data">
                         <form class="form-horizontal" role="form" method="POST"
-                            action="{{ url('/register') }}">
+                            action="{{ url('/register/active') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="_method" value="PUT">
                             <div class="form-group required">
                                 <label class="col-md-4 control-label">{{ trans('database.users.u_name') }}</label>
                                 <div class="col-md-6">
