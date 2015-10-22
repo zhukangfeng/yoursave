@@ -6,14 +6,16 @@ use App\Models\User;
 
 // Requests
 use App\Http\Requests;
+use App\Http\Requests\Register\UserActiveRequest;
 use App\Http\Requests\Register\UserCreateRequest;
 
 // Services
+use App\Services\AliyunOSS;
+use Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Session;
-use App\Services\AliyunOSS;
 
 // Utils
 use App\Utils\AuthUtil;
@@ -50,16 +52,16 @@ class UserController extends Controller
         //     'test/bootstrap-datetimepicker-master_' . Carbon::now() . '.zip',
         //     public_path() . '/bootstrap-datetimepicker-master.zip'
         // );
-        // var_dump(FileIO::upload('/Users/shu/Downloads/china1.pdf', 'upload/china1.pdf'));
+        var_dump(FileIO::upload('/Users/shu/Downloads/china1.pdf', 'upload/china1.pdf'));
         // return FileIO::getUrl('upload/china1.pdf', 1);
         // return DB::table('users')
         //     ->select('id')
         //     ->first()
         //     ->id;
-        $aliyunOSS = new AliyunOSS();
+        // $aliyunOSS = new AliyunOSS();
         // var_dump($aliyunOSS->upload('robots.txt', public_path() . '/robots.txt'));
         // var_dump($aliyunOSS->deleteObject('yoursave', 'abcd.xbd'));
-        var_dump($aliyunOSS->moveObject(null, 'tmp/tobots.txt', null, 'tmp/robots.txt'));
+        // var_dump($aliyunOSS->moveObject(null, 'tmp/tobots.txt', null, 'tmp/robots.txt'));
     }
 
     /**
@@ -119,7 +121,7 @@ class UserController extends Controller
     }
 
     /**
-     * 个人账户激活
+     * 个人账户激活页面
      *
      * @param Request $request
      * @return Response
@@ -148,6 +150,50 @@ class UserController extends Controller
             return redirect('/register/resendmail');
         }
 
+        return view('register.user_active', compact('token'));
+    }
+
+    /**
+     * 账户激活
+     *
+     * @param UserActiveRequest $request
+     * @return Response
+     */
+    public function active(UserActiveRequest $request)
+    {
+        $token = $request->input('token');
+
+        if ($token == '') {
+            // 不存在token
+            return redirect('/');
+        }
+
+        $user = User::where('active_token', $token)
+            ->first();
+
+        if (is_null($user)) {
+            // token无效
+            Session::flash('error_messages', [trans('error_messages.register.token_error')]);
+            return redirect('/register');
+        }
+
+        if ($user->active_token_time < Carbon::now()) {
+            // token失效
+            Session::flash('error_messages', [trans('error_messages.register.over_token_active_time')]);
+            return redirect('/register/resendmail');
+        }
+        
+        $user->update([
+            'password'  => AuthUtil::encryptPassword($request->input('password')),
+            'status'    => DB_USERS_STATUS_EFFECITVE,
+            'active_token'  => null,
+            'active_token_time' => null
+        ]);
+
+        Session::put('User', $user);
+        Auth::login($user);
+
+        return redirect('/user/edit');
     }
 
     /**
@@ -167,9 +213,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $user = Session::get('User');
+
+        return view('user.edit', compact('user'));
     }
 
     /**

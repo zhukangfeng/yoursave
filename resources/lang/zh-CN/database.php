@@ -338,17 +338,25 @@ return [
         'status'        => '账户状态',
         'created_ip'    => '注册IP地址',
         'column_value' => [
-            DB_USERS_SEX_MAN    => '男性',
-            DB_USERS_SEX_WOMAN  => '女性',
-            DB_USERS_STATUS_INVALID     => '无效',
-            DB_USERS_STATUS_EFFECITVE   => '有效',
-            DB_USERS_STATUS_REQUESTING  => '等待邮件认证',
-            DB_USERS_AUTHERITICATE_TYPE_UNAUTHENTICATED => '未认证',
-            DB_USERS_AUTHERITICATE_TYPE_OFFICIAL_AUTH   => '官方认证',
-            DB_USERS_AUTHERITICATE_TYPE_COMMON_AUTH     => '普通认证',
-            DB_USERS_LANGUAGE_EN    => 'English',
-            DB_USERS_LANGUAGE_ZH_CN => '日本語',
-            DB_USERS_LANGUAGE_JA    => '简体中文'
+            'sex'   => [
+                DB_USERS_SEX_MAN    => '男性',
+                DB_USERS_SEX_WOMAN  => '女性'
+            ],
+            'status'    => [
+                DB_USERS_STATUS_INVALID     => '无效',
+                DB_USERS_STATUS_EFFECITVE   => '有效',
+                DB_USERS_STATUS_REQUESTING  => '等待邮件认证'
+            ],
+            'autheriticate_type'    => [
+                DB_USERS_AUTHERITICATE_TYPE_UNAUTHENTICATED => '未认证',
+                DB_USERS_AUTHERITICATE_TYPE_OFFICIAL_AUTH   => '官方认证',
+                DB_USERS_AUTHERITICATE_TYPE_COMMON_AUTH     => '普通认证'
+            ],
+            'language'  => [
+                DB_USERS_LANGUAGE_EN    => 'English',
+                DB_USERS_LANGUAGE_ZH_CN => '日本語',
+                DB_USERS_LANGUAGE_JA    => '简体中文'
+            ]
         ]
     ]
 ];

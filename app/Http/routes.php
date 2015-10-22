@@ -34,7 +34,9 @@ Route::group([
 
     Route::get('/logout', 'AuthController@logout');
 
-    Route::resource('/user', 'UserController');
+    Route::get('/user', 'UserController@show');
+    Route::get('/user/edit', 'UserController@edit');
+    Route::put('/user/edit', 'UserController@update');
 
     // 商店职员登录
     Route::group([

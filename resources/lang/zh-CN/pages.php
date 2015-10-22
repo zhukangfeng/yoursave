@@ -63,6 +63,7 @@ return [
         'labels'    => [
             'index_panel_header'    => '新用户注册',
             'active_panel_header'   => '账号信息修改',
+            'password_confirm'      => '密码（确认）'
         ]
     ],
     // 用户相关界面显示内容
@@ -70,6 +71,10 @@ return [
         // 登录界面
         'title' => '个人资料管理',
         'friends_title' => '好友管理',
-        ''
+        'edit_title'    => '个人资料管理',
+
+        'labels'    => [
+            'edit_panel_header' => '个人资料修改'
+        ]
     ],
 ];

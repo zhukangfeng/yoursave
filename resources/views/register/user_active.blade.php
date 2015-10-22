@@ -11,53 +11,32 @@
                         <form class="form-horizontal" role="form" method="POST"
                             action="{{ url('/register/active') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="token" value="{{ $token }}">
                             <div class="form-group required">
-                                <label class="col-md-4 control-label">{{ trans('database.users.u_name') }}</label>
+                                <label class="col-md-4 control-label">{{ trans('database.users.password') }}</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="username" value="{{ old('username') }}">
-                                    @if ($errors->has('username'))
+                                    <input type="password" class="form-control" name="password" value="">
+                                    @if ($errors->has('password'))
                                     <div class="errors">
-                                        <p class="error-message">{{ $errors->first('username') }}</p>
+                                        <p class="error-message">{{ $errors->first('password') }}</p>
                                     </div>
                                     @endif
                                 </div>
                             </div>
                             <div class="form-group required">
-                                <label class="col-md-4 control-label">{{ trans('database.users.f_name') }}</label>
+                                <label class="col-md-4 control-label">{{ trans('pages.register.labels.password_confirm') }}</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="firstname" value="{{ old('firstname') }}">
-                                    @if ($errors->has('firstname'))
+                                    <input type="password" class="form-control" name="confirm" value="">
+                                    @if ($errors->has('confirm'))
                                     <div class="errors">
-                                        <p class="error-message">{{ $errors->first('firstname') }}</p>
-                                    </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group required">
-                                <label class="col-md-4 control-label">{{ trans('database.users.l_name') }}</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="lastname" value="{{ old('lastname') }}">
-                                    @if ($errors->has('lastname'))
-                                    <div class="errors">
-                                        <p class="error-message">{{ $errors->first('lastname') }}</p>
-                                    </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group required">
-                                <label class="col-md-4 control-label">{{ trans('database.users.login_mail') }}</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="login_mail_addr" value="{{ old('login_mail_addr') }}">
-                                    @if ($errors->has('login_mail_addr'))
-                                    <div class="errors">
-                                        <p class="error-message">{{ $errors->first('login_mail_addr') }}</p>
+                                        <p class="error-message">{{ $errors->first('confirm') }}</p>
                                     </div>
                                     @endif
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">{{ trans('pages.common.buttons.create') }}</button>
+                                    <button type="submit" class="btn btn-primary">{{ trans('pages.common.buttons.confirm') }}</button>
                                 </div>
                             </div>
                         </form>

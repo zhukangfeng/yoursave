@@ -91,6 +91,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'confirm'   => [
+            'same'  => '确认输入值和:other的值不一致。'
+        ]
     ],
 
     /*
@@ -109,6 +112,8 @@ return [
         'firstname' => trans('database.users.f_name'),
         'lastname'  => trans('database.users.l_name'),
         'login_mail_addr'   => trans('database.users.login_mail'),
+        'password'  => trans('database.users.password'),
+        'confirm'   => '确认'
     ],
 
 ];

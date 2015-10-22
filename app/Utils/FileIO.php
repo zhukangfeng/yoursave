@@ -101,7 +101,12 @@ class FileIO
      */
     protected static function uploadToAliyunOSS($originalPathName, $savePathName)
     {
-        return AliyunOSS::multipartUpload($savePathName, $originalPathName);
+        if (strlen(file_get_contents($originalPathName)) > 5242880) {
+            // 如果文件大小大于5MB，则多分段上传
+            return AliyunOSS::multipartUpload($savePathName, $originalPathName);
+        } else {
+            return AliyunOSS::upload($savePathName, $originalPathName);
+        }
     }
 
     /**
