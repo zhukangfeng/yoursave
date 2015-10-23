@@ -26,6 +26,17 @@ class AliyunOSS
         $this->ossClient->setBucket(Config::get('app.aliyun_oss_bucket'));
     }
 
+    /**
+     * 返回阿里云提供的接口类的实力
+     *
+     * @return  Aliyun\OSS\OSSclient
+     */
+    public static function getOSSClient()
+    {   $oss = new AliyunOSS();
+        return $oss->getOSSClient();
+    }
+
+
     public static function upload($ossKey, $filePath)
     {
         $oss = new AliyunOSS();
@@ -48,17 +59,55 @@ class AliyunOSS
      */
     public static function multipartUpload($ossKey, $filePath)
     {
-        $oss = new AliyunOSS();
-        $ossClient = new factory([
-            OSSOptions::ENDPOINT => $serverName,
-            'AccessKeyId' => $AccessKeyId,
-            'AccessKeySecret' => $AccessKeySecret
-        ]);
-        return $oss->ossClient->initiateMultipartUpload([
-            'Bucket'    => $oss->bucket,
+        $contentLenth = filesize($filePath);
+        $ossClient = (new ParentAliyunOSS(
+            Config::get('app.aliyun_oss_server'),
+            Config::get('app.aliyun_access_key_id'),
+            Config::get('app.aliyun_access_key_secret')
+        ))->getOSSClient();
+        $uploadResult = $ossClient->initiateMultipartUpload([
+            'Bucket'    => Config::get('app.aliyun_oss_bucket'),
             'Key'       => $ossKey,
-            'Content'   => file_get_contents($filePath),
-            'ContentLength' => strlen(file_get_contents($file))
+            'Content'   => file($filePath),
+            'ContentLength' => $contentLenth
+        ]);
+
+        // var_dump($ossClient->listMultipartUploads([
+        //     'Bucket'    => Config::get('app.aliyun_oss_bucket'),
+        // ]));exit;
+        $partNumber = (int)($contentLenth / 5242880);  // 10MB亿块
+
+        $uploadFile = fopen($filePath, 'r');
+        $partEtages = [];
+        for ($i = 0; $i < $partNumber; $i++) {
+            $uploadPartResult = $ossClient->uploadPart([
+                'Bucket'    => Config::get('app.aliyun_oss_bucket'),
+                'Key'       => $ossKey,
+                'UploadId'  => $uploadResult->getUploadId(),
+                'Content'   => fgets($uploadFile, 5242880),
+                'PartNumber' => $i + 1,
+                'PartSize'  => 5242880
+            ]);
+            $partEtages[] = $uploadPartResult->getPartETag();
+        }
+        if (($partNumber * 5242880) < $contentLenth) {
+            // 最后一块
+            $uploadPartResult = $ossClient->uploadPart([
+                'Bucket'    => Config::get('app.aliyun_oss_bucket'),
+                'Key'       => $ossKey,
+                'UploadId'  => $uploadResult->getUploadId(),
+                'Content'   => fgets($uploadFile, 5242880),
+                'PartNumber' => $i + 1,
+                'PartSize'  => $contentLenth - ($partNumber * 5242880)
+            ]);
+            $partEtages[] = $uploadPartResult->getPartETag();
+        }
+        var_dump($partEtages);
+        $ossClient->completeMultipartUpload([
+            'Bucket'    => Config::get('app.aliyun_oss_bucket'),
+            'Key'       => $ossKey,
+            'UploadId'  => $uploadResult->getUploadId(),
+            'PartETags' => $partEtages
         ]);
     }
 

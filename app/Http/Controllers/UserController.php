@@ -52,7 +52,9 @@ class UserController extends Controller
         //     'test/bootstrap-datetimepicker-master_' . Carbon::now() . '.zip',
         //     public_path() . '/bootstrap-datetimepicker-master.zip'
         // );
-        var_dump(FileIO::upload('/Users/shu/Downloads/china1.pdf', 'upload/china1.pdf'));
+        // $result = FileIO::upload('/Users/shu/Downloads/QQ_V4.0.4.dmg', 'tmp/QQ_V4.0.4.dmg');
+        $result = FileIO::upload('/Users/shu/Downloads/QQ_V4.0.4.dmg', 'tmp/QQ_V4.0.4.dmg1');
+        // var_dump($result->getUploadId());
         // return FileIO::getUrl('upload/china1.pdf', 1);
         // return DB::table('users')
         //     ->select('id')

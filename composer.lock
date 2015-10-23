@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6bff7a6ce0993635ddb3b4c55ab0a3f4",
-    "content-hash": "a18ad22418d3cf0047877f4789532cef",
+    "hash": "035c44ac25d34daef3f0286606568a56",
+    "content-hash": "2bcd101d8d712a40f760adb867137284",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.8.1",
+            "version": "3.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5de9bee69024457be14d125b2ad1598d17968e11"
+                "reference": "b4fba5210039feaf32850776dc382c9946ed4b97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5de9bee69024457be14d125b2ad1598d17968e11",
-                "reference": "5de9bee69024457be14d125b2ad1598d17968e11",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b4fba5210039feaf32850776dc382c9946ed4b97",
+                "reference": "b4fba5210039feaf32850776dc382c9946ed4b97",
                 "shasum": ""
             },
             "require": {
@@ -38,6 +38,7 @@
                 "ext-pcre": "*",
                 "ext-simplexml": "*",
                 "ext-spl": "*",
+                "nette/neon": "^2.3",
                 "phpunit/phpunit": "~4.0"
             },
             "suggest": {
@@ -81,7 +82,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-10-15 21:40:56"
+            "time": "2015-10-22 22:56:23"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1055,16 +1056,16 @@
         },
         {
             "name": "maximebf/debugbar",
-            "version": "v1.10.4",
+            "version": "v1.10.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "7b2006e6e095126b5a061ec33fca3d90ea8a8219"
+                "reference": "30e53e8a28284b69dd223c9f5ee8957befd72636"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/7b2006e6e095126b5a061ec33fca3d90ea8a8219",
-                "reference": "7b2006e6e095126b5a061ec33fca3d90ea8a8219",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/30e53e8a28284b69dd223c9f5ee8957befd72636",
+                "reference": "30e53e8a28284b69dd223c9f5ee8957befd72636",
                 "shasum": ""
             },
             "require": {
@@ -1107,7 +1108,7 @@
             "keywords": [
                 "debug"
             ],
-            "time": "2015-02-05 07:51:20"
+            "time": "2015-10-19 20:35:12"
         },
         {
             "name": "monolog/monolog",
@@ -2626,16 +2627,16 @@
         },
         {
             "name": "zhu/aliyun-oss",
-            "version": "v1.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zhukangfeng/AliyunOSS.git",
-                "reference": "2b7d6db79f0fa7c76037bb50574e0c2b0a73381e"
+                "reference": "e49757b9a99a4d9cb7833551fc231b5ab0aa24c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zhukangfeng/AliyunOSS/zipball/2b7d6db79f0fa7c76037bb50574e0c2b0a73381e",
-                "reference": "2b7d6db79f0fa7c76037bb50574e0c2b0a73381e",
+                "url": "https://api.github.com/repos/zhukangfeng/AliyunOSS/zipball/e49757b9a99a4d9cb7833551fc231b5ab0aa24c5",
+                "reference": "e49757b9a99a4d9cb7833551fc231b5ab0aa24c5",
                 "shasum": ""
             },
             "require": {
@@ -2668,7 +2669,7 @@
                 "aliyun",
                 "oss"
             ],
-            "time": "2015-10-22 08:38:14"
+            "time": "2015-10-23 06:21:11"
         }
     ],
     "packages-dev": [
@@ -3301,16 +3302,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.14",
+            "version": "4.8.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b4900675926860bef091644849305399b986efa2"
+                "reference": "be8f7b9eacf8243940f8412f8b4a9a434c73dd7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b4900675926860bef091644849305399b986efa2",
-                "reference": "b4900675926860bef091644849305399b986efa2",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/be8f7b9eacf8243940f8412f8b4a9a434c73dd7b",
+                "reference": "be8f7b9eacf8243940f8412f8b4a9a434c73dd7b",
                 "shasum": ""
             },
             "require": {
@@ -3369,7 +3370,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-17 15:03:30"
+            "time": "2015-10-22 09:05:37"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3850,7 +3851,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "zhu/aliyun-oss": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
