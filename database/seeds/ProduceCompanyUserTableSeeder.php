@@ -14,7 +14,9 @@ class ProduceCompanyUserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('produce_company_users')->delete();
+        DB::table('produce_company_users')
+            ->where('id', '<', DB::raw(15))
+            ->delete();
 
         $produceCompanyUserData = [];
         

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Requests;
 use App\Http\Requests\Register\UserActiveRequest;
 use App\Http\Requests\Register\UserCreateRequest;
+use App\Http\Requests\User\UserUpdateRequest;
 
 // Services
 use App\Services\AliyunOSS;
@@ -53,7 +54,7 @@ class UserController extends Controller
         //     public_path() . '/bootstrap-datetimepicker-master.zip'
         // );
         // $result = FileIO::upload('/Users/shu/Downloads/QQ_V4.0.4.dmg', 'tmp/QQ_V4.0.4.dmg');
-        $result = FileIO::upload('/Users/shu/Downloads/QQ_V4.0.4.dmg', 'tmp/QQ_V4.0.4.dmg1');
+        // $result = FileIO::upload('/Users/shu/Downloads/QQ_V4.0.4.dmg', 'tmp/QQ_V4.0.4.dmg1');
         // var_dump($result->getUploadId());
         // return FileIO::getUrl('upload/china1.pdf', 1);
         // return DB::table('users')
@@ -64,6 +65,7 @@ class UserController extends Controller
         // var_dump($aliyunOSS->upload('robots.txt', public_path() . '/robots.txt'));
         // var_dump($aliyunOSS->deleteObject('yoursave', 'abcd.xbd'));
         // var_dump($aliyunOSS->moveObject(null, 'tmp/tobots.txt', null, 'tmp/robots.txt'));
+        var_dump(Auth::viaRemember());
     }
 
     /**
@@ -206,7 +208,9 @@ class UserController extends Controller
      */
     public function show()
     {
-        //
+        $user = Session::get('User');
+
+        return view('user.show', compact('user'));
     }
 
     /**
@@ -223,15 +227,37 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 更新用户的个人资料
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  UserUpdateRequest  $request
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request)
     {
-        //
+        $user = Session::get('User');
+
+        $updateData = [
+            'u_name'    => $request->input('username'),
+            'f_name'    => $request->input('firstname'),
+            'l_name'    => $request->input('lastname'),
+            'contact_email' => ($request->input('contact_email') == '' ? $user->email : $request->input('contact_email')),
+            'post_code' => $request->input('post_code'),
+            'address'   => $request->input('address'),
+            'home_phone'    => $request->input('home_phone'),
+            'mobile_phone'  => $request->input('mobile_phone'),
+            'birthday'  => $request->input('birthday'),
+            'sex'       => $request->input('sex'),
+            'language'  => $request->input('language'),
+            'currency'  => $request->input('currency')
+        ];
+        $user->update($updateData);
+
+        Session::put('User', $user);
+        Auth::login($user);
+
+        Session::flash('success_messages', [trans('success_messages.user.update_success')]);
+
+        return redirect('/user');
     }
 
     /**

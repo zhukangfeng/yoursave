@@ -112,6 +112,8 @@ return [
         'firstname' => trans('database.users.f_name'),
         'lastname'  => trans('database.users.l_name'),
         'login_mail_addr'   => trans('database.users.login_mail'),
+        'contact_email'     => trans('database.users.contact_email'),
+        'email'     => '邮箱地址',
         'password'  => trans('database.users.password'),
         'confirm'   => '确认'
     ],

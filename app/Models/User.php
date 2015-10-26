@@ -29,7 +29,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'f_name',
         'l_name',
         'login_mail',
-        'email',
+        'contact_email',
         'password',
         'post_code',
         'address',

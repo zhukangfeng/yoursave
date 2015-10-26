@@ -81,7 +81,7 @@
         @endif
         @yield('console')
         <div class="contents-area">
-            <div class="flash-massage">
+            <div class="flash-massage col-md-10 col-md-offset-1">
                 @if (Session::has('success_messages'))
                     <div class="success-messages alert alert-success" role="alert">
                         @foreach (Session::get('success_messages') as $message)

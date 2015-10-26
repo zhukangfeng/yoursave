@@ -36,7 +36,7 @@ Route::group([
 
     Route::get('/user', 'UserController@show');
     Route::get('/user/edit', 'UserController@edit');
-    Route::put('/user/edit', 'UserController@update');
+    Route::put('/user', 'UserController@update');
 
     // 商店职员登录
     Route::group([

@@ -395,8 +395,8 @@ define('DB_USERS_CURRENCY_RMB', 1);
 define('DB_USERS_CURRENCY_USD', 2);
 define('DB_USERS_CURRENCY_JPY', 3);
 
-define('DB_USERS_LANGUAGE_EN',      'en');
 define('DB_USERS_LANGUAGE_ZH_CN',   'zh-CN');
+define('DB_USERS_LANGUAGE_EN',      'en');
 define('DB_USERS_LANGUAGE_JA',      'ja');
 
 define('DB_USERS_AUTHERITICATE_TYPE_UNAUTHENTICATED',   0);

@@ -11,13 +11,16 @@ return [
         'labels'    => [
         ],
         'buttons'   => [
-            'confirm'   => '确认',
-            'cancel'    => '取消',
-            'delete'    => '删除',
             'back'      => '返回',
-            'download'  => '下载',
+            'back_to_index' => '返回主页',
             'create'    => '创建',
+            'cancel'    => '取消',
+            'confirm'   => '确认',
+            'edit'      => '修改',
+            'delete'    => '删除',
+            'download'  => '下载',
             'logout'    => '注销',
+            'update'    => '更新'
         ],
     ],
 
@@ -71,10 +74,15 @@ return [
         // 登录界面
         'title' => '个人资料管理',
         'friends_title' => '好友管理',
+        'show_title'    => '个人资料',
         'edit_title'    => '个人资料管理',
 
         'labels'    => [
-            'edit_panel_header' => '个人资料修改'
+            'show_panel_header' => '个人资料详情',
+            'edit_panel_header' => '个人资料修改',
+            'belonged_shop'     => '所属商店',
+            'belonged_produce_company'  => '所属生产厂家',
+
         ]
     ],
 ];

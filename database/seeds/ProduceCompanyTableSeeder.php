@@ -13,7 +13,9 @@ class ProduceCompanyTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('produce_companies')->delete();
+        DB::table('produce_companies')
+            ->where('id', '<', DB::raw(3))
+            ->delete();
 
         $produceCompanyData = [];
         $produceCompanyData[] = [

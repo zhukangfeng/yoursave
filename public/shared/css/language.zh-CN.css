@@ -3,3 +3,8 @@ div.contents-body .contents-area .panel-body
 .form-data .required > label.control-label:after {
     content: '必须';
 }
+
+div.contents-body .contents-area .panel-body
+.form-data .required > :not(label.control-label):after {
+    content: '';
+}
