@@ -17,10 +17,12 @@ return [
         'deleted_at'    => '删除时间',
         'public_type'   => '公开类型',
         'column_value'    => [
-            DB_COMMON_PUBLIC_TYPE_NO                    => '不公开',
-            DB_COMMON_PUBLIC_TYPE_YES_FOR_ALL           => '公开',
-            DB_COMMON_PUBLIC_TYPE_YES_FOR_REGISTERED    => '注册用户公开',
-            DB_COMMON_PUBLIC_TYPE_YES_FOR_FRIEND        => '对好友公开'
+            'public_type'   => [
+                DB_COMMON_PUBLIC_TYPE_NO                    => '不公开',
+                DB_COMMON_PUBLIC_TYPE_YES_FOR_ALL           => '公开',
+                DB_COMMON_PUBLIC_TYPE_YES_FOR_REGISTERED    => '注册用户公开',
+                DB_COMMON_PUBLIC_TYPE_YES_FOR_FRIEND        => '对好友公开'
+            ]
         ]
     ],
     // 群组成员信息
@@ -260,18 +262,20 @@ return [
         ]
     ],
     // 商品售卖商店信息表
-    DB_SHOPS => [
-        'table_name'       => 'shops',
-        DB_SHOPS_NAME       => 'shop\'s name',
-        DB_SHOPS_ADDRESS    => 'shop\' address',
-        DB_SHOPS_PHONE_NUM  => 'contact phone number',
-        DB_SHOPS_WEB_ADDR   => 'shop website',
-        DB_SHOPS_SHOP_INFO  => 'shop information',
-        DB_SHOPS_STATUS     => 'shop status',
+    'shops' => [
+        'table_name'    => '商店信息',
+        'name'          => '商店名',
+        'address'       => '商店地址',
+        'phone_num'     => '联系电话',
+        'web_addr'      => '商店网址',
+        'shop_info'     => '商店详情',
+        'status'        => '商店状态',
         'column_value' => [
-            DB_SHOPS_STATUS_INVALID         => 'invalid',
-            DB_SHOPS_STATUS_AUTHENTICATED   => 'authenticated',
-            DB_SHOPS_STATUS_UNAUTHENTICATED => 'unauthenticated'
+            'status'    => [
+                DB_SHOPS_STATUS_INVALID         => '无效',
+                DB_SHOPS_STATUS_AUTHENTICATED   => '已认证',
+                DB_SHOPS_STATUS_UNAUTHENTICATED => '未认证'
+            ]
         ]
     ],
     // 对用户评价，评分表
@@ -323,7 +327,7 @@ return [
         'f_name'        => '名',
         'l_name'        => '姓',
         'login_mail'    => '登录邮箱地址',
-        'email'         => '联系邮箱地址',
+        'contact_email' => '联系邮箱地址',
         'password'      => '密码',
         'post_code'     => '邮编',
         'address'       => '地址',
@@ -338,17 +342,40 @@ return [
         'status'        => '账户状态',
         'created_ip'    => '注册IP地址',
         'column_value' => [
-            DB_USERS_SEX_MAN    => '男性',
-            DB_USERS_SEX_WOMAN  => '女性',
-            DB_USERS_STATUS_INVALID     => '无效',
-            DB_USERS_STATUS_EFFECITVE   => '有效',
-            DB_USERS_STATUS_REQUESTING  => '等待邮件认证',
-            DB_USERS_AUTHERITICATE_TYPE_UNAUTHENTICATED => '未认证',
-            DB_USERS_AUTHERITICATE_TYPE_OFFICIAL_AUTH   => '官方认证',
-            DB_USERS_AUTHERITICATE_TYPE_COMMON_AUTH     => '普通认证',
-            DB_USERS_LANGUAGE_EN    => 'English',
-            DB_USERS_LANGUAGE_ZH_CN => '日本語',
-            DB_USERS_LANGUAGE_JA    => '简体中文'
+            'sex'   => [
+                DB_USERS_SEX_MAN    => '男性',
+                DB_USERS_SEX_WOMAN  => '女性'
+            ],
+            'language'  => [
+                DB_USERS_LANGUAGE_ZH_CN => '简体中文',
+                DB_USERS_LANGUAGE_EN    => 'English',
+                DB_USERS_LANGUAGE_JA    => '日本語'
+            ],
+            'currency'  => [
+                DB_USERS_CURRENCY_RMB   => '人民币',
+                DB_USERS_CURRENCY_USD   => '美元',
+                DB_USERS_CURRENCY_JPY   => '日元'
+            ],
+            'autheriticate_type'    => [
+                DB_USERS_AUTHERITICATE_TYPE_UNAUTHENTICATED => '未认证',
+                DB_USERS_AUTHERITICATE_TYPE_OFFICIAL_AUTH   => '官方认证',
+                DB_USERS_AUTHERITICATE_TYPE_COMMON_AUTH     => '普通认证'
+            ],
+            'receive_collection_message_type'   => [
+                DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_REVEIVE_NO     => '不公开',
+                DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_REVEIVE_ALL    => '接受所有',
+                DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_RECEVIE_SELF_COLLECTION    => '接受自己收藏',
+                DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_RECEVIE_FRIEND_COLLECTION  => '接受好友收藏',
+                DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_RECEVIE_OFFICAL_SHOP       => '接受官方认证商店',
+                DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_RECEVIE_OFFICAL_PRODUCE_COMPANY    => '接受官方认证生产厂家',
+                DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_RECEIVE_ALL_SHOP                   => '接受所有商店',
+                DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_RECEIVE_ALL_PRODUCE_COMPANY        => '接受所有生产厂家'
+            ],
+            'status'    => [
+                DB_USERS_STATUS_INVALID     => '无效',
+                DB_USERS_STATUS_EFFECITVE   => '有效',
+                DB_USERS_STATUS_REQUESTING  => '等待邮件认证'
+            ],
         ]
     ]
 ];

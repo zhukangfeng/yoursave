@@ -29,7 +29,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'f_name',
         'l_name',
         'login_mail',
-        'email',
+        'contact_email',
         'password',
         'post_code',
         'address',
@@ -45,10 +45,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'receive_collection_message_type',
         'approve_times',
         'remember_token_time',
+        'active_token',
         'active_token_time',
         'status',
         'public_type',
-        'created_id'
+        'created_ip'
     ];
 
     /**
@@ -69,4 +70,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $table = 'users';
 
+    public static function de()
+    {
+        var_dump(with(new static)->getTable());
+    }
 }

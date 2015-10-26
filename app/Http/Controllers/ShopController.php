@@ -22,7 +22,7 @@ class ShopController extends Controller
     public function index()
     {
         $shop = Session::get('Shop');
-        return $shop;
+        var_dump($shop);
     }
 
     /**

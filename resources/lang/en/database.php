@@ -323,7 +323,7 @@ return [
         'f_name'        => 'first name',
         'l_name'        => 'last name',
         'login_mail'    => 'login email address',
-        'email'         => 'contact email address',
+        'contact_email' => 'contact email address',
         'password'      => 'password',
         'post_code'     => 'post code',
         'address'       => 'address',

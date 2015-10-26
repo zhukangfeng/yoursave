@@ -7,60 +7,62 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{{ trans('pages.register.labels.index_panel_header') }}</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST"
-                        action="{{ url('/register') }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="_method" value="PUT">
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">{{ trans('database.users.u_name') }}</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="username" value="{{ old('username') }}">
-                                @if ($errors->has('username'))
-                                <div class="errors">
-                                    <p class="error-message">{{ $errors->first('username') }}</p>
+                    <div class="form-data">
+                        <form class="form-horizontal" role="form" method="POST"
+                            action="{{ url('/register') }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group required">
+                                <label class="col-md-4 control-label">{{ trans('database.users.u_name') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="username" value="{{ old('username') }}">
+                                    @if ($errors->has('username'))
+                                    <div class="errors">
+                                        <p class="error-message">{{ $errors->first('username') }}</p>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
                             </div>
-                        </div>
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">{{ trans('database.users.f_name') }}</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="firstname" value="{{ old('firstname') }}">
-                                @if ($errors->has('firstname'))
-                                <div class="errors">
-                                    <p class="error-message">{{ $errors->first('firstname') }}</p>
+                            <div class="form-group required">
+                                <label class="col-md-4 control-label">{{ trans('database.users.f_name') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="firstname" value="{{ old('firstname') }}">
+                                    @if ($errors->has('firstname'))
+                                    <div class="errors">
+                                        <p class="error-message">{{ $errors->first('firstname') }}</p>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
                             </div>
-                        </div>
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">{{ trans('database.users.l_name') }}</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="lastname" value="{{ old('lastname') }}">
-                                @if ($errors->has('lastname'))
-                                <div class="errors">
-                                    <p class="error-message">{{ $errors->first('lastname') }}</p>
+                            <div class="form-group required">
+                                <label class="col-md-4 control-label">{{ trans('database.users.l_name') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="lastname" value="{{ old('lastname') }}">
+                                    @if ($errors->has('lastname'))
+                                    <div class="errors">
+                                        <p class="error-message">{{ $errors->first('lastname') }}</p>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
                             </div>
-                        </div>
-                        <div class="form-group required">
-                            <label class="col-md-4 control-label">{{ trans('database.users.login_mail') }}</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="login_mail_addr" value="{{ old('login_mail_addr') }}">
-                                @if ($errors->has('login_mail_addr'))
-                                <div class="errors">
-                                    <p class="error-message">{{ $errors->first('login_mail_addr') }}</p>
+                            <div class="form-group required">
+                                <label class="col-md-4 control-label">{{ trans('database.users.login_mail') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="login_mail_addr" value="{{ old('login_mail_addr') }}">
+                                    @if ($errors->has('login_mail_addr'))
+                                    <div class="errors">
+                                        <p class="error-message">{{ $errors->first('login_mail_addr') }}</p>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">{{ trans('pages.common.buttons.create') }}</button>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">{{ trans('pages.common.buttons.create') }}</button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -13,7 +13,9 @@ class ShopTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('shops')->delete();
+        DB::table('shops')
+            ->where('id', '<', DB::raw(3))
+            ->delete();
         
         $shopData = [];
         // 商店1

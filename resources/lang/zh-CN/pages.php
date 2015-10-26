@@ -11,13 +11,16 @@ return [
         'labels'    => [
         ],
         'buttons'   => [
-            'confirm'   => '确认',
-            'cancel'    => '取消',
-            'delete'    => '删除',
             'back'      => '返回',
-            'download'  => '下载',
+            'back_to_index' => '返回主页',
             'create'    => '创建',
+            'cancel'    => '取消',
+            'confirm'   => '确认',
+            'edit'      => '修改',
+            'delete'    => '删除',
+            'download'  => '下载',
             'logout'    => '注销',
+            'update'    => '更新'
         ],
     ],
 
@@ -59,8 +62,11 @@ return [
     // 用户注册
     'register'  => [
         'title' => '注册',
+        'active_title'  => '账号激活',
         'labels'    => [
             'index_panel_header'    => '新用户注册',
+            'active_panel_header'   => '账号信息修改',
+            'password_confirm'      => '密码（确认）'
         ]
     ],
     // 用户相关界面显示内容
@@ -68,6 +74,15 @@ return [
         // 登录界面
         'title' => '个人资料管理',
         'friends_title' => '好友管理',
-        ''
+        'show_title'    => '个人资料',
+        'edit_title'    => '个人资料管理',
+
+        'labels'    => [
+            'show_panel_header' => '个人资料详情',
+            'edit_panel_header' => '个人资料修改',
+            'belonged_shop'     => '所属商店',
+            'belonged_produce_company'  => '所属生产厂家',
+
+        ]
     ],
 ];

@@ -9,21 +9,51 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::group([
+    'middleware' => 'guest'
+], function () {
+    Route::get('/login', 'AuthController@index');
+    Route::post('/login', 'AuthController@login');
 
-Route::get('/login', 'AuthController@index');
-Route::post('/login', 'AuthController@login');
+    Route::get('/register', 'UserController@create');
+    Route::put('/register', 'UserController@store');
+    Route::get('/register/check', 'UserController@check');
+    Route::post('/register/active', 'UserController@active');
+});
 
-Route::get('/register', 'UserController@create');
-Route::put('/register', 'UserController@store');
+// 用户登录
+Route::group([
+    'middleware'  => 'auth'
+], function () {
+    Route::get('/', 'DashboardController@index');
 
-Route::get('/logout', 'AuthController@logout');
+    // 文件下载api
+    Route::get('api/file/download', 'APIController@fileDownload');
 
-Route::get('/', 'DashboardController@index');
+    Route::get('/home', 'UserController@home');
 
-Route::get('/home', 'UserController@home');
+    Route::get('/logout', 'AuthController@logout');
 
-// 商店管理
-Route::resource('/myshop', 'ShopController');
+    Route::get('/user', 'UserController@show');
+    Route::get('/user/edit', 'UserController@edit');
+    Route::put('/user', 'UserController@update');
 
-// 生产厂家管理
-Route::resource('/mycompany', 'ProduceCompanyController');
+    // 商店职员登录
+    Route::group([
+        'middleware' => 'shop_auth'
+    ], function () {
+        // 商店管理
+        Route::resource('/myshop', 'ShopController');
+
+    });
+
+    // 生生产厂家登录
+    Route::group([
+        'middleware'  => 'produce_company_auth'
+    ], function () {
+        // 生产厂家管理
+        Route::resource('/mycompany', 'ProduceCompanyController');
+
+    });
+
+});
