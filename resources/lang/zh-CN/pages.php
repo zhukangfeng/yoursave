@@ -82,7 +82,8 @@ return [
             'edit_panel_header' => '个人资料修改',
             'belonged_shop'     => '所属商店',
             'belonged_produce_company'  => '所属生产厂家',
-
+            'user_icon'     => '头像',
+            'user_photo'    => '个人图片'
         ]
     ],
 ];
