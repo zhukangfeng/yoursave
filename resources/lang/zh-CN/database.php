@@ -59,11 +59,13 @@ return [
         DB_CONSUMES_PLACE           => 'consume place'
     ],
     // 上传文件信息
-    DB_FILES => [
-        'table_name'       => 'files',
-        DB_FILES_TYPE       => 'file type',
-        DB_FILES_REAL_NAME  => 'file name',
-        DB_FILES_SIZE       => 'file size'
+    'files' => [
+        'table_name'    => '文件',
+        'type'          => '文件类型',
+        'path'          => '文件路径',
+        'save_name'     => '文件保存名',
+        'real_name'     => '文件名',
+        'size'          => '文件大小'
     ],
     // 商品收藏
     DB_GOOD_COLLECTIONS => [

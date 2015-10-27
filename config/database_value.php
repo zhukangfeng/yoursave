@@ -71,6 +71,11 @@ define('DB_FILE_RELATIONS_RELATION_TABLE_ID',   'relation_table_id');   // 对�
 define('DB_FILE_RELATIONS_FILE_TYPE',           'file_type');           // 文件类型
 define('DB_FILE_RELATIONS_FILE_RELATION_INFO',  'file_relation_info');  // 文件关系表信息
 
+define('DB_FILE_RELATIONS_FILE_TYPE_CONTENT', 0);
+define('DB_FILE_RELATIONS_FILE_TYPE_ATTACHMENT', 1);
+define('DB_FILE_RELATIONS_FILE_TYPE_ICON', 2);
+
+
 // 上传文件信息表
 define('DB_FILES',                      'files');
 define('DB_FILES_SHOP_ID',              'shop_id');             // 商店id
