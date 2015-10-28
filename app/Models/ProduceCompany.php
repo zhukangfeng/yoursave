@@ -24,4 +24,25 @@ class ProduceCompany extends Model
         'updated_by',
         'deleted_by'
     ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id'    => 'integer',
+        'name'  => 'string',
+        'address'   => 'string',
+        'phone_num' => 'string',
+        'post_addr' => 'string',
+        'response_email'    => 'string',
+        'response_user_id'  => 'integer',
+        'corp_info' => 'string',
+        'status'    => 'integer',
+        'created_by'    => 'integer',
+        'updated_by'    => 'integer',
+        'deleted_by'    => 'integer',
+    ];
+ 
 }

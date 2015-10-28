@@ -13,6 +13,7 @@ class ShopUser extends Model
 
     protected $fillable = [
         'shop_id',
+        'user_id',
         'type',
         'email',
         'name',
@@ -22,4 +23,24 @@ class ShopUser extends Model
         'updated_by',
         'deleted_by'
     ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id'    => 'integer',
+        'shop_id'   => 'integer',
+        'user_id' => 'integer',
+        'type'  => 'integer',
+        'email' => 'string',
+        'name'  => 'string',
+        'position'  => 'string',
+        'status'    => 'integer',
+        'created_by'    => 'integer',
+        'updated_by'    => 'integer',
+        'deleted_by'    => 'integer',
+    ];
+ 
 }

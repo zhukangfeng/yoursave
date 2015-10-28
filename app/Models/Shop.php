@@ -24,4 +24,24 @@ class Shop extends Model
         'updated_by',
         'deleted_by'
     ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id'    => 'integer',
+        'name'  => 'string',
+        'address'   => 'string',
+        'phone_num' => 'string',
+        'web_addr'  => 'string',
+        'shop_info' => 'string',
+        'response_user_id'  => 'integer',
+        'status'    => 'integer',
+        'public_type'   => 'integer',
+        'created_by'    => 'integer',
+        'updated_by'    => 'integer',
+        'deleted_by'    => 'integer',
+    ];
 }

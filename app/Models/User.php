@@ -43,7 +43,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'produce_company_user_id',
         'autheriticate_type',
         'receive_collection_message_type',
-        'approve_times',
         'remember_token_time',
         'active_token',
         'active_token_time',
@@ -64,11 +63,37 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     /**
-     * The database table used by the model.
+     * The attributes that should be casted to native types.
      *
-     * @var string
+     * @var array
      */
-    protected $table = 'users';
+    protected $casts = [
+        'id'    => 'integer',
+        'u_nuam'    => 'string',
+        'f_name'    => 'string',
+        'l_name'    => 'string',
+        'login_mail'    => 'string',
+        'contact_email' => 'string',
+        'password'  => 'string',
+        'post_code' => 'string',
+        'address'   => 'string',
+        'home_phone'    => 'string',
+        'mobile_phone'  => 'string',
+        'birthday'  => 'date',
+        'sex'       => 'integer',
+        'currency'  => 'integer',
+        'language'  => 'string',
+        'shop_user_id'  => 'integer',
+        'produce_company_user_id'   => 'integer',
+        'autheriticate_type'    => 'integer',
+        'receive_collection_message_type'   => 'integer',
+        'remember_token_time'   => 'string',
+        'active_token'  => 'string',
+        'active_token_time' => 'datetime',
+        'status'    => 'integer',
+        'public_type'   => 'integer',
+        'created_ip'    => 'string'
+    ];
 
     public static function de()
     {
