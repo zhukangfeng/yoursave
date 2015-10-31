@@ -4,6 +4,10 @@ namespace App\Models;
 // Model
 use Illuminate\Database\Eloquent\Model as ParentModel;
 
+// SEervices
+use App;
+use DB;
+
 /**
  * 数据库模型
  * 用户自定义模型，继承laravel内部模型
@@ -99,4 +103,89 @@ class Model extends ParentModel
 
         return $query;
     }
+
+    /**
+     * 获得创建者的姓名拼接，区分英语，中文，日语差别
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query <不需要写，系统自动赋值>
+     * @param string $createdBy 创建者数据列名称 <可选>
+     * @param string $tableName join后创建者数据表名称 <可选>
+     * @param string $fullname 创建者全名的名称 <可选>
+     * @return \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @author zhukangfeng
+     */
+    public function scopeWithCreatedUser($query, $createdBy = 'created_by', $tableName = 'created_user', $fullname = 'created_user_fullname')
+    {
+        $query->leftJoin('users AS ' . $tableName, function ($join) use ($createdBy, $tableName) {
+            $join->on($createdBy, '=', $tableName . '.id')
+                ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
+        });
+        if (App::getLocale() === 'en') {
+            return $query->addSelect(
+                DB::raw('CONCAT(' . $tableName . '.f_name, " ", ' . $tableName . '.l_name) AS ' . $fullname)
+            );
+        } else {
+            return $query->addSelect(
+                DB::raw('CONCAT(' . $tableName . '.l_name, " ", ' . $tableName . '.f_name) AS ' . $fullname)
+            );
+        }
+    }
+
+    /**
+     * 获得更新者的姓名拼接，区分英语，中文，日语差别
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query <不需要赋值，系统自动复制>
+     * @param string $createdBy 更新者数据列名称 <可选>
+     * @param string $tableName join后创建者数据表名称 <可选>
+     * @param string $fullname 更新者全名的名称 <可选>
+     * @return \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @author zhukangfeng
+     */
+    public function scopeWithUpdatedUser($query, $updatedBy = 'updated_by', $tableName = 'updated_user', $fullname = 'updated_user_fullname')
+    {
+        $query->leftJoin('users AS ' . $tableName, function ($join) use ($updatedBy, $tableName) {
+            $join->on($updatedBy, '=', $tableName . '.id')
+                ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
+        });
+        if (App::getLocale() === 'en') {
+            return $query->addSelect(
+                DB::raw('CONCAT(' . $tableName . '.f_name, " ", ' . $tableName . '.l_name) AS ' . $fullname)
+            );
+        } else {
+            return $query->addSelect(
+                DB::raw('CONCAT(' . $tableName . '.l_name, " ", ' . $tableName . '.f_name) AS ' . $fullname)
+            );
+        }
+    }
+
+    /**
+     * 获得负责人的姓名拼接，区分英语，中文，日语差别
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query <不需要赋值，系统自动复制>
+     * @param string $createdBy 负责人数据列名称 <可选>
+     * @param string $tableName join后创建者数据表名称 <可选>
+     * @param string $fullname 负责人全名的名称 <可选>
+     * @return \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @author zhukangfeng
+     */
+    public function scopeWithResponsedUser($query, $responseUser = 'response_user_id', $tableName = 'response_user', $fullname = 'response_user_fullname')
+    {
+        $query->leftJoin('users AS ' . $tableName, function ($join) use ($responseUser, $tableName) {
+            $join->on($responseUser, '=', $tableName . '.id')
+                ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
+        });
+        if (App::getLocale() === 'en') {
+            return $query->addSelect(
+                DB::raw('CONCAT(' . $tableName . '.f_name, " ", ' . $tableName . '.l_name) AS ' . $fullname)
+            );
+        } else {
+            return $query->addSelect(
+                DB::raw('CONCAT(' . $tableName . '.l_name, " ", ' . $tableName . '.f_name) AS ' . $fullname)
+            );
+        }
+    }
+
 }

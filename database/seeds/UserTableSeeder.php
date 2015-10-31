@@ -39,7 +39,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/21',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,
             'produce_company_user_id'   => null,
@@ -65,7 +65,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -91,7 +91,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -117,7 +117,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -143,7 +143,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -169,7 +169,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -195,7 +195,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -221,7 +221,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -248,7 +248,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -274,7 +274,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -300,7 +300,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -326,7 +326,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -352,7 +352,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -378,7 +378,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -404,7 +404,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -432,7 +432,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -458,7 +458,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -484,7 +484,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -510,7 +510,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -536,7 +536,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -562,7 +562,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -588,7 +588,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -615,7 +615,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -641,7 +641,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -667,7 +667,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -693,7 +693,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -719,7 +719,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -745,7 +745,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,
@@ -771,7 +771,7 @@ class UserTableSeeder extends Seeder
             'mobile_phone'  => '0123456789',
             'birthday'      => '1992/03/22',
             'sex'           => DB_USERS_SEX_MAN,
-            'currency'      => DB_USERS_CURRENCY_RMB,
+            'currency'      => DB_COMMON_CURRENCY_RMB,
             'language'      => DB_USERS_LANGUAGE_ZH_CN,
             'shop_user_id'  => null,    // 之后设置为1
             'produce_company_user_id'   => null,

@@ -260,7 +260,7 @@ return [
         DB_USERS_MOBILE_PHONE                       => 'mobile phone number',
         DB_USERS_BIRTHDAY                           => 'birthday',
         DB_USERS_SEX                                => 'sex',
-        DB_USERS_CURRENCY                           => 'currency',
+        DB_COMMON_CURRENCY                           => 'currency',
         DB_USERS_LANGUAGE                           => 'language',
         DB_USERS_AUTHERITICATE_TYPE                 => 'authenticate type',
         DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE    => 'receive massage type',
