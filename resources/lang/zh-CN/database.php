@@ -22,6 +22,11 @@ return [
                 DB_COMMON_PUBLIC_TYPE_YES_FOR_ALL           => '公开',
                 DB_COMMON_PUBLIC_TYPE_YES_FOR_REGISTERED    => '注册用户公开',
                 DB_COMMON_PUBLIC_TYPE_YES_FOR_FRIEND        => '对好友公开'
+            ],
+            'currency'  => [
+                DB_COMMON_CURRENCY_RMB   => '人民币',
+                DB_COMMON_CURRENCY_USD   => '美元',
+                DB_COMMON_CURRENCY_JPY   => '日元'
             ]
         ]
     ],
@@ -83,7 +88,7 @@ return [
         'table_name'           => 'good kinds',
         DB_GOOD_KINDS_NAME      => 'kind name',
         DB_GOOD_KINDS_KIND_INFO => 'kind information',
-        DB_GOOD_KINDS_STATUS    => 'good kind status',
+        DB_GOOD_KINDS_    => 'good kind status',
         'column_value' => [
             DB_GOOD_KINDS_STATUS_INVALID => 'invalid',
             DB_GOOD_KINDS_STATUS_AUTHENTICATED => 'authenticated',
@@ -352,11 +357,6 @@ return [
                 DB_USERS_LANGUAGE_ZH_CN => '简体中文',
                 DB_USERS_LANGUAGE_EN    => 'English',
                 DB_USERS_LANGUAGE_JA    => '日本語'
-            ],
-            'currency'  => [
-                DB_USERS_CURRENCY_RMB   => '人民币',
-                DB_USERS_CURRENCY_USD   => '美元',
-                DB_USERS_CURRENCY_JPY   => '日元'
             ],
             'autheriticate_type'    => [
                 DB_USERS_AUTHERITICATE_TYPE_UNAUTHENTICATED => '未认证',
