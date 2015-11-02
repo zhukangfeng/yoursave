@@ -16,6 +16,7 @@ return [
         'updated_at'    => '最后更新时间',
         'deleted_at'    => '删除时间',
         'public_type'   => '公开类型',
+        'currency'      => 'currency',
         'column_value'    => [
             'public_type'   => [
                 DB_COMMON_PUBLIC_TYPE_NO                    => '不公开',
@@ -88,7 +89,7 @@ return [
         'table_name'           => 'good kinds',
         DB_GOOD_KINDS_NAME      => 'kind name',
         DB_GOOD_KINDS_KIND_INFO => 'kind information',
-        DB_GOOD_KINDS_    => 'good kind status',
+        'status' => 'good kind status',
         'column_value' => [
             DB_GOOD_KINDS_STATUS_INVALID => 'invalid',
             DB_GOOD_KINDS_STATUS_AUTHENTICATED => 'authenticated',
@@ -274,6 +275,7 @@ return [
         'name'          => '商店名',
         'address'       => '商店地址',
         'phone_num'     => '联系电话',
+        'contact_mail'  => 'contact mail',
         'web_addr'      => '商店网址',
         'shop_info'     => '商店详情',
         'status'        => '商店状态',
