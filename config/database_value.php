@@ -26,6 +26,10 @@ define('DB_COMMON_PUBLIC_TYPE_YES_FOR_ALL', 1); // 任意公开
 define('DB_COMMON_PUBLIC_TYPE_YES_FOR_REGISTERED', 2);
 define('DB_COMMON_PUBLIC_TYPE_YES_FOR_FRIEND', 3);
 
+define('DB_COMMON_CURRENCY_RMB', 1);
+define('DB_COMMON_CURRENCY_USD', 2);
+define('DB_COMMON_CURRENCY_JPY', 3);
+
 
 // 讨论组（群组）分析信息表
 define('DB_CHAT_GROUP_USER_RELATIONS',               'chat_group_user_relations');
@@ -70,6 +74,11 @@ define('DB_FILE_RELATIONS_RELATION_TABLE_NAME', 'relation_table_name'); // 关�
 define('DB_FILE_RELATIONS_RELATION_TABLE_ID',   'relation_table_id');   // 对应数据表的id
 define('DB_FILE_RELATIONS_FILE_TYPE',           'file_type');           // 文件类型
 define('DB_FILE_RELATIONS_FILE_RELATION_INFO',  'file_relation_info');  // 文件关系表信息
+
+define('DB_FILE_RELATIONS_FILE_TYPE_CONTENT', 0);
+define('DB_FILE_RELATIONS_FILE_TYPE_ATTACHMENT', 1);
+define('DB_FILE_RELATIONS_FILE_TYPE_ICON', 2);
+
 
 // 上传文件信息表
 define('DB_FILES',                      'files');
@@ -373,7 +382,7 @@ define('DB_USERS_HOME_PHONE',                       'home_phone');              
 define('DB_USERS_MOBILE_PHONE',                     'mobile_phone');                    // 移动电话
 define('DB_USERS_BIRTHDAY',                         'birthday');                        // 生日
 define('DB_USERS_SEX',                              'sex');                             // 性别
-define('DB_USERS_CURRENCY',                         'currency');                        // 币种
+define('DB_COMMON_CURRENCY',                         'currency');                        // 币种
 define('DB_USERS_LANGUAGE',                         'language');                        // 使用系统语言
 define('DB_USERS_SHOP_USER_ID',                     'shop_user_id');                    // 商店职员id（普通用户或者生产厂家职员时null）
 define('DB_USERS_PRODUCE_COMPANY_USER_ID',          'produce_company_user_id');         // 生产厂家id（普通用户或者商店职员时null）
@@ -390,10 +399,6 @@ define('DB_USERS_CREATED_IP',         'created_ip');            // 注册ip
 
 define('DB_USERS_SEX_MAN',      0);
 define('DB_USERS_SEX_WOMAN',    1);
-
-define('DB_USERS_CURRENCY_RMB', 1);
-define('DB_USERS_CURRENCY_USD', 2);
-define('DB_USERS_CURRENCY_JPY', 3);
 
 define('DB_USERS_LANGUAGE_ZH_CN',   'zh-CN');
 define('DB_USERS_LANGUAGE_EN',      'en');

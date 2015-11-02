@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 // Models
 use App\Models\Shop;
+use App\Models\ShopUser;
 
 // Services
 use App\Http\Requests;
@@ -52,20 +53,47 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id = null)
     {
-        //
+        if (is_null($id)) {
+            // 公司职员查看公司信息
+            $myshop = Session::get('Shop');
+            $shop = Shop::where('shops.id', $myshop->id)
+                ->select('shops.*')
+                ->withCreatedUser()
+                ->withUpdatedUser()
+                ->withResponsedUser()
+                ->first();
+
+            return view('myshop.show', compact('shop'));
+        } else {
+            $shop = Shop::where('shops.id', $id)
+                ->select('shops.*')
+                ->first();
+        }
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 商店管理员管理商店信息
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $myshop = Session::get('Shop');
+        $shop = Shop::where('shops.id', $myshop->id)
+            ->select('shops.*')
+            ->withCreatedUser()
+            ->withUpdatedUser()
+            ->withResponsedUser()
+            ->first();
+
+        $adminUsers = ShopUser::where('shop_users.shop_id', $shop->id)
+            ->where('shop_users.type', DB_SHOP_USERS_TYPE_ADMIN)
+            ->withUserName()
+            ->get();
+
+        return view('myshop.edit', compact('shop', 'adminUsers'));
     }
 
     /**

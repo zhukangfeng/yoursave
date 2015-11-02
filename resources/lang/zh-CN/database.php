@@ -16,12 +16,18 @@ return [
         'updated_at'    => '最后更新时间',
         'deleted_at'    => '删除时间',
         'public_type'   => '公开类型',
+        'currency'      => 'currency',
         'column_value'    => [
             'public_type'   => [
                 DB_COMMON_PUBLIC_TYPE_NO                    => '不公开',
                 DB_COMMON_PUBLIC_TYPE_YES_FOR_ALL           => '公开',
                 DB_COMMON_PUBLIC_TYPE_YES_FOR_REGISTERED    => '注册用户公开',
                 DB_COMMON_PUBLIC_TYPE_YES_FOR_FRIEND        => '对好友公开'
+            ],
+            'currency'  => [
+                DB_COMMON_CURRENCY_RMB   => '人民币',
+                DB_COMMON_CURRENCY_USD   => '美元',
+                DB_COMMON_CURRENCY_JPY   => '日元'
             ]
         ]
     ],
@@ -59,11 +65,13 @@ return [
         DB_CONSUMES_PLACE           => 'consume place'
     ],
     // 上传文件信息
-    DB_FILES => [
-        'table_name'       => 'files',
-        DB_FILES_TYPE       => 'file type',
-        DB_FILES_REAL_NAME  => 'file name',
-        DB_FILES_SIZE       => 'file size'
+    'files' => [
+        'table_name'    => '文件',
+        'type'          => '文件类型',
+        'path'          => '文件路径',
+        'save_name'     => '文件保存名',
+        'real_name'     => '文件名',
+        'size'          => '文件大小'
     ],
     // 商品收藏
     DB_GOOD_COLLECTIONS => [
@@ -81,7 +89,7 @@ return [
         'table_name'           => 'good kinds',
         DB_GOOD_KINDS_NAME      => 'kind name',
         DB_GOOD_KINDS_KIND_INFO => 'kind information',
-        DB_GOOD_KINDS_STATUS    => 'good kind status',
+        'status' => 'good kind status',
         'column_value' => [
             DB_GOOD_KINDS_STATUS_INVALID => 'invalid',
             DB_GOOD_KINDS_STATUS_AUTHENTICATED => 'authenticated',
@@ -267,6 +275,7 @@ return [
         'name'          => '商店名',
         'address'       => '商店地址',
         'phone_num'     => '联系电话',
+        'contact_mail'  => 'contact mail',
         'web_addr'      => '商店网址',
         'shop_info'     => '商店详情',
         'status'        => '商店状态',
@@ -350,11 +359,6 @@ return [
                 DB_USERS_LANGUAGE_ZH_CN => '简体中文',
                 DB_USERS_LANGUAGE_EN    => 'English',
                 DB_USERS_LANGUAGE_JA    => '日本語'
-            ],
-            'currency'  => [
-                DB_USERS_CURRENCY_RMB   => '人民币',
-                DB_USERS_CURRENCY_USD   => '美元',
-                DB_USERS_CURRENCY_JPY   => '日元'
             ],
             'autheriticate_type'    => [
                 DB_USERS_AUTHERITICATE_TYPE_UNAUTHENTICATED => '未认证',

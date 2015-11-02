@@ -28,6 +28,7 @@ Route::group([
     Route::get('/', 'DashboardController@index');
 
     // 文件下载api
+    Route::get('api/file/uploadurl', 'APIController@getFileUploadUrl');
     Route::get('api/file/download', 'APIController@fileDownload');
 
     Route::get('/home', 'UserController@home');
@@ -43,7 +44,8 @@ Route::group([
         'middleware' => 'shop_auth'
     ], function () {
         // 商店管理
-        Route::resource('/myshop', 'ShopController');
+        Route::get('/myshop', 'ShopController@show');
+        Route::get('/myshop/edit', 'ShopController@edit');
 
     });
 

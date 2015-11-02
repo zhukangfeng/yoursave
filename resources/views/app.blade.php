@@ -29,7 +29,7 @@
                             <li><a href="{{ url('/') }}">Home</a></li>
                             @if (Session::get('ProduceCompany'))
                                 <li>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.mycompany.title') }}</a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.mycompany.title.show') }}</a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="{{ url('/mycompany') }}">{{ trans('pages.mycompany.title') }}</a></li>
                                         @if (Session::get('ProduceCompanyUser')->type !== DB_PRODUCE_COMPANY_USERS_TYPE_GUEST)
@@ -41,12 +41,12 @@
                             @endif
                             @if (Session::get('Shop'))
                                 <li>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.myshop.title') }}</a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.myshop.title.index') }}</a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{ url('/myshop') }}">{{ trans('pages.myshop.title') }}</a></li>
+                                        <li><a href="{{ url('/myshop') }}">{{ trans('pages.myshop.title.show') }}</a></li>
                                         @if (Session::get('Shop')->type !== DB_PRODUCE_COMPANY_USERS_TYPE_GUEST)
-                                            <li><a href="{{ url('/myshop/goods') }}">{{ trans('pages.myshop.goods_title') }}</a></li>
-                                            <li><a href="{{ url('/myshop/users') }}">{{ trans('pages.myshop.users_title') }}</a></li>
+                                            <li><a href="{{ url('/myshop/goods') }}">{{ trans('pages.myshop.title.goods') }}</a></li>
+                                            <li><a href="{{ url('/myshop/users') }}">{{ trans('pages.myshop.title.users') }}</a></li>
                                         @endif
                                     </ul>
                                 </li>

@@ -9,6 +9,7 @@ return [
     'common'    => [
         'app_name'  => 'Yoursave',
         'labels'    => [
+            'response_user_name'    => '负责人',
         ],
         'buttons'   => [
             'back'      => '返回',
@@ -26,11 +27,19 @@ return [
 
     // 商店
     'myshop'  => [
-        'title' => '商店管理',
-        'edit_title'    => '商店信息修改',
-        'certificate_title' => '商店认证',
-        'goods_title'       => '销售商品一览',
-        'users_title'       => '职员管理'
+        'title' => [
+            'index' => '商店管理',
+            'show'  => '商店详情',
+            'edit'  => '商店信息修改',
+            'certificate'   => '商店认证',
+            'goods' => '销售商品一览',
+            'users' => '职员管理'
+        ],
+        'labels'    => [
+            'show_panel_header' => '商店',
+            'edit_panel_header' => 'edit the shop',
+            'shop_icon' => 'shop icon'
+        ]
     ],
     // 生产厂家
     'mycompany' => [
@@ -82,7 +91,8 @@ return [
             'edit_panel_header' => '个人资料修改',
             'belonged_shop'     => '所属商店',
             'belonged_produce_company'  => '所属生产厂家',
-
+            'user_icon'     => '头像',
+            'user_photo'    => '个人图片'
         ]
     ],
 ];
