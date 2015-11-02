@@ -36,7 +36,9 @@ return [
             'users' => '职员管理'
         ],
         'labels'    => [
-            'show_panel_header' => '商店详情'
+            'show_panel_header' => '商店',
+            'edit_panel_header' => 'edit the shop',
+            'shop_icon' => 'shop icon'
         ]
     ],
     // 生产厂家

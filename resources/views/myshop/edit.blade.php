@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">{{ trans('pages.shop.labels.edit_panel_header') }}</div>
+                <div class="panel-heading">{{ trans('pages.myshop.labels.edit_panel_header') }}</div>
                 <div class="panel-body">
                     <div class="data-form">
                         <div class="form-data">
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ trans('database.shops.contact_email') }}</label>
+                                    <label class="col-md-3 control-label">{{ trans('database.shops.contact_mail') }}</label>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" name="contact_email" value="{{ old('contact_email', $shop->email) }}" placeholder="{{ old('login_mail_addr', $shop->login_mail) }}">
                                         @if ($errors->has('contact_email'))
@@ -95,10 +95,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">{{ trans('database.shops.status') }}</label>
-                                    <div class="col-md-8"><label>{{ trans('database.shops.column_value.statsu.' . $shop->status) }}</label></div>
+                                    <div class="col-md-8"><label>{{ trans('database.shops.column_value.status.' . $shop->status) }}</label></div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ trans('database.shops.birthday') }}</label>
+                                    <label class="col-md-3 control-label">{{ trans('database.common.public_type') }}</label>
                                     <div class="col-md-8 date">
                                         <select name="public_type">
                                             @foreach (trans('database.common.column_value.public_type') as $publicTypeKey => $publicType)
@@ -113,11 +113,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ trans('database.shops.created_by') }}</label>
+                                    <label class="col-md-3 control-label">{{ trans('database.common.created_by') }}</label>
                                     <div class="col-md-8"><label>{{ $shop->created_user_fullname }}</label></div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ trans('database.shops.currency') }}</label>
+                                    <label class="col-md-3 control-label">{{ trans('database.common.currency') }}</label>
                                     <div class="col-md-8">
                                         <ul class="radio-list">
                                             @foreach (trans('database.common.column_value.currency') as $currencyKey => $currency)
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ trans('pages.shop.labels.shop_icon') }}</label>
+                                    <label class="col-md-3 control-label">{{ trans('pages.myshop.labels.shop_icon') }}</label>
                                     <div class="col-md-8">
                                         <div class="image-upload image">
                                             <input type="file" multiple class="file multi-file-upload" file-name="shop_icon" data-overwrite-initial="false" data-min-file-count="2">
