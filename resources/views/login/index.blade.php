@@ -1,4 +1,4 @@
-@extends ('app', ['title' => trans('pages.login.title'), 'id' => 'login', 'class' => 'login', 'console' => '', 'mode' => '', 'name' => ''])
+@extends ('app', ['title' => trans('pages.login.title.index'), 'id' => 'login', 'class' => 'login', 'console' => '', 'mode' => '', 'name' => ''])
 
 @section ('content')
 <div class="container-fluid">

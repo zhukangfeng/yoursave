@@ -1,4 +1,4 @@
-@extends ('app', ['title' => trans('pages.user.edit_title'), 'id' => 'user', 'class' => 'user edit', 'console' => '', 'mode' => '', 'name' => ''])
+@extends ('app', ['title' => trans('pages.user.title.edit'), 'id' => 'user', 'class' => 'user edit', 'console' => '', 'mode' => '', 'name' => ''])
 
 @section ('content')
 <div class="container-fluid">
@@ -152,10 +152,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{ trans('database.users.currency') }}</label>
+                                    <label class="col-md-3 control-label">{{ trans('database.common.currency') }}</label>
                                     <div class="col-md-8">
                                         <ul class="radio-list">
-                                            @foreach (trans('database.users.column_value.currency') as $currencyKey => $currency)
+                                            @foreach (trans('database.common.column_value.currency') as $currencyKey => $currency)
                                                 <li><label><input type="radio" name="currency" value="{{ $currencyKey }}" {{ old('currency', $user->currency) == $currencyKey ? 'checked' : '' }}>{{ $currency }}</label></li>
                                             @endforeach
                                         

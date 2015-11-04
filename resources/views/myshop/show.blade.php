@@ -21,6 +21,14 @@
                             <td>{{ $shop->phone_num }}</td>
                         </tr>
                         <tr>
+                            <th class="col-md-3 active">{{ trans('database.shops.contact_mail') }}</th>
+                            <td>{{ $shop->contact_mail }}</td>
+                        </tr>
+                        <tr>
+                            <th class="col-md-3 active">{{ trans('pages.common.labels.response_user_name') }}</th>
+                            <td>{{ $shop->response_user_fullname }}</td>
+                        </tr>
+                        <tr>
                             <th class="col-md-3 active">{{ trans('database.shops.web_addr') }}</th>
                             <td>{{ $shop->web_addr }}</td>
                         </tr>
@@ -58,9 +66,11 @@
                         </tr>
                         
                     </table>
+                    @if (Session::get('ShopUser')->type === DB_SHOP_USERS_TYPE_ADMIN)
                     <div class="col-md-6 col-md-offset-4">
                         <label class="btn btn-primary"><a href="{{ url('/myshop/edit') }}">{{ trans('pages.common.buttons.edit') }}</a></label>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

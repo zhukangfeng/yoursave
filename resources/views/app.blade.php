@@ -31,10 +31,10 @@
                                 <li>
                                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.mycompany.title.show') }}</a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{ url('/mycompany') }}">{{ trans('pages.mycompany.title') }}</a></li>
+                                        <li><a href="{{ url('/mycompany') }}">{{ trans('pages.mycompany.title.index') }}</a></li>
                                         @if (Session::get('ProduceCompanyUser')->type !== DB_PRODUCE_COMPANY_USERS_TYPE_GUEST)
-                                            <li><a href="{{ url('/mycompany/goods') }}">{{ trans('pages.mycompany.goods_title') }}</a></li>
-                                            <li><a href="{{ url('/mycompany/users') }}">{{ trans('pages.mycompany.users_title') }}</a></li>
+                                            <li><a href="{{ url('/mycompany/goods') }}">{{ trans('pages.mycompany.title.goods') }}</a></li>
+                                            <li><a href="{{ url('/mycompany/users') }}">{{ trans('pages.mycompany.title.users') }}</a></li>
                                         @endif
                                     </ul>
                                 </li>
@@ -62,8 +62,8 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Session::get('User')->u_name }} <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/user') }}">{{ trans('pages.user.title') }}</a></li>
-                                    <li><a href="{{ url('/user/friends') }}">{{ trans('pages.user.friends_title') }}</a></li>
+                                    <li><a href="{{ url('/user') }}">{{ trans('pages.user.title.index') }}</a></li>
+                                    <li><a href="{{ url('/user/friends') }}">{{ trans('pages.user.title.friends') }}</a></li>
                                     <li><a href="{{ url('/logout') }}">{{ trans('pages.common.buttons.logout') }}</a></li>
                                 </ul>
                             </li>

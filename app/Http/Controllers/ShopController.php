@@ -103,9 +103,28 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $myshop = Session::get('Shop');
+        $user = Session::get('User');
+
+        $shop = Shop::find($myshop->id);
+        $shop->update([
+            'name'  => $request->input('name'),
+            'address'   => $request->input('address'),
+            'phone_num' => $request->input('phone_num'),
+            'contact_mail'  => $request->input('contact_mail'),
+            'web_addr'  => $request->input('web_addr'),
+            'shop_info' => $request->input('shop_info'),
+            'response_user_id'
+                => $request->input('response_user_id') ? $request->input('response_user_id') : $shop->response_user_id,
+            'public_type'   => $request->input('public_type'),
+            'currency'      => $request->input('currency'),
+            'created_by'    => $user->id
+        ]);
+
+        Session::flash('success_messages', [trans('success_messages.myshop.update_success')]);
+        return redirect('/myshop');
     }
 
     /**

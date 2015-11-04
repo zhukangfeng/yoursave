@@ -52,7 +52,7 @@ class ShopUser extends Model
     public function scopeWithUserName($query, $tableName = 'users', $fullname = 'fullname')
     {
         $query->join('users', function($join) {
-            $join->on('shop_users.user_id', '=', 'users.id')
+            $join->on('shop_users.id', '=', 'users.shop_user_id')
                 ->on('users.deleted_at', ' IS ', DB::raw('NULL'));
         });
 

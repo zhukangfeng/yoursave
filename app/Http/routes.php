@@ -45,7 +45,12 @@ Route::group([
     ], function () {
         // 商店管理
         Route::get('/myshop', 'ShopController@show');
-        Route::get('/myshop/edit', 'ShopController@edit');
+        Route::group([
+            'middleware' => 'shop_admin_auth'
+        ], function () {
+            Route::get('/myshop/edit', 'ShopController@edit');
+            Route::put('/myshop', 'ShopController@update');
+        });
 
     });
 

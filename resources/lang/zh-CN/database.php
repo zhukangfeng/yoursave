@@ -16,12 +16,13 @@ return [
         'updated_at'    => '最后更新时间',
         'deleted_at'    => '删除时间',
         'public_type'   => '公开类型',
-        'currency'      => 'currency',
+        'currency'      => '货币',
         'column_value'    => [
             'public_type'   => [
                 DB_COMMON_PUBLIC_TYPE_NO                    => '不公开',
                 DB_COMMON_PUBLIC_TYPE_YES_FOR_ALL           => '公开',
                 DB_COMMON_PUBLIC_TYPE_YES_FOR_REGISTERED    => '注册用户公开',
+                DB_COMMON_PUBLIC_TYPE_YES_FOR_AUTHENTICATED => '认证用户公开',
                 DB_COMMON_PUBLIC_TYPE_YES_FOR_FRIEND        => '对好友公开'
             ],
             'currency'  => [
@@ -275,7 +276,7 @@ return [
         'name'          => '商店名',
         'address'       => '商店地址',
         'phone_num'     => '联系电话',
-        'contact_mail'  => 'contact mail',
+        'contact_mail'  => '联系邮箱',
         'web_addr'      => '商店网址',
         'shop_info'     => '商店详情',
         'status'        => '商店状态',

@@ -15,6 +15,11 @@ return [
     // 用户个人信息
     'user'  => [
         'update_success'    => '个人信息修改成功。'
+    ],
+
+    // 商店修改消息
+    'myshop'    => [
+        'update_success'    => '商店信息修改成功'
     ]
 
 
