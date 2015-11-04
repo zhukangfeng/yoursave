@@ -41,7 +41,7 @@ class UserUpdateRequest extends Request
             'birthday'  => 'string',
             'sex'       => 'in:' . implode(',', array_keys(trans('database.users.column_value.sex'))),
             'language'  => 'in:' . implode(',', array_keys(trans('database.users.column_value.language'))),
-            'currency'  => 'in:' . implode(',', array_keys(trans('database.users.column_value.currency'))),
+            'currency'  => 'in:' . implode(',', array_keys(trans('database.common.column_value.currency'))),
         ];
     }
 }

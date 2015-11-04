@@ -21,6 +21,7 @@ use Session;
 // Utils
 use App\Utils\AuthUtil;
 use App\Utils\FileIO;
+use App\Utils\MailUtil;
 
 /**
  * UserController
@@ -102,9 +103,10 @@ class UserController extends Controller
 
         try {
             $activeToken = $user->active_token;
+            $activeTokenTime = $user->active_token_time->format('Y/m/d H:i:s');
             MailUtil::sendMail([
                 'view'  => 'register.register_check_mail',
-                'viewData'  => compact('user', 'activeToken'),
+                'viewData'  => compact('user', 'activeToken', 'activeTokenTime'),
                 'fromMailAddr'  => null,
                 'fromName'  => null,
                 'toMailAddr'    => $user->login_mail,

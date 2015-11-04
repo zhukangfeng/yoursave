@@ -53,8 +53,8 @@
                             <td>{{ trans('database.users.column_value.sex.' . $user->sex) }}</td>
                         </tr>
                         <tr>
-                            <th class="col-md-3 active">{{ trans('database.users.currency') }}</th>
-                            <td>{{ trans('database.users.column_value.currency.' . $user->currency) }}</td>
+                            <th class="col-md-3 active">{{ trans('database.common.currency') }}</th>
+                            <td>{{ trans('database.common.column_value.currency.' . $user->currency) }}</td>
                         </tr>
                         <tr>
                             <th class="col-md-3 active">{{ trans('database.users.language') }}</th>

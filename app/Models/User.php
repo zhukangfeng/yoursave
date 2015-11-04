@@ -79,7 +79,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'address'   => 'string',
         'home_phone'    => 'string',
         'mobile_phone'  => 'string',
-        'birthday'  => 'date',
+        // 'birthday'  => 'date',
         'sex'       => 'integer',
         'currency'  => 'integer',
         'language'  => 'string',
