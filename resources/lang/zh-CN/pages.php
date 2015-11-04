@@ -61,6 +61,7 @@ return [
     'mycompany' => [
         'title' => [
             'index' => '企业管理',
+            'show'  => '企业详情',
             'edit'    => '企业信息修改',
             'certificate' => '企业认证',
             'goods'   => '生产商品一览',
