@@ -37,23 +37,42 @@ return [
         ],
         'labels'    => [
             'show_panel_header' => '商店',
-            'edit_panel_header' => 'edit the shop',
-            'shop_icon' => 'shop icon'
+            'edit_panel_header' => '商店信息修改',
+            'shop_icon' => '商店图标'
+        ],
+
+        'users' => [
+            'title' => [
+                'index' => '商店职员列表',
+                'create'    => '商店职员添加',
+                'show'  => '商店职员详情',
+                'edit'  => '商店职员信息修改'
+            ],
+            'labels'    => [
+                'index_panel_header'    => '商店职员信息一览',
+                'create_panel_header'   => '商店职员添加',
+                'show_panel_header'     => '商店职员详情',
+                'edit_panel_header'     => '商店职员信息修改'
+            ]
+
         ]
     ],
     // 生产厂家
     'mycompany' => [
-        'title' => '企业管理',
-        'edit_title'    => '企业信息修改',
-        'certificate_title' => '企业认证',
-        'goods_title'   => '生产商品一览',
-        'users_title'   => '职员管理',
-        ''
+        'title' => [
+            'index' => '企业管理',
+            'edit'    => '企业信息修改',
+            'certificate' => '企业认证',
+            'goods'   => '生产商品一览',
+            'users'   => '职员管理',
+        ]
     ],
 
     // 登录页面
     'login' => [
-        'title' => '登录',
+        'title' => [
+            'index' => '登录'
+        ],
         'labels' => [
             'index_panel_header'    => '登录信息',
             'u_name_or_mail'    => '用户名/邮箱',
@@ -70,8 +89,10 @@ return [
     ],
     // 用户注册
     'register'  => [
-        'title' => '注册',
-        'active_title'  => '账号激活',
+        'title' => [
+            'index' => '注册',
+            'active'  => '账号激活'
+        ],
         'labels'    => [
             'index_panel_header'    => '新用户注册',
             'active_panel_header'   => '账号信息修改',
@@ -81,10 +102,12 @@ return [
     // 用户相关界面显示内容
     'user'  => [
         // 登录界面
-        'title' => '个人资料管理',
-        'friends_title' => '好友管理',
-        'show_title'    => '个人资料',
-        'edit_title'    => '个人资料管理',
+        'title' => [
+            'index'   => '个人资料管理',
+            'friends' => '好友管理',
+            'show'    => '个人资料',
+            'edit'    => '个人资料管理'
+        ],
 
         'labels'    => [
             'show_panel_header' => '个人资料详情',

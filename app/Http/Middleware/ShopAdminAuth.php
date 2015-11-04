@@ -9,10 +9,10 @@ use App\Models\ShopUser;
 use Closure;
 use Session;
 
-class ShopAuth
+class ShopAdminAuth
 {
     /**
-     * 查看是否为商店职员，不是跳转至主页.
+     * 查看是否为商店管理员，不是跳转至主页.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -20,13 +20,7 @@ class ShopAuth
      */
     public function handle($request, Closure $next)
     {
-        $shop = Session::get('Shop');
-        $shopUser = Session::get('ShopUser');
-        if (!is_null($shop) && !is_null($shopUser) && $shopUser->status === DB_SHOP_USERS_STATUS_EFFECTIVE) {
-            $user = Session::get('User');
-            $shopUser = ShopUser::find($user->shop_user_id);
-            Session::put('ShopUser', $shopUser);
-            Session::put('Shop', Shop::find($shopUser->shop_id));
+        if (Session::get('ShopUser')->type === DB_SHOP_USERS_TYPE_ADMIN) {
             return $next($request);
         } else {
             if ($request->ajax()) {

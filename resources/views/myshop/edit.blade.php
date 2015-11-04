@@ -9,7 +9,7 @@
                 <div class="panel-body">
                     <div class="data-form">
                         <div class="form-data">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/shop') }}">
+                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/myshop') }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="PUT">
                                 <div class="form-group required">
@@ -70,10 +70,10 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">{{ trans('database.shops.contact_mail') }}</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" name="contact_email" value="{{ old('contact_email', $shop->email) }}" placeholder="{{ old('login_mail_addr', $shop->login_mail) }}">
-                                        @if ($errors->has('contact_email'))
+                                        <input type="text" class="form-control" name="contact_mail" value="{{ old('contact_mail', $shop->contact_mail) }}">
+                                        @if ($errors->has('contact_mail'))
                                         <div class="errors">
-                                            <p class="error-message">{{ $errors->first('contact_email') }}</p>
+                                            <p class="error-message">{{ $errors->first('contact_mail') }}</p>
                                         </div>
                                         @endif
                                     </div>
@@ -83,7 +83,7 @@
                                     <div class="col-md-8">
                                         <select class="form-control" name="response_user">
                                             @foreach ($adminUsers as $adminUser)
-                                                <option value="{{ $adminUser->id }}" {{ old('response_user', $adminUser->id) == $adminUser->id ? select : '' }}>{{ $adminUser->fullname }}</option>
+                                                <option value="{{ $adminUser->id }}" {{ old('response_user', $adminUser->id) == $adminUser->id ? 'select' : '' }}>{{ $adminUser->fullname }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('response_user'))
@@ -102,7 +102,7 @@
                                     <div class="col-md-8 date">
                                         <select name="public_type">
                                             @foreach (trans('database.common.column_value.public_type') as $publicTypeKey => $publicType)
-                                                <option value="{{ old('public_type', $shop->public_type) == $publicTypeKey ? 'select' : '' }}">{{ $publicType }}</option>
+                                                <option value="{{ $publicTypeKey }}" {{ old('public_type', $shop->public_type) == $publicTypeKey ? 'select' : '' }}>{{ $publicType }}</option>
                                             @endforeach                                            
                                         </select>
                                         @if ($errors->has('public_type'))
