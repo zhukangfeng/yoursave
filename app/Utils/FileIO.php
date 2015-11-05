@@ -3,6 +3,9 @@ namespace App\Utils;
 
 // Services
 use App\Services\AliyunOSS;
+use Aws\Credentials\Credentials;
+use Aws\Sts\StsClient;
+use Aws\S3\S3Client;
 use Carbon\Carbon;
 use Storage;
 use URL;
@@ -179,5 +182,94 @@ class FileIO
             );
         $request = $disk->getDriver()->getAdapter()->getClient()->createPresignedRequest($command, $effectiveTime);
         return (string)$request->getUri();
+    }
+
+    /**
+     * 获取amazonS3临时访问权限
+     * AWS Security Token Service
+     *
+     * @param int $seconds
+     * @return array ['']
+     */
+    public static function getS3TempSTS($effectiveSeconds = 900)
+    {
+        $credentials = new Credentials(env('FILESYSTEMS_DISKS_AWS_S3_WEB_KEY'), env('FILESYSTEMS_DISKS_AWS_S3_WEB_SECRET'), null, time('+' . $effectiveSeconds));
+        $sts = StsClient::factory([
+                'region'    => 'ap-northeast-1',
+                'endpoint' => 'https://sts.' . 'ap-northeast-1' . '.amazonaws.com',
+                'version'   => 'latest',
+                'credentials'   => $credentials
+        ]);
+
+$result = $sts->getSessionToken();
+var_dump($result);exit;
+
+
+
+
+
+        $awsCredentials = [
+            'includes' => array('_aws'),
+            'services' => array(
+                // All AWS clients extend from 'default_settings'. Here we are
+                // overriding 'default_settings' with our default credentials and
+                // providing a default region setting.
+                'default_settings' => array(
+                    'params' => array(
+                        'credentials' => array(
+                            'key'    => env('FILESYSTEMS_DISKS_AWS_S3_WEB_KEY'),
+                            'secret' => env('FILESYSTEMS_DISKS_AWS_S3_WEB_SECRET'),
+                        ),
+                        'region' => env('FILESYSTEMS_DISKS_AWS_S3_WEB_REGION')
+                    )
+                )
+            )
+        ];
+
+// var_dump($credentials);exit;
+        $sts = StsClient::factory([
+            'Credentials'   => [
+                'SessionToken'  => base64_encode(time()),
+                'Expiration'  => gmdate('Y-m-d\TG:i:s\Z', strtotime($effectiveSeconds))
+            ],
+            'key'   => env('FILESYSTEMS_DISKS_AWS_S3_KEY'),
+            'secret'   => env('FILESYSTEMS_DISKS_AWS_S3_SECRET'),
+            'service'   => 'sts',
+            'region'    => env('FILESYSTEMS_DISKS_AWS_S3_REGION'),
+            'version'   => 'latest',
+        ]);
+        // var_dump($sts);exit;
+        // $sts = StsClient::factory([
+        //     'Credentials'   => $credentials,
+        //     'region'    => env('FILESYSTEMS_DISKS_AWS_S3_WEB_REGION'),
+        //     'version'   => 'latest'
+        // ]);
+        $result = $sts->getSessionToken();
+var_dump($result);exit;
+        // Fetch the federated credentials.
+        $result = $sts->getFederationToken([
+            'Name' => 'yoursave-s3-upload',
+            'DurationSeconds' => $effectiveSeconds,
+            'Policy' => json_encode([
+                'Statement' => [
+                    [
+                        'Sid' => 'yoursave-s3-upload-' . time(),
+                        'Action' => ['s3:ListBucket'],
+                        'Effect' => 'Allow',
+                        'Resource' => 'arn:aws:s3:::' . env('FILESYSTEMS_DISKS_AWS_S3_WEB_BUCKET')
+                    ]
+                ]
+            ])
+        ]);
+        // The following will be part of your less trusted code. You provide temporary
+        // security credentials so it can send authenticated requests to Amazon S3.
+        // $credentials = $result->get('Credentials');
+var_dump($result);
+        var_dump($credentials);exit;
+        // $s3 = new S3Client::factory([
+        //     'key' => $credentials['AccessKeyId'],
+        //     'secret' => $credentials['SecretAccessKey'],
+        //     'token' => $credentials['SessionToken']
+        // ]);        
     }
 }
