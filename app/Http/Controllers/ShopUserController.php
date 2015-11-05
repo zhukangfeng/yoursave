@@ -1,21 +1,45 @@
 <?php
-
 namespace App\Http\Controllers;
 
+// Controllers
+use App\Http\Controllers\Controller;
+
+// Models
+use App\Models\Shop;
+use App\Models\ShopUser;
+
+// Requests
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+
+// Services
+use Session;
 
 class ShopUserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 显示公司职员
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $shopUser = Session::get('ShopUser');
+        if ($shopUser->type === DB_SHOP_USERS_TYPE_ADMIN) {
+            // 管理员
+            $shopUsers = ShopUser::where('shop_users.shop_id', $shopUser->shop_id)
+                ->select(
+                    'shop_users.*',
+                    'users.l_name as l_name',
+                    'users.f_name as f_name'
+                )
+                ->withUserName()
+                ->withCreatedUser()
+                ->withUpdatedUser()
+                ->get();
+        }
+
+        return view('myshop.users.index', compact('shopUsers'));
     }
 
     /**
@@ -40,14 +64,21 @@ class ShopUserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 显示职员详情
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $shopUser = ShopUser::where('shop_users.id', $id)
+            ->select('shop_users.*')
+            ->withUserName()
+            ->withCreatedUser()
+            ->withUpdatedUser()
+            ->first();
+
+        return view('myshop.users.show', compact('shopUser'));
     }
 
     /**

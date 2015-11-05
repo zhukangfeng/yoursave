@@ -46,10 +46,14 @@ Route::group([
         // 商店管理
         Route::get('/myshop', 'ShopController@show');
         Route::group([
+            'prefix'    => 'myshop',
             'middleware' => 'shop_admin_auth'
         ], function () {
-            Route::get('/myshop/edit', 'ShopController@edit');
-            Route::put('/myshop', 'ShopController@update');
+            Route::get('/edit', 'ShopController@edit');
+            Route::put('', 'ShopController@update');
+
+            // 商店职员
+            Route::resource('/users', 'ShopUserController');
         });
 
     });

@@ -10,6 +10,7 @@ return [
         'app_name'  => 'Yoursave',
         'labels'    => [
             'response_user_name'    => '负责人',
+            'fullname' => '姓名'
         ],
         'buttons'   => [
             'back'      => '返回',
@@ -25,7 +26,68 @@ return [
         ],
     ],
 
-    // 商店
+    // 个人消费记录
+    'consumes'  => [
+        'title' => [
+            'index' => '消费清单'
+        ]
+    ],
+    
+    // 促销信息
+    'preferences'   => [
+        'title' => [
+            'index' => '促销信息'
+        ]
+    ],
+
+    // 商品信息
+    'goods' => [
+        'title' => [
+            'info'  => '商品信息',
+            'index' => '商品一览',
+        ]
+
+    ],
+
+    // 商品分类信息
+    'good_kinds' => [
+        'title' => [
+            'index' => '商品种类'
+        ]
+    ],
+    // 登录页面
+    'login' => [
+        'title' => [
+            'index' => '登录'
+        ],
+        'labels' => [
+            'index_panel_header'    => '登录信息',
+            'u_name_or_mail'    => '用户名/邮箱',
+            'password'          => '密码',
+        ],
+        'buttons' => [
+            'login' => '登录',
+            'register'  => '注册',
+            'remember'  => '记住我',
+            'reminder'  => '忘记密码',
+            'resend_mail'   => '再次发送认证邮件',
+            'reactive'      => '重新激活'
+        ]
+    ],
+
+     // 生产厂家
+    'mycompany' => [
+        'title' => [
+            'index' => '企业管理',
+            'show'  => '企业详情',
+            'edit'    => '企业信息修改',
+            'certificate' => '企业认证',
+            'goods'   => '生产商品一览',
+            'users'   => '职员管理',
+        ]
+    ],
+
+   // 商店
     'myshop'  => [
         'title' => [
             'index' => '商店管理',
@@ -57,37 +119,14 @@ return [
 
         ]
     ],
+
     // 生产厂家
-    'mycompany' => [
+    'produce_companys'  => [
         'title' => [
-            'index' => '企业管理',
-            'show'  => '企业详情',
-            'edit'    => '企业信息修改',
-            'certificate' => '企业认证',
-            'goods'   => '生产商品一览',
-            'users'   => '职员管理',
+            'index' => '生产厂家'
         ]
     ],
 
-    // 登录页面
-    'login' => [
-        'title' => [
-            'index' => '登录'
-        ],
-        'labels' => [
-            'index_panel_header'    => '登录信息',
-            'u_name_or_mail'    => '用户名/邮箱',
-            'password'          => '密码',
-        ],
-        'buttons' => [
-            'login' => '登录',
-            'register'  => '注册',
-            'remember'  => '记住我',
-            'reminder'  => '忘记密码',
-            'resend_mail'   => '再次发送认证邮件',
-            'reactive'      => '重新激活'
-        ]
-    ],
     // 用户注册
     'register'  => [
         'title' => [
@@ -100,6 +139,13 @@ return [
             'password_confirm'      => '密码（确认）'
         ]
     ],
+
+    'shops' => [
+        'title' => [
+            'index' => '商店'
+        ]
+    ],
+
     // 用户相关界面显示内容
     'user'  => [
         // 登录界面
