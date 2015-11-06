@@ -89,7 +89,14 @@ class ShopUserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $shopUser = ShopUser::where('shop_users.id', $id)
+            ->select('shop_users.*')
+            ->withUserName()
+            ->withCreatedUser()
+            ->withUpdatedUser()
+            ->first();
+
+        return view('myshop.users.edit', compact('shopUser'));
     }
 
     /**

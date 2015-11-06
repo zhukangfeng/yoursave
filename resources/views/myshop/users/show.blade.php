@@ -46,10 +46,10 @@
                         </tr>
                     </table>
                     <div class="col-md-6 col-md-offset-4">
-                        <label class="btn btn-info"><a href="{{ action('ShopUserController@index') }}">{{ trans('pages.common.buttons.back') }}</a></label>
                         @if (Session::get('ShopUser')->type === DB_SHOP_USERS_TYPE_ADMIN)
                         <label class="btn btn-primary"><a href="{{ action('ShopUserController@edit', ['id' => $shopUser->id]) }}">{{ trans('pages.common.buttons.edit') }}</a></label>
                         @endif
+                        <label class="btn btn-info"><a href="{{ action('ShopUserController@index') }}">{{ trans('pages.common.buttons.back') }}</a></label>
                     </div>
                 </div>
             </div>
