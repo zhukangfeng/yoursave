@@ -26,7 +26,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         @if (Auth::check())
-                            <li><a href="{{ url('/') }}">Home</a></li>
+                            <li><a href="{{ url('/home') }}">Home</a></li>
                             @if (Session::get('ProduceCompany'))
                                 <li>
                                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.mycompany.title.index') }}</a>
@@ -51,6 +51,17 @@
                                     </ul>
                                 </li>
                             @endif
+                            <li><a href="{{ url('/preferences') }}">{{ trans('pages.preferences.title.index') }}</a></li>
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.goods.title.info') }}</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/goods') }}">{{ trans('pages.goods.title.index') }}</a></li>
+                                    <li><a href="{{ url('/good_kinds') }}">{{ trans('pages.good_kinds.title.index') }}</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ url('/shops') }}">{{ trans('pages.shops.title.index') }}</a></li>
+                            <li><a href="{{ url('/produce_companys') }}">{{ trans('pages.produce_companys.title.index') }}</a></li>
+                            <li><a href="{{ url('/consumes') }}">{{ trans('pages.consumes.title.index') }}</a></li>
                         @endif
                     </ul>
 

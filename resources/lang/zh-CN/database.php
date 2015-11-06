@@ -257,17 +257,25 @@ return [
         DB_SHIP_RANKS_RANK_INFO => 'rank information'
     ],
     // 商品售卖商店职员信息表
-    DB_SHOP_USERS => [
-        'table_name'           => 'staffs',
-        DB_SHOP_USERS_TYPE      => 'staff type',
+    'shop_users' => [
+        'table_name'           => '商店职员信息',
+        'type'      => '职员类型',
+        'email'     => '职员邮箱',
+        'position'  => '职员职位',
+        'status'    => '账户状态',
+        
         'column_value' => [
-            DB_SHOP_USERS_EMAIL     => 'staff\' email',
-            DB_SHOP_USERS_NAME      => 'staff\s name',
-            DB_SHOP_USERS_POSITION  => 'staff\'s positon',
-            DB_SHOP_USERS_STATUS    => 'account\' status',
-            DB_SHOP_USERS_STATUS_INVALID    => 'invalid',
-            DB_SHOP_USERS_STATUS_EFFECTIVE  => 'effective',
-            DB_SHOP_USERS_STATUS_REQUESTING => 'requesting'
+            'status'    => [
+                DB_SHOP_USERS_STATUS_INVALID    => '无效',
+                DB_SHOP_USERS_STATUS_EFFECTIVE  => '有效',
+                DB_SHOP_USERS_STATUS_REQUESTING => '邀请中'
+            ],
+            'type'  => [
+                DB_SHOP_USERS_TYPE_ADMIN    => '管理员',
+                DB_SHOP_USERS_TYPE_MANAGER  => '经理',
+                DB_SHOP_USERS_TYPE_COMMON   => '普通用户',
+                DB_SHOP_USERS_TYPE_GUEST    => '阅览用户'
+            ],
         ]
     ],
     // 商品售卖商店信息表
