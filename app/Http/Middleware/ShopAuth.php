@@ -21,6 +21,13 @@ class ShopAuth
     public function handle($request, Closure $next)
     {
         $shopUser = Session::get('ShopUser');
+        if (is_null($shopUser)) {
+            if ($request->ajax()) {
+                return response(trans('error_messages.common.unauthorized'), 401);
+            } else {
+                return redirect('/');
+            }            
+        }
         $shopUser = ShopUser::find($shopUser->id);
         $shop = Shop::find($shopUser->shop_id);
 

@@ -51,7 +51,6 @@ Route::group([
 
             // 商店信息修改
             Route::group([
-                'prefix'    => 'myshop',
                 'middleware' => 'shop_admin_auth'
             ], function () {
                 Route::get('/edit', 'ShopController@edit');
