@@ -15,7 +15,7 @@ class ShopUserTableSeeder extends Seeder
     public function run()
     {
         DB::table('shop_users')
-            ->where('id', '<', DB::raw(15))
+            ->where('id', '<', DB::raw(19))
             ->delete();
 
         $shopUserData = [];

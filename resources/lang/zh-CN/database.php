@@ -87,16 +87,22 @@ return [
     ],
     // 商品分类信息
     DB_GOOD_KINDS => [
-        'table_name'           => 'good kinds',
-        DB_GOOD_KINDS_NAME      => 'kind name',
-        DB_GOOD_KINDS_KIND_INFO => 'kind information',
-        'status' => 'good kind status',
+        'table_name'           => '商品种类信息',
+        'name'      => '商品分类名称',
+        'kind_info' => '商品分类介绍',
+        'status' => '分类状态',
         'column_value' => [
-            DB_GOOD_KINDS_STATUS_INVALID => 'invalid',
-            DB_GOOD_KINDS_STATUS_AUTHENTICATED => 'authenticated',
-            DB_GOOD_KINDS_STATUS_CREATE_BY_USER_UNACTIVE => 'not authenticate(created by user)',
-            DB_GOOD_KINDS_STATUS_CREATE_BY_SHOP_UNACTIVE => 'not authenticate(created by shop)',
-            DB_GOOD_KINDS_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE => 'not authenticate(created by produce company)'
+            'status'    => [
+                DB_GOOD_KINDS_STATUS_INVALID        => '无效',
+                DB_GOOD_KINDS_STATUS_AUTHENTICATED  => '权威认证',
+                DB_GOOD_KINDS_STATUS_CREATE_BY_USER_UNACTIVE => '未认证（用户创建）',
+                DB_GOOD_KINDS_STATUS_CREATE_BY_SHOP_UNACTIVE => '未认证（商店创建）',
+                DB_GOOD_KINDS_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE => '未认证（生产厂家创建）'
+            ],
+            'has_children'  => [
+                DB_GOOD_KINDS_HAS_CHILDREN_NO   => '不再含子分类',
+                DB_GOOD_KINDS_HAS_CHILDREN_YES  => '可以含有子分类'
+            ]
         ]
     ],
     // 商品评价信息
@@ -332,11 +338,11 @@ return [
         'column_value' => [
             DB_USER_SHARES_TYPE_PREFERENCE              => 'preference',
             DB_USER_SHARES_TYPE_GOOD                    => 'good',
-            DB_USER_SHARES_TYPE_good_kind               => 'good kind',
-            DB_USER_SHARES_TYPE_shop_good               => 'shop good',
-            DB_USER_SHARES_TYPE_produce_company_good    => 'produce company good',
-            DB_USER_SHARES_TYPE_shop                    => 'shop',
-            DB_USER_SHARES_TYPE_produce_company         => 'produce company'
+            DB_USER_SHARES_TYPE_GOOD_KIND               => 'good kind',
+            DB_USER_SHARES_TYPE_SHOP_GOOD               => 'shop good',
+            DB_USER_SHARES_TYPE_PRODUCE_COMPANY_GOOD    => 'produce company good',
+            DB_USER_SHARES_TYPE_SHOP                    => 'shop',
+            DB_USER_SHARES_TYPE_PRODUCE_COMPANY         => 'produce company'
         ]
     ],
     // 用户信息表。

@@ -56,7 +56,7 @@ class Model extends ParentModel
         
 
         $searchData =  preg_split('/[\s|\x{3000}]+/u', $searchString);
-        $query->where(function ($query) use ($searchName, $searchData) {
+        $query->where(function ($query) use ($searchName, $searchData, $searchType) {
             if ($searchType === Config::get('const_value.search_query_type.and', 0)) {
                 // 多条件并且符合
                 foreach ($searchData as $splitString) {
@@ -76,12 +76,15 @@ class Model extends ParentModel
             } else {
                 // 多条件符合一项
                 foreach ($searchData as $splitString) {
+                    if ($splitString == '') {
+                        continue;
+                    }
                     if (is_array($searchName)) {
                         foreach ($searchName as $dbName) {
-                            $query->orWhere($dbName, $splitString);
+                            $query->orWhere($dbName, 'like', '%' . $splitString . '%');
                         }
                     } else {
-                        $query->orWhere($searchData, $splitString);
+                        $query->orWhere($searchName, 'like', '%' . $splitString . '%');
                     }
                 }
             }

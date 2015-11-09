@@ -310,11 +310,11 @@ return [
         'column_value' => [
             DB_USER_SHARES_TYPE_PREFERENCE              => 'preference',
             DB_USER_SHARES_TYPE_GOOD                    => 'good',
-            DB_USER_SHARES_TYPE_good_kind               => 'good kind',
-            DB_USER_SHARES_TYPE_shop_good               => 'shop good',
-            DB_USER_SHARES_TYPE_produce_company_good    => 'produce company good',
-            DB_USER_SHARES_TYPE_shop                    => 'shop',
-            DB_USER_SHARES_TYPE_produce_company         => 'produce company'
+            DB_USER_SHARES_TYPE_GOOD_KIND               => 'good kind',
+            DB_USER_SHARES_TYPE_SHOP_GOOD               => 'shop good',
+            DB_USER_SHARES_TYPE_PRODUCE_COMPANY_GOOD    => 'produce company good',
+            DB_USER_SHARES_TYPE_SHOP                    => 'shop',
+            DB_USER_SHARES_TYPE_PRODUCE_COMPANY         => 'produce company'
         ]
     ],
     // 用户信息表。

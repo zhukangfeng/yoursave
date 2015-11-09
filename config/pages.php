@@ -7,6 +7,11 @@ return [
     'common'    => [
 
     ],
+    'good_kinds'    => [
+        'index' => [
+            'default_show_number'   => 10,
+        ]
+    ],
     'myshop'    => [
         'users' => [
             'index' => [
@@ -15,7 +20,6 @@ return [
             'create'    => [
             ]
         ]
-
-    ],
+    ]
 
 ];
