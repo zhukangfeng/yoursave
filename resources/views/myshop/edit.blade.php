@@ -83,7 +83,7 @@
                                     <div class="col-md-8">
                                         <select class="form-control" name="response_user">
                                             @foreach ($adminUsers as $adminUser)
-                                                <option value="{{ $adminUser->id }}" {{ old('response_user', $adminUser->id) == $adminUser->id ? 'select' : '' }}>{{ $adminUser->fullname }}</option>
+                                                <option value="{{ $adminUser->user_id }}" {{ old('response_user', $shop->response_user_id) == $adminUser->user_id ? 'select' : '' }}>{{ $adminUser->fullname }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('response_user'))

@@ -97,7 +97,7 @@ class UserController extends Controller
             'f_name'    => $request->input('firstname'),
             'l_name'    => $request->input('lastname'),
             'login_mail'    => $request->input('login_mail_addr'),
-            'active_token'  => AuthUtil::createToken('login_mail_addr'),
+            'active_token'  => AuthUtil::createToken($request->input('login_mail_addr')),
             'active_token_time' => Carbon::now()->addHours(REGISTER_CHECK_URL_EFFECTIVE_HOUR),
             'status'    => DB_USERS_STATUS_REQUESTING,
             'created_ip'    => $request->getClientIp()
@@ -123,7 +123,7 @@ class UserController extends Controller
         }
 
         DB::commit();
-        Session::flash('success_messages', [trans('success_messages.register.user_register_success')]);
+        Session::flash('success_messages', [trans('success_messages.register.user_registered_success')]);
 
         return redirect('/');
     }
@@ -259,7 +259,7 @@ class UserController extends Controller
         Session::put('User', $user);
         Auth::login($user);
 
-        Session::flash('success_messages', [trans('success_messages.user.update_success')]);
+        Session::flash('success_messages', [trans('success_messages.user.updated_success')]);
 
         return redirect('/user');
     }

@@ -1,18 +1,14 @@
 <?php
 namespace App\Http\Middleware;
 
-// Models
-use App\Models\Shop;
-use App\Models\ShopUser;
-
 // Services
 use Closure;
 use Session;
 
-class ShopAdminAuth
+class ProduceCompanyAdminAuth
 {
     /**
-     * 查看是否为商店管理员，不是跳转至主页.
+     * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -20,7 +16,7 @@ class ShopAdminAuth
      */
     public function handle($request, Closure $next)
     {
-        if (Session::get('ShopUser')->type === DB_SHOP_USERS_TYPE_ADMIN) {
+        if (Session::get('ProduceCompanyUser')->type === DB_SHOP_USERS_TYPE_ADMIN) {
             return $next($request);
         } else {
             if ($request->ajax()) {

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model as ParentModel;
 // SEervices
 use App;
 use DB;
+use Config;
 
 /**
  * 数据库模型

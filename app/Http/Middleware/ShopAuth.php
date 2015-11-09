@@ -20,17 +20,17 @@ class ShopAuth
      */
     public function handle($request, Closure $next)
     {
-        $shop = Session::get('Shop');
         $shopUser = Session::get('ShopUser');
+        $shopUser = ShopUser::find($shopUser->id);
+        $shop = Shop::find($shopUser->shop_id);
+
+        Session::put('ShopUser', $shopUser);
+        Session::put('Shop', $shop);
         if (!is_null($shop) && !is_null($shopUser) && $shopUser->status === DB_SHOP_USERS_STATUS_EFFECTIVE) {
-            $user = Session::get('User');
-            $shopUser = ShopUser::find($user->shop_user_id);
-            Session::put('ShopUser', $shopUser);
-            Session::put('Shop', Shop::find($shopUser->shop_id));
             return $next($request);
         } else {
             if ($request->ajax()) {
-                return response('Unauthorized.', 401);
+                return response(trans('error_messages.common.unauthorized'), 401);
             } else {
                 return redirect('/');
             }
