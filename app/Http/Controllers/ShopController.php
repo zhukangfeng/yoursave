@@ -90,7 +90,7 @@ class ShopController extends Controller
 
         $adminUsers = ShopUser::where('shop_users.shop_id', $shop->id)
             ->where('shop_users.type', DB_SHOP_USERS_TYPE_ADMIN)
-            ->join('users', 'shop_users.id', '=', 'users.shop_user_id')
+            ->where('shop_users.status', DB_SHOP_USERS_STATUS_EFFECTIVE)
             ->withUserName()
             ->get();
 
