@@ -6,20 +6,24 @@
  */
 return [
     'common'    => [
-        'create_success' => '创建成功'
+        'created_success' => '创建成功'
     ],
     'register'  => [
-        'user_register_success' => '用户注册成功，请前往邮箱进行激活'
+        'user_registered_success' => '用户注册成功，请前往邮箱进行激活'
     ],
 
     // 用户个人信息
     'user'  => [
-        'update_success'    => '个人信息修改成功。'
+        'updated_success'    => '个人信息修改成功。'
     ],
 
     // 商店修改消息
     'myshop'    => [
-        'update_success'    => '商店信息修改成功'
+        'updated_success'    => '商店信息修改成功',
+        'users' => [
+            'updated_success'   => '账户信息修改成功。',
+            'create_success'    => '商店账户添加成功。'
+        ]
     ]
 
 

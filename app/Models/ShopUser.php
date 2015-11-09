@@ -49,10 +49,10 @@ class ShopUser extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query <不需要赋值，系统自动复制>
      * @return \Illuminate\Database\Eloquent\Builder $query
      */
-    public function scopeWithUserName($query, $tableName = 'users', $fullname = 'fullname')
+    public function scopeWithUserName($query, $tableName = 'users', $fullname = 'fullname', $userIdName = 'user_id')
     {
         $query->join('users', function($join) {
-            $join->on('shop_users.id', '=', 'users.shop_user_id')
+            $join->on('shop_users.user_id', '=', 'users.id')
                 ->on('users.deleted_at', ' IS ', DB::raw('NULL'));
         });
 

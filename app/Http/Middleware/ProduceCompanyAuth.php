@@ -20,16 +20,16 @@ class ProduceCompanyAuth
      */
     public function handle($request, Closure $next)
     {
-        if (Session::get('ProduceCompany') && Session::get('ProduceCompanyUser')) {
-            $user = Session::get('User');
-            $produceCompanyUser = ProduceCompanyUser::find($user->produce_company_user_id);
-            Session::put('ProduceCompanyUser', $produceCompanyUser);
-            Session::put('ProduceCompany', ProduceCompany::find($produceCompanyUser->produce_company_id));
+        $produceCompanyUser = Session::get('ProduceCompanyUser');
+        $produceCompanyUser = ProduceCompanyUser::find($produceCompanyUser->id);
+        Session::put('ProduceCompanyUser', $produceCompanyUser);
+        Session::put('ProduceCompany', ProduceCompany::find($produceCompanyUser->produce_company_id));
 
+        if (Session::get('ProduceCompany') && Session::get('ProduceCompanyUser')) {
             return $next($request);
         } else {
             if ($request->ajax()) {
-                return response('Unauthorized.', 401);
+                return response(trans('error_messages.common.unauthorized'), 401);
             } else {
                 return redirect('/');
             }

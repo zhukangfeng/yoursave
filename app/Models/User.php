@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+// Services
+use App;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -39,8 +41,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'sex',
         'currency',
         'language',
-        'shop_user_id',
-        'produce_company_user_id',
         'autheriticate_type',
         'receive_collection_message_type',
         'remember_token_time',
@@ -83,8 +83,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'sex'       => 'integer',
         'currency'  => 'integer',
         'language'  => 'string',
-        'shop_user_id'  => 'integer',
-        'produce_company_user_id'   => 'integer',
         'autheriticate_type'    => 'integer',
         'receive_collection_message_type'   => 'integer',
         'remember_token_time'   => 'string',
@@ -98,6 +96,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public static function de()
     {
         var_dump(with(new static)->getTable());
+    }
+
+    public function getFullName()
+    {
+        if (App::getLocale() === 'en') {
+            return $this->f_name . ' ' . $this->l_name;
+        } else {
+            return $this->l_name . ' ' . $this->f_name;
+        }
     }
 
     /**

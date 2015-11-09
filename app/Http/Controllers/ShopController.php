@@ -33,7 +33,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -90,6 +90,7 @@ class ShopController extends Controller
 
         $adminUsers = ShopUser::where('shop_users.shop_id', $shop->id)
             ->where('shop_users.type', DB_SHOP_USERS_TYPE_ADMIN)
+            ->join('users', 'shop_users.id', '=', 'users.shop_user_id')
             ->withUserName()
             ->get();
 
@@ -117,13 +118,13 @@ class ShopController extends Controller
             'web_addr'  => $request->input('web_addr'),
             'shop_info' => $request->input('shop_info'),
             'response_user_id'
-                => $request->input('response_user_id') ? $request->input('response_user_id') : $shop->response_user_id,
+                => $request->input('response_user') ? $request->input('response_user') : $shop->response_user_id,
             'public_type'   => $request->input('public_type'),
             'currency'      => $request->input('currency'),
             'created_by'    => $user->id
         ]);
 
-        Session::flash('success_messages', [trans('success_messages.myshop.update_success')]);
+        Session::flash('success_messages', [trans('success_messages.myshop.updated_success')]);
         return redirect('/myshop');
     }
 

@@ -115,7 +115,9 @@ return [
         'contact_email'     => trans('database.users.contact_email'),
         'email'     => '邮箱地址',
         'password'  => trans('database.users.password'),
-        'confirm'   => '确认'
+        'confirm'   => '确认',
+        'login_mails'   => '登录邮箱',
+        'type'      => '类型'
     ],
 
 ];

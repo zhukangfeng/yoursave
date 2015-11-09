@@ -79,20 +79,34 @@ class AuthController extends Controller
         Auth::login($user, (bool)$remember);
         Session::put('User', $user);
 
-        if (!is_null($user->shop_user_id)) {
+        $redirectUrl = '/';
+        $shopUsers = ShopUser::where('user_id', $user->id)
+            ->select('*')
+            ->get();
+        if (count($shopUsers) > 0) {
             // 商店用户
-            $shopUser = ShopUser::find($user->shop_user_id);
-            Session::put('ShopUser', $shopUser);
-            Session::put('Shop', Shop::find($shopUser->shop_id));
+            if (count($shopUsers) === 1) {
+                Session::put('ShopUser', $shopUsers[0]);
+                Session::put('Shop', Shop::find($shopUsers[0]->shop_id));                
+            } else {
+                $redirectUrl = '/accounts';
+            }
         }
 
-        if (!is_null($user->produce_company_user_id)) {
+        $produceCompanyUsers = ProduceCompanyUser::where('user_id', $user->id)
+            ->select('*')
+            ->get();
+        if (count($produceCompanyUsers) > 0) {
             // 生产厂家用户
-            $produceCompanyUser = ProduceCompanyUser::find($user->produce_company_user_id);
-            Session::put('ProduceCompanyUser', $produceCompanyUser);
-            Session::put('ProduceCompany', ProduceCompany::find($produceCompanyUser->produce_company_id));
+            if (count($produceCompanyUsers) === 1) {
+                Session::put('ProduceCompanyUser', $produceCompanyUsers[0]);
+                Session::put('ProduceCompany', ProduceCompany::find($produceCompanyUsers[0]->produce_company_id));
+            } else {
+                $redirectUrl = '/accounts';
+            }
         }
-        return redirect('/');
+
+        return redirect($redirectUrl);
     }
 
     /**

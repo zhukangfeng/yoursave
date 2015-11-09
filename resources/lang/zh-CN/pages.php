@@ -26,6 +26,22 @@ return [
         ],
     ],
 
+    // 收藏
+    'collections'   => [
+        'title' => [
+            'info'  => '收藏',
+            'index' => '收藏一览',
+            'preferences'   => '促销信息',
+            'goods' => '商品',
+            'shops' => '店铺',
+            'shop_goods'    => '店铺商品',
+            'produce_companies'  => '生产厂家',
+            'produce_company_goods' => '厂家商品'
+
+        ]
+
+    ],
+
     // 个人消费记录
     'consumes'  => [
         'title' => [
@@ -45,6 +61,9 @@ return [
         'title' => [
             'info'  => '商品信息',
             'index' => '商品一览',
+            'good_kinds'    => '商品分类',
+            'shops' => '销售商店',
+            'produce_companies' => '生产厂家'
         ]
 
     ],
@@ -75,7 +94,23 @@ return [
         ]
     ],
 
-     // 生产厂家
+    // 分享
+    'shares'   => [
+        'title' => [
+            'info'  => '分享',
+            'index' => '分享一览',
+            'preferences'   => '促销信息',
+            'goods' => '商品',
+            'shops' => '店铺',
+            'shop_goods'    => '店铺商品',
+            'produce_companies'  => '生产厂家',
+            'produce_company_goods' => '厂家商品'
+
+        ]
+
+    ],
+
+    // 生产厂家
     'mycompany' => [
         'title' => [
             'index' => '企业管理',
@@ -94,13 +129,14 @@ return [
             'show'  => '商店详情',
             'edit'  => '商店信息修改',
             'certificate'   => '商店认证',
-            'goods' => '销售商品一览',
+            'preferences'   => '促销信息',
+            'goods' => '销售商品',
             'users' => '职员管理'
         ],
         'labels'    => [
             'show_panel_header' => '商店',
             'edit_panel_header' => '商店信息修改',
-            'shop_icon' => '商店图标'
+            'shop_icon' => '商店图标',
         ],
 
         'users' => [
@@ -114,16 +150,29 @@ return [
                 'index_panel_header'    => '商店职员信息一览',
                 'create_panel_header'   => '商店职员添加',
                 'show_panel_header'     => '商店职员详情',
-                'edit_panel_header'     => '商店职员信息修改'
+                'edit_panel_header'     => '商店职员信息修改',
+                'create_type'   => '用户情况',
+                'shop_user_created_from_exist_user' => '既存普通账号关联',
+                'shop_user_created_by_new_user'     => '新建用户账号',
+                'multi_mail_input'      => '复数邮箱输入可，每一行请输入一个邮箱地址。如果该邮箱地址未登录，将进行注册。'
             ]
 
         ]
     ],
 
     // 生产厂家
-    'produce_companys'  => [
+    'produce_companies'  => [
         'title' => [
             'index' => '生产厂家'
+        ]
+    ],
+
+    //生活记录
+    'records'   => [
+        'title' => [
+            'info'  => '小笔记',
+            'consumes'  => '消费记录',
+            'diaries'   => '生活记录'
         ]
     ],
 
