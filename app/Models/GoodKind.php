@@ -2,6 +2,7 @@
 namespace App\Models;
 
 // Services
+use DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GoodKind extends Model
@@ -22,4 +23,31 @@ class GoodKind extends Model
         'updated_by',
         'deleted_by'
     ];
+
+    /**
+     * 加上父亲分类
+     *
+     * @param $query
+     * @param $parentTableName 父亲分类表的别名
+     * @param array selectColumns [['columnName' => 'name', 'asName' => 'parent_name']]
+     * @return $query
+     */
+    public function scopeWithParent($query,
+        $parentTableName = 'parent_good_kinds',
+        $selectColumns = [['columnName' => 'name', 'asName' => 'parent_name']]
+    ) {
+
+        $selectValue = [];
+        foreach ($selectColumns as $key => $selectColumn) {
+            $selectValue[] = $parentTableName . '.' . $selectColumn['columnName'] . ' AS ' . $selectColumn['asName'];
+        }
+
+        $query->leftJoin('good_kinds AS ' . $parentTableName, function ($join) use ($parentTableName) {
+            $join->on('good_kinds.parent_id', '=', $parentTableName . '.id')
+                ->on($parentTableName . '.deleted_at', 'IS', DB::raw('NULL'));
+        })
+            ->addSelect(implode(',', $selectValue));
+
+        return $query;
+    }
 }

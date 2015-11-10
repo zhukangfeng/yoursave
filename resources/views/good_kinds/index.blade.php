@@ -18,18 +18,24 @@
                     <table class="table table-bordered">
                         <tr>
                             <th class="col-md-1"></th>
-                            <th class="col-md-1">{{ trans('database.good_kinds.name') }}</th>
-                            <th class="col-md-1">{{ trans('database.good_kinds.status') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('database.good_kinds.name') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('pages.good_kinds.labels.parent_name') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('database.good_kinds.status') }}</th>
                             <th class="col-md-1">{{ trans('database.common.created_by') }}</th>
-                            <th class="col-md-1">{{ trans('database.common.created_at') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('database.common.created_at') }}</th>
                             <th class="col-md-1">{{ trans('database.common.updated_by') }}</th>
-                            <th class="col-md-1">{{ trans('database.common.updated_at') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('database.common.updated_at') }}</th>
                         </tr>
                         @foreach ($goodKinds as $goodKindKey => $goodKind)
                         <tr>
                             <td>{{ $goodKindKey + 1 }}</td>
                             <td>
                                 <a href="{{ action('GoodKindController@show', ['id' => $goodKind->id]) }}">{{ $goodKind->name }}</a>
+                            </td>
+                            <td>
+                                @if (isset($goodKind->parent_name))
+                                <a href="{{ action('GoodKindController@show', ['id' => $goodKind->parent_id]) }}">{{ $goodKind->parent_name }}</a>
+                                @endif
                             </td>
                             <td>{{ trans('database.good_kinds.column_value.status.' . $goodKind->status) }}</td>
                             <td>{{ $goodKind->created_user_uname }}</td>

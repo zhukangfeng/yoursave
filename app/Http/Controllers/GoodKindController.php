@@ -27,15 +27,22 @@ class GoodKindController extends Controller
     {
         $input  = [];
         $input['order'] = $request->input('order', []);
+        $input['status'] = $request->input('status');
         $input['order_type'] = $request->input('order_type', []);
         $input['paginate'] = $request->input('paginate', Config::get('pages.good_kinds.index.default_show_number'));
         $input['name']  = $request->input('name');
 
-        $goodKinds = GoodKind::searchQuery('good_kinds.name', $input['name'])
+        $query = GoodKind::searchQuery('good_kinds.name', $input['name'])
             ->select('good_kinds.*')
             ->withCreatedUser()
             ->withUpdatedUser()
-            ->paginate($input['paginate']);
+            ->withParent();
+            
+        if ($input['status'] != '') {
+            $query->where('good_kinds.status', $input['status']);
+        }
+
+        $goodKinds = $query->paginate($input['paginate']);
 
         $goodKinds->appends($input);
 

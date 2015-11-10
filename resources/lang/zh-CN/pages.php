@@ -25,6 +25,9 @@ return [
             'search'    => '搜索',
             'update'    => '更新'
         ],
+        'options'   => [
+            'default_no_condition_option'    => '无限制',
+        ]
     ],
 
     // 收藏
@@ -66,7 +69,8 @@ return [
         ],
         'labels'    => [
             'search_by_name'    => '商品名',
-            'index_panel_header'    => '商品分类信息'
+            'index_panel_header'    => '商品分类信息',
+            'parent_name'   => '上级分类'
         ],
         'placeholder'   => [
             'search_by_name'    => '商品名关键词搜索，多个关键词中间请用空格分开。'

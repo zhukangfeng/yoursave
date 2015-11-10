@@ -86,7 +86,7 @@ return [
         DB_GOOD_COMMENTS_COMMENT_INFO   => 'comment content'
     ],
     // 商品分类信息
-    DB_GOOD_KINDS => [
+    'good_kinds' => [
         'table_name'           => '商品种类信息',
         'name'      => '商品分类名称',
         'kind_info' => '商品分类介绍',
