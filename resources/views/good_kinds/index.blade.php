@@ -32,9 +32,9 @@
                                 <a href="{{ action('GoodKindController@show', ['id' => $goodKind->id]) }}">{{ $goodKind->name }}</a>
                             </td>
                             <td>{{ trans('database.good_kinds.column_value.status.' . $goodKind->status) }}</td>
-                            <td>{{ $goodKind->created_user_fullname }}</td>
+                            <td>{{ $goodKind->created_user_uname }}</td>
                             <td>{{ isset($goodKind->created_at) ? $goodKind->created_at->format('Y/m/d H:i:s') : '' }}</td>
-                            <td>{{ $goodKind->updated_user_fullname }}</td>
+                            <td>{{ $goodKind->updated_user_uname }}</td>
                             <td>{{ isset($goodKind->updated_at) ? $goodKind->updated_at->format('Y/m/d H:i:s') : '' }}</td>
                         </tr>
 
