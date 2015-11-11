@@ -57,7 +57,7 @@ class GoodKindController extends Controller
      */
     public function create()
     {
-        //
+        return view('good_kinds.create');
     }
 
     /**
@@ -68,7 +68,36 @@ class GoodKindController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $hasParent = (bool)$request->input('has_parent', false);
+        $hasChildren = (int)$request->input('has_children', 1);
+        $name = $request->input('name');
+        $kindInfo = $request->input('kind_info');
+
+        $parentId = $request->input('parent');
+
+        if (Session::get('ShopUser')) {
+            $status = DB_GOOD_KINDS_STATUS_CREATE_BY_SHOP_UNACTIVE;
+        } elseif (Session::get('ProduceCompanyUser')) {
+            $status = DB_GOOD_KINDS_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE;
+        } else {
+            $status = DB_GOOD_KINDS_STATUS_CREATE_BY_USER_UNACTIVE;
+        }
+
+        $user = Session::get('User');
+
+        GoodKind::create([
+            'parent_id' => $hasParent ? $parentId : null,
+            'has_children'  => $hasChildren,
+            'name'  => $name,
+            'kind_info' => $kindInfo,
+            'status'    => $status,
+            'created_by'    => $user->id,
+            'updated_by'    => $user->id
+        ]);
+
+        Session::flash('success_messages', [trans('success_messages.good_kinds.created_success')]);
+
+        return redirect('/good_kinds');
     }
 
     /**
@@ -114,5 +143,30 @@ class GoodKindController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * 商品名搜索
+     *
+     * @param Request
+     * @return Json
+     */
+    public function search(Request $request)
+    {
+        $goodKindName = $request->input('good_kind_name');
+
+        if ($goodKindName == '') {
+            $goodKinds = GoodKind::whereNull('parent_id')
+                ->where('has_children', 1)
+                ->select('id', 'name')
+                ->get();
+        } else {
+            $goodKinds = GoodKind::searchQuery('name', $goodKindName)
+                ->where('has_children', 1)
+                ->select('id', 'name')
+                ->get();            
+        }
+
+        return $goodKinds->toJson();
     }
 }

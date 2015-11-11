@@ -34,12 +34,17 @@ Route::group([
     Route::get('api/file/uploadurl', 'APIController@getFileUploadUrl');
     Route::get('api/file/download', 'APIController@fileDownload');
 
-    // 商品分类
-    Route::resource('good_kinds', 'GoodKindController');
-
     Route::get('/home', 'UserController@home');
 
     Route::get('/logout', 'AuthController@logout');
+
+    // 商品分类
+    Route::get('good_kinds', 'GoodKindController@index');
+    Route::get('good_kinds/create', 'GoodKindController@create');
+    Route::get('/good_kinds/search', 'GoodKindController@search');
+    Route::put('good_kinds', 'GoodKindController@store');
+    Route::get('good_kinds/{goodKindId}', 'GoodKindController@edit');
+    Route::post('good_kinds/{goodKindId}', 'GoodKindController@update');
 
     // 商店职员登录
     Route::group([
@@ -81,9 +86,7 @@ Route::group([
             // 商店商品信息
             Route::resource('/goods', 'ShopGoodController', [
                 'only'  => [
-                    'index',
                     'create',
-                    'show',
                     'edit',
                     'update',
                     'destroy'
@@ -151,3 +154,15 @@ Route::group([
 
 
 });
+
+// 商品分类
+Route::get('good_kinds/', 'GoodKindController@index');
+Route::get('good_kinds/{goodKindId}', 'GoodKindController@show');
+
+// 商店商品信息
+Route::resource('/goods', 'ShopGoodController', [
+    'only'  => [
+        'index',
+        'show',
+    ]
+]);

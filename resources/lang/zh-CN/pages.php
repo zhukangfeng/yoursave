@@ -64,16 +64,24 @@ return [
     'good_kinds' => [
         'title' => [
             'index' => '商品种类',
+            'create'    => '商品分类添加',
             'show'  => '商品分类详情',
             'edit'  => '商品分类信息修改'
         ],
         'labels'    => [
-            'search_by_name'    => '商品名',
             'index_panel_header'    => '商品分类信息',
-            'parent_name'   => '上级分类'
+            'create_panel_header'   => '创建商品分类',
+            'search_by_name'    => '商品名',
+            'parent_name'   => '上级分类',
+            'has_parent'    => '拥有父类',
+            'no_parent'     => '没有父类',
+            'child_good_kinds'  => '商品子类',
+            'has_child_good_kinds'  => '可以有子类',
+            'no_child_good_kinds'   => '不能有子类'
         ],
         'placeholder'   => [
-            'search_by_name'    => '商品名关键词搜索，多个关键词中间请用空格分开。'
+            'search_by_name'    => '商品名关键词搜索，多个关键词中间请用空格分开',
+            'search_byparent_name'  => '父分类名搜索'
         ]
     ],
 

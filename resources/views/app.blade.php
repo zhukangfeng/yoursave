@@ -52,17 +52,18 @@
                                     </ul>
                                 </li>
                             @endif
-                            <li>
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.goods.title.info') }}</a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/goods') }}">{{ trans('pages.goods.title.index') }}</a></li>
-                                    <li><a href="{{ url('/good_kinds') }}">{{ trans('pages.goods.title.good_kinds') }}</a></li>
-                                    <li><a href="{{ url('/shops') }}">{{ trans('pages.goods.title.shops') }}</a></li>
-                                    <li><a href="{{ url('/produce_companies') }}">{{ trans('pages.goods.title.produce_companies') }}</a></li>
-                                </ul>
-                            </li>
-
-                            <li><a href="{{ url('/preferences') }}">{{ trans('pages.preferences.title.index') }}</a></li>
+                        @endif
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.goods.title.info') }}</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/goods') }}">{{ trans('pages.goods.title.index') }}</a></li>
+                                <li><a href="{{ url('/good_kinds') }}">{{ trans('pages.goods.title.good_kinds') }}</a></li>
+                                <li><a href="{{ url('/shops') }}">{{ trans('pages.goods.title.shops') }}</a></li>
+                                <li><a href="{{ url('/produce_companies') }}">{{ trans('pages.goods.title.produce_companies') }}</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url('/preferences') }}">{{ trans('pages.preferences.title.index') }}</a></li>
+                        @if (Auth::check())
                             <li>
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.collections.title.info') }}</a>
                                 <ul class="dropdown-menu" role="menu">
@@ -94,7 +95,6 @@
                                     <li><a href="{{ url('/consumes') }}">{{ trans('pages.records.title.diaries') }}</a></li>
                                 </ul>
                             </li>
-
                         @endif
                     </ul>
 
