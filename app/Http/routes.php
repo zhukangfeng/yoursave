@@ -27,17 +27,19 @@ Route::group([
 ], function () {
     Route::get('/', 'DashboardController@index');
 
+    // 用户账号信息
+    Route::resource('/accounts', 'AccountController');
+
     // 文件下载api
     Route::get('api/file/uploadurl', 'APIController@getFileUploadUrl');
     Route::get('api/file/download', 'APIController@fileDownload');
 
+    // 商品分类
+    Route::resource('good_kinds', 'GoodKindController');
+
     Route::get('/home', 'UserController@home');
 
     Route::get('/logout', 'AuthController@logout');
-
-    Route::get('/user', 'UserController@show');
-    Route::get('/user/edit', 'UserController@edit');
-    Route::put('/user', 'UserController@update');
 
     // 商店职员登录
     Route::group([
@@ -141,5 +143,11 @@ Route::group([
         });
 
     });
+
+    // 用户个人信息
+    Route::get('/user', 'UserController@show');
+    Route::get('/user/edit', 'UserController@edit');
+    Route::put('/user', 'UserController@update');
+
 
 });

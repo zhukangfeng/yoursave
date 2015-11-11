@@ -56,7 +56,7 @@ class Model extends ParentModel
         
 
         $searchData =  preg_split('/[\s|\x{3000}]+/u', $searchString);
-        $query->where(function ($query) use ($searchName, $searchData) {
+        $query->where(function ($query) use ($searchName, $searchData, $searchType) {
             if ($searchType === Config::get('const_value.search_query_type.and', 0)) {
                 // 多条件并且符合
                 foreach ($searchData as $splitString) {
@@ -76,12 +76,15 @@ class Model extends ParentModel
             } else {
                 // 多条件符合一项
                 foreach ($searchData as $splitString) {
+                    if ($splitString == '') {
+                        continue;
+                    }
                     if (is_array($searchName)) {
                         foreach ($searchName as $dbName) {
-                            $query->orWhere($dbName, $splitString);
+                            $query->orWhere($dbName, 'like', '%' . $splitString . '%');
                         }
                     } else {
-                        $query->orWhere($searchData, $splitString);
+                        $query->orWhere($searchName, 'like', '%' . $splitString . '%');
                     }
                 }
             }
@@ -116,7 +119,7 @@ class Model extends ParentModel
      *
      * @author zhukangfeng
      */
-    public function scopeWithCreatedUser($query, $createdBy = 'created_by', $tableName = 'created_user', $fullname = 'created_user_fullname')
+    public function scopeWithCreatedUser($query, $createdBy = 'created_by', $tableName = 'created_user', $fullname = 'created_user_fullname', $uname = 'created_user_uname')
     {
         $query->leftJoin('users AS ' . $tableName, function ($join) use ($createdBy, $tableName) {
             $join->on($createdBy, '=', $tableName . '.id')
@@ -124,10 +127,12 @@ class Model extends ParentModel
         });
         if (App::getLocale() === 'en') {
             return $query->addSelect(
+                $tableName . '.u_name AS ' . $uname,
                 DB::raw('CONCAT(' . $tableName . '.f_name, " ", ' . $tableName . '.l_name) AS ' . $fullname)
             );
         } else {
             return $query->addSelect(
+                $tableName . '.u_name AS ' . $uname,
                 DB::raw('CONCAT(' . $tableName . '.l_name, " ", ' . $tableName . '.f_name) AS ' . $fullname)
             );
         }
@@ -144,7 +149,7 @@ class Model extends ParentModel
      *
      * @author zhukangfeng
      */
-    public function scopeWithUpdatedUser($query, $updatedBy = 'updated_by', $tableName = 'updated_user', $fullname = 'updated_user_fullname')
+    public function scopeWithUpdatedUser($query, $updatedBy = 'updated_by', $tableName = 'updated_user', $fullname = 'updated_user_fullname', $uname = 'updated_user_uname')
     {
         $query->leftJoin('users AS ' . $tableName, function ($join) use ($updatedBy, $tableName) {
             $join->on($updatedBy, '=', $tableName . '.id')
@@ -152,10 +157,12 @@ class Model extends ParentModel
         });
         if (App::getLocale() === 'en') {
             return $query->addSelect(
+                $tableName . 'u_name AS ' . $uname,
                 DB::raw('CONCAT(' . $tableName . '.f_name, " ", ' . $tableName . '.l_name) AS ' . $fullname)
             );
         } else {
             return $query->addSelect(
+                $tableName . '.u_name AS ' . $uname,
                 DB::raw('CONCAT(' . $tableName . '.l_name, " ", ' . $tableName . '.f_name) AS ' . $fullname)
             );
         }
@@ -172,7 +179,7 @@ class Model extends ParentModel
      *
      * @author zhukangfeng
      */
-    public function scopeWithResponsedUser($query, $responseUser = 'response_user_id', $tableName = 'response_user', $fullname = 'response_user_fullname')
+    public function scopeWithResponsedUser($query, $responseUser = 'response_user_id', $tableName = 'response_user', $fullname = 'response_user_fullname', $uname = 'response_user_uname')
     {
         $query->leftJoin('users AS ' . $tableName, function ($join) use ($responseUser, $tableName) {
             $join->on($responseUser, '=', $tableName . '.id')
@@ -180,10 +187,12 @@ class Model extends ParentModel
         });
         if (App::getLocale() === 'en') {
             return $query->addSelect(
+                $tableName . '.u_name AS ' . $uname,
                 DB::raw('CONCAT(' . $tableName . '.f_name, " ", ' . $tableName . '.l_name) AS ' . $fullname)
             );
         } else {
             return $query->addSelect(
+                $tableName . '.u_name AS ' . $uname,
                 DB::raw('CONCAT(' . $tableName . '.l_name, " ", ' . $tableName . '.f_name) AS ' . $fullname)
             );
         }

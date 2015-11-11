@@ -110,6 +110,8 @@ define('DB_GOOD_KINDS_NAME',        'name');        // 商品分类名
 define('DB_GOOD_KINDS_KIND_INFO',   'kind_info');   // 分类信息
 define('DB_GOOD_KINDS_STATUS',      'status');      // 分类信息状态：0:无效；1:认证；2:未认证（一般用户创建）；
                                                     // 3:未认证（商店职员创建）；4：未认证（生产厂家创建）
+define('DB_GOOD_KINDS_HAS_CHILDREN_NO',     0);
+define('DB_GOOD_KINDS_HAS_CHILDREN_YES',    1);
 
 define('DB_GOOD_KINDS_STATUS_INVALID', 0);
 define('DB_GOOD_KINDS_STATUS_AUTHENTICATED', 1);
@@ -360,11 +362,11 @@ define('DB_USER_SHARES_TYPE',           'type');        // 分享类型:1:优惠
 
 define('DB_USER_SHARES_TYPE_PREFERENCE',            1);
 define('DB_USER_SHARES_TYPE_GOOD',                  2);
-define('DB_USER_SHARES_TYPE_good_kind',             3);
-define('DB_USER_SHARES_TYPE_shop_good',             4);
-define('DB_USER_SHARES_TYPE_produce_company_good',  5);
-define('DB_USER_SHARES_TYPE_shop',                  6);
-define('DB_USER_SHARES_TYPE_produce_company',       7);
+define('DB_USER_SHARES_TYPE_GOOD_KIND',             3);
+define('DB_USER_SHARES_TYPE_SHOP_GOOD',             4);
+define('DB_USER_SHARES_TYPE_PRODUCE_COMPANY_GOOD',  5);
+define('DB_USER_SHARES_TYPE_SHOP',                  6);
+define('DB_USER_SHARES_TYPE_PRODUCE_COMPANY',       7);
 
 // 用户信息表。
 // 普通用户：shop_user_id:null，produce_company_user_id:null
