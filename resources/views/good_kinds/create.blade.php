@@ -18,10 +18,10 @@
                             <div class="form-group required">
                                 <label class="col-md-4 control-label">{{ trans('pages.good_kinds.labels.parent_name') }}</label>
                                 <div class="col-md-6">
-                                    <label><input type="radio" name="has_parent" value="1" {{ old('has_parent') ? '' : 'checked' }}>{{ trans('pages.good_kinds.labels.has_parent') }}</label>
-                                    <label><input type="radio" name="has_parent" value="0" {{ old('has_parent') ? 'checked' : '' }}>{{ trans('pages.good_kinds.labels.no_parent') }}</label><br />
+                                    <label><input type="radio" name="has_parent" value="1" {{ old('has_parent') == '0' ? '' : 'checked' }}>{{ trans('pages.good_kinds.labels.has_parent') }}</label>
+                                    <label><input type="radio" name="has_parent" value="0" {{ old('has_parent') == '0'? 'checked' : '' }}>{{ trans('pages.good_kinds.labels.no_parent') }}</label><br />
                                     <div class="parent-seach">
-                                        <input type="text" name="parent_search_name" value="{{ old('parent_seach_name') }}"><label class="btn btn-default">{{ trans('pages.common.buttons.search') }}</label><br />
+                                        <input type="text" name="parent_search_name" value="{{ old('parent_seach_name') }}" placeholder="{{ trans('pages.good_kinds.placeholder.search_byparent_name') }}"><label class="btn btn-default">{{ trans('pages.common.buttons.search') }}</label><br />
                                         @if (old('parent'))
                                         <label class="parent-info"><input type="radio" name="parent" value="{{ $parent }}">{{ isset($parentName) ? $parentName : '' }}</label>
                                         @endif
@@ -61,10 +61,10 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group required">
+                            <div class="form-group">
                                 <label class="col-md-4 control-label">{{ trans('database.good_kinds.kind_info') }}</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="kind_info" value="{{ old('kind_info') }}">
+                                    <textarea class="form-control" name="kind_info">{{ old('kind_info') }}</textarea>
                                     @if ($errors->has('kind_info'))
                                     <div class="errors">
                                         <p class="error-message">{{ $errors->first('kind_info') }}</p>

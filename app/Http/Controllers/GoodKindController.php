@@ -8,8 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Models\GoodKind;
 
 // Request
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Http\Requests\GoodKinds\GoodKindRequest;
+use Illuminate\Http\Request;
 
 // Services
 use Config;
@@ -66,7 +67,7 @@ class GoodKindController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GoodKindRequest $request)
     {
         $hasParent = (bool)$request->input('has_parent', false);
         $hasChildren = (int)$request->input('has_children', 1);

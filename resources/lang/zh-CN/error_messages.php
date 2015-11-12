@@ -10,6 +10,14 @@ return [
         'unauthorized'  => '非常抱歉，您没有权限。'
     ],
 
+    // 商品分类
+    'good_kinds'    => [
+        'whether_has_parent'    => '必须选择是否拥有父类',
+        'need_parent_id'        => '请选择父类',
+        'whether_has_childrent' => '必须选择是否拥有子类。',
+        'need_name'             => '请输入商品分类名称'
+    ],
+
     // 商店管理
     'myshop'    => [
         'users' => [

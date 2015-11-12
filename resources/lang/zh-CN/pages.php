@@ -53,13 +53,6 @@ return [
         ]
     ],
     
-    // 促销信息
-    'preferences'   => [
-        'title' => [
-            'index' => '促销信息'
-        ]
-    ],
-
     // 商品分类信息
     'good_kinds' => [
         'title' => [
@@ -117,23 +110,7 @@ return [
         ]
     ],
 
-    // 分享
-    'shares'   => [
-        'title' => [
-            'info'  => '分享',
-            'index' => '分享一览',
-            'preferences'   => '促销信息',
-            'goods' => '商品',
-            'shops' => '店铺',
-            'shop_goods'    => '店铺商品',
-            'produce_companies'  => '生产厂家',
-            'produce_company_goods' => '厂家商品'
-
-        ]
-
-    ],
-
-    // 生产厂家
+   // 生产厂家
     'mycompany' => [
         'title' => [
             'index' => '企业管理',
@@ -183,6 +160,13 @@ return [
         ]
     ],
 
+    // 促销信息
+    'preferences'   => [
+        'title' => [
+            'index' => '促销信息'
+        ]
+    ],
+
     // 生产厂家
     'produce_companies'  => [
         'title' => [
@@ -210,6 +194,22 @@ return [
             'active_panel_header'   => '账号信息修改',
             'password_confirm'      => '密码（确认）'
         ]
+    ],
+
+    // 分享
+    'shares'   => [
+        'title' => [
+            'info'  => '分享',
+            'index' => '分享一览',
+            'preferences'   => '促销信息',
+            'goods' => '商品',
+            'shops' => '店铺',
+            'shop_goods'    => '店铺商品',
+            'produce_companies'  => '生产厂家',
+            'produce_company_goods' => '厂家商品'
+
+        ]
+
     ],
 
     'shops' => [
