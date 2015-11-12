@@ -8,8 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Models\GoodKind;
 
 // Request
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Http\Requests\GoodKinds\GoodKindRequest;
+use Illuminate\Http\Request;
 
 // Services
 use Config;
@@ -32,7 +33,7 @@ class GoodKindController extends Controller
         $input['paginate'] = $request->input('paginate', Config::get('pages.good_kinds.index.default_show_number'));
         $input['name']  = $request->input('name');
 
-        $query = GoodKind::searchQuery('good_kinds.name', $input['name'])
+        $query = GoodKind::searchQuery(['good_kinds.name', 'good_kinds.kind_info'], $input['name'])
             ->select('good_kinds.*')
             ->withCreatedUser()
             ->withUpdatedUser()
@@ -40,6 +41,11 @@ class GoodKindController extends Controller
             
         if ($input['status'] != '') {
             $query->where('good_kinds.status', $input['status']);
+        }
+        $parentId = $request->input('parent_id');
+        if (!is_null($parentId)) {
+            $input['parent_id'] = $parentId;
+            $query->where('good_kinds.parent_id', $parentId);
         }
 
         $goodKinds = $query->paginate($input['paginate']);
@@ -57,7 +63,7 @@ class GoodKindController extends Controller
      */
     public function create()
     {
-        //
+        return view('good_kinds.create');
     }
 
     /**
@@ -66,9 +72,38 @@ class GoodKindController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GoodKindRequest $request)
     {
-        //
+        $hasParent = (bool)$request->input('has_parent', false);
+        $hasChildren = (int)$request->input('has_children', 1);
+        $name = $request->input('name');
+        $kindInfo = $request->input('kind_info');
+
+        $parentId = $request->input('parent');
+
+        if (Session::get('ShopUser')) {
+            $status = DB_GOOD_KINDS_STATUS_CREATE_BY_SHOP_UNACTIVE;
+        } elseif (Session::get('ProduceCompanyUser')) {
+            $status = DB_GOOD_KINDS_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE;
+        } else {
+            $status = DB_GOOD_KINDS_STATUS_CREATE_BY_USER_UNACTIVE;
+        }
+
+        $user = Session::get('User');
+
+        GoodKind::create([
+            'parent_id' => $hasParent ? $parentId : null,
+            'has_children'  => $hasChildren,
+            'name'  => $name,
+            'kind_info' => $kindInfo,
+            'status'    => $status,
+            'created_by'    => $user->id,
+            'updated_by'    => $user->id
+        ]);
+
+        Session::flash('success_messages', [trans('success_messages.good_kinds.created_success')]);
+
+        return redirect('/good_kinds');
     }
 
     /**
@@ -80,6 +115,14 @@ class GoodKindController extends Controller
     public function show($id)
     {
         //
+        $goodKind = GoodKind::where('good_kinds.id', $id)
+            ->select('good_kinds.*')
+            ->withCreatedUser()
+            ->withUpdatedUser()
+            ->withParent('parent_good_kinds')
+            ->first();
+
+        return view('good_kinds.show', compact('goodKind'));
     }
 
     /**
@@ -114,5 +157,30 @@ class GoodKindController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * 商品名搜索
+     *
+     * @param Request
+     * @return Json
+     */
+    public function search(Request $request)
+    {
+        $goodKindName = $request->input('good_kind_name');
+
+        if ($goodKindName == '') {
+            $goodKinds = GoodKind::whereNull('parent_id')
+                ->where('has_children', 1)
+                ->select('id', 'name')
+                ->get();
+        } else {
+            $goodKinds = GoodKind::searchQuery(['name', 'kind_info'], $goodKindName)
+                ->where('has_children', 1)
+                ->select('id', 'name')
+                ->get();            
+        }
+
+        return $goodKinds->toJson();
     }
 }

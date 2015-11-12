@@ -23,6 +23,7 @@ return [
             'download'  => '下载',
             'logout'    => '注销',
             'search'    => '搜索',
+            'reset'     => '重置',
             'update'    => '更新'
         ],
         'options'   => [
@@ -53,27 +54,29 @@ return [
         ]
     ],
     
-    // 促销信息
-    'preferences'   => [
-        'title' => [
-            'index' => '促销信息'
-        ]
-    ],
-
     // 商品分类信息
     'good_kinds' => [
         'title' => [
             'index' => '商品种类',
+            'create'    => '商品分类添加',
             'show'  => '商品分类详情',
             'edit'  => '商品分类信息修改'
         ],
         'labels'    => [
-            'search_by_name'    => '商品名',
             'index_panel_header'    => '商品分类信息',
-            'parent_name'   => '上级分类'
+            'create_panel_header'   => '创建商品分类',
+            'show_panel_header'     => '商品分类详情',
+            'search_by_name'    => '商品名',
+            'parent_name'   => '上级分类',
+            'has_parent'    => '拥有父类',
+            'no_parent'     => '没有父类',
+            'child_good_kinds'  => '商品子类',
+            'has_child_good_kinds'  => '可以有子类',
+            'no_child_good_kinds'   => '不能有子类'
         ],
         'placeholder'   => [
-            'search_by_name'    => '商品名关键词搜索，多个关键词中间请用空格分开。'
+            'search_by_name'    => '商品分类名或者分类信息关键词搜索，多个关键词中间请用空格分开',
+            'search_byparent_name'  => '父分类名搜索'
         ]
     ],
 
@@ -109,23 +112,7 @@ return [
         ]
     ],
 
-    // 分享
-    'shares'   => [
-        'title' => [
-            'info'  => '分享',
-            'index' => '分享一览',
-            'preferences'   => '促销信息',
-            'goods' => '商品',
-            'shops' => '店铺',
-            'shop_goods'    => '店铺商品',
-            'produce_companies'  => '生产厂家',
-            'produce_company_goods' => '厂家商品'
-
-        ]
-
-    ],
-
-    // 生产厂家
+   // 生产厂家
     'mycompany' => [
         'title' => [
             'index' => '企业管理',
@@ -175,6 +162,13 @@ return [
         ]
     ],
 
+    // 促销信息
+    'preferences'   => [
+        'title' => [
+            'index' => '促销信息'
+        ]
+    ],
+
     // 生产厂家
     'produce_companies'  => [
         'title' => [
@@ -202,6 +196,22 @@ return [
             'active_panel_header'   => '账号信息修改',
             'password_confirm'      => '密码（确认）'
         ]
+    ],
+
+    // 分享
+    'shares'   => [
+        'title' => [
+            'info'  => '分享',
+            'index' => '分享一览',
+            'preferences'   => '促销信息',
+            'goods' => '商品',
+            'shops' => '店铺',
+            'shop_goods'    => '店铺商品',
+            'produce_companies'  => '生产厂家',
+            'produce_company_goods' => '厂家商品'
+
+        ]
+
     ],
 
     'shops' => [

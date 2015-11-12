@@ -13,6 +13,7 @@
                             @endforeach
                         </select>
                         <button type="submit" class="btn btn-sm">{{ trans('pages.common.buttons.search') }}</button>
+                        <a href="{{ action('GoodKindController@index') }}"><label class="btn btn-default">{{ trans('pages.common.buttons.reset') }}</label></a>
                     </div>
                 </div>
 

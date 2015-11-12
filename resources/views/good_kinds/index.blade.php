@@ -1,9 +1,8 @@
 @extends ('app', ['title' => trans('pages.good_kinds.title.index'), 'id' => 'good_kinds', 'class' => 'good_kinds index', 'console' => '', 'mode' => '', 'name' => ''])
 
 @section ('console')
-@include ('good_kinds.console')
+    @include ('good_kinds.console')
 @endsection
-
 
 @section ('content')
 <div class="container-fluid">
@@ -12,7 +11,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{{ trans('pages.good_kinds.labels.index_panel_header') }}</div>
                 <div class="panel-body">
-                    <div>
+                    <div class="paginage text-center">
                         {!! $goodKinds->render() !!}
                     </div>
                     <table class="table table-bordered">
@@ -46,12 +45,14 @@
 
                         @endforeach
                     </table>
-                    <div>
+                    <div class="paginage text-center">
                         {!! $goodKinds->render() !!}
                     </div>
+                    @if (Auth::check())
                     <div class="col-md-6 col-md-offset-2">
                         <label class="btn btn-info"><a href="{{ action('GoodKindController@create') }}">{{ trans('pages.common.buttons.create') }}</a></label>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
