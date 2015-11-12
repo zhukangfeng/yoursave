@@ -50,4 +50,21 @@ class GoodKind extends Model
 
         return $query;
     }
+
+    /**
+     * 获取子分类
+     *
+     * @param $status default null 分类状态
+     * @return array compact(GoodKind);
+     */
+    public function children($status = null)
+    {
+        $query = GoodKind::where('parent_id', $this->id);
+
+        if (!is_null($status)) {
+            $query->where('status', $status);
+        }
+
+        return $query->select('good_kinds.*')->get();
+    }
 }

@@ -33,7 +33,7 @@ class GoodKindController extends Controller
         $input['paginate'] = $request->input('paginate', Config::get('pages.good_kinds.index.default_show_number'));
         $input['name']  = $request->input('name');
 
-        $query = GoodKind::searchQuery('good_kinds.name', $input['name'])
+        $query = GoodKind::searchQuery(['good_kinds.name', 'good_kinds.kind_info'], $input['name'])
             ->select('good_kinds.*')
             ->withCreatedUser()
             ->withUpdatedUser()
@@ -41,6 +41,11 @@ class GoodKindController extends Controller
             
         if ($input['status'] != '') {
             $query->where('good_kinds.status', $input['status']);
+        }
+        $parentId = $request->input('parent_id');
+        if (!is_null($parentId)) {
+            $input['parent_id'] = $parentId;
+            $query->where('good_kinds.parent_id', $parentId);
         }
 
         $goodKinds = $query->paginate($input['paginate']);
@@ -110,6 +115,14 @@ class GoodKindController extends Controller
     public function show($id)
     {
         //
+        $goodKind = GoodKind::where('good_kinds.id', $id)
+            ->select('good_kinds.*')
+            ->withCreatedUser()
+            ->withUpdatedUser()
+            ->withParent('parent_good_kinds')
+            ->first();
+
+        return view('good_kinds.show', compact('goodKind'));
     }
 
     /**
@@ -162,7 +175,7 @@ class GoodKindController extends Controller
                 ->select('id', 'name')
                 ->get();
         } else {
-            $goodKinds = GoodKind::searchQuery('name', $goodKindName)
+            $goodKinds = GoodKind::searchQuery(['name', 'kind_info'], $goodKindName)
                 ->where('has_children', 1)
                 ->select('id', 'name')
                 ->get();            

@@ -23,6 +23,7 @@ return [
             'download'  => '下载',
             'logout'    => '注销',
             'search'    => '搜索',
+            'reset'     => '重置',
             'update'    => '更新'
         ],
         'options'   => [
@@ -64,6 +65,7 @@ return [
         'labels'    => [
             'index_panel_header'    => '商品分类信息',
             'create_panel_header'   => '创建商品分类',
+            'show_panel_header'     => '商品分类详情',
             'search_by_name'    => '商品名',
             'parent_name'   => '上级分类',
             'has_parent'    => '拥有父类',
@@ -73,7 +75,7 @@ return [
             'no_child_good_kinds'   => '不能有子类'
         ],
         'placeholder'   => [
-            'search_by_name'    => '商品名关键词搜索，多个关键词中间请用空格分开',
+            'search_by_name'    => '商品分类名或者分类信息关键词搜索，多个关键词中间请用空格分开',
             'search_byparent_name'  => '父分类名搜索'
         ]
     ],

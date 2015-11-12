@@ -11,7 +11,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{{ trans('pages.good_kinds.labels.index_panel_header') }}</div>
                 <div class="panel-body">
-                    <div>
+                    <div class="paginage text-center">
                         {!! $goodKinds->render() !!}
                     </div>
                     <table class="table table-bordered">
@@ -45,7 +45,7 @@
 
                         @endforeach
                     </table>
-                    <div>
+                    <div class="paginage text-center">
                         {!! $goodKinds->render() !!}
                     </div>
                     @if (Auth::check())

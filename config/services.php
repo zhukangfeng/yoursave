@@ -24,9 +24,9 @@ return [
     ],
 
     'ses' => [
-        'key'    => env('SES_KEY'),
-        'secret' => env('SES_SECRET'),
-        'region' => 'us-east-1',
+        'key'    => env('MAIL_AWS_SES_KEY'),
+        'secret' => env('MAIL_AWS_SES_SECRET'),
+        'region' => env('MAIL_AWS_SES_REGION', 'us-east-1'),
     ],
 
     'stripe' => [
