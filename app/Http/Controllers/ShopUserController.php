@@ -107,7 +107,7 @@ class ShopUserController extends Controller
                     ShopUser::create([
                         'shop_id'   => $shop->id,
                         'user_id'   => $invitedUser->id,
-                        'email'     => $invitedUser->email,
+                        'email'     => $invitedUser->login_mail,
                         'type'      => (int)$type,
                         'position'  => $position,
                         'status'    => DB_SHOP_USERS_STATUS_REQUESTING,
@@ -123,9 +123,9 @@ class ShopUserController extends Controller
                             'viewData'  => compact('invitedUser', 'activeToken', 'activeTokenTime', 'invitingUserName', 'shopName'),
                             'fromMailAddr'  => null,
                             'fromName'  => null,
-                            'toMailAddr'    => $user->login_mail,
-                            'toName'    => $user->l_name,
-                            'subject'   => trans('mails.myshop.users.check_mail_for_unregistered.subject')
+                            'toMailAddr'    => $invitedUser->login_mail,
+                            'toName'    => $invitedUser->l_name,
+                            'subject'   => trans('mails.myshop.users.check_mail_for_unregistered.subject', ['shop_name' => $shop->name])
                         ]);
                     } catch (Exception $e) {
 
@@ -135,30 +135,26 @@ class ShopUserController extends Controller
                     }
                 } else {
                     // 已经注册的用户邀请（商店账户邀请）
-                    $invitedShopUser = ShopUser::where('shop_id', $shop->id)
-                        ->where('user_id', $invitedUser->id)
-                        ->first();
-                    if (is_null($invitedShopUser)) {
-                        ShopUser::create([
-                            'shop_id'   => $shop->id,
-                            'email'     => $invitedUser->email,
-                            'user_id'   => $invitedUser->id,
-                            'type'      => (int)$type,
-                            'position'  => $position,
-                            'status'    => DB_SHOP_USERS_STATUS_REQUESTING,
-                            'created_by'    => $user->id,
-                            'updated_by'    => $user->id
-                        ]);
-                    }
+                    $invitedShopUser = ShopUser::create([
+                        'shop_id'   => $shop->id,
+                        'email'     => $invitedUser->login_mail,
+                        'user_id'   => $invitedUser->id,
+                        'type'      => (int)$type,
+                        'position'  => $position,
+                        'status'    => DB_SHOP_USERS_STATUS_REQUESTING,
+                        'created_by'    => $user->id,
+                        'updated_by'    => $user->id
+                    ]);
+
                     try {
                         MailUtil::sendMail([
                             'view'  => 'myshop.users.info_mail_for_registered_user',
                             'viewData'  => compact('invitedUser', 'invitingUserName', 'shopName'),
                             'fromMailAddr'  => null,
                             'fromName'  => null,
-                            'toMailAddr'    => $user->login_mail,
-                            'toName'    => $user->l_name,
-                            'subject'   => trans('mails.myshop.users.info_mail_for_registered_user.subject')
+                            'toMailAddr'    => $invitedUser->login_mail,
+                            'toName'    => $invitedUser->l_name,
+                            'subject'   => trans('mails.myshop.users.info_mail_for_registered_user.subject', ['shop_name' => $shop->name])
                         ]);
                     } catch (Exception $e) {
 
@@ -231,6 +227,7 @@ class ShopUserController extends Controller
             )
             ->first();
         $shop = Session::get('Shop');
+        $user = Session::get('User');
 
         if ($request->input('type', DB_SHOP_USERS_TYPE_ADMIN) != DB_SHOP_USERS_TYPE_ADMIN) {
             if ($updatedShopUser->user_id === $shop->response_user_id) {
@@ -255,6 +252,7 @@ class ShopUserController extends Controller
             'email'  => $request->input('email'),
             'position'  => $request->input('position'),
             'status'  => (int)$request->input('status', DB_SHOP_USERS_TYPE_ADMIN),
+            'updated_by'    => $user->id
         ]);
 
         $shopUser = Session::get('ShopUser');
