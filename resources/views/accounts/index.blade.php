@@ -38,7 +38,7 @@
                             <td>{{ isset($shopUser->updated_at) ? $shopUser->updated_at->format('Y/m/d H:i:s') : '' }}</td>
                             <td class="account-operating">
                                 @if ($shopUser->status === DB_SHOP_USERS_STATUS_REQUESTING)
-                                    <form method="POST" action="{{ action('AccountController@login') }}">
+                                    <form method="POST" action="{{ action('AccountController@accept') }}">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="shop_user_id" value="{{ $shopUser->id }}">
                                         <div class="accept"><input type="submit" class="btn btn-default" value="{{ trans('pages.common.buttons.accept') }}"></div>
@@ -47,11 +47,13 @@
                                     @if (Session::get('ShopUser') && Session::get('ShopUser')->id === $shopUser->id)
                                         <form method="POST" action="{{ action('AccountController@logout') }}">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="shop_user_id" value="{{ $shopUser->id }}">
                                             <div class="logout"><input type="submit" class="btn btn-default" value="{{ trans('pages.common.buttons.logout') }}"></div>
                                         </form>
                                     @else
-                                        <form method="POST" action="{{ action('AccontController@accept') }}">
+                                        <form method="POST" action="{{ action('AccountController@login') }}">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="shop_user_id" value="{{ $shopUser->id }}">
                                             <div class="login"><input type="submit" class="btn btn-default" value="{{ trans('pages.common.buttons.login') }}"></div>
                                         </form>
                                     @endif

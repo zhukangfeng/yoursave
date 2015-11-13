@@ -22,6 +22,7 @@ return [
             'edit'      => '修改',
             'delete'    => '删除',
             'download'  => '下载',
+            'login'     => '登录',
             'logout'    => '注销',
             'search'    => '搜索',
             'reset'     => '重置',

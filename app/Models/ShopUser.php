@@ -44,6 +44,16 @@ class ShopUser extends Model
     ];
 
     /**
+     * 所属商店
+     *
+     * @return Shop
+     */
+    public function shop()
+    {
+        return $this->belongsTo('App\Models\Shop');
+    }
+
+    /**
      * 加入用户姓名
      *
      * @param \Illuminate\Database\Eloquent\Builder $query <不需要赋值，系统自动复制>
