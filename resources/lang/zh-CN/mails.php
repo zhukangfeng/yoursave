@@ -19,8 +19,8 @@ return [
                 'body'  => '<label>尊敬的用户，你好，来自商店（:shop_name）的 :inviting_user_name' . trans('pages.common.app_name')
                     . '。</label><br />'
                     . '请登录后完成账户信息填写。<br>'
-                    . '您的激活网址url是（' . asset('/register/check?token=') . ':active_token）。<br />'
-                    . 'url有效时间为' . REGISTER_CHECK_URL_EFFECTIVE_HOUR . '小时，请在:active_token_time之前激活。<br />'
+                    . '您的激活网址url是（ ' . asset('/register/check?token=') . ':active_token ）。<br />'
+                    . 'url有效时间为' . REGISTER_CHECK_URL_EFFECTIVE_HOUR . '小时，请在 :active_token_time 之前激活。<br />'
                     . '超过该时间，该url将无效。'
                     . '<br />'
             ],
