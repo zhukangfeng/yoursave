@@ -1,0 +1,1 @@
+<script type="text/javascript" src="{{ asset('app/js/accounts/controller.js') }}" defer></script>

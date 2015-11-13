@@ -10,6 +10,12 @@ return [
         'unauthorized'  => '非常抱歉，您没有权限。'
     ],
 
+    // 受邀账户邀请
+    'accounts'  => [
+        'account_need_accept'   => '账户需要接受邀请',
+        'account_not_ivalid'    => '无效账户',
+    ],
+
     // 商品分类
     'good_kinds'    => [
         'whether_has_parent'    => '必须选择是否拥有父类',

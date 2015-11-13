@@ -9,6 +9,13 @@ return [
         'created_success' => '创建成功'
     ],
 
+    // 受邀账户管理
+    'accounts'  => [
+        'accepted_success'  => '账户邀请接受成功。',
+        'logined_success'   => '账户登录成功',
+        'logout_success'    => '账户注销成功'
+    ],
+
     // 商品分类
     'good_kinds'    => [
         'created_success'   => '商品分类创建成功',
