@@ -28,6 +28,9 @@ Route::group([
     Route::get('/', 'DashboardController@index');
 
     // 用户账号信息
+    Route::post('/accounts/login', 'AccountController@login');
+    Route::post('/accounts/logout', 'AccountController@logout');
+    Route::post('/accounts/accept', 'AccountController@accept');
     Route::resource('/accounts', 'AccountController');
 
     // 文件下载api
@@ -50,6 +53,7 @@ Route::group([
     Route::group([
         'middleware' => 'shop_auth'
     ], function () {
+
         // 商店信息显示
         Route::group([
             'prefix'    => 'myshop',
@@ -166,3 +170,7 @@ Route::resource('/goods', 'ShopGoodController', [
         'show',
     ]
 ]);
+
+// 商店
+Route::get('/shops', 'ShopController@index');
+Route::get('/shops/{shopId}', 'ShopController@show');

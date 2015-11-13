@@ -70,6 +70,8 @@ class ShopController extends Controller
             $shop = Shop::where('shops.id', $id)
                 ->select('shops.*')
                 ->first();
+
+            var_dump($shop);
         }
     }
 

@@ -107,9 +107,12 @@ class ShopUserController extends Controller
                     ShopUser::create([
                         'shop_id'   => $shop->id,
                         'user_id'   => $invitedUser->id,
+                        'email'     => $invitedUser->email,
                         'type'      => (int)$type,
                         'position'  => $position,
-                        'status'    => DB_SHOP_USERS_STATUS_REQUESTING
+                        'status'    => DB_SHOP_USERS_STATUS_REQUESTING,
+                        'created_by'    => $user->id,
+                        'updated_by'    => $user->id
                     ]);
 
                     try {
@@ -138,10 +141,13 @@ class ShopUserController extends Controller
                     if (is_null($invitedShopUser)) {
                         ShopUser::create([
                             'shop_id'   => $shop->id,
+                            'email'     => $invitedUser->email,
                             'user_id'   => $invitedUser->id,
                             'type'      => (int)$type,
                             'position'  => $position,
-                            'status'    => DB_SHOP_USERS_STATUS_REQUESTING
+                            'status'    => DB_SHOP_USERS_STATUS_REQUESTING,
+                            'created_by'    => $user->id,
+                            'updated_by'    => $user->id
                         ]);
                     }
                     try {
