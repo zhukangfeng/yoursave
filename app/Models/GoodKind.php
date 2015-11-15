@@ -14,7 +14,7 @@ class GoodKind extends Model
 
     protected $fillable = [
         'parent_id',    // 父分类名称
-        'has_children', // 能否含有子分类
+        'can_has_children', // 能否含有子分类
         'name',         // 商品分类名
         'kind_info',    // 分类信息
         'status',       // 分类信息状态：0:无效；1:认证；2:未认证（一般用户创建）；
@@ -39,7 +39,10 @@ class GoodKind extends Model
 
         $selectValue = [];
         foreach ($selectColumns as $key => $selectColumn) {
-            $selectValue[] = $parentTableName . '.' . $selectColumn['columnName'] . ' AS ' . $selectColumn['asName'];
+            isset($selectColumn['asName'])
+                ? $asName = $selectColumn['asName']
+                : $asName = $selectColumn['columnName'];
+            $selectValue[] = $parentTableName . '.' . $selectColumn['columnName'] . ' AS ' . $asName;
         }
 
         $query->leftJoin('good_kinds AS ' . $parentTableName, function ($join) use ($parentTableName) {

@@ -9,6 +9,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
 Route::group([
     'middleware' => 'guest'
 ], function () {
@@ -45,9 +46,19 @@ Route::group([
     Route::get('good_kinds', 'GoodKindController@index');
     Route::get('good_kinds/create', 'GoodKindController@create');
     Route::get('/good_kinds/search', 'GoodKindController@search');
-    Route::put('good_kinds', 'GoodKindController@store');
-    Route::get('good_kinds/{goodKindId}', 'GoodKindController@edit');
-    Route::post('good_kinds/{goodKindId}', 'GoodKindController@update');
+    Route::post('good_kinds', 'GoodKindController@store');
+    Route::get('good_kinds/{goodKindId}/edit', 'GoodKindController@edit');
+    Route::put('good_kinds/{goodKindId}', 'GoodKindController@update');
+
+    // 商品
+    Route::resource('/goods', 'GoodController', [
+        'only'  => [
+            'create',
+            'store',
+            'edit',
+            'update'
+        ]
+    ]);
 
     // 商店职员登录
     Route::group([
@@ -156,15 +167,23 @@ Route::group([
     Route::get('/user/edit', 'UserController@edit');
     Route::put('/user', 'UserController@update');
 
-
 });
+
 
 // 商品分类
 Route::get('good_kinds/', 'GoodKindController@index');
 Route::get('good_kinds/{goodKindId}', 'GoodKindController@show');
 
+// 商品
+Route::resource('/good', 'GoodController', [
+    'only'  => [
+        'index',
+        'show'
+    ]
+]);
+
 // 商店商品信息
-Route::resource('/goods', 'ShopGoodController', [
+Route::resource('/goods', 'GoodController', [
     'only'  => [
         'index',
         'show',
@@ -174,3 +193,8 @@ Route::resource('/goods', 'ShopGoodController', [
 // 商店
 Route::get('/shops', 'ShopController@index');
 Route::get('/shops/{shopId}', 'ShopController@show');
+
+
+
+
+

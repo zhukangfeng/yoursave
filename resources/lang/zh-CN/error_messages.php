@@ -24,6 +24,13 @@ return [
         'need_name'             => '请输入商品分类名称'
     ],
 
+    // 商品
+    'goods' => [
+        'no_good_kind'      => '商品分类不存在',
+        'good_kind_error'   => '商品分类出错。',
+        'create_type_error' => '创建身份出错'
+    ],
+
     // 商店管理
     'myshop'    => [
         'users' => [

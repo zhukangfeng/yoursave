@@ -23,7 +23,7 @@
                         <tr>
                             <th class="col-md-3 active">{{ trans('pages.good_kinds.labels.child_good_kinds') }}</th>
                             <td>
-                                @if ($goodKind->has_children)
+                                @if ($goodKind->can_has_children)
                                 <a href="{{ action('GoodKindController@index', ['parent_id' => $goodKind->id]) }}">{{ trans('pages.good_kinds.labels.has_child_good_kinds') }}</a>
                                 @else
                                 {{ trans('pages.good_kinds.labels.no_child_good_kinds') }}
