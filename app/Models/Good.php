@@ -10,6 +10,8 @@ class Good extends Model
     //
     use SoftDeletes;
 
+    protected $data = ['deleted_at'];
+    
     protected $fillable = [
         'good_kind_id',
         'good_name',
