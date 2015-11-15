@@ -154,10 +154,11 @@ class FileIO
      * @param string $originalPathName
      * @param string $destPathName
      */
-     protected static function moveFileInS3($originalPathName, $destPathName)
-     {
+    protected static function moveFileInS3($originalPathName, $destPathName)
+    {
         return Storage::move($originalPathName, $destPathName);
-     }
+    }
+
     /**
      * 获取amazon s3下载url
      *
@@ -168,8 +169,7 @@ class FileIO
     protected static function getUrlFromS3($savePathName, $effectiveTime)
     {
         $disk = Storage::disk('s3');
-        $command = $disk
-            ->getDriver()
+        $command = $disk->getDriver()
             ->getAdapter()
             ->getClient()
             ->getCommand(
@@ -180,7 +180,11 @@ class FileIO
                     'ResponseContentDisposition' => 'attachment;'
                 ]
             );
-        $request = $disk->getDriver()->getAdapter()->getClient()->createPresignedRequest($command, $effectiveTime);
+        $request = $disk
+            ->getDriver()
+            ->getAdapter()
+            ->getClient()
+            ->createPresignedRequest($command, $effectiveTime);
         return (string)$request->getUri();
     }
 
@@ -193,7 +197,12 @@ class FileIO
      */
     public static function getS3TempSTS($effectiveSeconds = 900)
     {
-        $credentials = new Credentials(env('FILESYSTEMS_DISKS_AWS_S3_WEB_KEY'), env('FILESYSTEMS_DISKS_AWS_S3_WEB_SECRET'), null, time('+' . $effectiveSeconds));
+        $credentials = new Credentials(
+            env('FILESYSTEMS_DISKS_AWS_S3_WEB_KEY'),
+            env('FILESYSTEMS_DISKS_AWS_S3_WEB_SECRET'),
+            null,
+            time('+' . $effectiveSeconds)
+        );
         $sts = StsClient::factory([
                 'region'    => 'ap-northeast-1',
                 'endpoint' => 'https://sts.' . 'ap-northeast-1' . '.amazonaws.com',
@@ -201,8 +210,9 @@ class FileIO
                 'credentials'   => $credentials
         ]);
 
-$result = $sts->getSessionToken();
-var_dump($result);exit;
+        $result = $sts->getSessionToken();
+        var_dump($result);
+        exit;
 
 
 
@@ -245,7 +255,8 @@ var_dump($result);exit;
         //     'version'   => 'latest'
         // ]);
         $result = $sts->getSessionToken();
-var_dump($result);exit;
+        var_dump($result);
+        exit;
         // Fetch the federated credentials.
         $result = $sts->getFederationToken([
             'Name' => 'yoursave-s3-upload',
@@ -264,12 +275,13 @@ var_dump($result);exit;
         // The following will be part of your less trusted code. You provide temporary
         // security credentials so it can send authenticated requests to Amazon S3.
         // $credentials = $result->get('Credentials');
-var_dump($result);
-        var_dump($credentials);exit;
+        var_dump($result);
+        var_dump($credentials);
+        exit;
         // $s3 = new S3Client::factory([
         //     'key' => $credentials['AccessKeyId'],
         //     'secret' => $credentials['SecretAccessKey'],
         //     'token' => $credentials['SessionToken']
-        // ]);        
+        // ]);
     }
 }

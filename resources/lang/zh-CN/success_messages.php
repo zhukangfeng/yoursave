@@ -21,6 +21,11 @@ return [
         'created_success'   => '商品分类创建成功',
     ],
 
+    // 商品
+    'goods' => [
+        'created_success'   => '商品信息创建成功'
+    ],
+
     // 商店修改消息
     'myshop'    => [
         'updated_success'    => '商店信息修改成功',

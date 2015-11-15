@@ -26,7 +26,7 @@ class ShopAuth
                 return response(trans('error_messages.common.unauthorized'), 401);
             } else {
                 return redirect('/');
-            }            
+            }
         }
         $shopUser = ShopUser::find($shopUser->id);
         $shop = Shop::find($shopUser->shop_id);

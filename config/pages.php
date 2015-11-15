@@ -12,6 +12,11 @@ return [
             'default_show_number'   => 10,
         ]
     ],
+    'goods'    => [
+        'index' => [
+            'default_show_number'   => 10,
+        ]
+    ],
     'myshop'    => [
         'users' => [
             'index' => [

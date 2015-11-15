@@ -80,30 +80,14 @@ class AuthController extends Controller
         Session::put('User', $user);
 
         $redirectUrl = '/';
-        $shopUsers = ShopUser::where('user_id', $user->id)
-            ->select('*')
-            ->get();
-        if (count($shopUsers) > 0) {
-            // 商店用户
-            if (count($shopUsers) === 1) {
-                Session::put('ShopUser', $shopUsers[0]);
-                Session::put('Shop', Shop::find($shopUsers[0]->shop_id));                
-            } else {
-                $redirectUrl = '/accounts';
-            }
-        }
+        $shopUserNum = ShopUser::where('user_id', $user->id)
+            ->count();
 
-        $produceCompanyUsers = ProduceCompanyUser::where('user_id', $user->id)
-            ->select('*')
-            ->get();
-        if (count($produceCompanyUsers) > 0) {
-            // 生产厂家用户
-            if (count($produceCompanyUsers) === 1) {
-                Session::put('ProduceCompanyUser', $produceCompanyUsers[0]);
-                Session::put('ProduceCompany', ProduceCompany::find($produceCompanyUsers[0]->produce_company_id));
-            } else {
-                $redirectUrl = '/accounts';
-            }
+        $produceCompanyUserNum = ProduceCompanyUser::where('user_id', $user->id)
+            ->count();
+        if ($shopUserNum > 0 || $produceCompanyUserNum > 0) {
+            // 含有生产厂家或者商店账户
+            $redirectUrl = '/accounts';
         }
 
         return redirect($redirectUrl);

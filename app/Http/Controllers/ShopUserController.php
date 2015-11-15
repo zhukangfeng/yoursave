@@ -120,15 +120,22 @@ class ShopUserController extends Controller
                         $activeTokenTime = $invitedUser->active_token_time->format('Y/m/d H:i:s');
                         MailUtil::sendMail([
                             'view'  => 'myshop.users.check_mail_for_unregistered',
-                            'viewData'  => compact('invitedUser', 'activeToken', 'activeTokenTime', 'invitingUserName', 'shopName'),
+                            'viewData'  => compact(
+                                'invitedUser',
+                                'activeToken',
+                                'activeTokenTime',
+                                'invitingUserName',
+                                'shopName'
+                            ),
                             'fromMailAddr'  => null,
                             'fromName'  => null,
                             'toMailAddr'    => $invitedUser->login_mail,
                             'toName'    => $invitedUser->l_name,
-                            'subject'   => trans('mails.myshop.users.check_mail_for_unregistered.subject', ['shop_name' => $shop->name])
+                            'subject'   => trans('mails.myshop.users.check_mail_for_unregistered.subject', [
+                                'shop_name' => $shop->name
+                            ])
                         ]);
                     } catch (Exception $e) {
-
                         Session::flash('error_messages', [trans('error_messages.register.mail_sent_fail')]);
 
                         return back()->withInput();
@@ -154,10 +161,11 @@ class ShopUserController extends Controller
                             'fromName'  => null,
                             'toMailAddr'    => $invitedUser->login_mail,
                             'toName'    => $invitedUser->l_name,
-                            'subject'   => trans('mails.myshop.users.info_mail_for_registered_user.subject', ['shop_name' => $shop->name])
+                            'subject'   => trans('mails.myshop.users.info_mail_for_registered_user.subject', [
+                                'shop_name' => $shop->name
+                            ])
                         ]);
                     } catch (Exception $e) {
-
                         Session::flash('error_messages', [trans('error_messages.register.mail_sent_fail')]);
 
                         return back()->withInput();
@@ -232,18 +240,37 @@ class ShopUserController extends Controller
         if ($request->input('type', DB_SHOP_USERS_TYPE_ADMIN) != DB_SHOP_USERS_TYPE_ADMIN) {
             if ($updatedShopUser->user_id === $shop->response_user_id) {
                 // 商店代表必须是管理员
-                return back()->withInput()->withErrors(['type'  => trans('error_messages.myshop.users.shop_response_user')]);
-            } elseif ($updatedShopUser->type === DB_SHOP_USERS_TYPE_ADMIN && ShopUser::where('shop_id', $shop->id)->count() < 2) {
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'type'  => trans('error_messages.myshop.users.shop_response_user')
+                    ]);
+            } elseif ($updatedShopUser->type === DB_SHOP_USERS_TYPE_ADMIN
+                && ShopUser::where('shop_id', $shop->id)->count() < 2) {
                 // 公司管理员至少需要两个
-                return back()->withInput()->withErrors(['type'  => trans('error_messages.myshop.users.only_one_admin')]);
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'type'  => trans('error_messages.myshop.users.only_one_admin')
+                    ]);
             }
-        } elseif ($request->input('status', DB_SHOP_USERS_STATUS_INVALID) != DB_SHOP_USERS_STATUS_EFFECTIVE) {
+        } elseif ($request->input('status', DB_SHOP_USERS_STATUS_INVALID)
+            != DB_SHOP_USERS_STATUS_EFFECTIVE) {
             if ($updatedShopUser->user_id === $shop->response_user_id) {
                 // 商店代表必须是管理员
-                return back()->withInput()->withErrors(['status'  => trans('error_messages.myshop.users.shop_response_user_effective')]);
-            } elseif ($updatedShopUser->type === DB_SHOP_USERS_TYPE_ADMIN && ShopUser::where('shop_id', $shop->id)->count() < 2) {
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'status'  => trans('error_messages.myshop.users.shop_response_user_effective')
+                    ]);
+            } elseif ($updatedShopUser->type === DB_SHOP_USERS_TYPE_ADMIN
+                && ShopUser::where('shop_id', $shop->id)->count() < 2) {
                 // 公司管理员至少需要两个
-                return back()->withInput()->withErrors(['status'  => trans('error_messages.myshop.users.need_one_effective_admin')]);
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'status'  => trans('error_messages.myshop.users.need_one_effective_admin')
+                    ]);
             }
         }
 

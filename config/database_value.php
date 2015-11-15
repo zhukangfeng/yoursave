@@ -104,12 +104,6 @@ define('DB_GOOD_COMMENTS_PARENT_ID',    'parent_id');        // 父评论id
 define('DB_GOOD_COMMENTS_COMMENT_INFO', 'comment_info');  // 评论信息
 
 // 商品分类信息表
-define('DB_GOOD_KINDS',             'good_kinds');
-define('DB_GOOD_KINDS_PARENT_ID',   'parent_id');   // 父分类名称
-define('DB_GOOD_KINDS_NAME',        'name');        // 商品分类名
-define('DB_GOOD_KINDS_KIND_INFO',   'kind_info');   // 分类信息
-define('DB_GOOD_KINDS_STATUS',      'status');      // 分类信息状态：0:无效；1:认证；2:未认证（一般用户创建）；
-                                                    // 3:未认证（商店职员创建）；4：未认证（生产厂家创建）
 define('DB_GOOD_KINDS_CAN_HAS_CHILDREN_NO',     0);
 define('DB_GOOD_KINDS_CAN_HAS_CHILDREN_YES',    1);
 
@@ -132,6 +126,13 @@ define('DB_GOODS_GOOD_NAME',    'good_name');       // 商品名
 define('DB_GOODS_GOOD_INFO',    'good_info');       // 商品信息
 define('DB_GOODS_STATUS',       'status');          // 商品状态:0:无效；1:权威认证；2:未认证（一般用户创建）；
                                                     // 3:未认证（商店职员创建）；4：未认证（生产厂家创建）
+
+define('DB_GOOD_STATUS_INVALID', 0);
+define('DB_GOOD_STATUS_AUTHENTICATED', 1);
+define('DB_GOOD_STATUS_CREATE_BY_USER_UNACTIVE', 2);
+define('DB_GOOD_STATUS_CREATE_BY_SHOP_UNACTIVE', 3);
+define('DB_GOOD_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE', 4);
+
 // 用户登录记录表
 define('DB_LOG_LOGINS',                 'log_logins');
 define('DB_LOG_LOGIN_USER_ID',          'user_id');         // 登录用户id

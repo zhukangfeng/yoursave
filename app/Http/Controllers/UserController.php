@@ -244,7 +244,10 @@ class UserController extends Controller
             'u_name'    => $request->input('username'),
             'f_name'    => $request->input('firstname'),
             'l_name'    => $request->input('lastname'),
-            'contact_email' => ($request->input('contact_email') == '' ? $user->email : $request->input('contact_email')),
+            'contact_email'
+                => $request->input('contact_email') == ''
+                ? $user->email
+                : $request->input('contact_email'),
             'post_code' => $request->input('post_code'),
             'address'   => $request->input('address'),
             'home_phone'    => $request->input('home_phone'),
