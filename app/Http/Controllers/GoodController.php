@@ -102,11 +102,13 @@ class GoodController extends Controller
         } elseif ($createType == '2') {
             // 生产厂家用户创建
             if (is_null(Session::get('ProduceCompanyUser'))) {
-
+                return back()->withInput()->withErrors([
+                    'create_type' => trans('error_messages.goods.create_type_error')
+                ]);
             }
             $status = DB_GOOD_KINDS_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE;
         } else {
-            $status = DB_GOOD_KINDS_STATUS_CREATE_BY_USER_UNACTIVE;            
+            $status = DB_GOOD_KINDS_STATUS_CREATE_BY_USER_UNACTIVE;
         }
 
         $user = Session::get('User');
@@ -133,7 +135,14 @@ class GoodController extends Controller
      */
     public function show($id)
     {
-        //
+        $good = Good::where('goods.id', $id)
+            ->select('goods.*')
+            ->withCreatedUser()
+            ->withUpdatedUser()
+            ->withGoodKind()
+            ->first();
+
+        return view('goods.show', compact('good'));
     }
 
     /**

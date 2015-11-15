@@ -32,7 +32,8 @@ class GoodKind extends Model
      * @param array selectColumns [['columnName' => 'name', 'asName' => 'parent_name']]
      * @return $query
      */
-    public function scopeWithParent($query,
+    public function scopeWithParent(
+        $query,
         $parentTableName = 'parent_good_kinds',
         $selectColumns = [['columnName' => 'name', 'asName' => 'parent_name']]
     ) {

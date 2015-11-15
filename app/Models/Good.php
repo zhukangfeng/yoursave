@@ -27,7 +27,8 @@ class Good extends Model
      * @param $selectValue compact(['columnName' => 'name', 'asName' => 'good_kind_name'])
      * @return $query
      */
-    public function scopeWithGoodKind($query,
+    public function scopeWithGoodKind(
+        $query,
         $parentTableName = 'good_kinds',
         $selectColumns = [['columnName' => 'name', 'asName' => 'good_kind_name']]
     ) {

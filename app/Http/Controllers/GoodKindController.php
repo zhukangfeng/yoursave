@@ -240,7 +240,8 @@ class GoodKindController extends Controller
         // 父类条件
         if ($parentName != '' || $parentKey != '') {
             $lineTmp = __LINE__;
-            $query->join('good_kinds AS good_kinds_' . $lineTmp,
+            $query->join(
+                'good_kinds AS good_kinds_' . $lineTmp,
                 'good_kinds.parent_id',
                 'good_kinds_' . $lineTmp . '.id'
             )
@@ -263,7 +264,8 @@ class GoodKindController extends Controller
             || $childrenName != ''
             || $childrenKey != '') {
             $lineTmp = __LINE__;
-            $query->join('good_kinds AS good_kinds_' . $lineTmp,
+            $query->join(
+                'good_kinds AS good_kinds_' . $lineTmp,
                 'good_kinds.id',
                 '=',
                 'good_kinds_' . $lineTmp . '.parent_id'
@@ -282,7 +284,7 @@ class GoodKindController extends Controller
             }
             // 子分类关键词
             if ($childrenKey != '') {
-                $query->searchQuery('good_kinds_' . $lineTmp . '.name', $childrenName);                
+                $query->searchQuery('good_kinds_' . $lineTmp . '.name', $childrenName);
             }
         }
 

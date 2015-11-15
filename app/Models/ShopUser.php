@@ -64,7 +64,7 @@ class ShopUser extends Model
      */
     public function scopeWithUserName($query, $tableName = 'users', $fullname = 'fullname', $userIdName = 'user_id')
     {
-        $query->join('users', function($join) {
+        $query->join('users', function ($join) {
             $join->on('shop_users.user_id', '=', 'users.id')
                 ->on('users.deleted_at', ' IS ', DB::raw('NULL'));
         });
@@ -88,10 +88,11 @@ class ShopUser extends Model
      * @param $selectData array compact(['columnName' => 'name', 'asName' => 'shop_name'])
      * @return \Illuminate\Database\Eloquent\Builder $query
      */
-    public function scopeWithShop($query,
+    public function scopeWithShop(
+        $query,
         $tableName = 'shops',
-        $selectData = [['columnName' => 'name', 'asName' => 'shop_name']])
-    {
+        $selectData = [['columnName' => 'name', 'asName' => 'shop_name']]
+    ) {
         $data = [];
         foreach ($selectData as $key => $selectDatum) {
             $data[] = $tableName . '.' . $selectDatum['columnName'] . ' AS ' . $selectDatum['asName'];

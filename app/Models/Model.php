@@ -119,8 +119,13 @@ class Model extends ParentModel
      *
      * @author zhukangfeng
      */
-    public function scopeWithCreatedUser($query, $createdBy = 'created_by', $tableName = 'created_user', $fullname = 'created_user_fullname', $uname = 'created_user_uname')
-    {
+    public function scopeWithCreatedUser(
+        $query,
+        $createdBy = 'created_by',
+        $tableName = 'created_user',
+        $fullname = 'created_user_fullname',
+        $uname = 'created_user_uname'
+    ) {
         $query->leftJoin('users AS ' . $tableName, function ($join) use ($createdBy, $tableName) {
             $join->on($createdBy, '=', $tableName . '.id')
                 ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
@@ -149,8 +154,13 @@ class Model extends ParentModel
      *
      * @author zhukangfeng
      */
-    public function scopeWithUpdatedUser($query, $updatedBy = 'updated_by', $tableName = 'updated_user', $fullname = 'updated_user_fullname', $uname = 'updated_user_uname')
-    {
+    public function scopeWithUpdatedUser(
+        $query,
+        $updatedBy = 'updated_by',
+        $tableName = 'updated_user',
+        $fullname = 'updated_user_fullname',
+        $uname = 'updated_user_uname'
+    ) {
         $query->leftJoin('users AS ' . $tableName, function ($join) use ($updatedBy, $tableName) {
             $join->on($updatedBy, '=', $tableName . '.id')
                 ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
@@ -179,8 +189,13 @@ class Model extends ParentModel
      *
      * @author zhukangfeng
      */
-    public function scopeWithResponsedUser($query, $responseUser = 'response_user_id', $tableName = 'response_user', $fullname = 'response_user_fullname', $uname = 'response_user_uname')
-    {
+    public function scopeWithResponsedUser(
+        $query,
+        $responseUser = 'response_user_id',
+        $tableName = 'response_user',
+        $fullname = 'response_user_fullname',
+        $uname = 'response_user_uname'
+    ) {
         $query->leftJoin('users AS ' . $tableName, function ($join) use ($responseUser, $tableName) {
             $join->on($responseUser, '=', $tableName . '.id')
                 ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
@@ -197,5 +212,4 @@ class Model extends ParentModel
             );
         }
     }
-
 }

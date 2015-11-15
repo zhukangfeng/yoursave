@@ -81,7 +81,7 @@ class ShopUserOperateAuth
                             return redirect()->action('ShopUserController@index');
                         }
                     }
-                    break;                
+                    break;
                 default:
                     # code...
                     break;

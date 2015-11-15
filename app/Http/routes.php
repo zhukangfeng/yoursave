@@ -193,8 +193,3 @@ Route::resource('/goods', 'GoodController', [
 // 商店
 Route::get('/shops', 'ShopController@index');
 Route::get('/shops/{shopId}', 'ShopController@show');
-
-
-
-
-

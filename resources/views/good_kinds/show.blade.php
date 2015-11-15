@@ -54,8 +54,10 @@
                             <th class="col-md-3 active">{{ trans('database.common.updated_at') }}</th>
                             <td>{{ $goodKind->updated_at->format('Y/m/d H:i:s') }}</td>
                         </tr>
-                        
                     </table>
+                    <div class="col-md-6 col-md-offset-4">
+                        <a href="{{ action('GoodKindController@index') }}" class="btn btn-info"><span>{{ trans('pages.common.buttons.back_to_index') }}</span></a>
+                    </div>
                 </div>
             </div>
         </div>
