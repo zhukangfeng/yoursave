@@ -110,8 +110,8 @@ define('DB_GOOD_KINDS_NAME',        'name');        // 商品分类名
 define('DB_GOOD_KINDS_KIND_INFO',   'kind_info');   // 分类信息
 define('DB_GOOD_KINDS_STATUS',      'status');      // 分类信息状态：0:无效；1:认证；2:未认证（一般用户创建）；
                                                     // 3:未认证（商店职员创建）；4：未认证（生产厂家创建）
-define('DB_GOOD_KINDS_HAS_CHILDREN_NO',     0);
-define('DB_GOOD_KINDS_HAS_CHILDREN_YES',    1);
+define('DB_GOOD_KINDS_CAN_HAS_CHILDREN_NO',     0);
+define('DB_GOOD_KINDS_CAN_HAS_CHILDREN_YES',    1);
 
 define('DB_GOOD_KINDS_STATUS_INVALID', 0);
 define('DB_GOOD_KINDS_STATUS_AUTHENTICATED', 1);
