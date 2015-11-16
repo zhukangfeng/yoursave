@@ -75,11 +75,11 @@ return [
         DB_GOOD_COMMENTS_COMMENT_INFO   => 'comment content'
     ],
     // 商品分类信息
-    DB_GOOD_KINDS => [
+    'good_kinds' => [
         'tabel_name'           => 'good kinds',
-        DB_GOOD_KINDS_NAME      => 'kind name',
-        DB_GOOD_KINDS_KIND_INFO => 'kind information',
-        DB_GOOD_KINDS_STATUS    => 'good kind status',
+        'name'      => 'kind name',
+        'kind_info' => 'kind information',
+        'status'    => 'good kind status',
         'column_value' => [
             DB_GOOD_KINDS_STATUS_INVALID => 'invalid',
             DB_GOOD_KINDS_STATUS_AUTHENTICATED => 'authenticated',

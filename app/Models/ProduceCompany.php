@@ -44,5 +44,4 @@ class ProduceCompany extends Model
         'updated_by'    => 'integer',
         'deleted_by'    => 'integer',
     ];
- 
 }

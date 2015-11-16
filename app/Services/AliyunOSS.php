@@ -32,7 +32,8 @@ class AliyunOSS
      * @return  Aliyun\OSS\OSSclient
      */
     public static function getOSSClient()
-    {   $oss = new AliyunOSS();
+    {
+        $oss = new AliyunOSS();
         return $oss->getOSSClient();
     }
 
@@ -47,8 +48,10 @@ class AliyunOSS
     /**
      * 初始化一个Multipart上传事件。
      * <p>
-     * 使用Multipart模式上传数据前，必须先调用该接口来通过OSS初始化一个Multipart上传事件。
-     * 该接口会返回一个OSS服务器创建的全局唯一的Upload ID，用于标识本次Multipart上传事件。
+     * 使用Multipart模式上传数据前，
+     * 必须先调用该接口来通过OSS初始化一个Multipart上传事件。
+     * 该接口会返回一个OSS服务器创建的全局唯一的Upload ID，
+     * 用于标识本次Multipart上传事件。
      * 用户可以根据这个ID来发起相关的操作，如中止、查询Multipart上传等。
      * </p>
      *
@@ -139,7 +142,8 @@ class AliyunOSS
      * @param string $destKey - 复制的目的Object的Key
      * @return Models\CopyObjectResult
      */
-    public static function copyObject($sourceBuckt, $sourceKey, $destBucket, $destKey) {
+    public static function copyObject($sourceBuckt, $sourceKey, $destBucket, $destKey)
+    {
         $oss = new AliyunOSS();
 
         return $oss->ossClient->copyObject($sourceBuckt, $sourceKey, $destBucket, $destKey);
@@ -171,7 +175,8 @@ class AliyunOSS
      *
      * @return void
      */
-    public function deleteObject($bucketName, $key) {
+    public function deleteObject($bucketName, $key)
+    {
         $oss = new AliyunOSS();
 
         return $oss->ossClient->deleteObject($bucketName, $key);

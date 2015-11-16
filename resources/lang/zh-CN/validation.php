@@ -117,7 +117,9 @@ return [
         'password'  => trans('database.users.password'),
         'confirm'   => '确认',
         'login_mails'   => '登录邮箱',
-        'type'      => '类型'
+        'type'      => '类型',
+        'good_name' => '商品名称',
+        'good_kind' => '商品分类'
     ],
 
 ];

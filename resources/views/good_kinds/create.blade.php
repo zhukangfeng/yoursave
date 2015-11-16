@@ -14,17 +14,22 @@
                     <div class="form-data">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/good_kinds') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="_method" value="PUT">
                             <div class="form-group required">
                                 <label class="col-md-4 control-label">{{ trans('pages.good_kinds.labels.parent_name') }}</label>
                                 <div class="col-md-6">
-                                    <label><input type="radio" name="has_parent" value="1" {{ old('has_parent') == '0' ? '' : 'checked' }}>{{ trans('pages.good_kinds.labels.has_parent') }}</label>
-                                    <label><input type="radio" name="has_parent" value="0" {{ old('has_parent') == '0'? 'checked' : '' }}>{{ trans('pages.good_kinds.labels.no_parent') }}</label><br />
-                                    <div class="parent-seach">
-                                        <input type="text" name="parent_search_name" value="{{ old('parent_seach_name') }}" placeholder="{{ trans('pages.good_kinds.placeholder.search_byparent_name') }}"><label class="btn btn-default">{{ trans('pages.common.buttons.search') }}</label><br />
-                                        @if (old('parent'))
-                                        <label class="parent-info"><input type="radio" name="parent" value="{{ $parent }}">{{ isset($parentName) ? $parentName : '' }}</label>
-                                        @endif
+                                    <div class="good-kind-search">
+                                        <label><input type="radio" name="has_parent" value="1" {{ old('has_parent') == '0' ? '' : 'checked' }}>{{ trans('pages.good_kinds.labels.has_parent') }}</label>
+                                        <label><input type="radio" name="has_parent" value="0" {{ old('has_parent') == '0'? 'checked' : '' }}>{{ trans('pages.good_kinds.labels.no_parent') }}</label>
+                                        <div class="parent-seach">
+                                            <input type="text" name="good_kind_key" value="{{ old('good_kind_key') }}" placeholder="{{ trans('pages.good_kinds.placeholder.search_by_parent_name') }}">
+                                            <label class="search-btn"><span class="btn btn-default">{{ trans('pages.common.buttons.search') }}</span></label>
+                                        </div>
+                                        <div class="parent-good-kind-list">
+                                            @if (old('parent'))
+                                            <label class="parent-info"><input type="radio" name="parent" value="{{ $parent }}" checked="">{{ isset($parentName) ? $parentName : '' }}</label>
+                                            @endif                                        
+                                        </div>
+                                        
                                     </div>
                                     @if ($errors->has('has_parent'))
                                     <div class="errors">
@@ -41,11 +46,11 @@
                             <div class="form-group required">
                                 <label class="col-md-4 control-label">{{ trans('pages.good_kinds.labels.child_good_kinds') }}</label>
                                 <div class="col-md-6">
-                                    <label><input type="radio" name="has_children" value="1" {{ old('has_children') == '0' ? '' : 'checked' }}>{{ trans('pages.good_kinds.labels.has_child_good_kinds') }}</label>
-                                    <label><input type="radio" name="has_children" value="0" {{ old('has_children') == '0' ? 'checked' : '' }}>{{ trans('pages.good_kinds.labels.no_child_good_kinds') }}</label>
-                                    @if ($errors->has('has_children'))
+                                    <label><input type="radio" name="can_has_children" value="1" {{ old('can_has_children') == '0' ? '' : 'checked' }}>{{ trans('pages.good_kinds.labels.has_child_good_kinds') }}</label>
+                                    <label><input type="radio" name="can_has_children" value="0" {{ old('can_has_children') == '0' ? 'checked' : '' }}>{{ trans('pages.good_kinds.labels.no_child_good_kinds') }}</label>
+                                    @if ($errors->has('can_has_children'))
                                     <div class="errors">
-                                        <p class="error-message">{{ $errors->first('has_children') }}</p>
+                                        <p class="error-message">{{ $errors->first('can_has_children') }}</p>
                                     </div>
                                     @endif
                                 </div>

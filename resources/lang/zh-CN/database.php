@@ -100,8 +100,8 @@ return [
                 DB_GOOD_KINDS_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE => '未认证（生产厂家创建）'
             ],
             'has_children'  => [
-                DB_GOOD_KINDS_HAS_CHILDREN_NO   => '不再含子分类',
-                DB_GOOD_KINDS_HAS_CHILDREN_YES  => '可以含有子分类'
+                DB_GOOD_KINDS_CAN_HAS_CHILDREN_NO   => '不再含子分类',
+                DB_GOOD_KINDS_CAN_HAS_CHILDREN_YES  => '可以含有子分类'
             ]
         ]
     ],
@@ -113,10 +113,19 @@ return [
     ],
     // 商品信息
     DB_GOODS => [
-        'table_name'       => 'goods',
-        DB_GOODS_GOOD_NAME  => 'good name',
-        DB_GOODS_GOOD_INFO  => 'good information',
-        DB_GOODS_STATUS     => 'good status'
+        'table_name'    => '商品信息',
+        'good_name'     => '商品名称',
+        'good_info'     => '商品信息',
+        'status'        => '商品状态',
+        'column_value'  => [
+            'status'    => [
+                DB_GOOD_STATUS_INVALID        => '无效',
+                DB_GOOD_STATUS_AUTHENTICATED  => '权威认证',
+                DB_GOOD_STATUS_CREATE_BY_USER_UNACTIVE => '未认证（用户创建）',
+                DB_GOOD_STATUS_CREATE_BY_SHOP_UNACTIVE => '未认证（商店创建）',
+                DB_GOOD_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE => '未认证（生产厂家创建）'
+            ]
+        ]
     ],
     // 用户登录记录
     DB_LOG_LOGINS => [

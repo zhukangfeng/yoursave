@@ -16,6 +16,6 @@
 <script type="text/javascript" src="{{ asset('/shared/js/bootstrap/locales/bootstrap-datepicker.' . App::getLocale() . '.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('/shared/js/fileinput/fileinput.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('/shared/js/fileinput/locales/fileinput_locale_' . App::getLocale() . '.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('/shared/js/locales/message.' . App::getLocale() . '.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('/shared/js/locales/messages.' . App::getLocale() . '.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('/shared/js/functions.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('/shared/js/controllers.js') }}" defer></script>

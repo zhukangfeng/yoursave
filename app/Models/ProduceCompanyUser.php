@@ -41,4 +41,14 @@ class ProduceCompanyUser extends Model
         'updated_by'    => 'integer',
         'deleted_by'    => 'integer',
     ];
+
+    /**
+     * 所属生产厂家
+     *
+     * @return ProduceCompany
+     */
+    public function produceCompany()
+    {
+        return $this->belongsTo('App\Models\ProduceCompany');
+    }
 }

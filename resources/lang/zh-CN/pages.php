@@ -13,6 +13,7 @@ return [
             'fullname' => '姓名'
         ],
         'buttons'   => [
+            'accept'    => '接受',
             'back'      => '返回',
             'back_to_index' => '返回主页',
             'create'    => '创建',
@@ -21,6 +22,7 @@ return [
             'edit'      => '修改',
             'delete'    => '删除',
             'download'  => '下载',
+            'login'     => '登录',
             'logout'    => '注销',
             'search'    => '搜索',
             'reset'     => '重置',
@@ -28,6 +30,23 @@ return [
         ],
         'options'   => [
             'default_no_condition_option'    => '无限制',
+        ]
+    ],
+
+    // 用户商店和生产厂家账户管理
+    'accounts'  => [
+        'title' => [
+            'index' => '受邀账户一览',
+            'show'  => '受邀账户详情'
+        ],
+        'labels'    => [
+            'index_panel_header'    => '账户一览',
+            'account_type'  => '账户类型',
+            'shop_account'  => '商店职员账户',
+            'allowed_name'  => '账户所属',
+            'status'        => '账户状态',
+            'inviting_user' => '邀请人',
+            'operating'     => '操作'
         ]
     ],
 
@@ -66,7 +85,7 @@ return [
             'index_panel_header'    => '商品分类信息',
             'create_panel_header'   => '创建商品分类',
             'show_panel_header'     => '商品分类详情',
-            'search_by_name'    => '商品名',
+            'search_by_name'    => '商品分类名',
             'parent_name'   => '上级分类',
             'has_parent'    => '拥有父类',
             'no_parent'     => '没有父类',
@@ -76,7 +95,7 @@ return [
         ],
         'placeholder'   => [
             'search_by_name'    => '商品分类名或者分类信息关键词搜索，多个关键词中间请用空格分开',
-            'search_byparent_name'  => '父分类名搜索'
+            'search_by_parent_name'  => '父分类信息搜索'
         ]
     ],
 
@@ -85,9 +104,25 @@ return [
         'title' => [
             'info'  => '商品信息',
             'index' => '商品一览',
+            'create'    => '新建商品信息',
             'good_kinds'    => '商品分类',
             'shops' => '销售商店',
             'produce_companies' => '生产厂家'
+        ],
+        'labels'    => [
+            'index_panel_header'    => '商品信息',
+            'create_panel_header'   => '创建商品',
+            'show_panel_header'     => '商品详情',
+            'search_by_name'    => '商品名',
+            'good_kind'    => '商品分类',
+            'create_type'   => '创建身份',
+            'created_by_user'   => '普通用户',
+            'created_by_shop_user'  => '商店职员',
+            
+        ],
+        'placeholder'   => [
+            'search_by_name'    => '商品名或者信息关键词搜索，多个关键词中间请用空格分开',
+            'search_by_good_kind_name'  => '分类信息搜索'
         ]
 
     ],

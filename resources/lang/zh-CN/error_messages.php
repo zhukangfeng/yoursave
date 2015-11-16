@@ -10,12 +10,25 @@ return [
         'unauthorized'  => '非常抱歉，您没有权限。'
     ],
 
+    // 受邀账户邀请
+    'accounts'  => [
+        'account_need_accept'   => '账户需要接受邀请',
+        'account_not_ivalid'    => '无效账户',
+    ],
+
     // 商品分类
     'good_kinds'    => [
         'whether_has_parent'    => '必须选择是否拥有父类',
         'need_parent_id'        => '请选择父类',
         'whether_has_childrent' => '必须选择是否拥有子类。',
         'need_name'             => '请输入商品分类名称'
+    ],
+
+    // 商品
+    'goods' => [
+        'no_good_kind'      => '商品分类不存在',
+        'good_kind_error'   => '商品分类出错。',
+        'create_type_error' => '创建身份出错'
     ],
 
     // 商店管理

@@ -69,7 +69,7 @@
                                     <label class="col-md-3 control-label">{{ trans('database.shop_users.status') }}</label>
                                     <div class="col-md-8">
                                         @if ($operateShopUser->status === DB_SHOP_USERS_STATUS_REQUESTING)
-                                            <label>{{ trans('database.shop_users.column_value.', $operateShopUser->status) }}</label>
+                                            <label>{{ trans('database.shop_users.column_value.status.' . $operateShopUser->status) }}</label>
                                         @else
                                             <label><input type="radio" name="status" value="{{ DB_SHOP_USERS_STATUS_INVALID }}" {{ old('status', $operateShopUser->status) == DB_SHOP_USERS_STATUS_INVALID ? 'checked' : '' }}>{{ trans('database.shop_users.column_value.status.' . DB_SHOP_USERS_STATUS_INVALID) }}</label>
                                             <label><input type="radio" name="status" value="{{ DB_SHOP_USERS_STATUS_EFFECTIVE }}" {{ old('status', $operateShopUser->status) == DB_SHOP_USERS_STATUS_EFFECTIVE ? 'checked' : '' }}>{{ trans('database.shop_users.column_value.status.' . DB_SHOP_USERS_STATUS_EFFECTIVE) }}</label>
