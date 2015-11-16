@@ -17,7 +17,7 @@ class ConsumeTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('comsumes')->where('id', '<', 20)->delete();
+        DB::table('consumes')->where('id', '<', 20)->delete();
 
         $consumeData = [];
 
