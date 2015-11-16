@@ -71,6 +71,7 @@ class ShopUserOperateRequest extends Request
                     // 删除帐户只能是管理员账户
                     return false;
                 }
+                break;
             default:
                 # code...
                 break;
@@ -82,7 +83,7 @@ class ShopUserOperateRequest extends Request
             if (!array_key_exists($operateShopUserStatus, trans('database.shop_users.column_value.status'))) {
                 // 账户有效状态
                 return false;
-            }                    
+            }
         }
         return true;
     }

@@ -30,4 +30,95 @@ $(".date input[type=text].full-date").datepicker({
     todayBtn: true,
     language: $language,
     todayHighlight: true
+});
+
+
+$.extend({
+    dialog: function(strMessage) {
+        $('#dialog.inner-window').remove();
+
+        return $dialog = $('<aside id="dialog" class="inner-window" />')
+            .append( $('<div class="dialog-contents" />')
+                .append( $('<p class="dialog-message" />').html( strMessage))
+                .append( '<ul class="btn-area" />')
+            )
+        ;
+    }
+,
+    alert: function(strMessage, func) {
+
+        alert(strMessage);
+        func;
+        return;
+
+        var $alert = $.dialog( strMessage );
+
+        $('.btn-area', $alert )
+            .append( '<li class="close btn"><span>' + commonMessages.buttons.close + '</span></li>' )
+        ;
+
+
+        $('body' ).append( $alert.show() );
+
+        var objWindow = $.getWindowSize(),
+            numPositionTop = ( objWindow.height - $alert.outerHeight() ) / 2,
+            numPositionLeft = ( objWindow.width - $alert.outerWidth() ) / 2
+        ;
+
+        $alert.css({
+                    top: numPositionTop,
+                    left: numPositionLeft
+                });
+
+        $('.close.btn', $alert ).click( func );
+    }
+,
+    confirm: function(strMessage, funcTrue, funcFalse) {
+        var result = confirm(strMessage);
+        if (result) {
+            funcTrue;
+        } else {
+            funcFalse;
+        }
+        return;
+
+        var $confirm = $.dialog( strMessage );
+
+        if ( numPositionTop < 0 ) {
+            numPositionTop = 0;
+        }
+
+        if ( numPositionLeft < 0 ) {
+            numPositionLeft = 0;
+        }
+
+        $('.btn-area', $confirm )
+            .append( '<li class="no btn"><span>' + commonMessage.buttons.yes + '</span></li>' )
+            .append( '<li class="yes btn"><span>' + commonMessage.buttons.no + '</span></li>' )
+        ;
+
+        $('body' ).append( $confirm.show() );
+
+        var objWindow = $.getWindowSize(),
+            numPositionTop = ( objWindow.height - $confirm.outerHeight() ) / 2,
+            numPositionLeft = ( objWindow.width - $confirm.outerWidth() ) / 2
+        ;
+
+        $confirm.css({
+                    top: numPositionTop,
+                    left: numPositionLeft
+                });
+
+        $('.yes.btn', $confirm ).click( funcTrue );
+        $('.no.btn', $confirm ).click( funcFalse );
+    }
+,
+    getWindowSize: function() {
+        var objWindow = {
+            width: window.innerWidth || $(window).width(),
+            height: window.innerHeight || $(window).height()
+        };
+        return objWindow;
+    }
+
 })

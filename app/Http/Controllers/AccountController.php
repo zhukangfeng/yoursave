@@ -145,7 +145,7 @@ class AccountController extends Controller
             Session::forget('produceCompanyUser');
             Session::forget('produceCompany');
 
-            Session::flash('success_messages', [trans('success_messages.accounts.logout_success')]);            
+            Session::flash('success_messages', [trans('success_messages.accounts.logout_success')]);
         }
 
         return redirect()->action('AccountController@index');
