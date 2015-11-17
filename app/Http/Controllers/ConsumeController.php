@@ -26,13 +26,43 @@ class ConsumeController extends Controller
     {
         $input  = [];
         // 排序
-        $input['order'] = $request->input('order', []);
-        $input['order_type'] = $request->input('order_type', []);
+        $order = $request->input('order', []);
+        if (count($order) > 0) {
+            $input['order'] = [];
+            $input['order_type'] = [];
+            foreach ($order as $orderKey => $orderValue) {
+                $input['order'][$orderKey] = $orderValue;
+                $orderType = $request->input('order_type.' . $orderKey);
+                if ($orderKey) {
+                    $input['order_type'][$orderKey] = '1';  // 升序
+                } else {
+                    $input['order_type'][$orderKey] = '0';  // 降序
+                }
+            }
+        }
 
         // 商品状态
-        $input['status'] = $request->input('status');
-        // 关键词搜索
-        $input['key']  = $request->input('key');
+        $status = $request->input('status');
+        if ($status != '') {
+            $input['status'] = $status;
+        }
+        // 消费名搜索
+        $name = $request->input('name');
+        if ($name != '') {
+            $input['name'] = $name;
+        }
+
+        // 商品名
+        $goodName = $request->input('good_name');
+        if ($goodName != '') {
+            $input['good_name'] = $goodName;
+        }
+
+        // 商店名
+        $shopName = $request->input('shop_name');
+        if ($shopName != '') {
+            $input['shop_name'] = $shopName;
+        }
         // 一页显示数目
         $input['paginate'] = $request->input('paginate', Config::get('pages.consumes.index.default_show_number'));
 
@@ -41,7 +71,7 @@ class ConsumeController extends Controller
         $consumes = Consume::where('user_id', $user->id)
             ->ofCandition($input)->paginate($input['paginate']);
 
-        return $consumes;
+        return view('consumes.index', compact('consumes', 'input'));
     }
 
     /**

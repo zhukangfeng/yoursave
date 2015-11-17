@@ -22,32 +22,38 @@
                     <table class="table table-bordered">
                         <tr>
                             <th class="col-md-1"></th>
+                            <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_name') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('database.consumes.shop_name') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.good_name') }}</th>
-                            <th class="col-md-1 sort-able">{{ trans('pages.consumes.labels.good_kind') }}</th>
-                            <th class="col-md-1 sort-able">{{ trans('database.consumes.good_info') }}</th>
-                            <th class="col-md-1 sort-able">{{ trans('database.consumes.status') }}</th>
-                            <th class="col-md-1">{{ trans('database.common.created_by') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_cost') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_time') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.common.created_at') }}</th>
-                            <th class="col-md-1">{{ trans('database.common.updated_by') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.common.updated_at') }}</th>
                         </tr>
-                        @foreach ($consumes as $goodKey => $good)
+                        @foreach ($consumes as $consumeKey => $consume)
                         <tr>
-                            <td>{{ $goodKey + 1 }}</td>
+                            <td>{{ $consumeKey + 1 }}</td>
                             <td>
-                                <a href="{{ action('GoodController@show', ['id' => $good->id]) }}">{{ $good->good_name }}</a>
+                                <a href="{{ action('ConsumeController@show', ['id' => $consume->id]) }}">{{ $consume->consume_name }}</a>
                             </td>
                             <td>
-                                @if (isset($good->good_kind_id))
-                                <a href="{{ action('GoodKindController@show', ['goodId' => $good->good_kind_id]) }}">{{ $good->good_kind_name }}</a>
+                                @if (isset($consume->shop_id))
+                                <a href="{{ action('ShopController@show', ['shopId' => $consume->shop_id]) }}">{{ $consume->shop_name }}</a>
+                                @else
+                                <label>{{ $consume->shop_name }}</label>
                                 @endif
                             </td>
-                            <td>{{ $good->good_info }}</td>
-                            <td>{{ trans('database.consumes.column_value.status.' . $good->status) }}</td>
-                            <td>{{ $good->created_user_uname }}</td>
-                            <td>{{ isset($good->created_at) ? $good->created_at->format('Y/m/d H:i:s') : '' }}</td>
-                            <td>{{ $good->updated_user_uname }}</td>
-                            <td>{{ isset($good->updated_at) ? $good->updated_at->format('Y/m/d H:i:s') : '' }}</td>
+                            <td>
+                                @if (isset($consume->good_id))
+                                <a href="{{ action('GoodKindController@show', ['consumeId' => $consume->good_id]) }}">{{ $consume->good_name }}</a>
+                                @else
+                                <label>{{ $consume->good_name }}</label>
+                                @endif
+                            </td>
+                            <td>{{ $consume->consume_cost }}</td>
+                            <td>{{ isset($consume->consume_time) ? $consume->consume_time->format('Y/m/d H:i:s') : '' }}</td>
+                            <td>{{ isset($consume->created_at) ? $consume->created_at->format('Y/m/d H:i:s') : '' }}</td>
+                            <td>{{ isset($consume->updated_at) ? $consume->updated_at->format('Y/m/d H:i:s') : '' }}</td>
                         </tr>
 
                         @endforeach
@@ -57,7 +63,7 @@
                     </div>
                     @if (Auth::check())
                     <div class="col-md-6 col-md-offset-2">
-                        <label class="btn btn-info"><a href="{{ action('GoodController@create') }}">{{ trans('pages.common.buttons.create') }}</a></label>
+                        <label class="btn btn-info"><a href="{{ action('ConsumeController@create') }}">{{ trans('pages.common.buttons.create') }}</a></label>
                     </div>
                     @endif
                 </div>

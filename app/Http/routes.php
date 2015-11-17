@@ -40,6 +40,11 @@ Route::group([
 
     // 个人消费
     Route::get('/consumes', 'ConsumeController@index');
+    Route::post('/consumes', 'ConsumeController@store');
+    Route::get('/consumes/create', 'ConsumeController@create');
+    Route::get('/consumes/{consumeId}', 'ConsumeController@show');
+    Route::put('/consumes/{consumeId}', 'ConsumeController@update');
+    Route::get('/consumes/{consumeId}/edit', 'ConsumeController@edit');
 
     // 商品分类
     Route::get('good_kinds', 'GoodKindController@index');

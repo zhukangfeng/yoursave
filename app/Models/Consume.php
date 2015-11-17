@@ -47,10 +47,23 @@ class Consume extends Model
                 'consumes.consume_info'
             ], $data['key']);
         }
+
+        // 商品名称
+        if (isset($data['good_name'])) {
+            $query->searchQuery('good_name', $data['good_name']);
+        }
+
+        // 商品商店
+        if (isset($data['shop_name'])) {
+            $query->searchQuery('shop_name', $data['shop_name']);
+        }
+
         if (isset($data['order']) && is_array($data['order'])) {
             foreach ($data['order'] as $orderKey => $order) {
                 $query->orderBy($order, $data['order_type'][$orderKey]);
             }
+        } else {
+            $query->orderBy('consumes.consume_time', 'DESC');
         }
 
         return $query;
@@ -80,5 +93,43 @@ class Consume extends Model
                 ->on($shopTableName . '.status', '!=', DB_SHOPS_STATUS_INVALID);
         })
             ->addSelect(implode(',', $selectValue));
+    }
+
+    /**
+     * 添加用户信息
+     *
+     * @param $query
+     * @param string $userTableName
+     * @param array $selectColumns compact(['columnName' => 'u_name', 'asName' => 'user_u_name'])
+     * @return $query
+     */
+    public function scopeWithUser(
+        $query,
+        $userTableName = 'users',
+        $selectColumns = [['columnName' => 'u_name', 'asName' => 'user_u_name']],
+        $fullname = 'fullname'
+    ) {
+        // 要选择的内容
+        $selectValue = [];
+        foreach ($selectColumns as $selectKey => $selectData) {
+            $selectValue[] = $userTableName . '.' . $selectData['columnName'] . ' AS ' . $selectData['asName'];
+        }
+
+        $query->leftJoin('users AS ' . $userTableName, function ($join) use ($userTableName) {
+            $join->on('consumes.user_id', '=', $userTableName . '.id')
+                ->on($userTableName . '.status', '!=', DB_SHOPS_STATUS_INVALID);
+        })
+            ->addSelect(implode(',', $selectValue));
+
+        if (App::getLocale() === 'en') {
+            return $query->addSelect(
+                DB::raw('CONCAT(' . $tableName . '.f_name, " ", ' . $tableName . '.l_name) AS ' . $fullname)
+            );
+        } else {
+            return $query->addSelect(
+                DB::raw('CONCAT(' . $tableName . '.l_name, " ", ' . $tableName . '.f_name) AS ' . $fullname)
+            );
+        }
+
     }
 }
