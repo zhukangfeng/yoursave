@@ -9,6 +9,7 @@ require_once(dirname(__FILE__) . '/ShopUserTableSeeder.php');
 require_once(dirname(__FILE__) . '/ProduceCompanyTableSeeder.php');
 require_once(dirname(__FILE__) . '/ProduceCompanyUserTableSeeder.php');
 require_once(dirname(__FILE__) . '/GoodKindTableSeeder.php');
+require_once(dirname(__FILE__) . '/ConsumeTableSeeder.php');
 require_once(dirname(__FILE__) . '/GoodTableSeeder.php');
 
 class DatabaseSeeder extends Seeder
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProduceCompanyTableSeeder::class);
         $this->call(ProduceCompanyUserTableSeeder::class);
         $this->call(GoodKindTableSeeder::class);
+        $this->call(ConsumeTableSeeder::class);
         $this->call(GoodTableSeeder::class);
 
         Model::reguard();

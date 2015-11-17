@@ -19,10 +19,11 @@ class Consume extends Model
         'shop_good_id',
         'shop_name',
         'consume_name',
-        'consume_price',
-        'consume_info',
+        'consume_cost',
         'currency',
-        'consume_time'
+        'consume_info',
+        'consume_time',
+        'place'
     ];
 
     /**
