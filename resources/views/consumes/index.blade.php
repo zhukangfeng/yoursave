@@ -23,10 +23,10 @@
                         <tr>
                             <th class="col-md-1"></th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_name') }}</th>
-                            <th class="col-md-1 sort-able">{{ trans('database.consumes.shop_name') }}</th>
-                            <th class="col-md-1 sort-able">{{ trans('database.consumes.good_name') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_cost') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_time') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('database.consumes.shop_name') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('database.consumes.good_name') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.common.created_at') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.common.updated_at') }}</th>
                         </tr>
@@ -36,6 +36,8 @@
                             <td>
                                 <a href="{{ action('ConsumeController@show', ['id' => $consume->id]) }}">{{ $consume->consume_name }}</a>
                             </td>
+                            <td>{{ $consume->consume_cost }}</td>
+                            <td>{{ isset($consume->consume_time) ? $consume->consume_time->format('Y/m/d H:i:s') : '' }}</td>
                             <td>
                                 @if (isset($consume->shop_id))
                                 <a href="{{ action('ShopController@show', ['shopId' => $consume->shop_id]) }}">{{ $consume->shop_name }}</a>
@@ -45,13 +47,11 @@
                             </td>
                             <td>
                                 @if (isset($consume->good_id))
-                                <a href="{{ action('GoodKindController@show', ['consumeId' => $consume->good_id]) }}">{{ $consume->good_name }}</a>
+                                <a href="{{ action('GoodController@show', ['consumeId' => $consume->good_id]) }}">{{ $consume->good_name }}</a>
                                 @else
                                 <label>{{ $consume->good_name }}</label>
                                 @endif
                             </td>
-                            <td>{{ $consume->consume_cost }}</td>
-                            <td>{{ isset($consume->consume_time) ? $consume->consume_time->format('Y/m/d H:i:s') : '' }}</td>
                             <td>{{ isset($consume->created_at) ? $consume->created_at->format('Y/m/d H:i:s') : '' }}</td>
                             <td>{{ isset($consume->updated_at) ? $consume->updated_at->format('Y/m/d H:i:s') : '' }}</td>
                         </tr>

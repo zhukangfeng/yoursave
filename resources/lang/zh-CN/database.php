@@ -63,6 +63,8 @@ return [
         'good_name'     => '商品名',
         'consume_cost'  => '消费金额',
         'consume_time'  => '消费时间',
+        'consume_info'  => '消费详情',
+        'place'         => '消费地点'
     ],
     // 上传文件信息
     'files' => [

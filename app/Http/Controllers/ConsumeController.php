@@ -82,6 +82,7 @@ class ConsumeController extends Controller
     public function create()
     {
         //
+        var_dump(trans('database.conmmon.column_value.public_type'));
     }
 
     /**
@@ -103,7 +104,14 @@ class ConsumeController extends Controller
      */
     public function show($id)
     {
-        //
+        $consume = Consume::where('user_id', Session::get('User')->id)
+            ->where('id', $id)
+            ->first();
+
+        if (is_null($consume)) {
+            return redirect()->action('ConsumeController@index');
+        }
+        return view('consumes.show', compact('consume'));
     }
 
     /**
