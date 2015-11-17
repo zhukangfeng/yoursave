@@ -69,7 +69,11 @@ return [
     // 个人消费记录
     'consumes'  => [
         'title' => [
-            'index' => '消费清单'
+            'index'     => '消费记录',
+            'create'    => '新建消费记录'
+        ],
+        'labels'    => [
+            'index_panel_header'    => '个人消费记录'
         ]
     ],
     

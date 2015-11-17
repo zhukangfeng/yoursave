@@ -7,6 +7,11 @@ return [
     'common'    => [
 
     ],
+    'consumes'    => [
+        'index' => [
+            'default_show_number'   => 10,
+        ]
+    ],
     'good_kinds'    => [
         'index' => [
             'default_show_number'   => 10,

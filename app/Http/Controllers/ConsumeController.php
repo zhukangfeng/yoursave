@@ -1,23 +1,47 @@
 <?php
 namespace App\Http\Controllers;
 
-// Controllers
+// Controller
 use App\Http\Controllers\Controller;
+
+// Models
+use App\Models\Consume;
 
 // Requests
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
-class ProduceCompanyUserController extends Controller
+// Services
+use Config;
+use Session;
+
+class ConsumeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 消费一览
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $input  = [];
+        // 排序
+        $input['order'] = $request->input('order', []);
+        $input['order_type'] = $request->input('order_type', []);
+
+        // 商品状态
+        $input['status'] = $request->input('status');
+        // 关键词搜索
+        $input['key']  = $request->input('key');
+        // 一页显示数目
+        $input['paginate'] = $request->input('paginate', Config::get('pages.consumes.index.default_show_number'));
+
+        $user = Session::get('User');
+
+        $consumes = Consume::where('user_id', $user->id)
+            ->ofCandition($input)->paginate($input['paginate']);
+
+        return $consumes;
     }
 
     /**

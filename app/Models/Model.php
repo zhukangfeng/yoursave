@@ -103,6 +103,8 @@ class Model extends ParentModel
     {
         if (!is_null($tableName)) {
             $query->whereNull($tableName . '.deleted_at');
+        } else {
+            $query->whereNull(with(new static)->getTable() . '.deleted_at');
         }
 
         return $query;
