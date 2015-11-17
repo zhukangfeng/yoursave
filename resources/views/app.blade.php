@@ -5,7 +5,7 @@
     <meta name="robots" content="noindex,nofollow">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
-    <link rel="shortcut icon" href="{{ asset('/shared/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('/shared/img/web-logo.png') }}">
     @include ('common_assets')
     <title>{{ trans('pages.common.app_name')}}:{{ $title or '' }}</title>
     @yield('assets')
