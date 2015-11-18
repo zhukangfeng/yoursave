@@ -64,6 +64,14 @@ Route::group([
         ]
     ]);
 
+    // 促销信息
+    Route::get('/preferences', 'PreferenceController@index');
+    Route::post('/preferences', 'PreferenceController@store');
+    Route::post('/preferences/search', 'PreferenceController@search');
+    Route::get('/preferences/{preferenceId}', 'PreferenceController@show');
+    Route::put('/preferences/{preferenceId}', 'PreferenceController@update');
+    Route::get('/preferences/{preferenceId}/edit', 'PreferenceController@edit');
+
     // 商店职员登录
     Route::group([
         'middleware' => 'shop_auth'
