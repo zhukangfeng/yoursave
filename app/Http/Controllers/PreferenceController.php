@@ -23,7 +23,7 @@ class PreferenceController extends Controller
      */
     public function index()
     {
-        //
+        return view('welcome');
     }
 
     /**
@@ -99,6 +99,6 @@ class PreferenceController extends Controller
      */
     public function search()
     {
-        
+
     }
 }
