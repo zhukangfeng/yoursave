@@ -41,6 +41,9 @@
         <div class="container">
             <div class="content">
                 <div class="title">Sorry, the page you are looking for could not be found.</div>
+                <div class="redirect">
+                    <a href="{{ url('/') }}">{{ trans('pages.common.buttons.back_to_index') }}</a>
+                </div>
             </div>
         </div>
     </body>
