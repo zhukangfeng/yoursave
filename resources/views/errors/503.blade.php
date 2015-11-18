@@ -42,6 +42,9 @@
             <div class="content">
                 <div class="title">Be right back.</div>
             </div>
+            <div class="redirect">
+                <a href="{{ url('/') }}">{{ trans('pages.common.buttons.back_to_index') }}</a>
+            </div>
         </div>
     </body>
 </html>
