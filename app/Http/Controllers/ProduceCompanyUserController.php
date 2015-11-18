@@ -1,10 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
+// Controllers
 use App\Http\Controllers\Controller;
+
+// Requests
+use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class ProduceCompanyUserController extends Controller
 {

@@ -16,6 +16,7 @@ return [
             'accept'    => '接受',
             'back'      => '返回',
             'back_to_index' => '返回主页',
+            'back_to_list'  => '返回一览页面',
             'create'    => '创建',
             'cancel'    => '取消',
             'confirm'   => '确认',
@@ -41,6 +42,7 @@ return [
         ],
         'labels'    => [
             'index_panel_header'    => '账户一览',
+            'show_panel_header'     => '消费详情',
             'account_type'  => '账户类型',
             'shop_account'  => '商店职员账户',
             'allowed_name'  => '账户所属',
@@ -69,7 +71,20 @@ return [
     // 个人消费记录
     'consumes'  => [
         'title' => [
-            'index' => '消费清单'
+            'index'     => '消费记录',
+            'create'    => '新建消费记录'
+        ],
+        'labels'    => [
+            'index_panel_header'    => '个人消费记录',
+            'show_panel_header'     => '个人消费详情',
+            'search_by_name'        => '消费名搜索',
+            'search_by_good_name'   => '商品名搜索',
+            'search_by_shop_name'   => '商店名搜索'
+        ],
+        'placeholder'   => [
+            'search_by_name'        => '消费名',
+            'search_by_good_name'   => '商品名',
+            'search_by_shop_name'   => '商店名'
         ]
     ],
     

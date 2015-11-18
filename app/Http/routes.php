@@ -38,9 +38,13 @@ Route::group([
     Route::get('api/file/uploadurl', 'APIController@getFileUploadUrl');
     Route::get('api/file/download', 'APIController@fileDownload');
 
-    Route::get('/home', 'UserController@home');
-
-    Route::get('/logout', 'AuthController@logout');
+    // 个人消费
+    Route::get('/consumes', 'ConsumeController@index');
+    Route::post('/consumes', 'ConsumeController@store');
+    Route::get('/consumes/create', 'ConsumeController@create');
+    Route::get('/consumes/{consumeId}', 'ConsumeController@show');
+    Route::put('/consumes/{consumeId}', 'ConsumeController@update');
+    Route::get('/consumes/{consumeId}/edit', 'ConsumeController@edit');
 
     // 商品分类
     Route::get('good_kinds', 'GoodKindController@index');
@@ -161,6 +165,12 @@ Route::group([
         });
 
     });
+
+    // 注销
+    Route::get('/logout', 'AuthController@logout');
+
+    // 主页
+    Route::get('/home', 'UserController@home');
 
     // 用户个人信息
     Route::get('/user', 'UserController@show');

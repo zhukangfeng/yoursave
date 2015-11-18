@@ -57,13 +57,14 @@ return [
     ],
     // 用户的消费信息
     DB_CONSUMES => [
-        'table_name'               => 'consumes',
-        DB_CONSUMES_CONSUME_NAME    => 'consume name',
-        DB_CONSUMES_CONSUME_COST    => 'consume cost',
-        DB_CONSUMES_CURRENCY        => 'consume currency',
-        DB_CONSUMES_CONSUME_INFO    => 'consume information',
-        DB_CONSUMES_CONSUME_TIME    => 'consume time',
-        DB_CONSUMES_PLACE           => 'consume place'
+        'table_name'    => 'consumes',
+        'consume_name'  => '消费名',
+        'shop_name'     => '商店名',
+        'good_name'     => '商品名',
+        'consume_cost'  => '消费金额',
+        'consume_time'  => '消费时间',
+        'consume_info'  => '消费详情',
+        'place'         => '消费地点'
     ],
     // 上传文件信息
     'files' => [
