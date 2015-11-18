@@ -2,7 +2,12 @@
 namespace App\Models;
 
 // Model
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as ParentModel;
+
+// SEervices
+use App;
+use DB;
+use Config;
 
 /**
  * 数据库模型
@@ -10,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @todo 所有模型公用函数
  */
-class Model extends Model
+class Model extends ParentModel
 {
     /**
      * 多数据同时插入，并且加入updated_at,created_at等数据
@@ -23,7 +28,7 @@ class Model extends Model
         $model = new static();
         $model->updateTimestamps();
         foreach ($createData as &$data) {
-            foreach ($model->getDates() as $key) {
+            foreach (['created_at', 'updated_at'] as $key) {
                 if (!array_key_exists($key, $data)) {
                     $data += [ $key => $model->serializeDate($model->asDateTime($model->{$key}))];
                 }
@@ -34,7 +39,7 @@ class Model extends Model
     }
 
     /**
-     * 数据库多字段搜索 
+     * 数据库多字段搜索
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $searchName 要搜索的数据库字段
@@ -42,7 +47,7 @@ class Model extends Model
      * @param string int $searchType 搜索方式（0：并且；1:或者）
      * @return \Illuminate\Database\Eloquent\Builder $query
      */
-    public static function scopeSearchQuery($query, $searchName, $searchString, $searchType = Config::get('const_value.search_query_type.and', 0))
+    public static function scopeSearchQuery($query, $searchName, $searchString, $searchType = null)
     {
         $searchString = trim($searchString);
         //エスケープ
@@ -51,7 +56,7 @@ class Model extends Model
         
 
         $searchData =  preg_split('/[\s|\x{3000}]+/u', $searchString);
-        $query->where(function ($query) use ($searchName, $searchData)) {
+        $query->where(function ($query) use ($searchName, $searchData, $searchType) {
             if ($searchType === Config::get('const_value.search_query_type.and', 0)) {
                 // 多条件并且符合
                 foreach ($searchData as $splitString) {
@@ -71,16 +76,142 @@ class Model extends Model
             } else {
                 // 多条件符合一项
                 foreach ($searchData as $splitString) {
+                    if ($splitString == '') {
+                        continue;
+                    }
                     if (is_array($searchName)) {
                         foreach ($searchName as $dbName) {
-                            $query->orWhere($dbName, $splitString);
+                            $query->orWhere($dbName, 'like', '%' . $splitString . '%');
                         }
                     } else {
-                        $query->orWhere($searchData, $splitString);
+                        $query->orWhere($searchName, 'like', '%' . $splitString . '%');
                     }
                 }
             }
-        }
+        });
+        
         return $query;
+    }
+
+    /**
+     * 除去意见删除的数据
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder $query
+     */
+    public function scopeUndeleted($query, $tableName = null)
+    {
+        if (!is_null($tableName)) {
+            $query->whereNull($tableName . '.deleted_at');
+        } else {
+            $query->whereNull(with(new static)->getTable() . '.deleted_at');
+        }
+
+        return $query;
+    }
+
+    /**
+     * 获得创建者的姓名拼接，区分英语，中文，日语差别
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query <不需要写，系统自动赋值>
+     * @param string $createdBy 创建者数据列名称 <可选>
+     * @param string $tableName join后创建者数据表名称 <可选>
+     * @param string $fullname 创建者全名的名称 <可选>
+     * @return \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @author zhukangfeng
+     */
+    public function scopeWithCreatedUser(
+        $query,
+        $createdBy = 'created_by',
+        $tableName = 'created_user',
+        $fullname = 'created_user_fullname',
+        $uname = 'created_user_uname'
+    ) {
+        $query->leftJoin('users AS ' . $tableName, function ($join) use ($createdBy, $tableName) {
+            $join->on($createdBy, '=', $tableName . '.id')
+                ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
+        });
+        if (App::getLocale() === 'en') {
+            return $query->addSelect(
+                $tableName . '.u_name AS ' . $uname,
+                DB::raw('CONCAT(' . $tableName . '.f_name, " ", ' . $tableName . '.l_name) AS ' . $fullname)
+            );
+        } else {
+            return $query->addSelect(
+                $tableName . '.u_name AS ' . $uname,
+                DB::raw('CONCAT(' . $tableName . '.l_name, " ", ' . $tableName . '.f_name) AS ' . $fullname)
+            );
+        }
+    }
+
+    /**
+     * 获得更新者的姓名拼接，区分英语，中文，日语差别
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query <不需要赋值，系统自动复制>
+     * @param string $createdBy 更新者数据列名称 <可选>
+     * @param string $tableName join后创建者数据表名称 <可选>
+     * @param string $fullname 更新者全名的名称 <可选>
+     * @return \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @author zhukangfeng
+     */
+    public function scopeWithUpdatedUser(
+        $query,
+        $updatedBy = 'updated_by',
+        $tableName = 'updated_user',
+        $fullname = 'updated_user_fullname',
+        $uname = 'updated_user_uname'
+    ) {
+        $query->leftJoin('users AS ' . $tableName, function ($join) use ($updatedBy, $tableName) {
+            $join->on($updatedBy, '=', $tableName . '.id')
+                ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
+        });
+        if (App::getLocale() === 'en') {
+            return $query->addSelect(
+                $tableName . 'u_name AS ' . $uname,
+                DB::raw('CONCAT(' . $tableName . '.f_name, " ", ' . $tableName . '.l_name) AS ' . $fullname)
+            );
+        } else {
+            return $query->addSelect(
+                $tableName . '.u_name AS ' . $uname,
+                DB::raw('CONCAT(' . $tableName . '.l_name, " ", ' . $tableName . '.f_name) AS ' . $fullname)
+            );
+        }
+    }
+
+    /**
+     * 获得负责人的姓名拼接，区分英语，中文，日语差别
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query <不需要赋值，系统自动复制>
+     * @param string $createdBy 负责人数据列名称 <可选>
+     * @param string $tableName join后创建者数据表名称 <可选>
+     * @param string $fullname 负责人全名的名称 <可选>
+     * @return \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @author zhukangfeng
+     */
+    public function scopeWithResponsedUser(
+        $query,
+        $responseUser = 'response_user_id',
+        $tableName = 'response_user',
+        $fullname = 'response_user_fullname',
+        $uname = 'response_user_uname'
+    ) {
+        $query->leftJoin('users AS ' . $tableName, function ($join) use ($responseUser, $tableName) {
+            $join->on($responseUser, '=', $tableName . '.id')
+                ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
+        });
+        if (App::getLocale() === 'en') {
+            return $query->addSelect(
+                $tableName . '.u_name AS ' . $uname,
+                DB::raw('CONCAT(' . $tableName . '.f_name, " ", ' . $tableName . '.l_name) AS ' . $fullname)
+            );
+        } else {
+            return $query->addSelect(
+                $tableName . '.u_name AS ' . $uname,
+                DB::raw('CONCAT(' . $tableName . '.l_name, " ", ' . $tableName . '.f_name) AS ' . $fullname)
+            );
+        }
     }
 }

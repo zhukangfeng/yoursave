@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* 错误消息 */
+div.errors p.error-message {
+    color: #F10D05;
+}
+/* 警告消息 */
+
+div.contents-body .contents-area .panel-body
+.form-data .required > label.control-label:after {
+    margin-left: 1em;
+    color: red;
+}
+
+div.contents-body .contents-area .panel-body
+.form-data :not(.required) > label.control-label {
+    padding-right: 4em;
+}

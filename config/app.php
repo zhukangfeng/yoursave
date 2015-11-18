@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'zh-CN'),
+    'locale' => env('APP_LOCALE', 'en'),
 
     /*
     |--------------------------------------------------------------------------
@@ -207,5 +207,11 @@ return [
          */
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
     ],
+
+    'aliyun_oss_server'             => env('FILESYSTEMS_DISKS_ALIYUN_OSS_SERVER', null),
+    'aliyun_oss_server_internal'    => env('FILESYSTEMS_DISKS_ALIYUN_OSS_SERVER_INTERNAL', null),
+    'aliyun_oss_bucket'             => env('FILESYSTEMS_DISKS_ALIYUN_OSS_BUCKET', null),
+    'aliyun_access_key_id'          => env('FILESYSTEMS_DISKS_ALIYUN_OSS_KEY', null),
+    'aliyun_access_key_secret'      => env('FILESYSTEMS_DISKS_ALIYUN_OSS_SECRET', null),
 
 ];

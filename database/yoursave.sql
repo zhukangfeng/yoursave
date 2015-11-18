@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 4135
+# バージョン 4499
 #
 # http://www.sequelpro.com/
-# http://code.google.com/p/sequel-pro/
+# https://github.com/sequelpro/sequelpro
 #
-# Host: 127.0.0.1 (MySQL 5.5.42)
-# Database: yoursave
-# Generation Time: 2015-09-30 11:10:30 +0000
+# ホスト: 127.0.0.1 (MySQL 5.5.42)
+# データベース: yoursave
+# 作成時刻: 2015-10-01 11:00:24 +0000
 # ************************************************************
 
 
@@ -20,7 +20,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Dump of table admin_users
+# テーブルのダンプ admin_users
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `admin_users`;
@@ -57,7 +57,7 @@ CREATE TABLE `admin_users` (
 
 
 
-# Dump of table chat_group_user_relations
+# テーブルのダンプ chat_group_user_relations
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `chat_group_user_relations`;
@@ -87,7 +87,7 @@ CREATE TABLE `chat_group_user_relations` (
 
 
 
-# Dump of table chat_groups
+# テーブルのダンプ chat_groups
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `chat_groups`;
@@ -117,7 +117,7 @@ CREATE TABLE `chat_groups` (
 
 
 
-# Dump of table consumes
+# テーブルのダンプ consumes
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `consumes`;
@@ -126,11 +126,12 @@ CREATE TABLE `consumes` (
   `id` bigint(16) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned DEFAULT NULL,
   `good_id` int(12) unsigned DEFAULT NULL COMMENT '消费物品（null的时候，无对应物品）',
+  `shop_good_id` bigint(18) unsigned DEFAULT NULL COMMENT '商店物品id',
   `shop_id` int(8) unsigned DEFAULT NULL COMMENT 'null;没有填写',
   `consume_name` char(100) NOT NULL COMMENT '消费名称',
   `consume_price` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '消费数额',
-  `consume_info` mediumtext NOT NULL COMMENT '消费备注',
   `currency` int(3) unsigned DEFAULT '0' COMMENT '0:unset;默认为用户设定的币种',
+  `consume_info` mediumtext NOT NULL COMMENT '消费备注',
   `consume_time` datetime NOT NULL COMMENT '消费时间',
   `created_at` datetime DEFAULT NULL COMMENT '登陆时间',
   `updated_at` datetime DEFAULT NULL,
@@ -139,14 +140,16 @@ CREATE TABLE `consumes` (
   KEY `user relation` (`user_id`),
   KEY `good relation` (`good_id`),
   KEY `shop relation` (`shop_id`),
+  KEY `shop_good_id` (`shop_good_id`),
   CONSTRAINT `consumes good relation` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`),
   CONSTRAINT `consumes shop relation` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
-  CONSTRAINT `consumes user relation` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `consumes user relation` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `consumes_ibfk_1` FOREIGN KEY (`shop_good_id`) REFERENCES `shop_goods` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户的消费信息';
 
 
 
-# Dump of table file_relations
+# テーブルのダンプ file_relations
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `file_relations`;
@@ -173,7 +176,7 @@ CREATE TABLE `file_relations` (
 
 
 
-# Dump of table files
+# テーブルのダンプ files
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `files`;
@@ -199,7 +202,7 @@ CREATE TABLE `files` (
 
 
 
-# Dump of table good_collections
+# テーブルのダンプ good_collections
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `good_collections`;
@@ -227,7 +230,7 @@ CREATE TABLE `good_collections` (
 
 
 
-# Dump of table good_comments
+# テーブルのダンプ good_comments
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `good_comments`;
@@ -247,15 +250,15 @@ CREATE TABLE `good_comments` (
   KEY `parent_id` (`parent_id`),
   KEY `created_by` (`created_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `good_comments_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `good_comments_ibfk_1` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`),
   CONSTRAINT `good_comments_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `good_comments` (`id`),
-  CONSTRAINT `good_comments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `good_comments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `good_comments_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
-# Dump of table good_kinds
+# テーブルのダンプ good_kinds
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `good_kinds`;
@@ -286,7 +289,7 @@ CREATE TABLE `good_kinds` (
 
 
 
-# Dump of table good_ranks
+# テーブルのダンプ good_ranks
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `good_ranks`;
@@ -315,7 +318,7 @@ CREATE TABLE `good_ranks` (
 
 
 
-# Dump of table goods
+# テーブルのダンプ goods
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `goods`;
@@ -324,12 +327,8 @@ CREATE TABLE `goods` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `good_kind_id` int(11) unsigned DEFAULT NULL,
   `good_name` char(80) NOT NULL DEFAULT '',
-  `produce_company_id` int(8) unsigned DEFAULT NULL COMMENT 'goods'' produce company',
-  `produce_company_name` varchar(255) DEFAULT NULL COMMENT 'produce_company_id=null的时候有效',
   `good_info` mediumtext NOT NULL,
-  `price` float unsigned DEFAULT NULL,
-  `currency` int(3) unsigned DEFAULT NULL COMMENT '币种',
-  `expirate_time` datetime NOT NULL,
+  `status` tinyint(1) unsigned DEFAULT NULL COMMENT '0:无效；1:权威认证；2:未认证（一般用户创建）；3:未认证（商店职员创建）；4：未认证（生产厂家创建）',
   `created_by` int(11) unsigned DEFAULT NULL,
   `updated_by` int(11) unsigned DEFAULT NULL,
   `deleted_by` int(11) unsigned DEFAULT NULL,
@@ -338,12 +337,10 @@ CREATE TABLE `goods` (
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `good_kind_id` (`good_kind_id`),
-  KEY `produce_company_id` (`produce_company_id`),
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `deleted_by` (`deleted_by`),
   CONSTRAINT `goods_ibfk_1` FOREIGN KEY (`good_kind_id`) REFERENCES `good_kinds` (`id`),
-  CONSTRAINT `goods_ibfk_2` FOREIGN KEY (`produce_company_id`) REFERENCES `produce_companys` (`id`),
   CONSTRAINT `goods_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
   CONSTRAINT `goods_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
   CONSTRAINT `goods_ibfk_5` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
@@ -351,7 +348,7 @@ CREATE TABLE `goods` (
 
 
 
-# Dump of table log_logins
+# テーブルのダンプ log_logins
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `log_logins`;
@@ -371,7 +368,7 @@ CREATE TABLE `log_logins` (
 
 
 
-# Dump of table message_remind_user_relations
+# テーブルのダンプ message_remind_user_relations
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `message_remind_user_relations`;
@@ -397,7 +394,7 @@ CREATE TABLE `message_remind_user_relations` (
 
 
 
-# Dump of table messages
+# テーブルのダンプ messages
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `messages`;
@@ -429,7 +426,7 @@ CREATE TABLE `messages` (
 
 
 
-# Dump of table preference_collections
+# テーブルのダンプ preference_collections
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `preference_collections`;
@@ -451,7 +448,7 @@ CREATE TABLE `preference_collections` (
 
 
 
-# Dump of table preference_comments
+# テーブルのダンプ preference_comments
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `preference_comments`;
@@ -477,7 +474,7 @@ CREATE TABLE `preference_comments` (
 
 
 
-# Dump of table preferences
+# テーブルのダンプ preferences
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `preferences`;
@@ -517,7 +514,84 @@ CREATE TABLE `preferences` (
 
 
 
-# Dump of table produce_company_users
+# テーブルのダンプ produce_company_good_sells
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `produce_company_good_sells`;
+
+CREATE TABLE `produce_company_good_sells` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `produce_company_good_id` bigint(16) unsigned DEFAULT NULL,
+  `shop_id` int(8) unsigned DEFAULT NULL,
+  `response_user_id` int(11) unsigned DEFAULT NULL COMMENT '负责人',
+  `cost` float unsigned DEFAULT NULL COMMENT '成本',
+  `price` float unsigned DEFAULT NULL COMMENT '售价',
+  `currency` tinyint(3) unsigned DEFAULT NULL,
+  `sell_number` int(8) unsigned DEFAULT NULL COMMENT '卖出数量',
+  `status` tinyint(1) unsigned DEFAULT NULL COMMENT '0：无效；1:交易付款完成；2:相谈中；3：合约签订；4：交付中；6:交付完成',
+  `created_by` int(11) unsigned DEFAULT NULL,
+  `updated_by` int(11) unsigned DEFAULT NULL,
+  `deleted_by` int(11) unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `produce_company_good_id` (`produce_company_good_id`),
+  KEY `shop_id` (`shop_id`),
+  KEY `response_user_id` (`response_user_id`),
+  KEY `created_by` (`created_by`),
+  KEY `updated_by` (`updated_by`),
+  KEY `deleted_by` (`deleted_by`),
+  CONSTRAINT `produce_company_good_sells_ibfk_6` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `produce_company_good_sells_ibfk_1` FOREIGN KEY (`produce_company_good_id`) REFERENCES `produce_company_goods` (`id`),
+  CONSTRAINT `produce_company_good_sells_ibfk_2` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
+  CONSTRAINT `produce_company_good_sells_ibfk_3` FOREIGN KEY (`response_user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `produce_company_good_sells_ibfk_4` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `produce_company_good_sells_ibfk_5` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品生产厂家产品卖出信息表';
+
+
+
+# テーブルのダンプ produce_company_goods
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `produce_company_goods`;
+
+CREATE TABLE `produce_company_goods` (
+  `id` bigint(16) unsigned NOT NULL AUTO_INCREMENT,
+  `produce_company_id` int(8) unsigned DEFAULT NULL COMMENT '生产厂家信息',
+  `response_user_id` int(11) unsigned DEFAULT NULL COMMENT '产品负责人',
+  `good_id` int(12) unsigned DEFAULT NULL COMMENT '商品id',
+  `price` float DEFAULT NULL COMMENT '卖出价格',
+  `cost` float unsigned DEFAULT NULL COMMENT '生产成本',
+  `currency` tinyint(3) unsigned DEFAULT NULL,
+  `good_info` mediumtext COMMENT '商品备注',
+  `is_public` tinyint(1) unsigned DEFAULT NULL COMMENT '1:公开 0：不公开',
+  `status` tinyint(1) DEFAULT NULL COMMENT '0:关闭；1:有效：2:等待确认',
+  `created_by` int(11) unsigned DEFAULT NULL,
+  `updated_by` int(11) unsigned DEFAULT NULL,
+  `deleted_by` int(11) unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `produce_company_id` (`produce_company_id`),
+  KEY `response_user_id` (`response_user_id`),
+  KEY `good_id` (`good_id`),
+  KEY `created_by` (`created_by`),
+  KEY `updated_by` (`updated_by`),
+  KEY `deleted_by` (`deleted_by`),
+  CONSTRAINT `produce_company_goods_ibfk_1` FOREIGN KEY (`produce_company_id`) REFERENCES `produce_companys` (`id`),
+  CONSTRAINT `produce_company_goods_ibfk_2` FOREIGN KEY (`response_user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `produce_company_goods_ibfk_3` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`),
+  CONSTRAINT `produce_company_goods_ibfk_4` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `produce_company_goods_ibfk_5` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `produce_company_goods_ibfk_6` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='生产厂家产品一览';
+
+
+
+# テーブルのダンプ produce_company_users
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `produce_company_users`;
@@ -549,7 +623,7 @@ CREATE TABLE `produce_company_users` (
 
 
 
-# Dump of table produce_companys
+# テーブルのダンプ produce_companys
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `produce_companys`;
@@ -583,7 +657,7 @@ CREATE TABLE `produce_companys` (
 
 
 
-# Dump of table shop_collections
+# テーブルのダンプ shop_collections
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `shop_collections`;
@@ -611,7 +685,7 @@ CREATE TABLE `shop_collections` (
 
 
 
-# Dump of table shop_comments
+# テーブルのダンプ shop_comments
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `shop_comments`;
@@ -643,7 +717,7 @@ CREATE TABLE `shop_comments` (
 
 
 
-# Dump of table shop_good_comments
+# テーブルのダンプ shop_good_comments
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `shop_good_comments`;
@@ -663,15 +737,15 @@ CREATE TABLE `shop_good_comments` (
   KEY `parent_id` (`parent_id`),
   KEY `created_by` (`created_by`),
   KEY `deleted_by` (`deleted_by`),
-  CONSTRAINT `shop_good_comments_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `shop_good_comments_ibfk_1` FOREIGN KEY (`shop_good_id`) REFERENCES `shop_good_comments` (`id`),
   CONSTRAINT `shop_good_comments_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `shop_good_comments` (`id`),
-  CONSTRAINT `shop_good_comments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`)
+  CONSTRAINT `shop_good_comments_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `shop_good_comments_ibfk_4` FOREIGN KEY (`deleted_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
-# Dump of table shop_goods
+# テーブルのダンプ shop_goods
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `shop_goods`;
@@ -680,7 +754,9 @@ CREATE TABLE `shop_goods` (
   `id` bigint(18) unsigned NOT NULL AUTO_INCREMENT,
   `shop_id` int(8) unsigned DEFAULT NULL,
   `good_id` int(12) unsigned DEFAULT NULL,
-  `price` float DEFAULT NULL,
+  `produce_company_id` int(8) unsigned DEFAULT NULL COMMENT '产品生产厂家id',
+  `cost` float unsigned DEFAULT NULL COMMENT '买入价格',
+  `price` float unsigned DEFAULT NULL COMMENT '卖出价格',
   `currency` int(3) unsigned DEFAULT NULL,
   `good_info` mediumtext,
   `is_public` tinyint(1) unsigned NOT NULL DEFAULT '1',
@@ -697,6 +773,8 @@ CREATE TABLE `shop_goods` (
   KEY `created_by` (`created_by`),
   KEY `updated_by` (`updated_by`),
   KEY `deleted_by` (`deleted_by`),
+  KEY `produce_company_id` (`produce_company_id`),
+  CONSTRAINT `shop_goods_ibfk_6` FOREIGN KEY (`produce_company_id`) REFERENCES `produce_companys` (`id`),
   CONSTRAINT `shop_goods_ibfk_1` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
   CONSTRAINT `shop_goods_ibfk_2` FOREIGN KEY (`good_id`) REFERENCES `goods` (`id`),
   CONSTRAINT `shop_goods_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`),
@@ -706,7 +784,7 @@ CREATE TABLE `shop_goods` (
 
 
 
-# Dump of table shop_ranks
+# テーブルのダンプ shop_ranks
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `shop_ranks`;
@@ -735,7 +813,7 @@ CREATE TABLE `shop_ranks` (
 
 
 
-# Dump of table shop_users
+# テーブルのダンプ shop_users
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `shop_users`;
@@ -767,7 +845,7 @@ CREATE TABLE `shop_users` (
 
 
 
-# Dump of table shops
+# テーブルのダンプ shops
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `shops`;
@@ -803,7 +881,7 @@ CREATE TABLE `shops` (
 
 
 
-# Dump of table user_ranks
+# テーブルのダンプ user_ranks
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `user_ranks`;
@@ -830,7 +908,7 @@ CREATE TABLE `user_ranks` (
 
 
 
-# Dump of table user_relation_groups
+# テーブルのダンプ user_relation_groups
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `user_relation_groups`;
@@ -850,7 +928,7 @@ CREATE TABLE `user_relation_groups` (
 
 
 
-# Dump of table user_relations
+# テーブルのダンプ user_relations
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `user_relations`;
@@ -874,7 +952,7 @@ CREATE TABLE `user_relations` (
 
 
 
-# Dump of table user_share_comments
+# テーブルのダンプ user_share_comments
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `user_share_comments`;
@@ -903,7 +981,7 @@ CREATE TABLE `user_share_comments` (
 
 
 
-# Dump of table user_shares
+# テーブルのダンプ user_shares
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `user_shares`;
@@ -930,7 +1008,7 @@ CREATE TABLE `user_shares` (
 
 
 
-# Dump of table users
+# テーブルのダンプ users
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `users`;

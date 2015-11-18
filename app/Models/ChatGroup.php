@@ -4,7 +4,6 @@ namespace App\Models;
 // Services
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 /**
  * 讨论组（群组）分析信息表
  *
