@@ -67,7 +67,8 @@
                         
                     </table>
                     <div class="col-md-6 col-md-offset-4">
-                        <a href="{{ action('ConsumeController@index') }}" class="btn btn-info"><span>{{ trans('pages.common.buttons.back_to_list') }}</span></a>
+                        <a href="{{ action('ConsumeController@index') }}"><label class="btn btn-info">{{ trans('pages.common.buttons.back_to_list') }}</label></a>
+                        <a href="{{ action('ConsumeController@edit', ['consumeId' => $consume->id]) }}"><label class="btn btn-info">{{ trans('pages.common.buttons.edit') }}</label></a>
                     </div>
                 </div>
             </div>

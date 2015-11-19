@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 
 // Models
 use App\Models\Consume;
+use App\Models\Good;
+use App\Models\Shop;
+use App\Models\ShopGood;
 
 // Requests
 use App\Http\Requests;
+use App\Http\Requests\Consumes\ConsumeRequest;
 use Illuminate\Http\Request;
 
 // Services
@@ -95,12 +99,71 @@ class ConsumeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\Consumes\ConsumeRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ConsumeRequest $request)
     {
-        //
+        $goodId = $request->input('good_id');
+        $shopId = $request->input('shop_id');
+
+        // 系统内商品
+        if (!is_null($goodId)) {
+            $good = Good::where('id', $goodId)
+                ->withEffective()
+                ->first();
+            if (is_null($good)) {
+                $goodName = $request->input('good_name');
+                $goodId = null;
+            } else {
+                $goodName = $good->good_name;
+            }
+        } else {
+            $goodName = $request->input('good_name');
+        }
+        // 系统内登录的商店
+        if (!is_null($shopId)) {
+            $shop = Shop::where('id', $shopId)
+                ->withEffective()
+                ->first();
+            if (is_null($shop)) {
+                $shopName = $request->input('shop_name');
+                $shopId = null;
+            } else {
+                $shopName = $shop->name;
+            }
+        } else {
+            $shopName = $request->input('shop_name');
+        }
+        // 商店内的商品
+        if (!is_null($goodId) && !is_null($shopId)) {
+            $shopGood = ShopGood::where('shop_id', $shopId)
+                ->where('good_id', $goodId)
+                ->first();
+            if (is_null($shopGood)) {
+                $shopGoodId = null;
+            } else {
+                $shopGoodId = $shopGood->id;
+            }
+        } else {
+            $shopGoodId = null;
+        }
+
+        $consume = Consume::create([
+            'user_id'   => Session::get('User')->id,
+            'good_id'   => $goodId,
+            'good_name' => $goodName,
+            'shop_id'   => $shopId,
+            'shop_name' => $shopName,
+            'shop_good_id'  => $shopGoodId,
+            'consume_name'  => $request->input('consume_name'),
+            'consume_cost'  => ($request->input('consume_cost') == '' ? null : $request->input('consume_cost')),
+            'consume_info'  => $request->input('consume_info'),
+            'consume_time'  => $request->input('consume_time'),
+            'place'         => $request->input('consume_place')
+        ]);
+
+        return redirect()->action('ConsumeController@show', ['consumeId' => $consume->id]);
     }
 
     /**
@@ -109,7 +172,7 @@ class ConsumeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, ConsumeRequest $request)
     {
         $consume = Consume::where('user_id', Session::get('User')->id)
             ->where('id', $id)
@@ -127,9 +190,9 @@ class ConsumeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, ConsumeRequest $request)
     {
-        //
+        
     }
 
     /**
@@ -139,7 +202,7 @@ class ConsumeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ConsumeRequest $request, $id)
     {
         //
     }
