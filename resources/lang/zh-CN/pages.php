@@ -88,7 +88,14 @@ return [
             'edit_panel_header'     => '个人消费记录修改',
             'search_by_name'        => '消费名搜索',
             'search_by_good_name'   => '商品名搜索',
-            'search_by_shop_name'   => '商店名搜索'
+            'search_by_shop_name'   => '商店名搜索',
+            'begin_consume_time'    => '开始时间',
+            'end_consume_time'      => '结束时间',
+            'last_week_cost'        => '最近一个星期消费额',
+            'last_month_cost'       => '最近一个月消费额',
+            'last_three_months_cost'=> '最近三个月消费额',
+            'last_sex_months_cost'  => '最近半年消费额',
+            'last_year_cost'        => '最近一年消费额'
         ],
         'placeholder'   => [
             'search_by_name'        => '消费名',

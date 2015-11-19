@@ -16,6 +16,7 @@ use App\Http\Requests\Consumes\ConsumeRequest;
 use Illuminate\Http\Request;
 
 // Services
+use Carbon\Carbon;
 use Config;
 use Session;
 
@@ -74,6 +75,36 @@ class ConsumeController extends Controller
 
         $consumes = Consume::where('user_id', $user->id)
             ->ofCandition($input)->paginate($input['paginate']);
+
+        // 最近一个星期的消费
+        $consumes->last_week_cost = Consume::where('user_id', $user->id)
+            ->where('consumes.consume_time', '>', Carbon::now()->subWeek())
+            ->where('consumes.consume_time', '<=', Carbon::now())
+            ->sum('consumes.consume_cost');
+
+        // 最近一个月的消费
+        $consumes->last_month_cost = Consume::where('user_id', $user->id)
+            ->where('consumes.consume_time', '>', Carbon::now()->subMonth())
+            ->where('consumes.consume_time', '<=', Carbon::now())
+            ->sum('consumes.consume_cost');
+
+        // 最近三个月的消费额
+        $consumes->last_three_months_cost = Consume::where('user_id', $user->id)
+            ->where('consumes.consume_time', '>', Carbon::now()->subMonths(3))
+            ->where('consumes.consume_time', '<=', Carbon::now())
+            ->sum('consumes.consume_cost');
+
+        // 最近六个月的消费额
+        $consumes->last_sex_months_cost = Consume::where('user_id', $user->id)
+            ->where('consumes.consume_time', '>', Carbon::now()->subMonths(6))
+            ->where('consumes.consume_time', '<=', Carbon::now())
+            ->sum('consumes.consume_cost');
+
+        // 最近一年的消费
+        $consumes->last_year_cost = Consume::where('user_id', $user->id)
+            ->where('consumes.consume_time', '>', Carbon::now()->subYear())
+            ->where('consumes.consume_time', '<=', Carbon::now())
+            ->sum('consumes.consume_cost');
 
         return view('consumes.index', compact('consumes', 'input'));
     }
