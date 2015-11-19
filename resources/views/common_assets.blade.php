@@ -3,7 +3,9 @@
 <link rel="stylesheet" href="{{ asset('/shared/css/bootstrap/bootstrap-datetimepicker.css') }}" media="screen,print">
 <link rel="stylesheet" href="{{ asset('/shared/css/bootstrap/bootstrap-datetimepicker.standalone.css') }}" media="screen,print">
 <link rel="stylesheet" href="{{ asset('/shared/css/bootstrap/bootstrap-datepicker.css') }}" media="screen,print">
+<link rel="stylesheet" href="{{ asset('/shared/css/bootstrap/bootstrap-responsive.css') }}" media="screen,print">
 <link rel="stylesheet" href="{{ asset('/shared/css/bootstrap/bootstrap-datepicker.standalone.css') }}" media="screen,print">
+<link rel="stylesheet" href="{{ asset('/shared/css/bootstrap/less/_bootstrap-datetimepicker.less') }}" media="screen,print">
 <link rel="stylesheet" href="{{ asset('/shared/css/fileinput/fileinput.css') }}" media="screen,print">
 <link rel="stylesheet" href="{{ asset('/shared/css/common.css') }}" media="screen,print">
 <link rel="stylesheet" href="{{ asset('/shared/css/language.' . App::getLocale() . '.css') }}" media="screen,print">

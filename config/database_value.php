@@ -20,6 +20,7 @@ define('DB_COMMON_CREATED_AT',   'created_at');
 define('DB_COMMON_UPDATED_AT',   'updated_at');
 define('DB_COMMON_DELETED_AT',   'deleted_at');
 define('DB_COMMON_PUBLIC_TYPE',  'public_type');
+define('DB_COMMON_STATUS_INVALID', 0);
 
 define('DB_COMMON_PUBLIC_TYPE_NO',  0); // 不公开
 define('DB_COMMON_PUBLIC_TYPE_YES_FOR_ALL', 1); // 任意公开

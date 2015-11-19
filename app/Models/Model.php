@@ -94,6 +94,24 @@ class Model extends ParentModel
     }
 
     /**
+     * 有效的商品
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder $query
+     */
+    public function scopeWithEffective($query, $tableName = null, $invaidValue = null)
+    {
+        if (is_null($tableName)) {
+            $tableName = with(new self)->getTable();
+        }
+        if (is_null($invaidValue)) {
+            $invaidValue = DB_COMMON_STATUS_INVALID;
+        }
+        return $query->where($tableName . '.status', '!=', $invaidValue);
+    }
+
+
+    /**
      * 除去意见删除的数据
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -104,7 +122,7 @@ class Model extends ParentModel
         if (!is_null($tableName)) {
             $query->whereNull($tableName . '.deleted_at');
         } else {
-            $query->whereNull(with(new static)->getTable() . '.deleted_at');
+            $query->whereNull(with(new self)->getTable() . '.deleted_at');
         }
 
         return $query;

@@ -140,4 +140,35 @@ class ShopController extends Controller
     {
         //
     }
+
+    /**
+     * 商店搜索
+     *
+     * @param Request $request
+     * @return json
+     */
+    public function search(Request $request)
+    {
+        $shopName = $request->input('shop_name');
+        $shopKey = $request->input('key');
+        $shopStatus = $request->input('shop_status');
+
+        $query = Shop::where('shops.status', '!=', DB_SHOPS_STATUS_INVALID)
+            ->where('shops.public_type', '!=', DB_COMMON_PUBLIC_TYPE_NO);
+
+        if ($shopName != '') {
+            $query->searchQuery('shops.name', $shopName);
+        }
+        if ($shopKey != '') {
+            $query->searchQuery([
+                'shops,name',
+                'shops.shop_info'
+            ], $shopKey);
+        }
+
+        return $query->select('shops.id as id', 'shops.name as name')
+            ->get()
+            ->toJson();
+
+    }
 }
