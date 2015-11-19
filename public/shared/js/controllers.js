@@ -32,6 +32,14 @@ $(".date input[type=text].full-date").datepicker({
     todayHighlight: true
 });
 
+$(".datetime input[type=text].full-datetime").datetimepicker({
+    format: "yyyy/mm/dd H:i:s",
+    autoclose: true,
+    todayBtn: true,
+    language: $language,
+    todayHighlight: true
+});
+
 
 $.extend({
     dialog: function(strMessage) {

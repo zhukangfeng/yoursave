@@ -81,8 +81,15 @@ class ConsumeController extends Controller
      */
     public function create()
     {
-        //
-        var_dump(trans('database.conmmon.column_value.public_type'));
+        if (old('good_id')) {
+            $good = Good::find(old('good_id'));
+        }
+        if (old('shop_id')) {
+            $shop = Shop::withEffective()
+                ->find(old('shop_id'));
+        }
+
+        return view('consumes.create', compact('good', 'shop'));
     }
 
     /**

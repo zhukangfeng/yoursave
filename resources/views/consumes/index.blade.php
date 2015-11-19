@@ -63,7 +63,7 @@
                     </div>
                     @if (Auth::check())
                     <div class="col-md-6 col-md-offset-2">
-                        <label class="btn btn-info"><a href="{{ action('ConsumeController@create') }}">{{ trans('pages.common.buttons.create') }}</a></label>
+                        <a href="{{ action('ConsumeController@create') }}"><label class="btn btn-info">{{ trans('pages.common.buttons.create') }}</label></a>
                     </div>
                     @endif
                 </div>

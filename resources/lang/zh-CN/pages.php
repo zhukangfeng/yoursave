@@ -72,11 +72,20 @@ return [
     'consumes'  => [
         'title' => [
             'index'     => '消费记录',
-            'create'    => '新建消费记录'
+            'create'    => '新建消费记录',
+            'show'      => '消费记录详情',
+            'edit'      => '消费记录修改'
         ],
+        'description'   => [
+            'good_name' => '输入商品名称，可以搜索后关联系统内的商品。也可以只输入商品记录名，不进行关联。',
+            'shop_name' => '输入商店名称，可以搜索后关联系统内的商店。也可以只输入商店记录名，不进行关联。'
+        ],
+
         'labels'    => [
             'index_panel_header'    => '个人消费记录',
+            'create_panel_header'   => '个人消费记录添加',
             'show_panel_header'     => '个人消费详情',
+            'edit_panel_header'     => '个人消费记录修改',
             'search_by_name'        => '消费名搜索',
             'search_by_good_name'   => '商品名搜索',
             'search_by_shop_name'   => '商店名搜索'

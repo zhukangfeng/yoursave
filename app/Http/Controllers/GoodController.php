@@ -178,4 +178,32 @@ class GoodController extends Controller
     {
         //
     }
+
+    /**
+     * 商品搜索
+     *
+     * @param Request $request
+     * @return json
+     */
+    public function search(Request $request)
+    {
+        $goodName = $request->input('good_name');
+        $goodKey = $request->input('good_key');
+
+        $query = Good::where('goods.status', '!=', DB_COMMON_STATUS_INVALID);
+
+        if ($goodName != '') {
+            $query->searchQuery('goods.good_name', $goodName);
+        }
+        if ($goodKey != '') {
+            $query->searchQuery([
+                'goods.good_name',
+                'goods.good_info'
+            ], $goodKey);
+        }
+
+        return $query->select('goods.id', 'goods.good_name as name')
+            ->get()
+            ->toJson();
+    }
 }
