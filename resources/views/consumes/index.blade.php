@@ -20,8 +20,6 @@
                         @include ('consumes.summary')
                     </div>
 
-
-
                     <div class="paginage text-center">
                         {!! $consumes->render() !!}
                     </div>
@@ -29,7 +27,11 @@
                         <tr>
                             <th class="col-md-1"></th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_name') }}</th>
-                            <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_cost') }}</th>
+                            <th class="col-md-1 sort-able">
+                                {{ trans('database.consumes.consume_cost') }}<br />
+                                {{ trans('pages.consumes.labels.page_total_cost', ['cost' => $consumes->page_total_cost]) }}<br />
+                                {{ trans('pages.consumes.labels.total_cost', ['cost' => $consumes->total_cost]) }}
+                            </th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_time') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.shop_name') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.good_name') }}</th>

@@ -16,6 +16,12 @@ return [
         'logout_success'    => '账户注销成功'
     ],
 
+    // 个人消费
+    'consumes'  => [
+        'created_success'   => '个人消费账单创建成功',
+        'updated_success'   => '个人消费更新成功'
+    ],
+
     // 商品分类
     'good_kinds'    => [
         'created_success'   => '商品分类创建成功',

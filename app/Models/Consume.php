@@ -2,6 +2,8 @@
 namespace App\Models;
 
 // Services
+use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Consume extends Model
@@ -35,6 +37,7 @@ class Consume extends Model
      */
     public function scopeOfCandition($query, $data)
     {
+        // var_dump($data);exit;
         // 消费名搜索
         if (isset($data['name']) && $data['name'] != '') {
             $query->searchQuery('consumes.consume_name', $data['name']);
@@ -58,6 +61,15 @@ class Consume extends Model
             $query->searchQuery('shop_name', $data['shop_name']);
         }
 
+        // 开始时间
+        if (isset($data['begin_consume_time'])) {
+            $query->where('consumes.consume_time', '>=', $data['begin_consume_time']);
+        }
+
+        if (isset($data['end_consume_time'])) {
+            $query->where('consumes.consume_time', '<', (new Carbon($data['end_consume_time']))->addDay());
+        }
+
         if (isset($data['order']) && is_array($data['order'])) {
             foreach ($data['order'] as $orderKey => $order) {
                 $query->orderBy($order, $data['order_type'][$orderKey]);
@@ -70,17 +82,43 @@ class Consume extends Model
     }
 
     /**
+     * 添加商品信息
+     *
+     * @param $query
+     * @param string $shopTableName
+     * @param array $selectColumns compact(['columnName' => 'good_name', 'asName' => 'good_real_name'])
+     * @return $query
+     */
+    public function scopeWithGood(
+        $query,
+        $shopTableName = 'goods',
+        $selectColumns = [['columnName' => 'good_name', 'asName' => 'good_real_name']]
+    ) {
+        // 要选择的内容
+        $selectValue = [];
+        foreach ($selectColumns as $selectKey => $selectData) {
+            $selectValue[] = $shopTableName . '.' . $selectData['columnName'] . ' AS ' . $selectData['asName'];
+        }
+
+        return $query->leftJoin('goods AS ' . $shopTableName, function ($join) use ($shopTableName) {
+            $join->on('consumes.shop_id', '=', $shopTableName . '.id')
+                ->on($shopTableName . '.status', '!=', DB::raw(DB_SHOPS_STATUS_INVALID));
+        })
+            ->addSelect(implode(',', $selectValue));
+    }
+
+    /**
      * 添加商店信息
      *
      * @param $query
      * @param string $shopTableName
-     * @param array $selectColumns compact(['columnName' => 'name', 'asName' => 'shop_name'])
+     * @param array $selectColumns compact(['columnName' => 'name', 'asName' => 'shop_real_name'])
      * @return $query
      */
     public function scopeWithShop(
         $query,
         $shopTableName = 'shops',
-        $selectColumns = [['columnName' => 'name', 'asName' => 'shop_name']]
+        $selectColumns = [['columnName' => 'name', 'asName' => 'shop_real_name']]
     ) {
         // 要选择的内容
         $selectValue = [];
@@ -90,7 +128,7 @@ class Consume extends Model
 
         return $query->leftJoin('shops AS ' . $shopTableName, function ($join) use ($shopTableName) {
             $join->on('consumes.shop_id', '=', $shopTableName . '.id')
-                ->on($shopTableName . '.status', '!=', DB_SHOPS_STATUS_INVALID);
+                ->on($shopTableName . '.status', '!=', DB::raw(DB_SHOPS_STATUS_INVALID));
         })
             ->addSelect(implode(',', $selectValue));
     }
