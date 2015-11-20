@@ -55,6 +55,7 @@ Route::group([
     Route::put('good_kinds/{goodKindId}', 'GoodKindController@update');
 
     // 商品
+    Route::get('/goods/search', 'GoodController@search');
     Route::resource('/goods', 'GoodController', [
         'only'  => [
             'create',
@@ -71,6 +72,9 @@ Route::group([
     Route::get('/preferences/{preferenceId}', 'PreferenceController@show');
     Route::put('/preferences/{preferenceId}', 'PreferenceController@update');
     Route::get('/preferences/{preferenceId}/edit', 'PreferenceController@edit');
+
+    // 商品信息搜索
+    Route::get('shops/search', 'ShopController@search');
 
     // 商店职员登录
     Route::group([

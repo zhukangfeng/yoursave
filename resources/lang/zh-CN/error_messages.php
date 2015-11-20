@@ -16,6 +16,12 @@ return [
         'account_not_ivalid'    => '无效账户',
     ],
 
+    // 个人消费记录
+    'consumes'  => [
+        'good_id_error' => '您输入的商品信息有误。',
+        'shop_id_error' => '您输入的商店信息有误。'
+    ],
+
     // 商品分类
     'good_kinds'    => [
         'whether_has_parent'    => '必须选择是否拥有父类',

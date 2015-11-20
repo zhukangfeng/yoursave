@@ -72,14 +72,32 @@ return [
     'consumes'  => [
         'title' => [
             'index'     => '消费记录',
-            'create'    => '新建消费记录'
+            'create'    => '新建消费记录',
+            'show'      => '消费记录详情',
+            'edit'      => '消费记录修改'
         ],
+        'description'   => [
+            'good_name' => '输入商品名称，可以搜索后关联系统内的商品。也可以只输入商品记录名，不进行关联。',
+            'shop_name' => '输入商店名称，可以搜索后关联系统内的商店。也可以只输入商店记录名，不进行关联。'
+        ],
+
         'labels'    => [
             'index_panel_header'    => '个人消费记录',
+            'create_panel_header'   => '个人消费记录添加',
             'show_panel_header'     => '个人消费详情',
+            'edit_panel_header'     => '个人消费记录修改',
             'search_by_name'        => '消费名搜索',
             'search_by_good_name'   => '商品名搜索',
-            'search_by_shop_name'   => '商店名搜索'
+            'search_by_shop_name'   => '商店名搜索',
+            'begin_consume_time'    => '开始时间',
+            'end_consume_time'      => '结束时间',
+            'last_week_cost'        => '最近一个星期消费额',
+            'last_month_cost'       => '最近一个月消费额',
+            'last_three_months_cost'=> '最近三个月消费额',
+            'last_sex_months_cost'  => '最近半年消费额',
+            'last_year_cost'        => '最近一年消费额',
+            'total_cost'            => '总计：:cost',
+            'page_total_cost'       => '该页总计：:cost'
         ],
         'placeholder'   => [
             'search_by_name'        => '消费名',

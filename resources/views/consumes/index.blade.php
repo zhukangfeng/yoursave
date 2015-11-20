@@ -16,6 +16,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{{ trans('pages.consumes.labels.index_panel_header') }}</div>
                 <div class="panel-body">
+                    <div class="summary-area">
+                        @include ('consumes.summary')
+                    </div>
+
                     <div class="paginage text-center">
                         {!! $consumes->render() !!}
                     </div>
@@ -23,7 +27,11 @@
                         <tr>
                             <th class="col-md-1"></th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_name') }}</th>
-                            <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_cost') }}</th>
+                            <th class="col-md-1 sort-able">
+                                {{ trans('database.consumes.consume_cost') }}<br />
+                                {{ trans('pages.consumes.labels.page_total_cost', ['cost' => $consumes->page_total_cost]) }}<br />
+                                {{ trans('pages.consumes.labels.total_cost', ['cost' => $consumes->total_cost]) }}
+                            </th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.consume_time') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.shop_name') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.consumes.good_name') }}</th>
@@ -63,7 +71,7 @@
                     </div>
                     @if (Auth::check())
                     <div class="col-md-6 col-md-offset-2">
-                        <label class="btn btn-info"><a href="{{ action('ConsumeController@create') }}">{{ trans('pages.common.buttons.create') }}</a></label>
+                        <a href="{{ action('ConsumeController@create') }}"><label class="btn btn-info">{{ trans('pages.common.buttons.create') }}</label></a>
                     </div>
                     @endif
                 </div>
