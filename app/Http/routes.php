@@ -56,7 +56,8 @@ Route::group([
 
     // 商品
     Route::get('/goods/search', 'GoodController@search');
-    Route::put('/goods', 'GoodController@store');
+    Route::post('/goods', 'GoodController@store');
+    Route::get('/goods/create', 'GoodController@create');
     Route::post('/goods/{goodId}', 'GoodController@update');
     Route::get('/goods/{goodId}/edit', 'GoodController@edit');
 
