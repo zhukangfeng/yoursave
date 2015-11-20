@@ -56,14 +56,9 @@ Route::group([
 
     // 商品
     Route::get('/goods/search', 'GoodController@search');
-    Route::resource('/goods', 'GoodController', [
-        'only'  => [
-            'create',
-            'store',
-            'edit',
-            'update'
-        ]
-    ]);
+    Route::put('/goods', 'GoodController@store');
+    Route::post('/goods/{goodId}', 'GoodController@update');
+    Route::get('/goods/{goodId}/edit', 'GoodController@edit');
 
     // 促销信息
     Route::get('/preferences', 'PreferenceController@index');
@@ -197,12 +192,8 @@ Route::get('good_kinds/', 'GoodKindController@index');
 Route::get('good_kinds/{goodKindId}', 'GoodKindController@show');
 
 // 商品
-Route::resource('/good', 'GoodController', [
-    'only'  => [
-        'index',
-        'show'
-    ]
-]);
+Route::get('/good', 'GoodController@index');
+Route::get('/good/{goodId}', 'GoodController@show');
 
 // 商店商品信息
 Route::resource('/goods', 'GoodController', [
