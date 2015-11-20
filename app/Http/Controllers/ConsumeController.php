@@ -68,6 +68,19 @@ class ConsumeController extends Controller
         if ($shopName != '') {
             $input['shop_name'] = $shopName;
         }
+
+        // 消费开始时间
+        $beginTime = $request->input('begin_consume_time');
+        if ($beginTime != '') {
+            $input['begin_consume_time'] = $beginTime;
+        }
+
+        // 消费结束时间
+        $endTime = $request->input('end_consume_time');
+        if ($endTime) {
+            $input['end_consume_time'] = $endTime;
+        }
+
         // 一页显示数目
         $input['paginate'] = $request->input('paginate', Config::get('pages.consumes.index.default_show_number'));
 
@@ -76,34 +89,47 @@ class ConsumeController extends Controller
         $consumes = Consume::where('user_id', $user->id)
             ->ofCandition($input)->paginate($input['paginate']);
 
+        // 显示页面总支出
+        $consumes->page_total_cost = 0;
+        foreach ($consumes->items() as $consumeKey => $consume) {
+            $consumes->page_total_cost += $consume->consume_cost;
+        }
+
+        // 搜索结果总支出
+        $consumes->total_cost = Consume::where('user_id', $user->id)
+            ->ofCandition($input)
+            ->sum('consumes.consume_cost');
+
+        $consumes->appends($input);
+
         // 最近一个星期的消费
         $consumes->last_week_cost = Consume::where('user_id', $user->id)
-            ->where('consumes.consume_time', '>', Carbon::now()->subWeek())
-            ->where('consumes.consume_time', '<=', Carbon::now())
+            ->where('consumes.consume_time', '>=', Carbon::now()->subWeek()->format('Y-m-d'))
+            ->where('consumes.consume_time', '<', Carbon::today()->addDay())
             ->sum('consumes.consume_cost');
 
         // 最近一个月的消费
         $consumes->last_month_cost = Consume::where('user_id', $user->id)
-            ->where('consumes.consume_time', '>', Carbon::now()->subMonth())
-            ->where('consumes.consume_time', '<=', Carbon::now())
+            ->where('consumes.consume_time', '>=', Carbon::now()->subMonth()->format('Y-m-d'))
+            ->where('consumes.consume_time', '<', Carbon::today()->addDay())
             ->sum('consumes.consume_cost');
 
         // 最近三个月的消费额
         $consumes->last_three_months_cost = Consume::where('user_id', $user->id)
-            ->where('consumes.consume_time', '>', Carbon::now()->subMonths(3))
-            ->where('consumes.consume_time', '<=', Carbon::now())
+            ->where('consumes.consume_time', '>=', Carbon::now()->subMonths(3)->format('Y-m-d'))
+            ->where('consumes.consume_time', '<', Carbon::today()->addDay())
             ->sum('consumes.consume_cost');
 
         // 最近六个月的消费额
         $consumes->last_sex_months_cost = Consume::where('user_id', $user->id)
-            ->where('consumes.consume_time', '>', Carbon::now()->subMonths(6))
-            ->where('consumes.consume_time', '<=', Carbon::now())
+            ->where('consumes.consume_time', '>=', Carbon::now()->subMonths(6)->format('Y-m-d'))
+            ->where('consumes.consume_time', '<', Carbon::today()->addDay())
             ->sum('consumes.consume_cost');
 
         // 最近一年的消费
         $consumes->last_year_cost = Consume::where('user_id', $user->id)
-            ->where('consumes.consume_time', '>', Carbon::now()->subYear())
-            ->where('consumes.consume_time', '<=', Carbon::now())
+            ->where('consumes.consume_time', '>=', Carbon::now()->subYear()->format('Y-m-d'))
+            ->where('consumes.consume_time', '<', Carbon::today()->addDay())
             ->sum('consumes.consume_cost');
 
         return view('consumes.index', compact('consumes', 'input'));
@@ -194,6 +220,8 @@ class ConsumeController extends Controller
             'place'         => $request->input('consume_place')
         ]);
 
+        Session::flash('success_messages', [trans('success_messages.consumes.updated_success')]);
+
         return redirect()->action('ConsumeController@show', ['consumeId' => $consume->id]);
     }
 
@@ -223,7 +251,22 @@ class ConsumeController extends Controller
      */
     public function edit($id, ConsumeRequest $request)
     {
-        
+        $consume = Consume::where('consumes.user_id', Session::get('User')->id)
+            ->where('consumes.id', $id)
+            ->select('consumes.*')
+            ->withShop()
+            ->withGood()
+            ->first();
+
+        if (old('good_id')) {
+            $good = Good::find(old('good_id'));
+        }
+        if (old('shop_id')) {
+            $shop = Shop::withEffective()
+                ->find(old('shop_id'));
+        }
+
+        return view('consumes.edit', compact('consume', 'good', 'shop'));
     }
 
     /**
@@ -235,7 +278,70 @@ class ConsumeController extends Controller
      */
     public function update(ConsumeRequest $request, $id)
     {
-        //
+        $consume = Consume::where('user_id', Session::get('User')->id)
+            ->where('id', $id)
+            ->first();
+        $goodId = $request->input('good_id');
+        $shopId = $request->input('shop_id');
+
+        // 系统内商品
+        if (!is_null($goodId)) {
+            $good = Good::where('id', $goodId)
+                ->withEffective()
+                ->first();
+            if (is_null($good)) {
+                $goodName = $request->input('good_name');
+                $goodId = null;
+            } else {
+                $goodName = $good->good_name;
+            }
+        } else {
+            $goodName = $request->input('good_name');
+        }
+        // 系统内登录的商店
+        if (!is_null($shopId)) {
+            $shop = Shop::where('id', $shopId)
+                ->withEffective()
+                ->first();
+            if (is_null($shop)) {
+                $shopName = $request->input('shop_name');
+                $shopId = null;
+            } else {
+                $shopName = $shop->name;
+            }
+        } else {
+            $shopName = $request->input('shop_name');
+        }
+        // 商店内的商品
+        if (!is_null($goodId) && !is_null($shopId)) {
+            $shopGood = ShopGood::where('shop_id', $shopId)
+                ->where('good_id', $goodId)
+                ->first();
+            if (is_null($shopGood)) {
+                $shopGoodId = null;
+            } else {
+                $shopGoodId = $shopGood->id;
+            }
+        } else {
+            $shopGoodId = null;
+        }
+
+        $consume->update([
+            'good_id'   => $goodId,
+            'good_name' => $goodName,
+            'shop_id'   => $shopId,
+            'shop_name' => $shopName,
+            'shop_good_id'  => $shopGoodId,
+            'consume_name'  => $request->input('consume_name'),
+            'consume_cost'  => ($request->input('consume_cost') == '' ? null : $request->input('consume_cost')),
+            'consume_info'  => $request->input('consume_info'),
+            'consume_time'  => $request->input('consume_time'),
+            'place'         => $request->input('consume_place')
+        ]);
+
+        Session::flash('success_messages', [trans('success_messages.consumes.updated_success')]);
+
+        return redirect()->action('ConsumeController@show', ['consumeId' => $consume->id]);
     }
 
     /**

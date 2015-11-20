@@ -95,7 +95,9 @@ return [
             'last_month_cost'       => '最近一个月消费额',
             'last_three_months_cost'=> '最近三个月消费额',
             'last_sex_months_cost'  => '最近半年消费额',
-            'last_year_cost'        => '最近一年消费额'
+            'last_year_cost'        => '最近一年消费额',
+            'total_cost'            => '总计：:cost',
+            'page_total_cost'       => '该页总计：:cost'
         ],
         'placeholder'   => [
             'search_by_name'        => '消费名',
