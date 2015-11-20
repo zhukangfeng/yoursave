@@ -26,23 +26,23 @@
                                 </div>
                             </div>
                             <div class="form-group required">
-                                <label class="col-md-4 control-label">{{ trans('database.consumes.consume_cost') }}</label>
-                                <div class="col-md-6">
-                                    <input type="text" name="consume_cost" value="{{ old('consume_cost') }}">
-                                    @if ($errors->has('consume_cost'))
-                                    <div class="errors">
-                                        <p class="error-message">{{ $errors->first('consume_cost') }}</p>
-                                    </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group required">
                                 <label class="col-md-4 control-label">{{ trans('database.consumes.consume_time') }}</label>
                                 <div class="col-md-6 datetime">
                                     <input type="text" name="consume_time" class="full-datetime" value="{{ old('consume_time') }}">
                                     @if ($errors->has('consume_time'))
                                     <div class="errors">
                                         <p class="error-message">{{ $errors->first('consume_time') }}</p>
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">{{ trans('database.consumes.consume_cost') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="consume_cost" value="{{ old('consume_cost') }}">
+                                    @if ($errors->has('consume_cost'))
+                                    <div class="errors">
+                                        <p class="error-message">{{ $errors->first('consume_cost') }}</p>
                                     </div>
                                     @endif
                                 </div>
@@ -71,12 +71,12 @@
                                     </div>
                                     <div class="good-list">
                                         @if (old('good_id') && isset($good))
-                                        <label class="good-info"><input type="radio" name="good_id" value="{{ $good->id }}" checked="">{{ $good->name }}</label>
+                                        <label class="good-info"><input type="radio" name="good_id" value="{{ $good->id }}" checked="">{{ $good->good_name }}</label>
                                         @endif   
                                     </div>
-                                    @if ($errors->has('good_name'))
+                                    @if ($errors->has('good_id'))
                                     <div class="errors">
-                                        <p class="error-message">{{ $errors->first('good_name') }}</p>
+                                        <p class="error-message">{{ $errors->first('good_id') }}</p>
                                     </div>
                                     @endif
                                     @if ($errors->has('good_id_error'))
@@ -102,9 +102,9 @@
                                         <label class="shop-info"><input type="radio" name="shop_id" value="{{ $shop->id }}" checked="">{{ $shop->name }}</label>
                                         @endif   
                                     </div>
-                                    @if ($errors->has('shop_name'))
+                                    @if ($errors->has('shop_id'))
                                     <div class="errors">
-                                        <p class="error-message">{{ $errors->first('shop_name') }}</p>
+                                        <p class="error-message">{{ $errors->first('shop_id') }}</p>
                                     </div>
                                     @endif
                                     @if ($errors->has('shop_id_error'))
@@ -112,6 +112,12 @@
                                         <p class="error-message">{{ $errors->first('shop_id_error') }}</p>
                                     </div>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">{{ trans('database.consumes.place') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="consume_place" value="{{ old('consume_place') }}">
                                 </div>
                             </div>
                             <div class="form-group">

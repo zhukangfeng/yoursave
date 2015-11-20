@@ -16,6 +16,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{{ trans('pages.consumes.labels.index_panel_header') }}</div>
                 <div class="panel-body">
+                    <div class="summary-area">
+                        @include ('consumes.summary')
+                    </div>
+
+
+
                     <div class="paginage text-center">
                         {!! $consumes->render() !!}
                     </div>

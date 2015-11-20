@@ -33,7 +33,7 @@ $(".date input[type=text].full-date").datepicker({
 });
 
 $(".datetime input[type=text].full-datetime").datetimepicker({
-    format: "yyyy/mm/dd H:i:s",
+    format: "yyyy-mm-dd HH:ii:ss",
     autoclose: true,
     todayBtn: true,
     language: $language,

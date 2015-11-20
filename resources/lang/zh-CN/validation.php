@@ -35,7 +35,7 @@ return [
     'digits'               => 'The :attribute must be :digits digits.',
     'digits_between'       => 'The :attribute must be between :min and :max digits.',
     'email'                => ':attribute必须是合法的邮箱地址。',
-    'exists'               => 'The selected :attribute is invalid.',
+    'exists'               => '输入的:attribute不合法。',
     'filled'               => 'The :attribute field is required.',
     'image'                => 'The :attribute must be an image.',
     'in'                   => 'The selected :attribute is invalid.',
@@ -93,6 +93,10 @@ return [
         ],
         'confirm'   => [
             'same'  => '确认输入值和:other的值不一致。'
+        ],
+        'consume_const' => [
+            'numeric'   => '消费金额必须是数字',
+            'min.0'     => '消费金额必须是大于0的数字。'
         ]
     ],
 
@@ -119,7 +123,11 @@ return [
         'login_mails'   => '登录邮箱',
         'type'      => '类型',
         'good_name' => '商品名称',
-        'good_kind' => '商品分类'
+        'good_kind' => '商品分类',
+
+        // 个人消费记录
+        'consume_name'  => trans('database.consumes.consume_name'),
+        'consume_time'  => trans('database.consumes.consume_time'),
     ],
 
 ];

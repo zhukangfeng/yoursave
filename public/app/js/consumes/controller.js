@@ -4,13 +4,13 @@ $(function() {
             $.ajax({
                 url: '/goods/search',
                 data: {
-                    good_name: $('.container-fluid .form-horizontal .good-name-seach input[name=good_kind_search_key]').val()
+                    good_name: $('.container-fluid .form-horizontal .good-name-seach input[name=good_name]').val()
                 },
                 success: function(_data) {
                     var appendHtml = '';
                     var data = JSON.parse(_data);
                     if (data.length == 0) {
-                        $.alert(messages.errors.no_good_kind_data);
+                        $.alert(messages.errors.no_good_data);
                         return;
                     }
 
@@ -36,13 +36,13 @@ $(function() {
             $.ajax({
                 url: '/shops/search',
                 data: {
-                    shop_name: $('.container-fluid .form-horizontal .shop-name-seach input[name=shop_kind_search_key]').val()
+                    shop_name: $('.container-fluid .form-horizontal .shop-name-seach input[name=shop_name]').val()
                 },
                 success: function(_data) {
                     var appendHtml = '';
                     var data = JSON.parse(_data);
                     if (data.length == 0) {
-                        $.alert(messages.errors.no_shop_kind_data);
+                        $.alert(messages.errors.no_shop_data);
                         return;
                     }
 

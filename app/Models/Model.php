@@ -102,7 +102,7 @@ class Model extends ParentModel
     public function scopeWithEffective($query, $tableName = null, $invaidValue = null)
     {
         if (is_null($tableName)) {
-            $tableName = with(new self)->getTable();
+            $tableName = with(new static)->getTable();
         }
         if (is_null($invaidValue)) {
             $invaidValue = DB_COMMON_STATUS_INVALID;
