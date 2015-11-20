@@ -39,7 +39,7 @@ return [
     'filled'               => 'The :attribute field is required.',
     'image'                => 'The :attribute must be an image.',
     'in'                   => 'The selected :attribute is invalid.',
-    'integer'              => 'The :attribute must be an integer.',
+    'integer'              => ':attribute必须是整数',
     'ip'                   => 'The :attribute must be a valid IP address.',
     'json'                 => 'The :attribute must be a valid JSON string.',
     'max'                  => [
@@ -50,13 +50,13 @@ return [
     ],
     'mimes'                => 'The :attribute must be a file of type: :values.',
     'min'                  => [
-        'numeric' => 'The :attribute must be at least :min.',
+        'numeric' => ':attribute输入大于:min的数字',
         'file'    => 'The :attribute must be at least :min kilobytes.',
         'string'  => ':attribute至少含有:min个字符.',
         'array'   => 'The :attribute must have at least :min items.',
     ],
     'not_in'               => 'The selected :attribute is invalid.',
-    'numeric'              => 'The :attribute must be a number.',
+    'numeric'              => ':attribute必须是数字。',
     'regex'                => 'The :attribute format is invalid.',
     'required'             => '请输入:attribute。',
     'required_if'          => 'The :attribute field is required when :other is :value.',
@@ -128,6 +128,7 @@ return [
         // 个人消费记录
         'consume_name'  => trans('database.consumes.consume_name'),
         'consume_time'  => trans('database.consumes.consume_time'),
+        'consume_cost'  => trans('database.consumes.consume_cost')
     ],
 
 ];
