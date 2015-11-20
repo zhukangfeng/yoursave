@@ -56,7 +56,7 @@
                         </tr>
                     </table>
                     <div class="col-md-6 col-md-offset-4">
-                        <a href="{{ action('GoodKindController@index') }}" class="btn btn-info"><span>{{ trans('pages.common.buttons.back_to_index') }}</span></a>
+                        <a href="{{ action('GoodKindController@index') }}"><span class="btn btn-info">{{ trans('pages.common.buttons.back_to_index') }}</span></a>
                     </div>
                 </div>
             </div>

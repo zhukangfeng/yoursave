@@ -97,7 +97,7 @@ class GoodKindController extends Controller
 
         $user = Session::get('User');
 
-        GoodKind::create([
+        $goodKind = GoodKind::create([
             'parent_id' => $hasParent ? $parentId : null,
             'can_has_children'  => $canHasChildren,
             'name'  => $name,
@@ -109,7 +109,7 @@ class GoodKindController extends Controller
 
         Session::flash('success_messages', [trans('success_messages.good_kinds.created_success')]);
 
-        return redirect('/good_kinds');
+        return redirect()->action('GoodKindController@show', ['goodKindId' => $goodKind->id]);
     }
 
     /**

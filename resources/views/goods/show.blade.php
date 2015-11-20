@@ -47,7 +47,8 @@
                         
                     </table>
                     <div class="col-md-6 col-md-offset-4">
-                        <a href="{{ action('GoodController@index') }}" class="btn btn-info"><span>{{ trans('pages.common.buttons.back_to_index') }}</span></a>
+                        <a href="{{ action('GoodController@index') }}"><span class="btn btn-info">{{ trans('pages.common.buttons.back_to_index') }}</span></a>
+                        <a href="{{ action('GoodController@edit', ['goodId' => $good->id]) }}"><span class="btn btn-info">{{ trans('pages.common.buttons.edit') }}</span></a>
                     </div>
                 </div>
             </div>

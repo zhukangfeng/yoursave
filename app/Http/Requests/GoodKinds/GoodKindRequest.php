@@ -33,7 +33,7 @@ class GoodKindRequest extends Request
                 $rules = [
                     'has_parent'    => 'required|in:0,1',
                     'parent'        => 'required_if:has_parent,1',
-                    'has_children'  => 'required|in:0,1',
+                    'can_has_children'  => 'required|in:0,1',
                     'name'          => 'required'
                 ];
                 # code...
