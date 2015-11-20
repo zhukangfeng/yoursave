@@ -123,7 +123,7 @@ class GoodController extends Controller
 
         Session::flash('success_messages', [trans('success_messages.goods.created_success')]);
 
-        return redirect()->action('GoodController@index');
+        return redirect()->action('GoodController@show', ['goodId' => $good->id]);
 
     }
 
