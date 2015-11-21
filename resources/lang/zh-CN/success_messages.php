@@ -45,6 +45,10 @@ return [
         'user_registered_success' => '用户注册成功，请前往邮箱进行激活'
     ],
 
+    // 商店信息
+    'shops' => [
+        'created_success'   => '商店信息创建成功。'
+    ],
 
     // 用户个人信息
     'user'  => [

@@ -99,7 +99,7 @@ class Model extends ParentModel
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder $query
      */
-    public function scopeWithEffective($query, $tableName = null, $invaidValue = null)
+    public function scopeOfEffective($query, $tableName = null, $invaidValue = null)
     {
         if (is_null($tableName)) {
             $tableName = with(new static)->getTable();

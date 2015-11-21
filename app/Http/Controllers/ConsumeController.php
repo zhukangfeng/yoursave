@@ -146,7 +146,7 @@ class ConsumeController extends Controller
             $good = Good::find(old('good_id'));
         }
         if (old('shop_id')) {
-            $shop = Shop::withEffective()
+            $shop = Shop::ofEffective()
                 ->find(old('shop_id'));
         }
 
@@ -167,7 +167,7 @@ class ConsumeController extends Controller
         // 系统内商品
         if (!is_null($goodId)) {
             $good = Good::where('id', $goodId)
-                ->withEffective()
+                ->ofEffective()
                 ->first();
             if (is_null($good)) {
                 $goodName = $request->input('good_name');
@@ -181,7 +181,7 @@ class ConsumeController extends Controller
         // 系统内登录的商店
         if (!is_null($shopId)) {
             $shop = Shop::where('id', $shopId)
-                ->withEffective()
+                ->ofEffective()
                 ->first();
             if (is_null($shop)) {
                 $shopName = $request->input('shop_name');
@@ -262,7 +262,7 @@ class ConsumeController extends Controller
             $good = Good::find(old('good_id'));
         }
         if (old('shop_id')) {
-            $shop = Shop::withEffective()
+            $shop = Shop::ofEffective()
                 ->find(old('shop_id'));
         }
 
@@ -287,7 +287,7 @@ class ConsumeController extends Controller
         // 系统内商品
         if (!is_null($goodId)) {
             $good = Good::where('id', $goodId)
-                ->withEffective()
+                ->ofEffective()
                 ->first();
             if (is_null($good)) {
                 $goodName = $request->input('good_name');
@@ -301,7 +301,7 @@ class ConsumeController extends Controller
         // 系统内登录的商店
         if (!is_null($shopId)) {
             $shop = Shop::where('id', $shopId)
-                ->withEffective()
+                ->ofEffective()
                 ->first();
             if (is_null($shop)) {
                 $shopName = $request->input('shop_name');

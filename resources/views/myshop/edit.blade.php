@@ -102,7 +102,7 @@
                                     <div class="col-md-8 date">
                                         <select name="public_type">
                                             @foreach (trans('database.common.column_value.public_type') as $publicTypeKey => $publicType)
-                                                <option value="{{ $publicTypeKey }}" {{ old('public_type', $shop->public_type) == $publicTypeKey ? 'select' : '' }}>{{ $publicType }}</option>
+                                                <option value="{{ $publicTypeKey }}" {{ old('public_type', $shop->public_type) == $publicTypeKey ? 'selected' : '' }}>{{ $publicType }}</option>
                                             @endforeach                                            
                                         </select>
                                         @if ($errors->has('public_type'))
