@@ -74,7 +74,7 @@ return [
     'string'               => 'The :attribute must be a string.',
     'timezone'             => 'The :attribute must be a valid zone.',
     'unique'               => '该:attribute已经被使用，请修改。',
-    'url'                  => 'The :attribute format is invalid.',
+    'url'                  => ':attribute必须是合法的网站地址。',
 
     /*
     |--------------------------------------------------------------------------
@@ -128,7 +128,11 @@ return [
         // 个人消费记录
         'consume_name'  => trans('database.consumes.consume_name'),
         'consume_time'  => trans('database.consumes.consume_time'),
-        'consume_cost'  => trans('database.consumes.consume_cost')
+        'consume_cost'  => trans('database.consumes.consume_cost'),
+
+        // 商店页面
+        'contact_mail'  => '联系邮箱',
+        'web_addr'      => '网站地址'
     ],
 
 ];

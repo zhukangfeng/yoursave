@@ -35,7 +35,7 @@ class GoodController extends Controller
         // 商品状态
         $input['status'] = $request->input('status');
         // 关键词搜索
-        $input['name']  = $request->input('name');
+        $input['key']  = $request->input('key');
         // 一页显示数目
         $input['paginate'] = $request->input('paginate', Config::get('pages.goods.index.default_show_number'));
 
@@ -49,8 +49,8 @@ class GoodController extends Controller
             $query->where('goods.status', $input['status']);
         }
 
-        if ($input['name'] != '') {
-            $query->searchQuery(['goods.good_name', 'goods.good_info'], $input['name']);
+        if ($input['key'] != '') {
+            $query->searchQuery(['goods.good_name', 'goods.good_info'], $input['key']);
         }
 
         $goods = $query->paginate($input['paginate']);

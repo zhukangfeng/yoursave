@@ -146,15 +146,14 @@ return [
             'index_panel_header'    => '商品信息',
             'create_panel_header'   => '创建商品',
             'show_panel_header'     => '商品详情',
-            'search_by_name'    => '商品名',
+            'search_by_key'    => '商品关键词',
             'good_kind'    => '商品分类',
             'create_type'   => '创建身份',
             'created_by_user'   => '普通用户',
             'created_by_shop_user'  => '商店职员',
-            
         ],
         'placeholder'   => [
-            'search_by_name'    => '商品名或者信息关键词搜索，多个关键词中间请用空格分开',
+            'search_by_key'    => '商品名或者信息关键词搜索，多个关键词中间请用空格分开',
             'search_by_good_kind_name'  => '分类信息搜索'
         ]
 
@@ -284,7 +283,27 @@ return [
 
     'shops' => [
         'title' => [
-            'index' => '商店'
+            'index' => '商店一览',
+            'show'  => '商店详情',
+            'create'    => '新建商店信息'
+        ],
+
+        'buttons'    => [
+            'authenticate'  => '认证'
+        ],
+
+        'labels'    => [
+            'index_panel_header'    => '商店信息一览',
+            'show_panel_header'     => '商店详细信息',
+            'create_panel_header'   => '新建商店信息',
+            'search_by_key'         => '关键词搜索',
+            'create_type'           => '创建方式',
+            'created_by_user'       => '普通用户创建',
+            'created_by_shop_user'  => '商店所有者创建',
+
+        ],
+        'placeholder'   => [
+            'search_by_key'    => '商店名称或者信息关键词搜索，多个关键词中间请用空格分开',
         ]
     ],
 

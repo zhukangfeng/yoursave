@@ -20,6 +20,8 @@ define('DB_COMMON_CREATED_AT',   'created_at');
 define('DB_COMMON_UPDATED_AT',   'updated_at');
 define('DB_COMMON_DELETED_AT',   'deleted_at');
 define('DB_COMMON_PUBLIC_TYPE',  'public_type');
+
+// 无效
 define('DB_COMMON_STATUS_INVALID', 0);
 
 define('DB_COMMON_PUBLIC_TYPE_NO',  0); // 不公开
@@ -108,7 +110,7 @@ define('DB_GOOD_COMMENTS_COMMENT_INFO', 'comment_info');  // 评论信息
 define('DB_GOOD_KINDS_CAN_HAS_CHILDREN_NO',     0);
 define('DB_GOOD_KINDS_CAN_HAS_CHILDREN_YES',    1);
 
-define('DB_GOOD_KINDS_STATUS_INVALID', 0);
+define('DB_GOOD_KINDS_STATUS_INVALID', DB_COMMON_STATUS_INVALID);
 define('DB_GOOD_KINDS_STATUS_AUTHENTICATED', 1);
 define('DB_GOOD_KINDS_STATUS_CREATE_BY_USER_UNACTIVE', 2);
 define('DB_GOOD_KINDS_STATUS_CREATE_BY_SHOP_UNACTIVE', 3);
@@ -128,7 +130,7 @@ define('DB_GOODS_GOOD_INFO',    'good_info');       // 商品信息
 define('DB_GOODS_STATUS',       'status');          // 商品状态:0:无效；1:权威认证；2:未认证（一般用户创建）；
                                                     // 3:未认证（商店职员创建）；4：未认证（生产厂家创建）
 
-define('DB_GOOD_STATUS_INVALID', 0);
+define('DB_GOOD_STATUS_INVALID', DB_COMMON_STATUS_INVALID);
 define('DB_GOOD_STATUS_AUTHENTICATED', 1);
 define('DB_GOOD_STATUS_CREATE_BY_USER_UNACTIVE', 2);
 define('DB_GOOD_STATUS_CREATE_BY_SHOP_UNACTIVE', 3);
@@ -200,7 +202,7 @@ define('DB_PRODUCE_COMPANY_GOOD_SELLS_CURRENCY',                'currency');    
 define('DB_PRODUCE_COMPANY_GOOD_SELLS_SELL_NUMBER',             'sell_number');             // 售卖数量
 define('DB_PRODUCE_COMPANY_GOOD_SELLS_STATUS',                  'status');                  // 销售状态:0：无效；1:交易付款完成；
                                                                                             // 2:相谈中；3：合约签订；4：交付中；6:交付完成
-define('DB_PRODUCE_COMPANY_GOOD_SELLS_STATUS_INVALID',      0);
+define('DB_PRODUCE_COMPANY_GOOD_SELLS_STATUS_INVALID',      DB_COMMON_STATUS_INVALID);
 define('DB_PRODUCE_COMPANY_GOOD_SELLS_STATUS_COMPLETED',    1);
 define('DB_PRODUCE_COMPANY_GOOD_SELLS_STATUS_DISCUSSING',   2);
 define('DB_PRODUCE_COMPANY_GOOD_SELLS_STATUS_CONTRACTED',   3);
@@ -229,7 +231,7 @@ define('DB_PRODUCE_COMPANY_USERS_USER_ID',              'user_id');             
 define('DB_PRODUCE_COMPANY_USERS_STATUS',               'status');              // 账户状态：0:无效；1:有效；2:邀请中
 define('DB_PRODUCE_COMPANY_USERS_TYPE',                 'type');                // 账户类型：1: 管理者; 2:经理; 3:普通用户; 4:阅览用户
 
-define('DB_PRODUCE_COMPANY_USERS_STATUS_INVALID', 0);
+define('DB_PRODUCE_COMPANY_USERS_STATUS_INVALID', DB_COMMON_STATUS_INVALID);
 define('DB_PRODUCE_COMPANY_USERS_STATUS_EFFECTIVE', 1);
 define('DB_PRODUCE_COMPANY_USERS_STATUS_REQUESTING', 2);
 
@@ -251,7 +253,7 @@ define('DB_PRODUCE_COMPANYS_RESPONSE_USER_ID',  'response_user_id');    // 负�
 define('DB_PRODUCE_COMPANYS_CORP_INFO',         'corp_info');           // 厂家信息
 define('DB_PRODUCE_COMPANYS_STATUS',            'status');              // 厂家状态:0:无效；1：认证，2:普通注册
 
-define('DB_PRODUCE_COMPANYS_STATUS_INVALID',            0);
+define('DB_PRODUCE_COMPANYS_STATUS_INVALID',            DB_COMMON_STATUS_INVALID);
 define('DB_PRODUCE_COMPANYS_STATUS_AUTHENTICATED',      1);
 define('DB_PRODUCE_COMPANYS_STATUS_UNAUTHENTICATED',    2);
 
@@ -284,7 +286,7 @@ define('DB_SHOP_GOODS_CURRENCY',            'currency');            // 商品货
 define('DB_SHOP_GOODS_GOOD_INFO',           'good_info');           // 商品信息
 define('DB_SHOP_GOODS_STATUS',              'status');              // 商品状态：0:无效；1:有效：2:等待确认
 
-define('DB_SHOP_GOODS_STATUS_INVALID',      0);
+define('DB_SHOP_GOODS_STATUS_INVALID',      DB_COMMON_STATUS_INVALID);
 define('DB_SHOP_GOODS_STATUS_EFFECTIVE',    1);
 define('DB_SHOP_GOODS_STATUS_REQUSTING',    2);
 
@@ -307,7 +309,7 @@ define('DB_SHOP_USERS_TYPE_ADMIN',      1);
 define('DB_SHOP_USERS_TYPE_MANAGER',    2);
 define('DB_SHOP_USERS_TYPE_COMMON',     3);
 define('DB_SHOP_USERS_TYPE_GUEST',      4);
-define('DB_SHOP_USERS_STATUS_INVALID',      0);
+define('DB_SHOP_USERS_STATUS_INVALID',      DB_COMMON_STATUS_INVALID);
 define('DB_SHOP_USERS_STATUS_EFFECTIVE',    1);
 define('DB_SHOP_USERS_STATUS_REQUESTING',   2);
 
@@ -321,7 +323,7 @@ define('DB_SHOPS_SHOP_INFO',        'shop_info');           // 商店信息
 define('DB_SHOPS_STATUS',           'status');              // 商店状态：0:无效; 1:认证；2:未认证
 define('DB_SHOPS_RESPONSE_USER_ID', 'response_user_id');    // 负责人用户id
 
-define('DB_SHOPS_STATUS_INVALID',           0);
+define('DB_SHOPS_STATUS_INVALID',           DB_COMMON_STATUS_INVALID);
 define('DB_SHOPS_STATUS_AUTHENTICATED',     1);
 define('DB_SHOPS_STATUS_UNAUTHENTICATED',   2);
 
@@ -344,7 +346,7 @@ define('DB_USER_RELATIONS_FRIEND_USER_ID',          'friend_user_id');          
 define('DB_USER_RELATIONS_STATUS',                  'status');                  // 好友关系状态：0:无效；1:有效；2:邀请中z
 define('DB_USER_RELATIONS_USER_RELATION_GROUP_ID',  'user_relation_group_id');  // 该好友的分组
 
-define('DB_USER_RELATIONS_STATUS_INVALID',      0);
+define('DB_USER_RELATIONS_STATUS_INVALID',      DB_COMMON_STATUS_INVALID);
 define('DB_USER_RELATIONS_STATUS_EFFECTIVE',    1);
 define('DB_USER_RELATIONS_STATUS_REQUESTIN',    2);
 
@@ -422,7 +424,7 @@ define('DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_RECEVIE_OFFICAL_PRODUCE_COMPANY
 define('DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_RECEIVE_ALL_SHOP', 0b00010000);
 define('DB_USERS_RECEIVE_COLLECTION_MESSAGE_TYPE_RECEIVE_ALL_PRODUCE_COMPANY', 0b00100000);
 
-define('DB_USERS_STATUS_INVALID',       0);
+define('DB_USERS_STATUS_INVALID',       DB_COMMON_STATUS_INVALID);
 define('DB_USERS_STATUS_EFFECITVE',     1);
 define('DB_USERS_STATUS_REQUESTING',    2);
 
