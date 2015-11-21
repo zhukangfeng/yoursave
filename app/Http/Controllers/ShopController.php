@@ -98,6 +98,19 @@ class ShopController extends Controller
             'updated_by'    => $user->id,
         ]);
 
+        if (!is_null($responseUserId)) {
+            // 商店所有者创建，创建商店职员账号
+            ShopUser::create([
+                'user_id'   => $user->id,
+                'shop_id'   => $shop->id,
+                'type'      => DB_SHOP_USERS_TYPE_ADMIN,
+                'email'     => $user->contact_email ? $user->contact_email : $user->login_mail,
+                'status'    => DB_SHOP_USERS_STATUS_EFFECTIVE,
+                'created_by'    => $user->id,
+                'updated_by'    => $user->id
+            ]);
+        }
+
         Session::flash('success_messages', [trans('success_messages.shops.created_success')]);
 
         return redirect()->action('ShopController@show', ['shopId' => $shop->id]);
