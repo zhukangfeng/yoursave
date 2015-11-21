@@ -47,7 +47,8 @@ return [
 
     // 商店信息
     'shops' => [
-        'created_success'   => '商店信息创建成功。'
+        'common_shop_created_success'   => '商店创建成功。',
+        'owner_shop_created_success'    => '商店创建成功,您可以进入受邀账户一览登录后对商店进行管理。'
     ],
 
     // 用户个人信息

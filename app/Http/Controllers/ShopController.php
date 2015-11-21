@@ -109,9 +109,10 @@ class ShopController extends Controller
                 'created_by'    => $user->id,
                 'updated_by'    => $user->id
             ]);
+            Session::flash('success_messages', [trans('success_messages.shops.owner_shop_created_success')]);
+        } else {
+            Session::flash('success_messages', [trans('success_messages.shops.common_shop_created_success')]);
         }
-
-        Session::flash('success_messages', [trans('success_messages.shops.created_success')]);
 
         return redirect()->action('ShopController@show', ['shopId' => $shop->id]);
     }
