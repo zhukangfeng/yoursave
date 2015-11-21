@@ -85,7 +85,7 @@ class ShopUserController extends Controller
         $shopUser = Session::get('ShopUser');
         $shop = Session::get('Shop');
 
-        $loginMails = explode("\n", $request->input('login_mails'));
+        $loginMails = explode("\r\n", $request->input('login_mails'));
         $position = $request->input('position');
         $type = (int)$request->input('type');
         $invitingUserName = $user->getFullName();

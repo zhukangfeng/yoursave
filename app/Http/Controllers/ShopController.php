@@ -8,8 +8,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use App\Models\ShopUser;
 
+// Requests
+use App\Http\Requests\Shops\ShopRequest;
+
 // Services
 use App\Http\Requests;
+use Config;
 use Illuminate\Http\Request;
 use Session;
 
@@ -20,10 +24,38 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $shop = Session::get('Shop');
-        var_dump($shop);
+        $input  = [];
+        // 排序
+        $input['order'] = $request->input('order', []);
+        $input['order_type'] = $request->input('order_type', []);
+
+        // 商品状态
+        $status = $request->input('status');
+        if (!is_null($status)) {
+            $input['status'] = $status;
+        }
+        // 关键词搜索
+        $shopKey = $request->input('key');
+        if (!is_null($shopKey)) {
+            $input['key'] = $shopKey;
+        }
+        // 一页显示数目
+        $paginate = $request->input('paginate', Config::get('pages.shops.index.default_show_number'));
+        if ($paginate != Config::get('pages.shops.index.default_show_number')) {
+            $input['paginate'] = $paginate;
+        }
+        $shops = Shop::select('shops.*')
+            ->ofCandition($input)
+            ->ofEffective()
+            ->withCreatedUser()
+            ->withResponsedUser()
+            ->paginate($paginate);
+
+        $shops->appends($input);
+
+        return view('shops.index', compact('shops'));
     }
 
     /**
@@ -33,18 +65,56 @@ class ShopController extends Controller
      */
     public function create()
     {
-
+        return view('shops.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ShopRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ShopRequest $request)
     {
-        //
+        $user = Session::get('User');
+        if ($request->input('create_type')) {
+            $responseUserId = $user->id;
+        } else {
+            $responseUserId = null;
+        }
+
+        $shop = Shop::create([
+            'name'  => $request->input('name'),
+            'address'   => $request->input('address'),
+            'phone_num' => $request->input('phone_num'),
+            'contact_mail'  => $request->input('contact_mail'),
+            'web_addr'  => $request->input('web_addr'),
+            'shop_info' => $request->input('shop_info'),
+            'response_user_id'  => $responseUserId,
+            'status'        => DB_SHOPS_STATUS_UNAUTHENTICATED,
+            'public_type'   => $request->input('public_type'),
+            'currency'      => $request->input('currency'),
+            'created_by'    => $user->id,
+            'updated_by'    => $user->id,
+        ]);
+
+        if (!is_null($responseUserId)) {
+            // 商店所有者创建，创建商店职员账号
+            ShopUser::create([
+                'user_id'   => $user->id,
+                'shop_id'   => $shop->id,
+                'type'      => DB_SHOP_USERS_TYPE_ADMIN,
+                'email'     => $user->contact_email ? $user->contact_email : $user->login_mail,
+                'status'    => DB_SHOP_USERS_STATUS_EFFECTIVE,
+                'created_by'    => $user->id,
+                'updated_by'    => $user->id
+            ]);
+            Session::flash('success_messages', [trans('success_messages.shops.owner_shop_created_success')]);
+        } else {
+            Session::flash('success_messages', [trans('success_messages.shops.common_shop_created_success')]);
+        }
+
+        return redirect()->action('ShopController@show', ['shopId' => $shop->id]);
     }
 
     /**
@@ -69,9 +139,12 @@ class ShopController extends Controller
         } else {
             $shop = Shop::where('shops.id', $id)
                 ->select('shops.*')
+                ->withCreatedUser()
+                ->withUpdatedUser()
+                ->withResponsedUser()
                 ->first();
 
-            var_dump($shop);
+            return view('shops.show', compact('shop'));
         }
     }
 
@@ -102,11 +175,11 @@ class ShopController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ShopRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(ShopRequest $request)
     {
         $myshop = Session::get('Shop');
         $user = Session::get('User');

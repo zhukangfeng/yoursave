@@ -70,7 +70,10 @@ Route::group([
     Route::get('/preferences/{preferenceId}/edit', 'PreferenceController@edit');
 
     // 商品信息搜索
-    Route::get('shops/search', 'ShopController@search');
+    Route::get('/shops/search', 'ShopController@search');
+    Route::post('/shops', 'ShopController@store');
+    Route::get('/shops/create', 'ShopController@create');
+    Route::get('/shops/{shopId}/authenticate', 'ShopAuthenticateController@index');
 
     // 商店职员登录
     Route::group([

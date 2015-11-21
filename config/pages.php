@@ -30,6 +30,11 @@ return [
             'create'    => [
             ]
         ]
+    ],
+    'shops' => [
+        'index' => [
+            'default_show_number'   => 10,
+        ]
     ]
 
 ];
