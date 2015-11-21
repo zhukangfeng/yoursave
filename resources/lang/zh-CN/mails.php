@@ -28,9 +28,9 @@ return [
                 'title' => '账号邀请',
                 'subject'   => '(:shop_name)商店账户邀请邮件',
                 'from'  => trans('pages.common.app_name'),
-                'body'  => '<label>尊敬的用户，你好，来自商店（:shop_name）的 :inviting_user_name' . trans('pages.common.app_name')
-                    . '。</label><br />'
-                    . '请登录账号，并且在（' . asset('/accounts') . '）完成账户邀请。<br />'
+                'body'  => '<label>尊敬的用户，你好：<br />这是来自商店（:shop_name）的:inviting_user_name的邀请提示。'
+                    . '</label><br />'
+                    . '请登录' .  trans('pages.common.app_name') . '并且在（' . asset('/accounts') . '）完成账户邀请。<br />'
                     . '<br />'
             ]
         ]
