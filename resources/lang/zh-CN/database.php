@@ -130,14 +130,16 @@ return [
     ],
     // 用户登录记录
     DB_LOG_LOGINS => [
-        'table_name'               => 'login log',
-        DB_LOG_LOGIN_LOG_IP         => 'login ip',
-        DB_LOG_LOGIN_LOG_HTTP_INFO  => 'login http information',
-        DB_LOG_LOGIN_STATUS         => 'login status',
-        'column_value' => [
-            DB_LOG_LOGIN_STATUS_SUCCESS         => 'success',
-            DB_LOG_LOGIN_STATUS_PASSWORD_ERROR  => 'password error',
-            DB_LOG_LOGIN_STATUS_OTHER           => 'other'
+        'table_name'    => '登录记录',
+        'log_i['        => '登录ip地址',
+        'log_http_info' => '登录网页信息',
+        'status'        => '登录状态',
+        'column_value'  => [
+            'status'    => [
+                DB_LOG_LOGIN_STATUS_SUCCESS         => '成功',
+                DB_LOG_LOGIN_STATUS_PASSWORD_ERROR  => '密码错误',
+                DB_LOG_LOGIN_STATUS_OTHER           => '其他'
+            ]
         ]
     ],
     // 聊天记录中提醒的用户信息

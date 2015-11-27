@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 // Models
+use App\Models\LogLogin;
 use App\Models\Shop;
 use App\Models\ShopUser;
 use App\Models\ProduceCompany;
@@ -74,8 +75,21 @@ class AuthController extends Controller
 
         if (!AuthUtil::checkPassword($password, $user->password)) {
             // 密码错误
+            LogLogin::create([
+                'user_id'   => $user->id,
+                'log_ip'    => $request->getClientIp(),
+                'log_http_info' => $request->server('HTTP_USER_AGENT'),
+                'status'        => DB_LOG_LOGIN_STATUS_PASSWORD_ERROR
+            ]);
             return back()->withInput()->withErrors(['password_error' => trans('error_messages.login.password_error')]);
         }
+
+        LogLogin::create([
+            'user_id'   => $user->id,
+            'log_ip'    => $request->getClientIp(),
+            'log_http_info' => $request->server('HTTP_USER_AGENT'),
+            'status'        => DB_LOG_LOGIN_STATUS_SUCCESS
+        ]);
         Auth::login($user, (bool)$remember);
         Session::put('User', $user);
 
