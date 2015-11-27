@@ -211,7 +211,9 @@ class FileIO
         ]);
 
         $result = $sts->getSessionToken();
+        echo "<pre>";
         var_dump($result);
+        echo '</pre>';
         exit;
 
 
