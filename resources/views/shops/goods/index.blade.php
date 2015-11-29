@@ -60,11 +60,12 @@
                     <div class="paginage text-center">
                         {!! $shopGoods->render() !!}
                     </div>
-                    @if (Auth::check())
                     <div class="col-md-6 col-md-offset-2">
-                        <label class="btn btn-info"><a href="{{ action('ShopGoodController@create') }}">{{ trans('pages.common.buttons.create') }}</a></label>
+                        <a href="{{ action('ShopController@show', ['shopId' => $shop->id]) }}"><label class="btn btn-info">{{ trans('pages.shops.goods.buttons.back_shop_detail') }}</label></a>
+                        @if (Auth::check())
+                        <a href="{{ action('ShopGoodController@create') }}"><label class="btn btn-info">{{ trans('pages.common.buttons.create') }}</label></a>
+                        @endif
                     </div>
-                    @endif
                 </div>
             </div>
         </div>

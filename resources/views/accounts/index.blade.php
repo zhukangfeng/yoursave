@@ -31,7 +31,11 @@
                             <td>
                                 <a href="{{ action('ShopController@show', ['id' => $shopUser->shop_id]) }}">{{ $shopUser->shop_name }}</a>
                             </td>
-                            <td>{{ trans('database.shop_users.column_value.status.' . $shopUser->status) }}</td>
+                            <td>
+                                @if (array_key_exists($shopUser->status, trans('database.shop_users.column_value.status')))
+                                {{ trans('database.shop_users.column_value.status.' . $shopUser->status) }}
+                                @endif
+                            </td>
                             <td>{{ trans('database.shop_users.column_value.type.' . $shopUser->type) }}</td>
                             <td>{{ $shopUser->created_user_fullname }}</td>
                             <td>{{ isset($shopUser->created_at) ? $shopUser->created_at->format('Y/m/d H:i:s') : '' }}</td>

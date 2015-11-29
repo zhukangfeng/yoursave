@@ -311,6 +311,9 @@ return [
                 'index' => '商店商品一览',
                 'show'  => '商店商品详情',
             ],
+            'buttons'   => [
+                'back_shop_detail'  => '返回商店信息'
+            ],
             'labels'    => [
                 'index_panel_header'    => ':shop_name-商品信息一览',
                 'show_panel_header'     => '商店商品信息一览',
