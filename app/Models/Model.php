@@ -147,7 +147,7 @@ class Model extends ParentModel
         $uname = 'created_user_uname'
     ) {
         $query->leftJoin('users AS ' . $tableName, function ($join) use ($createdBy, $tableName) {
-            $join->on($createdBy, '=', $tableName . '.id')
+            $join->on(with(new static)->getTable() . '.' . $createdBy, '=', $tableName . '.id')
                 ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
         });
         if (App::getLocale() === 'en') {
@@ -182,7 +182,7 @@ class Model extends ParentModel
         $uname = 'updated_user_uname'
     ) {
         $query->leftJoin('users AS ' . $tableName, function ($join) use ($updatedBy, $tableName) {
-            $join->on($updatedBy, '=', $tableName . '.id')
+            $join->on(with(new static)->getTable() . '.' . $updatedBy, '=', $tableName . '.id')
                 ->on($tableName . '.deleted_at', ' IS ', DB::raw('NULL'));
         });
         if (App::getLocale() === 'en') {

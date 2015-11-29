@@ -63,8 +63,7 @@ return [
             'shop_goods'    => '店铺商品',
             'produce_companies'  => '生产厂家',
             'produce_company_goods' => '厂家商品'
-
-        ]
+        ],
 
     ],
 
@@ -289,7 +288,8 @@ return [
         ],
 
         'buttons'    => [
-            'authenticate'  => '认证'
+            'authenticate'  => '认证',
+            'shop_goods'    => '商品一览'
         ],
 
         'labels'    => [
@@ -300,10 +300,29 @@ return [
             'create_type'           => '创建方式',
             'created_by_user'       => '普通用户创建',
             'created_by_shop_user'  => '商店所有者创建',
-
+            'shop_goods'    => '商品一览'
         ],
         'placeholder'   => [
             'search_by_key'    => '商店名称或者信息关键词搜索，多个关键词中间请用空格分开',
+        ],
+
+        'goods' => [
+            'title' => [
+                'index' => '商店商品一览',
+                'show'  => '商店商品详情',
+            ],
+            'labels'    => [
+                'index_panel_header'    => ':shop_name-商品信息一览',
+                'show_panel_header'     => '商店商品信息一览',
+                'search_by_key'         => '关键词搜索',
+                'search_by_name'        => '商品名搜索',
+                'search_by_produce_company_name'    => '生产厂家搜索'
+            ],
+            'placeholder'   => [
+                'search_by_key'    => '商店名称或者信息',
+                'search_by_name'    => '商店名称',
+                'search_by_produce_company_name'    => '商店生产厂家搜索',
+            ],
         ]
     ],
 

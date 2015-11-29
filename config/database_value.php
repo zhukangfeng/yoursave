@@ -287,8 +287,10 @@ define('DB_SHOP_GOODS_GOOD_INFO',           'good_info');           // 商品信
 define('DB_SHOP_GOODS_STATUS',              'status');              // 商品状态：0:无效；1:有效：2:等待确认
 
 define('DB_SHOP_GOODS_STATUS_INVALID',      DB_COMMON_STATUS_INVALID);
-define('DB_SHOP_GOODS_STATUS_EFFECTIVE',    1);
-define('DB_SHOP_GOODS_STATUS_REQUSTING',    2);
+define('DB_SHOP_GOODS_STATUS_AUTHENTICATED',    1);
+define('DB_SHOP_GOODS_STATUS_CREATE_BY_USER_UNACTIVE',  2);
+define('DB_SHOP_GOODS_STATUS_CREATE_BY_SHOP_UNACTIVE',  3);
+define('DB_SHOP_GOODS_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE',   4);
 
 // 商店评价表
 define('DB_SHOP_RANKS',                 'shop_ranks');
