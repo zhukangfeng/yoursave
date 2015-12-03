@@ -78,11 +78,24 @@ class ShopGoodController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param string $shopId
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($shopId = null, Request $request)
     {
-        //
+        if (old('good')) {
+            $good = Good::where('id', old('good'))
+                ->where('status', '!=', DB_GOOD_STATUS_INVALID)
+                ->first();
+        }
+        if (old('produce_company')) {
+            $produceCompany = ProduceCompany::where('id', old('produce_company'))
+                ->where('status', '!=', DB_PRODUCE_COMPANYS_STATUS_INVALID)
+                ->first();
+        }
+
+        return view('shops.goods.create', compact('shopId', 'good', 'shopGood'));
     }
 
     /**

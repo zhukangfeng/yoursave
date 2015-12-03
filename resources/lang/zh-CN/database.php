@@ -113,7 +113,7 @@ return [
         DB_GOOD_RANKS_RANK_INFO => 'rank information'
     ],
     // 商品信息
-    DB_GOODS => [
+    'goods' => [
         'table_name'    => '商品信息',
         'good_name'     => '商品名称',
         'good_info'     => '商品信息',
@@ -234,9 +234,11 @@ return [
         'corp_info'     => '厂家信息',
         'status'        => '状态',
         'column_value' => [
-            DB_PRODUCE_COMPANYS_STATUS_INVALID          => '无效',
-            DB_PRODUCE_COMPANYS_STATUS_AUTHENTICATED    => '权威认证',
-            DB_PRODUCE_COMPANYS_STATUS_UNAUTHENTICATED  => '未认证'
+            'status'    => [
+                DB_PRODUCE_COMPANYS_STATUS_INVALID          => '无效',
+                DB_PRODUCE_COMPANYS_STATUS_AUTHENTICATED    => '权威认证',
+                DB_PRODUCE_COMPANYS_STATUS_UNAUTHENTICATED  => '未认证'
+            ]
         ]
     ],
     // 商品商店收集

@@ -75,6 +75,9 @@ Route::group([
     Route::get('/shops/create', 'ShopController@create');
     Route::get('/shops/{shopId}/authenticate', 'ShopAuthenticateController@index');
 
+    // 商店商品
+    Route::get('/shops/{shopId}/goods/create', 'ShopGoodController@create');
+
     // 商店职员登录
     Route::group([
         'middleware' => 'shop_auth'

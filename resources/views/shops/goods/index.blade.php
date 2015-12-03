@@ -63,7 +63,7 @@
                     <div class="col-md-6 col-md-offset-2">
                         <a href="{{ action('ShopController@show', ['shopId' => $shop->id]) }}"><label class="btn btn-info">{{ trans('pages.shops.goods.buttons.back_shop_detail') }}</label></a>
                         @if (Auth::check())
-                        <a href="{{ action('ShopGoodController@create') }}"><label class="btn btn-info">{{ trans('pages.common.buttons.create') }}</label></a>
+                        <a href="{{ url('/shops/' . $shop->id . '/goods/create') }}"><label class="btn btn-info">{{ trans('pages.common.buttons.create') }}</label></a>
                         @endif
                     </div>
                 </div>
