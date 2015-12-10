@@ -23,6 +23,7 @@
                         <tr>
                             <th class="col-md-1"></th>
                             <th class="col-md-1 sort-able">{{ trans('database.shops.name') }}</th>
+                            <th class="col-md-1 sort-able">{{ trans('pages.shops.labels.shop_goods') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.shops.address') }}</th>
                             <th class="col-md-1 sort-able">{{ trans('database.shops.status') }}</th>
                             <th class="col-md-1">{{ trans('pages.common.labels.response_user_name') }}</th>
@@ -35,6 +36,7 @@
                             <td>
                                 <a href="{{ action('ShopController@show', ['id' => $shop->id]) }}">{{ $shop->name }}</a>
                             </td>
+                            <td><a href="{{ action('ShopGoodController@index', ['shopId' => $shop->id]) }}">{{ trans('pages.shops.buttons.shop_goods') }}</a></td>
                             <td>{{ $shop->address }}</td>
                             <td>{{ trans('database.shops.column_value.status.' . $shop->status) }}</td>
                             <td>{{ $shop->response_user_uname }}</td>
@@ -48,7 +50,7 @@
                     </div>
                     @if (Auth::check())
                     <div class="col-md-6 col-md-offset-2">
-                        <label class="btn btn-info"><a href="{{ action('ShopController@create') }}">{{ trans('pages.common.buttons.create') }}</a></label>
+                        <a href="{{ action('ShopController@create') }}"><label class="btn btn-info">{{ trans('pages.common.buttons.create') }}</label></a>
                     </div>
                     @endif
                 </div>

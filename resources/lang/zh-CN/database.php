@@ -56,7 +56,7 @@ return [
         ]
     ],
     // 用户的消费信息
-    DB_CONSUMES => [
+    'consumes' => [
         'table_name'    => 'consumes',
         'consume_name'  => '消费名',
         'shop_name'     => '商店名',
@@ -113,7 +113,7 @@ return [
         DB_GOOD_RANKS_RANK_INFO => 'rank information'
     ],
     // 商品信息
-    DB_GOODS => [
+    'goods' => [
         'table_name'    => '商品信息',
         'good_name'     => '商品名称',
         'good_info'     => '商品信息',
@@ -198,7 +198,7 @@ return [
         ]
     ],
     // 生产厂家产品信息
-    DB_PRODUCE_COMPANY_GOODS => [
+    'produce_company_goods' => [
         'table_name'                       => 'company\' goods',
         DB_PRODUCE_COMPANY_GOODS_PRICE      => 'price',
         DB_PRODUCE_COMPANY_GOODS_COST       => 'cost',
@@ -224,19 +224,21 @@ return [
         ]
     ],
     // 商品生产厂家信息
-    DB_PRODUCE_COMPANYS => [
-        'table_name'                           => 'produce companys',
-        DB_PRODUCE_COMPANYS_NAME                => 'name',
-        DB_PRODUCE_COMPANYS_ADDRESS             => 'address',
-        DB_PRODUCE_COMPANYS_PHONE_NUM           => 'phone number',
-        DB_PRODUCE_COMPANYS_POST_ADDR           => 'post address',
-        DB_PRODUCE_COMPANYS_RESPONSE_EMAIL      => 'response email',
-        DB_PRODUCE_COMPANYS_CORP_INFO           => 'company information',
-        DB_PRODUCE_COMPANYS_STATUS              => 'status',
+    'produce_companies' => [
+        'table_name'                           => '商品生产厂家',
+        'name'          => '生产厂家名',
+        'address'       => '地址',
+        'phone_num'     => '联系电话',
+        'post_addr'     => '邮政编码',
+        'response_email'    => '负责人邮编',
+        'corp_info'     => '厂家信息',
+        'status'        => '状态',
         'column_value' => [
-            DB_PRODUCE_COMPANYS_STATUS_INVALID          => 'invalid',
-            DB_PRODUCE_COMPANYS_STATUS_AUTHENTICATED    => 'authenticated',
-            DB_PRODUCE_COMPANYS_STATUS_UNAUTHENTICATED  => 'unauthenticated'
+            'status'    => [
+                DB_PRODUCE_COMPANYS_STATUS_INVALID          => '无效',
+                DB_PRODUCE_COMPANYS_STATUS_AUTHENTICATED    => '权威认证',
+                DB_PRODUCE_COMPANYS_STATUS_UNAUTHENTICATED  => '未认证'
+            ]
         ]
     ],
     // 商品商店收集
@@ -255,17 +257,20 @@ return [
         DB_SHOP_GOOD_COMMENTS_COMMENT_INFO  => 'comment information'
     ],
     // 商店商品信息
-    DB_SHOP_GOODS => [
-        'table_name'               => 'shop\'s goods',
-        DB_SHOP_GOODS_COST          => 'cost',
-        DB_SHOP_GOODS_PRICE         => 'price',
-        DB_SHOP_GOODS_CURRENCY      => 'currency',
-        DB_SHOP_GOODS_GOOD_INFO     => 'good information',
-        DB_SHOP_GOODS_STATUS        => 'status',
+    'shop_goods' => [
+        'table_name'    => '商店商品信息',
+        'cost'          => '花费',
+        'price'         => '售价',
+        'good_info'     => '商品信息',
+        'status'        => '商品信息状态',
         'column_value' => [
-            DB_SHOP_GOODS_STATUS_INVALID    => 'invalid',
-            DB_SHOP_GOODS_STATUS_EFFECTIVE  => 'effective',
-            DB_SHOP_GOODS_STATUS_REQUSTING  => 'requesting'
+            'status'    => [
+                DB_SHOP_GOODS_STATUS_INVALID    => '无效',
+                DB_SHOP_GOODS_STATUS_AUTHENTICATED  => '权威认证',
+                DB_SHOP_GOODS_STATUS_CREATE_BY_USER_UNACTIVE => '未认证（用户创建）',
+                DB_SHOP_GOODS_STATUS_CREATE_BY_SHOP_UNACTIVE => '未认证（商店创建）',
+                DB_SHOP_GOODS_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE => '未认证（生产厂家创建）'
+            ]
         ]
     ],
     // 商店评价

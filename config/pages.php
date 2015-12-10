@@ -34,6 +34,9 @@ return [
     'shops' => [
         'index' => [
             'default_show_number'   => 10,
+        ],
+        'goods' => [
+            'default_show_number'   => 10,
         ]
     ]
 

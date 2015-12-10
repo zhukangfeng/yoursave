@@ -234,9 +234,13 @@ return [
         DB_SHOP_GOODS_GOOD_INFO     => 'good information',
         DB_SHOP_GOODS_STATUS        => 'status',
         'column_value' => [
-            DB_SHOP_GOODS_STATUS_INVALID    => 'invalid',
-            DB_SHOP_GOODS_STATUS_EFFECTIVE  => 'effective',
-            DB_SHOP_GOODS_STATUS_REQUSTING  => 'requesting'
+            'status'    => [
+                DB_SHOP_GOODS_STATUS_INVALID    => 'invalid',
+                DB_SHOP_GOODS_STATUS_AUTHENTICATED  => '权威认证',
+                DB_SHOP_GOODS_STATUS_CREATE_BY_USER_UNACTIVE => '未认证（用户创建）',
+                DB_SHOP_GOODS_STATUS_CREATE_BY_SHOP_UNACTIVE => '未认证（商店创建）',
+                DB_SHOP_GOODS_STATUS_CREATE_BY_PRODUCE_COMPANY_UNACTIVE => '未认证（生产厂家创建）'
+            ]
         ]
     ],
     // 商店评价

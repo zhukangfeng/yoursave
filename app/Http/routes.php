@@ -75,6 +75,9 @@ Route::group([
     Route::get('/shops/create', 'ShopController@create');
     Route::get('/shops/{shopId}/authenticate', 'ShopAuthenticateController@index');
 
+    // 商店商品
+    Route::get('/shops/{shopId}/goods/create', 'ShopGoodController@create');
+
     // 商店职员登录
     Route::group([
         'middleware' => 'shop_auth'
@@ -210,3 +213,11 @@ Route::resource('/goods', 'GoodController', [
 // 商店
 Route::get('/shops', 'ShopController@index');
 Route::get('/shops/{shopId}', 'ShopController@show');
+Route::get('/shops/{shopId}/goods', 'ShopGoodController@index');
+Route::get('/shops/{shopId}/goods/{shopGoodId}', 'ShopGoodController@show');
+
+// 生产厂家
+Route::get('/produce_companies', 'ProduceCompanyController@index');
+Route::get('/produce_companies/{produceCompanyId}', 'ProduceCompanyController@show');
+Route::get('/produce_companies/{produceCompanyId}/goods', 'ProduceCompanyGoodController@index');
+Route::get('/produce_companies/{produceCompanyId}/goods/{produceCompanyGoodId}', 'ProduceCompanyGoodController@show');
