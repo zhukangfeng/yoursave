@@ -36,7 +36,11 @@
                                 {{ trans('database.shop_users.column_value.status.' . $shopUser->status) }}
                                 @endif
                             </td>
-                            <td>{{ trans('database.shop_users.column_value.type.' . $shopUser->type) }}</td>
+                            <td>
+                                @if (array_key_exists($shopUser->type, trans('database.shop_users.column_value.type')))
+                                {{ trans('database.shop_users.column_value.type.' . $shopUser->type) }}
+                                @endif
+                            </td>
                             <td>{{ $shopUser->created_user_fullname }}</td>
                             <td>{{ isset($shopUser->created_at) ? $shopUser->created_at->format('Y/m/d H:i:s') : '' }}</td>
                             <td>{{ isset($shopUser->updated_at) ? $shopUser->updated_at->format('Y/m/d H:i:s') : '' }}</td>
