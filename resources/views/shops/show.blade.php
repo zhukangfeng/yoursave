@@ -37,6 +37,12 @@
                             <td>{{ $shop->shop_info }}</td>
                         </tr>
                         <tr>
+                            <th class="col-md-3 active">{{ trans('pages.shops.labels.shop_goods') }}</th>
+                            <td>
+                                <a href="{{ action('ShopGoodController@index', ['shopId' => $shop->id]) }}">{{ trans('pages.shops.buttons.shop_goods') }}</a>
+                            </td>
+                        </tr>
+                        <tr>
                             <th class="col-md-3 active">{{ trans('pages.common.labels.response_user_name') }}</th>
                             <td>{{ $shop->response_user_uname }}</td>
                         </tr>
