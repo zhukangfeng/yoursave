@@ -326,7 +326,7 @@ return [
             ],
             'placeholder'   => [
                 'search_by_key'    => '商店名称或者信息',
-                'search_by_good_name'    => '商店名称',
+                'search_by_good_name'    => '商品名称',
                 'search_by_produce_company_name'    => '商店生产厂家搜索',
             ],
         ]

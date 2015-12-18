@@ -125,7 +125,7 @@ class UserController extends Controller
         DB::commit();
         Session::flash('success_messages', [trans('success_messages.register.user_registered_success')]);
 
-        return redirect('/');
+        return redirect('/login');
     }
 
     /**
