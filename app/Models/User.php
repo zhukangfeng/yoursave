@@ -118,7 +118,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @author zhukangfeng
      */
-    public function scopeWithFullName($query, $tableName = 'users', $tableName = 'users', $fullname = 'fullname')
+    public function scopeWithFullName($query, $tableName = 'users', $fullname = 'fullname')
     {
         if (App::getLocale() === 'en') {
             return $query->addSelect(
