@@ -1,11 +1,11 @@
-@extends ('app', ['title' => trans('pages.myshop.title.show'), 'id' => 'shop', 'class' => 'myshop show', 'console' => '', 'mode' => '', 'name' => ''])
+@extends ('app', ['title' => trans('pages.shops.title.show'), 'id' => 'shop', 'class' => 'shops show', 'console' => '', 'mode' => '', 'name' => ''])
 
 @section ('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">{{ trans('pages.myshop.labels.show_panel_header') }}</div>
+                <div class="panel-heading">{{ trans('pages.shops.labels.show_panel_header') }}</div>
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <tr>
@@ -26,19 +26,34 @@
                         </tr>
                         <tr>
                             <th class="col-md-3 active">{{ trans('database.shops.web_addr') }}</th>
-                            <td>{{ $shop->web_addr }}</td>
+                            <td>
+                                @if ($shop->web_addr)
+                                <a href="{{ $shop->web_addr }}" target="_blank">{{ $shop->web_addr }}</a>
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <th class="col-md-3 active">{{ trans('database.shops.shop_info') }}</th>
                             <td>{{ $shop->shop_info }}</td>
                         </tr>
                         <tr>
+                            <th class="col-md-3 active">{{ trans('pages.shops.labels.shop_goods') }}</th>
+                            <td>
+                                <a href="{{ action('ShopGoodController@index', ['shopId' => $shop->id]) }}">{{ trans('pages.shops.buttons.shop_goods') }}</a>
+                            </td>
+                        </tr>
+                        <tr>
                             <th class="col-md-3 active">{{ trans('pages.common.labels.response_user_name') }}</th>
-                            <td>{{ $shop->response_user_fullname }}</td>
+                            <td>{{ $shop->response_user_uname }}</td>
                         </tr>
                         <tr>
                             <th class="col-md-3 active">{{ trans('database.shops.status') }}</th>
-                            <td>{{ trans('database.shops.column_value.status.' . $shop->status) }}</td>
+                            <td>
+                                {{ trans('database.shops.column_value.status.' . $shop->status) }}
+                                @if ($shop->status === DB_SHOPS_STATUS_UNAUTHENTICATED)
+                                    <a href="{{ action('ShopAuthenticateController@index', ['shopId' => $shop->id]) }}"><label class="btn btn-default active">{{ trans('pages.shops.buttons.authenticate') }}</label></a>
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <th class="col-md-3 active">{{ trans('database.common.public_type') }}</th>
@@ -50,7 +65,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-3 active">{{ trans('database.common.created_by') }}</th>
-                            <td>{{ $shop->created_user_fullname }}</td>
+                            <td>{{ $shop->created_user_uname }}</td>
                         </tr>
                         <tr>
                             <th class="col-md-3 active">{{ trans('database.common.updated_at') }}</th>
@@ -58,15 +73,13 @@
                         </tr>
                         <tr>
                             <th class="col-md-3 active">{{ trans('database.common.updated_by') }}</th>
-                            <td>{{ $shop->updated_user_fullname }}</td>
+                            <td>{{ $shop->updated_user_uname }}</td>
                         </tr>
                         
                     </table>
-                    @if (Session::get('ShopUser')->type === DB_SHOP_USERS_TYPE_ADMIN)
                     <div class="col-md-6 col-md-offset-4">
-                        <label class="btn btn-primary"><a href="{{ url('/myshop/edit') }}">{{ trans('pages.common.buttons.edit') }}</a></label>
+                        <a href="{{ action('ShopController@index') }}"><label class="btn btn-info">{{ trans('pages.common.buttons.back_to_list') }}</label></a>
                     </div>
-                    @endif
                 </div>
             </div>
         </div>

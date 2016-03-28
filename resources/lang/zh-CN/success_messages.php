@@ -16,6 +16,12 @@ return [
         'logout_success'    => '账户注销成功'
     ],
 
+    // 个人消费
+    'consumes'  => [
+        'created_success'   => '个人消费账单创建成功',
+        'updated_success'   => '个人消费更新成功'
+    ],
+
     // 商品分类
     'good_kinds'    => [
         'created_success'   => '商品分类创建成功',
@@ -39,6 +45,11 @@ return [
         'user_registered_success' => '用户注册成功，请前往邮箱进行激活'
     ],
 
+    // 商店信息
+    'shops' => [
+        'common_shop_created_success'   => '商店创建成功。',
+        'owner_shop_created_success'    => '商店创建成功,您可以进入受邀账户一览登录后对商店进行管理。'
+    ],
 
     // 用户个人信息
     'user'  => [

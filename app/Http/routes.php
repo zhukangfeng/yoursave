@@ -56,14 +56,10 @@ Route::group([
 
     // 商品
     Route::get('/goods/search', 'GoodController@search');
-    Route::resource('/goods', 'GoodController', [
-        'only'  => [
-            'create',
-            'store',
-            'edit',
-            'update'
-        ]
-    ]);
+    Route::post('/goods', 'GoodController@store');
+    Route::get('/goods/create', 'GoodController@create');
+    Route::post('/goods/{goodId}', 'GoodController@update');
+    Route::get('/goods/{goodId}/edit', 'GoodController@edit');
 
     // 促销信息
     Route::get('/preferences', 'PreferenceController@index');
@@ -74,7 +70,13 @@ Route::group([
     Route::get('/preferences/{preferenceId}/edit', 'PreferenceController@edit');
 
     // 商品信息搜索
-    Route::get('shops/search', 'ShopController@search');
+    Route::get('/shops/search', 'ShopController@search');
+    Route::post('/shops', 'ShopController@store');
+    Route::get('/shops/create', 'ShopController@create');
+    Route::get('/shops/{shopId}/authenticate', 'ShopAuthenticateController@index');
+
+    // 商店商品
+    Route::get('/shops/{shopId}/goods/create', 'ShopGoodController@create');
 
     // 商店职员登录
     Route::group([
@@ -197,12 +199,8 @@ Route::get('good_kinds/', 'GoodKindController@index');
 Route::get('good_kinds/{goodKindId}', 'GoodKindController@show');
 
 // 商品
-Route::resource('/good', 'GoodController', [
-    'only'  => [
-        'index',
-        'show'
-    ]
-]);
+Route::get('/good', 'GoodController@index');
+Route::get('/good/{goodId}', 'GoodController@show');
 
 // 商店商品信息
 Route::resource('/goods', 'GoodController', [
@@ -215,3 +213,11 @@ Route::resource('/goods', 'GoodController', [
 // 商店
 Route::get('/shops', 'ShopController@index');
 Route::get('/shops/{shopId}', 'ShopController@show');
+Route::get('/shops/{shopId}/goods', 'ShopGoodController@index');
+Route::get('/shops/{shopId}/goods/{shopGoodId}', 'ShopGoodController@show');
+
+// 生产厂家
+Route::get('/produce_companies', 'ProduceCompanyController@index');
+Route::get('/produce_companies/{produceCompanyId}', 'ProduceCompanyController@show');
+Route::get('/produce_companies/{produceCompanyId}/goods', 'ProduceCompanyGoodController@index');
+Route::get('/produce_companies/{produceCompanyId}/goods/{produceCompanyGoodId}', 'ProduceCompanyGoodController@show');

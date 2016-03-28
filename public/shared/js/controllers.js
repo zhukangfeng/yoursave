@@ -26,7 +26,7 @@ $(".file-upload input[type=file].multi-file-upload").fileinput({
 });
 
 $(".date input[type=text].full-date").datepicker({
-    format: "yyyy/mm/dd",
+    format: "yyyy-mm-dd",
     todayBtn: true,
     language: $language,
     todayHighlight: true

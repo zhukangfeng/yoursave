@@ -21,3 +21,4 @@
 <script type="text/javascript" src="{{ asset('/shared/js/locales/messages.' . App::getLocale() . '.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('/shared/js/functions.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('/shared/js/controllers.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('/shared/js/aws/aws-sdk-2.2.18.js') }}" defer></script>

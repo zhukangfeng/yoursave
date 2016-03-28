@@ -17,4 +17,9 @@ class LogLogin extends Model
         'log_http_info',
         'status'
     ];
+
+    public function setUpdatedAtAttribute($value)
+    {
+        // to Disable updated_at
+    }
 }

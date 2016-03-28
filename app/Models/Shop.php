@@ -48,4 +48,32 @@ class Shop extends Model
         'updated_by'    => 'integer',
         'deleted_by'    => 'integer',
     ];
+
+    /**
+     * 商店搜索条件
+     *
+     * @param @query
+     * @param array $data compct('key', 'name', 'status')
+     * @return $query
+     */
+    public function scopeOfCandition($query, $data)
+    {
+        // 关键词
+        if (isset($data['key']) && $data['key'] != '') {
+            $query->searchQuery([
+                'shops.name',
+                'shops.shop_info'
+            ], $data['key']);
+        }
+        // 商店姓名
+        if (isset($data['name']) && $data['name'] != '') {
+            $query->searchQuery('shops.name', $data['name']);
+        }
+        // 商店状态
+        if (isset($data['status']) && $data['status'] != '') {
+            $query->where('shops.status', $data['status']);
+        }
+
+        return $query;
+    }
 }
