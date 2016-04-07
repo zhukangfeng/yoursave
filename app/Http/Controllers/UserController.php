@@ -190,7 +190,7 @@ class UserController extends Controller
             Session::flash('error_messages', [trans('error_messages.register.over_token_active_time')]);
             return redirect('/register/resendmail');
         }
-        
+
         $user->update([
             'password'  => AuthUtil::encryptPassword($request->input('password')),
             'status'    => DB_USERS_STATUS_EFFECITVE,
