@@ -1,7 +1,9 @@
-/vendor
-/node_modules
-Homestead.yaml
-Homestead.json
-.env
-composer.lock
-/storage
+/development/
+/node_modules/
+/vendor/
+/storage/
+/.env
+/composer.lock
+/Homestead.yaml
+/Homestead.json
+

@@ -173,7 +173,7 @@ class ShopUserController extends Controller
                 }
             }
         }
-        
+
         Session::flash('success_messages', [trans('success_messages.myshop.users.create_success')]);
 
         return redirect()->action('ShopUserController@index');
