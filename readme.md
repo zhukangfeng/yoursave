@@ -52,7 +52,7 @@ php artisan db:seed
  ```
 
 
-＃ 开发规则
+# 开发规则
 1. 代码规范
 要求符合[psr-2规范](http://www.php-fig.org/psr/psr-2/)，尽量满足[psr-4规范](http://www.php-fig.org/psr/psr-4/)
 
