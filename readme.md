@@ -110,3 +110,5 @@ trans('views.page_name.category_name.info_name');  // 界面控键名文件
 trans('messages.page_name.category_name.info_name');  // 界面信息提示文件
 trans('database.table_name.table_cell_name.value');  // 数据库信息文件
  ```
+# License
+个人开发软件，版权个人所有。不过欢迎大家参与开发。如有疑问可以添加issue，我将及时回复。
