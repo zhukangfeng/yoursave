@@ -1,29 +1,33 @@
-＃ 开发工程初始化
+# 版本信息
+2016/04/14 release v0.0.1
+
+
+# 开发工程初始化
 1. 创建并进入工作目录
-```sh
+ ```sh
 cd wording dir
-```
+ ```
 
 2. 源代码下载
-```sh
+ ```sh
 git clone
-```
+ ```
 可以使用sourcetree等工具
 
 3. 环境配置文件设置
-```sh
+ ```sh
 cp .env.example .env
 vim .env
 //根据本地需求配置文件
-```
+ ```
 
-4.数据库设置
+4. 数据库设置
 创建数据库，然后将数据库名称，用户名，密码等写入.env文件
 
-4.composer 插件安装
+5. composer 插件安装
 [composer 安装方法](https://github.com/composer/composer)
 安装完毕后
-```sh
+ ```sh
 composer install
 // 如果出错了，打开文件wording_dir/config/app.php，
 // 注释掉‘Maatwebsite\Excel\ExcelServiceProvider::class’和‘'Excel'     => Maatwebsite\Excel\Facades\Excel::class,’
@@ -31,21 +35,21 @@ composer install
 // 注释掉‘'autosize-method'             => PHPExcel_Shared_Font::AUTOSIZE_METHOD_APPROX,’
 // 然后再次执行'composer install'
 // 成功后去掉之前添加的注释
-```
-5. laravel 加密key生成
+ ```
+6. laravel 加密key生成
 
-```sh
+ ```sh
 php artisan key:generate
-```
+ ```
 
-6.数据库内容更新
-```sh
+7. 数据库内容更新
+ ```sh
 php artisan migrate
 // 数据表生成
 
 php artisan db:seed
 // 测试数据添加
-```
+ ```
 
 
 ＃ 开发规则
@@ -72,21 +76,21 @@ php artisan db:seed
  1. 开发时应在自己分支上进行开发，在进行开发之前，将主分支(development)合并到自己分支（为了保证为最新代码，减少冲突）
  2. 开发完成后，进行代码规范检查
 
-```sh
+  ```sh
 phpcs --standard=psr2 --colors testfile
 // 如果可以的话进行psr4测试
 // phpcs --standard=psr4 --colors testfile
-```
+  ```
 
  3. phpunit测试
  在完成功能代码后，需对自己所写代码撰写测试代码，进行测试。要求有详细的测试记录
 
-```sh
+ ```sh
 phpunit
 // 对所有测试文件进行测试
 phpunit filename
 // 对单个文件进行测试
-```
+ ```
 
  4. git提交
  在完成阶段性工作或者全部工作后，并且测试和代码规范都正确后可以提交到代码库的自己分支中，提交git管理库有利于错误时回滚，所以在完成一定代码量后即可提交。
@@ -101,8 +105,8 @@ phpunit filename
 
 ＃ laravel 多语言对应
 所以涉及到多语言问题(界面显示，邮件信息等)都在/resources/lang文件夹下定义然后利用laravel函数
-```php
+ ```php
 trans('views.page_name.category_name.info_name');  // 界面控键名文件
 trans('messages.page_name.category_name.info_name');  // 界面信息提示文件
 trans('database.table_name.table_cell_name.value');  // 数据库信息文件
-```
+ ```
