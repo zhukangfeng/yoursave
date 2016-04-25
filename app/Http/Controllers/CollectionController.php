@@ -10,7 +10,7 @@ use App\Http\Requests;
 // Services
 use Illuminate\Http\Request;
 
-class ShopPreferenceController extends Controller
+class CollectionController extends Controller
 {
     /**
      * Display a listing of the resource.
