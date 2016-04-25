@@ -38,6 +38,9 @@ Route::group([
     Route::get('api/file/uploadurl', 'APIController@getFileUploadUrl');
     Route::get('api/file/download', 'APIController@fileDownload');
 
+    // 个人收藏
+    Route::resource('collections', 'CollectionController');
+
     // 个人消费
     Route::get('/consumes', 'ConsumeController@index');
     Route::post('/consumes', 'ConsumeController@store');
@@ -68,6 +71,9 @@ Route::group([
     Route::get('/preferences/{preferenceId}', 'PreferenceController@show');
     Route::put('/preferences/{preferenceId}', 'PreferenceController@update');
     Route::get('/preferences/{preferenceId}/edit', 'PreferenceController@edit');
+
+    // 个人分享
+    Route::resource('shares', 'ShareController');
 
     // 商品信息搜索
     Route::get('/shops/search', 'ShopController@search');
