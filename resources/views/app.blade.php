@@ -63,39 +63,37 @@
                             </ul>
                         </li>
                         <li><a href="{{ url('/preferences') }}">{{ trans('pages.preferences.title.index') }}</a></li>
-                        @if (Auth::check())
-                            <li>
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.collections.title.info') }}</a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/collections') }}">{{ trans('pages.collections.title.index') }}</a></li>
-                                    <li><a href="{{ url('/collections/') }}">{{ trans('pages.collections.title.preferences') }}</a></li>
-                                    <li><a href="{{ url('/collections/goods') }}">{{ trans('pages.collections.title.goods') }}</a></li>
-                                    <li><a href="{{ url('/collections/shops') }}">{{ trans('pages.collections.title.shops') }}</a></li>
-                                    <li><a href="{{ url('/collections/shop_goods') }}">{{ trans('pages.collections.title.shop_goods') }}</a></li>
-                                    <li><a href="{{ url('/collections/produce_companies') }}">{{ trans('pages.collections.title.produce_companies') }}</a></li>
-                                    <li><a href="{{ url('/collections/produce_company_goods') }}">{{ trans('pages.collections.title.produce_company_goods') }}</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.shares.title.info') }}</a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/shares') }}">{{ trans('pages.shares.title.index') }}</a></li>
-                                    <li><a href="{{ url('/shares/') }}">{{ trans('pages.shares.title.preferences') }}</a></li>
-                                    <li><a href="{{ url('/shares/goods') }}">{{ trans('pages.shares.title.goods') }}</a></li>
-                                    <li><a href="{{ url('/shares/shops') }}">{{ trans('pages.shares.title.shops') }}</a></li>
-                                    <li><a href="{{ url('/shares/shop_goods') }}">{{ trans('pages.shares.title.shop_goods') }}</a></li>
-                                    <li><a href="{{ url('/shares/produce_companies') }}">{{ trans('pages.shares.title.produce_companies') }}</a></li>
-                                    <li><a href="{{ url('/shares/produce_company_goods') }}">{{ trans('pages.shares.title.produce_company_goods') }}</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.records.title.info') }}</a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/consumes') }}">{{ trans('pages.records.title.consumes') }}</a></li>
-                                    <li><a href="{{ url('/consumes') }}">{{ trans('pages.records.title.diaries') }}</a></li>
-                                </ul>
-                            </li>
-                        @endif
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.collections.title.info') }}</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/collections') }}">{{ trans('pages.collections.title.index') }}</a></li>
+                                <li><a href="{{ url('/collections/') }}">{{ trans('pages.collections.title.preferences') }}</a></li>
+                                <li><a href="{{ url('/collections/goods') }}">{{ trans('pages.collections.title.goods') }}</a></li>
+                                <li><a href="{{ url('/collections/shops') }}">{{ trans('pages.collections.title.shops') }}</a></li>
+                                <li><a href="{{ url('/collections/shop_goods') }}">{{ trans('pages.collections.title.shop_goods') }}</a></li>
+                                <li><a href="{{ url('/collections/produce_companies') }}">{{ trans('pages.collections.title.produce_companies') }}</a></li>
+                                <li><a href="{{ url('/collections/produce_company_goods') }}">{{ trans('pages.collections.title.produce_company_goods') }}</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.shares.title.info') }}</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/shares') }}">{{ trans('pages.shares.title.index') }}</a></li>
+                                <li><a href="{{ url('/shares/') }}">{{ trans('pages.shares.title.preferences') }}</a></li>
+                                <li><a href="{{ url('/shares/goods') }}">{{ trans('pages.shares.title.goods') }}</a></li>
+                                <li><a href="{{ url('/shares/shops') }}">{{ trans('pages.shares.title.shops') }}</a></li>
+                                <li><a href="{{ url('/shares/shop_goods') }}">{{ trans('pages.shares.title.shop_goods') }}</a></li>
+                                <li><a href="{{ url('/shares/produce_companies') }}">{{ trans('pages.shares.title.produce_companies') }}</a></li>
+                                <li><a href="{{ url('/shares/produce_company_goods') }}">{{ trans('pages.shares.title.produce_company_goods') }}</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.records.title.info') }}</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/consumes') }}">{{ trans('pages.records.title.consumes') }}</a></li>
+                                <li><a href="{{ url('/consumes') }}">{{ trans('pages.records.title.diaries') }}</a></li>
+                            </ul>
+                        </li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
