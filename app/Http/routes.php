@@ -49,6 +49,8 @@ Route::group([
     Route::put('/consumes/{consumeId}', 'ConsumeController@update');
     Route::get('/consumes/{consumeId}/edit', 'ConsumeController@edit');
 
+    // 个人笔记
+    Route::resource('diaries', 'DiaryController');
     // 商品分类
     Route::get('good_kinds', 'GoodKindController@index');
     Route::get('good_kinds/create', 'GoodKindController@create');
@@ -59,7 +61,7 @@ Route::group([
 
     // 商品
     Route::get('/goods/search', 'GoodController@search');
-    Route::post('/goods', 'GoodController@store');
+        Route::post('/goods', 'GoodController@store');
     Route::get('/goods/create', 'GoodController@create');
     Route::post('/goods/{goodId}', 'GoodController@update');
     Route::get('/goods/{goodId}/edit', 'GoodController@edit');

@@ -91,7 +91,7 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ trans('pages.records.title.info') }}</a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/consumes') }}">{{ trans('pages.records.title.consumes') }}</a></li>
-                                <li><a href="{{ url('/consumes') }}">{{ trans('pages.records.title.diaries') }}</a></li>
+                                <li><a href="{{ url('/diaries') }}">{{ trans('pages.records.title.diaries') }}</a></li>
                             </ul>
                         </li>
                     </ul>
