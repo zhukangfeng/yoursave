@@ -1,5 +1,9 @@
 # 版本信息
-2016/04/14 release v0.0.1
+ 2016/04/14 release v0.0.1
+
+ 2016/04/15 release v0.0.2
+
+ 2016/04/25 release v0.0.3
 
 
 # 开发工程初始化
@@ -76,21 +80,21 @@ php artisan db:seed
  1. 开发时应在自己分支上进行开发，在进行开发之前，将主分支(development)合并到自己分支（为了保证为最新代码，减少冲突）
  2. 开发完成后，进行代码规范检查
 
-  ```sh
+   ```sh
 phpcs --standard=psr2 --colors testfile
 // 如果可以的话进行psr4测试
 // phpcs --standard=psr4 --colors testfile
-  ```
+   ```
 
  3. phpunit测试
  在完成功能代码后，需对自己所写代码撰写测试代码，进行测试。要求有详细的测试记录
 
- ```sh
+   ```sh
 phpunit
 // 对所有测试文件进行测试
 phpunit filename
 // 对单个文件进行测试
- ```
+   ```
 
  4. git提交
  在完成阶段性工作或者全部工作后，并且测试和代码规范都正确后可以提交到代码库的自己分支中，提交git管理库有利于错误时回滚，所以在完成一定代码量后即可提交。
@@ -103,10 +107,13 @@ phpunit filename
   4. 合并后若改分支的开发内容完毕，可对该分支进行删除。
 
 
-＃ laravel 多语言对应
+# laravel 多语言对应
 所以涉及到多语言问题(界面显示，邮件信息等)都在/resources/lang文件夹下定义然后利用laravel函数
  ```php
 trans('views.page_name.category_name.info_name');  // 界面控键名文件
 trans('messages.page_name.category_name.info_name');  // 界面信息提示文件
 trans('database.table_name.table_cell_name.value');  // 数据库信息文件
  ```
+# License
+个人开发软件，版权个人所有。不过欢迎大家参与开发。如有疑问可以添加issue，或者发送邮件至yoursave.tk@gmail.com。
+我将及时回复。
