@@ -55,8 +55,38 @@ php artisan db:seed
 // 测试数据添加
  ```
 
+8. 文件夹权限修改
+到此处访问你的网页很有可能会出现无法访问的情况，原因很有可能是文件夹权限问题。
+首先在进入到工程目录，然后建立storage文件夹。
+ ```sh
+ mkdir storage
+ ```
+进入storage文件夹。
+ ```sh
+ cd storage
+ ```
+建立cache，framework，logs文件夹。
+ ```sh
+ mkdir cache
+ mkdir framework
+ mkdir logs
+ ```
+进入framework。
+ ```sh
+ cd framework
+ ```
+建立sessions，views文件夹。
+ ```sh
+ mkdir sessions
+ mkdir views
+ ```
+修改文件夹权限，首先返回到工程目录。然后对storage文件夹进行权限修改。
+ ```sh
+ chmod -R 777 storage
+ ```
 
-＃ 开发规则
+
+# 开发规则
 1. 代码规范
 要求符合[psr-2规范](http://www.php-fig.org/psr/psr-2/)，尽量满足[psr-4规范](http://www.php-fig.org/psr/psr-4/)
 
@@ -72,9 +102,9 @@ php artisan db:seed
 
 # git管理规则
 1. git分支管理
- 1. 开发时分支: feature-**-**(**为开发功能模块英文名称)
- 2. 数据库修改: db-**-**(**为修改内容)
- 3. bug修复时分支: bug-**-**
+ 1. 开发时分支: feature-++-++(++为开发功能模块英文名称)
+ 2. 数据库修改: db-++-++(++为修改内容)
+ 3. bug修复时分支: bug-++-++(++为修改bug信息)
 
 2. git 提交规范
  1. 开发时应在自己分支上进行开发，在进行开发之前，将主分支(development)合并到自己分支（为了保证为最新代码，减少冲突）
