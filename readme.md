@@ -55,6 +55,36 @@ php artisan db:seed
 // 测试数据添加
  ```
 
+8. 文件夹权限修改
+到此处访问你的网页很有可能会出现无法访问的情况，原因很有可能是文件夹权限问题。
+首先在进入到工程目录，然后建立storage文件夹。
+ ```sh
+ mkdir storage
+ ```
+进入storage文件夹。
+ ```sh
+ cd storage
+ ```
+建立cache，framework，logs文件夹。
+ ```sh
+ mkdir cache
+ mkdir framework
+ mkdir logs
+ ```
+进入framework。
+ ```sh
+ cd framework
+ ```
+建立sessions，views文件夹。
+ ```sh
+ mkdir sessions
+ mkdir views
+ ```
+修改文件夹权限，首先返回到工程目录。然后对storage文件夹进行权限修改。
+ ```sh
+ chmod -R 777 storage
+ ```
+
 
 # 开发规则
 1. 代码规范
