@@ -67,7 +67,8 @@ class UserController extends Controller
         // var_dump($aliyunOSS->deleteObject('yoursave', 'abcd.xbd'));
         // var_dump($aliyunOSS->moveObject(null, 'tmp/tobots.txt', null, 'tmp/robots.txt'));
         // var_dump(Auth::viaRemember());
-
+        return view('welcome');
+        
         FileIO::getS3TempSTS();
     }
 
