@@ -31,6 +31,11 @@ return [
             ]
         ]
     ],
+    'preference'    => [
+        'index' => [
+            'default_show_number'   => 50
+        ]
+    ],
     'shops' => [
         'index' => [
             'default_show_number'   => 10,
