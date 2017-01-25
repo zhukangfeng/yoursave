@@ -1,0 +1,4 @@
+[submodule "docker"]
+	path = third_party/docker-yoursave
+	url = https://github.com/zhukangfeng/docker-yoursave.git
+	branch = master
